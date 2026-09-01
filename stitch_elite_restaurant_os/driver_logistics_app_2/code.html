@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Delivery Driver UI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#574500",
+                        "outline-variant": "#4d4635",
+                        "on-error": "#690005",
+                        "on-tertiary": "#67001b",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353535",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-primary-container": "#554300",
+                        "surface-container-highest": "#353535",
+                        "surface": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-tint": "#e9c349",
+                        "inverse-primary": "#735c00",
+                        "surface-bright": "#393939",
+                        "on-secondary-container": "#00311f",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#ffe088",
+                        "tertiary-container": "#ff949c",
+                        "background": "#131313",
+                        "error": "#ffb4ab",
+                        "on-primary": "#3c2f00",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-container": "#00a572",
+                        "on-tertiary-container": "#8e0029",
+                        "outline": "#99907c",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-secondary": "#003824",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "primary-container": "#d4af37",
+                        "on-primary-fixed": "#241a00",
+                        "primary": "#f2ca50",
+                        "tertiary": "#ffbec1",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "secondary": "#4edea3",
+                        "on-surface": "#e5e2e1",
+                        "surface-container": "#20201f",
+                        "on-surface-variant": "#d0c5af",
+                        "on-background": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+        
+        .swipe-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.25rem;
+        }
+        .swipe-action {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            z-index: 0;
+        }
+        .swipe-action-left { left: 0; }
+        .swipe-action-right { right: 0; }
+        .swipe-content {
+            position: relative;
+            z-index: 10;
+            transition: transform 0.2s ease-out;
+        }
+        
+        /* Subtle glow for interactive cards */
+        .interactive-card:active {
+            box-shadow: inset 0 0 15px rgba(242, 202, 80, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm h-screen flex flex-col md:hidden selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background dark:bg-background border-b border-outline-variant flat no shadows flex justify-between items-center px-margin-mobile py-sm w-full z-50">
+<div class="flex items-center gap-sm text-primary dark:text-primary font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight">
+<span class="material-symbols-outlined fill text-2xl">restaurant</span>
+            RESTAURANT OS
+        </div>
+<div class="h-8 w-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img alt="Manager Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a restaurant delivery driver, wearing a dark uniform, illuminated by dramatic high-contrast lighting with deep shadows and subtle warm highlights. The style is hyper-realistic and modern, emphasizing reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV5gOFyi9gzBhyNv2HUc9-RvDCLsC1oWA0ZbJz4bys7L-g0_fM2cof0YwkK_uYICpdSqB1HdHEBfaWbgS67lHk3cmMiDRzprrTSgZSfG5UJvFKD3CwoO7vKyLRauTuRsqVDZ2f6uOsZqXbFZbSVTW_uJGkCEOWfO4tX5gvpI3-oIcvfdqTVmgexX9xlhmy17B4G5jYSHAote_U7EZ8Rfzn9nVqgVAsfbOXS5-HBtK7ZdBD3YGhSeNxKQ"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Map Integration Area (Placeholder for actual map) -->
+<div class="w-full h-48 bg-surface-container border-b border-outline-variant relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity" data-alt="A high-contrast, dark mode digital street map visualization showing intricate city blocks, glowing golden routes, and neon green status indicators. The map feels like a professional logistics dashboard with deep black backgrounds and crisp, luminous vector lines." data-location="New York City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdYYdTR1Krw7ns1wegklJXrOU5WXBmFbPcaimdB3_rDURBmlKInPqzXZb8cYT2-OYdjoFWUv4BWyX81Fb255GISUiUqYLLwN9ZrEazFhI5WU9au35tZSOrNU8ErctvcMVfyErjmP7wuq0ljA6S5-hubHs-lUbJZukya2vrIgLvAqJD2mDVv-AWYfunLBSGZ67Ip4hmWOjTCi-h5ZXMe14bkfiUXZadGqxpdZm05tZoLgbJg0032z7mjw')"></div>
+<!-- Current Location Marker -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_15px_rgba(242,202,80,0.8)]"></div>
+<div class="absolute w-12 h-12 border border-primary rounded-full opacity-30"></div>
+</div>
+<!-- Floating Status Pill -->
+<div class="absolute top-sm right-margin-mobile bg-surface-container-highest border border-outline-variant rounded-full px-3 py-1 flex items-center gap-xs shadow-lg backdrop-blur-md">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<span class="font-label-caps text-label-caps text-on-surface">ONLINE</span>
+</div>
+</div>
+<div class="px-margin-mobile py-lg space-y-lg">
+<!-- Dashboard Stats (Daily Earnings & Trips) -->
+<section class="grid grid-cols-2 gap-sm">
+<div class="bg-surface border border-outline-variant rounded-lg p-sm flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">payments</span>
+                        TODAY'S EARNINGS
+                    </span>
+<span class="font-data-pos text-data-pos text-primary text-2xl">$142.50</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-sm flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+                        COMPLETED TRIPS
+                    </span>
+<div class="flex items-end justify-between">
+<span class="font-data-pos text-data-pos text-on-surface text-2xl">12</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed-dim">/ 15</span>
+</div>
+</div>
+</section>
+<!-- Active Delivery -->
+<section>
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-title-md text-title-md text-on-surface">Active Delivery</h2>
+<span class="bg-surface-container-high border border-outline-variant px-2 py-1 rounded-DEFAULT font-label-caps text-label-caps text-primary flex items-center gap-xs">
+<div class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
+                        15 MIN ETA
+                    </span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden">
+<!-- Customer Info Header -->
+<div class="p-sm border-b border-outline-variant bg-surface-container flex justify-between items-center">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Order #8842</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sarah Jenkins</p>
+</div>
+<div class="flex gap-xs">
+<button class="w-10 h-10 rounded-full bg-surface-bright border border-outline-variant flex items-center justify-center text-primary active:scale-95 transition-transform interactive-card">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-bright border border-outline-variant flex items-center justify-center text-primary active:scale-95 transition-transform interactive-card">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+<!-- Delivery Address -->
+<div class="p-sm border-b border-outline-variant flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<p class="font-body-lg text-body-lg text-on-surface">1428 Elm Street, Apt 4B</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Gate code: #4492</p>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="p-sm bg-surface-container-lowest">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">ITEMS (3)</p>
+<ul class="space-y-xs font-body-sm text-body-sm text-on-surface">
+<li class="flex justify-between">
+<span>2x Truffle Burger</span>
+</li>
+<li class="flex justify-between">
+<span>1x Large Fries</span>
+</li>
+</ul>
+</div>
+<!-- Swipe Action Area (Mockup logic in HTML structure) -->
+<div class="p-sm bg-surface">
+<div class="swipe-container h-14 bg-surface-container-high border border-outline-variant rounded-DEFAULT overflow-hidden">
+<!-- Background actions that reveal on swipe -->
+<div class="swipe-action swipe-action-left bg-secondary-container text-on-secondary-container justify-start px-sm font-label-caps text-label-caps w-1/2">
+<span class="material-symbols-outlined mr-xs">check_circle</span> DELIVERED
+                            </div>
+<div class="swipe-action swipe-action-right bg-error-container text-on-error-container justify-end px-sm font-label-caps text-label-caps w-1/2">
+                                FAILED <span class="material-symbols-outlined ml-xs">error</span>
+</div>
+<!-- Draggable Handle -->
+<div class="swipe-content h-full w-full bg-surface-bright flex items-center justify-center border-x border-outline-variant cursor-grab active:cursor-grabbing interactive-card">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs">swipe_right</span>
+<span class="font-label-caps text-label-caps text-on-surface">SWIPE TO COMPLETE</span>
+<span class="material-symbols-outlined text-on-surface-variant ml-xs">swipe_left</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Next in Queue -->
+<section class="opacity-60">
+<h2 class="font-title-md text-title-md text-on-surface-variant mb-sm">Up Next</h2>
+<div class="bg-surface border border-outline-variant border-dashed rounded-lg p-sm flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">ORDER #8843</span>
+<span class="font-body-sm text-body-sm text-on-surface">Pickup @ Main Kitchen</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward_ios</span>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 border-t border-outline-variant bg-surface-container-lowest dark:bg-surface-container-lowest flex justify-around items-center h-16 px-4">
+<!-- Item 1 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:opacity-80">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="font-label-caps text-label-caps">Sales</span>
+</button>
+<!-- Item 2 -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 duration-100">
+<span class="material-symbols-outlined mb-1 fill">local_shipping</span>
+<span class="font-label-caps text-label-caps font-bold">Alerts</span>
+</button>
+<!-- Item 3 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:opacity-80">
+<span class="material-symbols-outlined mb-1">groups</span>
+<span class="font-label-caps text-label-caps">Staff</span>
+</button>
+<!-- Item 4 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:opacity-80">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Staff Attendance &amp; Shift Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#241a00",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-bright": "#393939",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-tertiary": "#67001b",
+                        "surface-tint": "#e9c349",
+                        "on-secondary": "#003824",
+                        "on-primary": "#3c2f00",
+                        "secondary-container": "#00a572",
+                        "tertiary": "#ffbec1",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary-container": "#8e0029",
+                        "surface-variant": "#353535",
+                        "inverse-primary": "#735c00",
+                        "outline": "#99907c",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#313030",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container": "#20201f",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#4d4635",
+                        "primary-fixed": "#ffe088",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-container": "#00311f",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed": "#40000d",
+                        "secondary": "#4edea3",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface-variant": "#d0c5af",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "primary": "#f2ca50",
+                        "tertiary-container": "#ff949c",
+                        "primary-container": "#d4af37",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdadb",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(242, 202, 80, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(242, 202, 80, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(242, 202, 80, 0); }
+        }
+        .glass-overlay {
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .pos-input:focus {
+            border-color: #D4AF37;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary font-body-sm text-body-sm h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant flat no shadows flex flex-col h-full py-lg px-md z-50 hidden md:flex">
+<div class="mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary tracking-tighter">RestaurantOS</h1>
+<p class="text-on-surface-variant text-xs mt-xs">Premium Management</p>
+</div>
+<div class="flex-1 space-y-xs">
+<a class="flex items-center space-x-md p-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-md p-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span>POS</span>
+</a>
+<a class="flex items-center space-x-md p-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center space-x-md p-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="table_restaurant">table_restaurant</span>
+<span>Tables</span>
+</a>
+<a class="flex items-center space-x-md p-md rounded-lg bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container font-semibold active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Menu</span> <!-- Assuming Staff falls under a broader operational category here as it's not a direct match, but 'Dashboard' could also be argued. Sticking to Dashboard for default active if unsure, but prompt implies specific functionality. Let's make Settings active for 'Staff Management' context if forced, or just leave Dashboard if it's a main view. Let's use Dashboard as default active for this general view if no better match. Re-reading rules: Dashboard is generic. Let's use Settings as a fallback for 'Management'. Actually, none fit perfectly. Let's default to Dashboard. -->
+</a>
+<a class="flex items-center space-x-md p-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center space-x-md p-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-lg border-t border-outline-variant flex items-center space-x-md">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A sophisticated black and gold avatar logo for a premium restaurant management system. The design is sleek, modern, and minimalist, featuring abstract geometric shapes that suggest efficiency and high-end hospitality. The lighting is subtle, creating a sense of depth against a dark void background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCscV0d9xlAiFbix0GQtRJuofbfj_0CZTKe32-DYk4jj308DFocwFmDxZVyK43bJERfi_rGeMN_3Qgj5yGHFiCJRKQ3pW48_d-bzYHLBHGiPhWRm6IOlTtFDsZXfFKnLsbsSVu8I6Kaxl9DcbzsEV-1QoPU5mRWm_v_bsFSbqLuv6DAUsfZLb2wybSc7kB-qA9YBAQBZc7yvNJeVgmLPqvE6I20f6voHTqDAbwjJwsGlR-w78xthGpAEA"/>
+<div>
+<p class="font-body-sm text-body-sm font-semibold">Admin User</p>
+<p class="text-xs text-on-surface-variant">Manager</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary font-title-md text-title-md fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant dark:border-outline-variant flat no shadows flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center w-1/3 focus-within:border-primary border-b border-transparent transition-colors pb-1">
+<span class="material-symbols-outlined mr-sm text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm p-0 w-full placeholder-on-surface-variant text-on-surface focus:outline-none" placeholder="Search staff..." type="text"/>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary dark:text-primary tracking-tighter hidden lg:block">
+                Downtown Branch
+            </div>
+<div class="flex items-center space-x-md text-on-surface-variant">
+<button class="hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto mt-16 p-margin-desktop bg-background">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-display text-display text-on-surface">Staff Attendance</h2>
+<p class="text-on-surface-variant font-body-lg text-body-lg mt-xs">Live Roster &amp; Clock-in Terminal</p>
+</div>
+<div class="flex items-center space-x-sm">
+<div class="w-2 h-2 rounded-full bg-primary pulse-dot"></div>
+<span class="font-label-caps text-label-caps text-primary">LIVE SYNC</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter h-full">
+<!-- Roster View (Bento Grid) -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-2 gap-gutter">
+<!-- Quick Stats -->
+<div class="col-span-2 grid grid-cols-3 gap-gutter">
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-sm">TOTAL STAFF ON SHIFT</span>
+<span class="font-display text-display text-on-surface">12</span>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-sm">ON BREAK</span>
+<span class="font-display text-display text-primary">3</span>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-sm">LATE ARRIVALS</span>
+<span class="font-display text-display text-error">1</span>
+</div>
+</div>
+<!-- Live Roster Table -->
+<div class="col-span-2 bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col">
+<div class="flex justify-between items-center mb-md border-b border-outline-variant pb-sm">
+<h3 class="font-title-md text-title-md text-on-surface">Active Roster</h3>
+<button class="text-primary font-label-caps text-label-caps hover:bg-surface-variant px-sm py-xs rounded">VIEW ALL</button>
+</div>
+<div class="flex-1 overflow-y-auto pr-sm">
+<table class="w-full text-left border-collapse">
+<thead class="font-label-caps text-label-caps text-on-surface-variant sticky top-0 bg-surface-container">
+<tr>
+<th class="pb-sm font-medium">NAME</th>
+<th class="pb-sm font-medium">ROLE</th>
+<th class="pb-sm font-medium text-right">TIME IN</th>
+<th class="pb-sm font-medium text-right">STATUS</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md text-on-surface">Sarah Jenkins</td>
+<td class="py-md text-on-surface-variant">Sous Chef</td>
+<td class="py-md font-data-pos text-data-pos text-right text-on-surface">14:00</td>
+<td class="py-md text-right">
+<span class="inline-block bg-[#1c2e26] text-secondary px-2 py-1 rounded text-xs font-semibold">IN</span>
+</td>
+</tr>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md text-on-surface">Marcus Vance</td>
+<td class="py-md text-on-surface-variant">Bartender</td>
+<td class="py-md font-data-pos text-data-pos text-right text-on-surface">15:30</td>
+<td class="py-md text-right">
+<span class="inline-block bg-[#1c2e26] text-secondary px-2 py-1 rounded text-xs font-semibold">IN</span>
+</td>
+</tr>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md text-on-surface">Elena Rodriguez</td>
+<td class="py-md text-on-surface-variant">Server</td>
+<td class="py-md font-data-pos text-data-pos text-right text-on-surface">16:00</td>
+<td class="py-md text-right">
+<span class="inline-block bg-surface-bright text-primary px-2 py-1 rounded text-xs font-semibold">BREAK</span>
+</td>
+</tr>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md text-on-surface">David Kim</td>
+<td class="py-md text-on-surface-variant">Host</td>
+<td class="py-md font-data-pos text-data-pos text-right text-on-surface">16:15</td>
+<td class="py-md text-right">
+<span class="inline-block bg-error-container text-error px-2 py-1 rounded text-xs font-semibold pulse-dot">LATE</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Clock-In Terminal Simulation -->
+<div class="col-span-12 lg:col-span-4 flex flex-col">
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-lg h-full flex flex-col relative overflow-hidden">
+<!-- Decorative background element for terminal -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
+<div class="text-center mb-xl relative z-10">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Terminal Access</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Enter PIN to clock in/out or start break</p>
+</div>
+<div class="flex-1 flex flex-col justify-center items-center relative z-10">
+<!-- PIN Display -->
+<div class="w-full max-w-[240px] mb-lg bg-surface-dim border border-[#262626] rounded-md h-16 flex items-center justify-center space-x-sm px-md shadow-inner">
+<div class="w-4 h-4 rounded-full bg-outline-variant"></div>
+<div class="w-4 h-4 rounded-full bg-outline-variant"></div>
+<div class="w-4 h-4 rounded-full bg-outline-variant"></div>
+<div class="w-4 h-4 rounded-full bg-outline-variant"></div>
+</div>
+<!-- Numpad -->
+<div class="grid grid-cols-3 gap-sm w-full max-w-[240px]">
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">1</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">2</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">3</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">4</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">5</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">6</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">7</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">8</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">9</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-label-caps text-label-caps text-error hover:bg-surface-container-high active:bg-error-container active:text-on-error-container transition-colors flex items-center justify-center">CLR</button>
+<button class="h-14 bg-surface-container border border-[#262626] rounded font-data-pos text-data-pos text-on-surface hover:bg-surface-container-high active:bg-primary-container active:text-on-primary-container transition-colors flex items-center justify-center">0</button>
+<button class="h-14 bg-primary border border-primary rounded font-label-caps text-label-caps text-on-primary hover:bg-primary-container transition-colors flex items-center justify-center">ENT</button>
+</div>
+</div>
+<!-- Status Action Buttons (Inactive until PIN entered, styled as such) -->
+<div class="grid grid-cols-2 gap-sm mt-lg relative z-10 opacity-50 pointer-events-none">
+<button class="bg-[#1c2e26] text-secondary border border-[#005236] py-sm rounded font-label-caps text-label-caps flex flex-col items-center justify-center">
+<span class="material-symbols-outlined mb-1" data-icon="login">login</span>
+                                CLOCK IN
+                            </button>
+<button class="bg-surface-bright text-primary border border-outline-variant py-sm rounded font-label-caps text-label-caps flex flex-col items-center justify-center">
+<span class="material-symbols-outlined mb-1" data-icon="free_breakfast">free_breakfast</span>
+                                BREAK
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to handle PIN input visual feedback
+        document.addEventListener('DOMContentLoaded', () => {
+            const pinDots = document.querySelectorAll('.w-4.h-4.rounded-full');
+            const numButtons = document.querySelectorAll('.grid-cols-3 button:not(.text-error):not(.bg-primary)');
+            const clrButton = document.querySelector('.text-error');
+            let pinCount = 0;
+
+            numButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (pinCount < 4) {
+                        pinDots[pinCount].classList.remove('bg-outline-variant');
+                        pinDots[pinCount].classList.add('bg-primary');
+                        pinCount++;
+                        
+                        // Simulate activating action buttons when PIN is full
+                        if (pinCount === 4) {
+                            const actionContainer = document.querySelector('.opacity-50.pointer-events-none');
+                            if(actionContainer) {
+                                actionContainer.classList.remove('opacity-50', 'pointer-events-none');
+                            }
+                        }
+                    }
+                });
+            });
+
+            clrButton.addEventListener('click', () => {
+                pinDots.forEach(dot => {
+                    dot.classList.remove('bg-primary');
+                    dot.classList.add('bg-outline-variant');
+                });
+                pinCount = 0;
+                
+                // Deactivate action buttons
+                const actionContainer = document.querySelector('.grid-cols-2.gap-sm.mt-lg.relative');
+                if(actionContainer) {
+                    actionContainer.classList.add('opacity-50', 'pointer-events-none');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Delivery &amp; Logistics Dispatch Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002113",
+                        "surface-variant": "#353535",
+                        "on-background": "#e5e2e1",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-secondary-fixed-variant": "#005236",
+                        "background": "#131313",
+                        "tertiary-container": "#ff949c",
+                        "inverse-surface": "#e5e2e1",
+                        "on-surface-variant": "#d0c5af",
+                        "surface": "#131313",
+                        "primary-fixed": "#ffe088",
+                        "surface-dim": "#131313",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#8e0029",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "secondary-container": "#00a572",
+                        "tertiary": "#ffbec1",
+                        "secondary": "#4edea3",
+                        "on-primary-fixed-variant": "#574500",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary": "#3c2f00",
+                        "surface-bright": "#393939",
+                        "primary": "#f2ca50",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-container": "#00311f",
+                        "on-tertiary": "#67001b",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-primary": "#735c00",
+                        "surface-container": "#20201f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed-dim": "#e9c349",
+                        "primary-container": "#d4af37",
+                        "surface-tint": "#e9c349",
+                        "surface-container-highest": "#353535",
+                        "outline": "#99907c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        
+        /* Custom Scrollbar for tight spaces */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353535; 
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4d4635; 
+        }
+
+        .border-1px { border-width: 1px; border-color: #262626; }
+        
+        .glow-active {
+            box-shadow: inset 0 0 20px rgba(242, 202, 80, 0.15);
+            border-color: #f2ca50;
+        }
+
+        .pulse-dot {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(242, 202, 80, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(242, 202, 80, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(242, 202, 80, 0); }
+        }
+        
+        .pulse-error {
+            animation: pulse-error-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-error-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 180, 171, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 180, 171, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 180, 171, 0); }
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg bg-surface antialiased overflow-hidden flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex bg-surface-container-lowest text-primary docked left-0 h-full w-64 border-r border-outline-variant flat no shadows flex-col pt-16 pb-4 z-40 fixed left-0 top-0">
+<div class="px-lg pb-xl border-b border-1px border-outline-variant mb-4">
+<h1 class="text-headline-lg font-headline-lg text-primary mb-2">RestaurantOS</h1>
+<div class="flex items-center gap-sm mt-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A cinematic, high-contrast black and white portrait of a confident, professional restaurant manager standing in a subtly lit, modern industrial kitchen environment. Sharp focus, deep shadows, premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcnl8RVeHSAxR_n0B_AhSRNMyZsYv8UKnyUsoLRrkxGa5kYAAW5dsNGfFdKD8Vy5h5IGGmvJb_jWzLIDJhMOd0r4VYF6w1coZKGLH-iQN2bx5__JIWrd7koN0ahMyjQxi4A-TZ-zDO5RrHrHod16WDQdCZpBhSXN7zFoaGwKeRcMi2NSbggPET6EgtBGCoLKvBDVjyovDe-12qMBxYX42h4hfbzluAWs4HdpWmp_sLY1bMOvor9BqacA"/>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface">Manager</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Downtown Branch</div>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-sm space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">point_of_sale</span>
+<span class="font-label-caps text-label-caps">POS</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-primary-container bg-primary-container rounded-lg font-bold scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-caps text-label-caps">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">table_restaurant</span>
+<span class="font-label-caps text-label-caps">Tables</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">menu_book</span>
+<span class="font-label-caps text-label-caps">Menu</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">inventory_2</span>
+<span class="font-label-caps text-label-caps">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">group</span>
+<span class="font-label-caps text-label-caps">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">assessment</span>
+<span class="font-label-caps text-label-caps">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">badge</span>
+<span class="font-label-caps text-label-caps">Staff</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="regular">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+<div class="px-md mt-auto pt-4">
+<button class="w-full bg-primary text-on-primary font-title-md text-title-md py-3 rounded-lg hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Order
+            </button>
+</div>
+</nav>
+<!-- TopNavBar (Shared Component) - Rendered for mobile/general structure completeness, though design focuses on desktop layout -->
+<header class="md:hidden bg-surface text-primary flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50 border-b border-outline-variant flat no shadows">
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-title-md font-title-md text-primary">RestaurantOS</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">sync_lock</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 h-screen pt-16 md:pt-0 flex flex-col bg-background">
+<!-- Contextual Header -->
+<div class="flex-none px-margin-desktop py-lg border-b border-1px flex justify-between items-end bg-surface">
+<div>
+<h2 class="text-display font-display text-on-surface mb-2">Dispatch Board</h2>
+<div class="flex gap-4 text-on-surface-variant font-label-caps text-label-caps">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary pulse-dot"></span> 12 Active Orders</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> 4 Drivers Available</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-high border-1px rounded-lg py-2 pl-10 pr-4 text-body-lg font-body-lg text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64" placeholder="Search orders..." type="text"/>
+</div>
+<button class="bg-surface-container-high border-1px rounded-lg px-4 py-2 text-on-surface font-title-md text-title-md hover:bg-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span> Filter
+                </button>
+</div>
+</div>
+<!-- Dashboard Bento Grid -->
+<div class="flex-1 p-margin-desktop gap-gutter grid grid-cols-12 grid-rows-6 overflow-hidden">
+<!-- Delivery Queue (Left Column) -->
+<div class="col-span-4 row-span-6 bg-surface border-1px rounded-xl flex flex-col overflow-hidden">
+<div class="px-4 py-3 border-b border-1px bg-surface-container flex justify-between items-center sticky top-0 z-10">
+<h3 class="font-title-md text-title-md text-on-surface">Order Queue</h3>
+<div class="bg-surface-variant px-2 py-1 rounded text-label-caps font-label-caps text-on-surface-variant">SORT: URGENCY</div>
+</div>
+<div class="flex-1 overflow-y-auto p-xs space-y-xs">
+<!-- Order Card - Ready (High Priority) -->
+<div class="bg-surface-container-low border-1px rounded-lg p-3 hover:bg-surface-variant transition-colors cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div>
+<span class="font-data-pos text-data-pos text-on-surface">#8042</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant">John D. • 2.4mi</div>
+</div>
+<div class="text-right">
+<span class="bg-secondary text-on-secondary px-2 py-1 rounded font-label-caps text-label-caps">READY</span>
+<div class="font-data-pos text-data-pos text-primary mt-1">14:20</div>
+</div>
+</div>
+<div class="border-t border-1px pt-2 mt-2 flex justify-between items-center pl-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate w-32">2x Burger, 1x Fries...</span>
+<button class="bg-surface-variant border-1px rounded px-3 py-1 text-on-surface font-label-caps text-label-caps hover:border-primary transition-colors flex items-center gap-1 group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary">
+                                Assign <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Order Card - Overdue -->
+<div class="bg-surface-container-low border-1px border-error rounded-lg p-3 hover:bg-surface-variant transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error pulse-error"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div>
+<span class="font-data-pos text-data-pos text-on-surface">#8039</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Sarah W. • 4.1mi</div>
+</div>
+<div class="text-right">
+<span class="bg-error-container text-error px-2 py-1 rounded font-label-caps text-label-caps pulse-error inline-block">OVERDUE</span>
+<div class="font-data-pos text-data-pos text-error mt-1">-5:00</div>
+</div>
+</div>
+<div class="border-t border-1px border-error/30 pt-2 mt-2 flex justify-between items-center pl-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate w-32">Family Feast Combo...</span>
+<button class="bg-error text-on-error border-1px rounded px-3 py-1 font-label-caps text-label-caps hover:bg-error-container hover:text-error transition-colors flex items-center gap-1">
+                                Expedite <span class="material-symbols-outlined text-[16px]">bolt</span>
+</button>
+</div>
+</div>
+<!-- Order Card - Preparing -->
+<div class="bg-surface-container-low border-1px rounded-lg p-3 hover:bg-surface-variant transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-variant"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div>
+<span class="font-data-pos text-data-pos text-on-surface">#8045</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Mike R. • 1.2mi</div>
+</div>
+<div class="text-right">
+<span class="bg-surface-container-high text-primary px-2 py-1 rounded font-label-caps text-label-caps">PREP</span>
+<div class="font-data-pos text-data-pos text-on-surface mt-1">Est 8m</div>
+</div>
+</div>
+<div class="border-t border-1px pt-2 mt-2 flex justify-between items-center pl-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate w-32">1x Pizza Margherita</span>
+<div class="h-1 w-16 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dispatch Map (Center/Right Top) -->
+<div class="col-span-8 row-span-4 bg-surface border-1px rounded-xl overflow-hidden relative group">
+<!-- Map Layer -->
+<div class="absolute inset-0 w-full h-full opacity-60 grayscale invert" data-alt="A highly stylized, minimalist, high-contrast dark mode digital map interface of a dense urban city grid. The map uses stark black backgrounds with thin, glowing gold and emerald green lines to trace roads and routes. No text or labels, purely abstract geometric map aesthetics representing logistics data." data-location="New York City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAt_p3nLNu-ydLsMF-CcqWSUj5ZJT9zzWmVlCwlWbb6piFe5NxK7vAEo1G3_88xTa0r9sMbHQFa8OnU6oyzaSxo_vw-v-uWmkPZilNa_wqpqHvGAnzu56AlUmnBPAI3ykjcZ4P4psfvppyTeuhSBqpwFMYUTmAL1cp5OCmA_D59YoPPhtcs_VVqpxG8zZ-8KAgL4W1r9aP-qOFWPIbezPGgAuOhPDW8e5Gxbau1c0Ek9WHn7LBs5lb6Pg')"></div>
+<!-- Glassmorphism Overlay UI -->
+<div class="absolute top-4 left-4 right-4 flex justify-between pointer-events-none">
+<div class="backdrop-blur-xl bg-background/40 border-1px rounded-lg p-3 pointer-events-auto shadow-2xl">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">DISPATCH RADIUS</div>
+<div class="font-data-pos text-data-pos text-on-surface flex items-center gap-2">
+                            5.0 Miles <span class="w-2 h-2 rounded-full bg-secondary pulse-dot"></span>
+</div>
+</div>
+<div class="flex gap-2 pointer-events-auto">
+<button class="w-10 h-10 backdrop-blur-xl bg-background/40 border-1px rounded-lg flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+<button class="w-10 h-10 backdrop-blur-xl bg-background/40 border-1px rounded-lg flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+</div>
+</div>
+<!-- Map Markers (Simulated) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="relative">
+<div class="w-4 h-4 bg-primary rounded-full pulse-dot absolute -left-2 -top-2"></div>
+<span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+</div>
+</div>
+<div class="absolute top-1/3 left-2/3 pointer-events-auto cursor-pointer group/marker">
+<div class="relative">
+<div class="w-3 h-3 bg-secondary rounded-full absolute -left-1.5 -top-1.5 shadow-[0_0_10px_#4edea3]"></div>
+<!-- Tooltip -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-32 backdrop-blur-xl bg-surface/90 border-1px rounded-lg p-2 opacity-0 group-hover/marker:opacity-100 transition-opacity">
+<div class="font-label-caps text-label-caps text-secondary mb-1">Driver: Dave</div>
+<div class="font-body-sm text-body-sm text-on-surface">Delivering #8030</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Driver Roster (Bottom Right) -->
+<div class="col-span-8 row-span-2 bg-surface border-1px rounded-xl flex flex-col overflow-hidden">
+<div class="px-4 py-2 border-b border-1px bg-surface-container flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface">FLEET STATUS</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 p-sm flex gap-sm overflow-x-auto">
+<!-- Driver Card - Available -->
+<div class="min-w-[200px] border-1px rounded-lg p-3 bg-surface-container-low flex flex-col justify-between hover:glow-active transition-all cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up monochrome portrait of a young male delivery driver wearing a dark uniform cap, looking determined. High contrast, studio lighting, professional dark theme aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx8MPx_XgKvZpjTMwhlvfmaIp3SrP5OaEyjh3PQdJTz0OKuOICfl8eQxWH3N-o7brPaozHawqKEGehmisOUHofkKpCacOudhqN0LTT8zbnpENamC-mRDeVm6_zX3zwhJ4A3cijVE78Cw6Ju_jwX_n_7Ge9XHORGkJIHrOuwOQuqelYb9oOvUpuQxmlzRq0N9mCnUQ2moRDxYd6UdZjsiEKxcyB4HyhrjkzNpjCECHPg9EASeJYaVThFw"/>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface leading-tight">Alex M.</div>
+<div class="font-label-caps text-label-caps text-secondary">AVAILABLE</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">two_wheeler</span>
+</div>
+<div class="mt-4 flex justify-between items-end">
+<div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Shift Ends</div>
+<div class="font-data-pos text-data-pos text-on-surface">22:00</div>
+</div>
+<div class="font-data-pos text-data-pos text-primary text-xl">0</div>
+</div>
+</div>
+<!-- Driver Card - Busy -->
+<div class="min-w-[200px] border-1px rounded-lg p-3 bg-surface flex flex-col justify-between opacity-70">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up monochrome portrait of a female delivery driver with hair tied back, wearing a minimalist dark jacket. High contrast, studio lighting, professional dark theme aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgacsqlq-KbCjc5xiyv87N0IGZGAX3uBdmZgaiFvwQ_SQQEi4RQyp8oavccUvrRwX9-4YIr7ysdGb-NPKMolof7xgzALQ8Gt0vY8E5s5XEAfpRNaTFbbOuKNr3m1QQBLH4lrdrKBeqnAdoXjUbXukYft74NnhtjLhktTMfTJmlgevDhZ7UA6c30DSa9kNYrvPcJILJ5Tmufam2fZ9rJqTw4O_yWIT6iVxSjAk3aSal-4yypI2sZtRD-Q"/>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface leading-tight">Sam T.</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">ON ROUTE</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+</div>
+<div class="mt-4 flex justify-between items-end">
+<div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Return Est.</div>
+<div class="font-data-pos text-data-pos text-on-surface">14:45</div>
+</div>
+<div class="font-data-pos text-data-pos text-on-surface-variant text-xl opacity-50">2</div>
+</div>
+</div>
+<!-- Add Driver Slot -->
+<div class="min-w-[120px] border-1px border-dashed border-outline-variant rounded-lg p-3 flex flex-col items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors cursor-pointer bg-surface/50">
+<span class="material-symbols-outlined text-3xl mb-2">person_add</span>
+<span class="font-label-caps text-label-caps text-center">CALL IN<br/>DRIVER</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('.hover\\:glow-active').forEach(el => {
+            el.addEventListener('click', function() {
+                // Toggle active state for driver selection
+                document.querySelectorAll('.hover\\:glow-active').forEach(sibling => {
+                    sibling.classList.remove('glow-active');
+                });
+                this.classList.add('glow-active');
+            });
+        });
+    </script>
+</body></html>

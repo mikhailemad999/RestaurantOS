@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Health Score</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#dbe1ff",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-fixed-dim": "#4edea3",
+                        "border-muted": "#2a2a2a",
+                        "primary": "#f2ca50",
+                        "secondary-container": "#00a572",
+                        "on-tertiary-container": "#254188",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "success": "#10b981",
+                        "on-primary-fixed": "#241a00",
+                        "primary-fixed": "#ffe088",
+                        "tertiary": "#bfcdff",
+                        "surface-dim": "#16130b",
+                        "surface-container": "#231f17",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed": "#00174b",
+                        "on-primary": "#3c2f00",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#082b72",
+                        "warning": "#f59e0b",
+                        "background": "#131313",
+                        "surface-bright": "#3d392f",
+                        "surface": "#16130b",
+                        "surface-container-highest": "#38342b",
+                        "secondary": "#4edea3",
+                        "on-background": "#eae1d4",
+                        "surface-container-high": "#2d2a21",
+                        "info": "#3b82f6",
+                        "surface-tint": "#e9c349",
+                        "inverse-surface": "#eae1d4",
+                        "on-secondary": "#003824",
+                        "on-surface-variant": "#d0c5af",
+                        "on-surface": "#eae1d4",
+                        "on-secondary-container": "#00311f",
+                        "surface-container-lowest": "#110e07",
+                        "tertiary-container": "#97b0ff",
+                        "surface-variant": "#38342b",
+                        "inverse-primary": "#735c00",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-primary-container": "#554300",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-data": "#1c1c1c",
+                        "outline-variant": "#4d4635",
+                        "on-error": "#690005",
+                        "outline": "#99907c",
+                        "primary-container": "#d4af37",
+                        "error": "#f43f5e",
+                        "surface-container-low": "#1f1b13",
+                        "on-primary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#343027"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "pane-padding": "12px",
+                        "gutter": "16px",
+                        "compact-gap": "4px",
+                        "grid-margin": "24px",
+                        "cell-padding-h": "12px",
+                        "cell-padding-v": "8px"
+                    },
+                    "fontFamily": {
+                        "data-table-cell": ["JetBrains Mono"],
+                        "data-table-header": ["Inter"],
+                        "label-xs": ["JetBrains Mono"],
+                        "stat-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "data-table-cell": ["13px", { "lineHeight": "1rem", "fontWeight": "400" }],
+                        "data-table-header": ["12px", { "lineHeight": "1rem", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-xs": ["11px", { "lineHeight": "1rem", "fontWeight": "500" }],
+                        "stat-lg": ["36px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .pane { background-color: theme('colors.surface-data'); border: 1px solid theme('colors.border-muted'); border-radius: theme('borderRadius.DEFAULT'); padding: theme('spacing.pane-padding'); }
+        .pane-header { font-family: theme('fontFamily.headline-md'); font-size: 18px; font-weight: 600; margin-bottom: 12px; color: theme('colors.on-surface'); }
+        .metric-value { font-family: theme('fontFamily.stat-lg'); font-size: theme('fontSize.stat-lg.0'); font-weight: 700; color: theme('colors.primary'); }
+        .metric-label { font-family: theme('fontFamily.label-xs'); font-size: theme('fontSize.label-xs.0'); text-transform: uppercase; color: theme('colors.on-surface-variant'); }
+        .trend-up { color: theme('colors.success'); background-color: rgba(16, 185, 129, 0.1); }
+        .trend-down { color: theme('colors.error'); background-color: rgba(244, 63, 94, 0.1); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-background/80 backdrop-blur-md fixed top-0 w-full z-50 flex justify-between items-center px-grid-margin h-16 border-b border-border-muted flat no shadows">
+<div class="flex items-center gap-6">
+<span class="font-headline-md text-headline-md font-bold text-primary">Command Center</span>
+<div class="hidden md:flex gap-4 h-16">
+<!-- Navigation is contextually active for Operations/Business Health -->
+<div class="flex flex-col justify-center px-2 cursor-pointer hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium">Dashboard</div>
+<div class="flex flex-col justify-center px-2 cursor-pointer hover:bg-surface-container-high transition-colors text-primary font-bold border-b-2 border-primary pb-1">Health Score</div>
+<div class="flex flex-col justify-center px-2 cursor-pointer hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium">Reports</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-[#0e0e0e] border border-border-muted rounded px-8 py-1.5 text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-0 transition-colors w-48" placeholder="Search..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-200">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-200">settings_suggest</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-200">account_circle</span>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex bg-surface fixed left-0 top-16 h-[calc(100vh-64px)] flex-col p-pane-padding w-64 border-r border-border-muted flat no shadows">
+<div class="mb-8 px-2">
+<div class="font-headline-sm text-headline-sm text-primary mb-1">Branch Alpha</div>
+<div class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Systems Online</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group cursor-pointer duration-150 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">insights</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Intelligence</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container rounded-lg group cursor-pointer duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Operations</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group cursor-pointer duration-150 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">local_shipping</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Logistics</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group cursor-pointer duration-150 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">trending_up</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Growth</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group cursor-pointer duration-150 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Administration</span>
+</div>
+</div>
+<div class="mt-auto flex flex-col gap-2 border-t border-border-muted pt-4">
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group cursor-pointer duration-150 rounded-lg">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Help</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group cursor-pointer duration-150 rounded-lg">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 mt-16 p-grid-margin overflow-y-auto">
+<header class="mb-6 flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Business Health Index</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time operational scoring and AI diagnostics.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-transparent border border-primary text-primary font-label-xs text-label-xs uppercase rounded hover:bg-primary/10 transition-colors">Export Report</button>
+<button class="px-4 py-2 bg-primary text-on-primary font-label-xs text-label-xs uppercase rounded hover:bg-primary-fixed transition-colors font-bold">Refresh Data</button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<!-- Primary Score Hero -->
+<div class="pane md:col-span-8 flex items-center justify-between relative overflow-hidden group border-primary/30 hover:border-primary transition-colors">
+<div class="z-10 w-1/2">
+<h2 class="pane-header">Overall Health Score</h2>
+<div class="flex items-baseline gap-4 mt-4">
+<span class="text-7xl font-bold font-stat-lg text-primary tracking-tighter">87</span>
+<span class="text-xl text-on-surface-variant font-data-table-cell">/100</span>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<span class="px-2 py-1 rounded-full trend-up flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+<span class="font-label-xs text-label-xs">+4.2 pts</span>
+</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">vs Last 30 Days</span>
+</div>
+</div>
+<!-- Abstract Gauge Visualization Placeholder -->
+<div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-20 group-hover:opacity-40 transition-opacity flex items-center justify-center">
+<div class="w-48 h-48 rounded-full border-4 border-dashed border-primary animate-[spin_20s_linear_infinite]"></div>
+<div class="absolute w-32 h-32 rounded-full border-2 border-secondary animate-[spin_15s_linear_infinite_reverse]"></div>
+</div>
+</div>
+<!-- AI Recommendations -->
+<div class="pane md:col-span-4 flex flex-col bg-surface-container-low border-secondary/20">
+<div class="flex items-center gap-2 mb-4 text-secondary">
+<span class="material-symbols-outlined">auto_awesome</span>
+<h2 class="font-headline-md text-sm font-bold uppercase tracking-wider">AI Directives</h2>
+</div>
+<div class="flex flex-col gap-3 flex-1 overflow-y-auto pr-2">
+<div class="bg-background p-3 border border-border-muted rounded cursor-pointer hover:border-secondary transition-colors">
+<div class="font-label-xs text-label-xs text-secondary mb-1">High Impact</div>
+<p class="font-data-table-cell text-data-table-cell text-on-surface">Optimize prep schedules to reduce kitchen delays during 18:00-20:00 rush.</p>
+</div>
+<div class="bg-background p-3 border border-border-muted rounded cursor-pointer hover:border-primary transition-colors">
+<div class="font-label-xs text-label-xs text-primary mb-1">Medium Impact</div>
+<p class="font-data-table-cell text-data-table-cell text-on-surface">Review protein yields; inventory variance detected in poultry.</p>
+</div>
+</div>
+</div>
+<!-- Component Scores Table/Grid -->
+<div class="pane md:col-span-7">
+<h2 class="pane-header">Component Breakdown</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-background border border-border-muted rounded flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="metric-label">Sales Velocity</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">payments</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="metric-value">92</span>
+<span class="trend-up px-1.5 py-0.5 rounded text-[10px] flex items-center"><span class="material-symbols-outlined text-[12px]">trending_up</span> 2%</span>
+</div>
+</div>
+<div class="p-3 bg-background border border-border-muted rounded flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="metric-label">Profit Margin Health</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">account_balance</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="metric-value">85</span>
+<span class="trend-down px-1.5 py-0.5 rounded text-[10px] flex items-center"><span class="material-symbols-outlined text-[12px]">trending_down</span> 1%</span>
+</div>
+</div>
+<div class="p-3 bg-background border border-border-muted rounded flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="metric-label">Inventory Accuracy</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">inventory_2</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="metric-value">78</span>
+<span class="text-warning px-1.5 py-0.5 rounded text-[10px] bg-warning/10 flex items-center"><span class="material-symbols-outlined text-[12px]">horizontal_rule</span> 0%</span>
+</div>
+</div>
+<div class="p-3 bg-background border border-border-muted rounded flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="metric-label">Kitchen Perf (KDS)</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">soup_kitchen</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="metric-value">89</span>
+<span class="trend-up px-1.5 py-0.5 rounded text-[10px] flex items-center"><span class="material-symbols-outlined text-[12px]">trending_up</span> 5%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Factors (Positive/Negative) -->
+<div class="pane md:col-span-5 flex flex-col">
+<h2 class="pane-header">Key Drivers</h2>
+<div class="flex-1 overflow-y-auto pr-2 flex flex-col gap-4">
+<div>
+<div class="font-label-xs text-label-xs uppercase text-success mb-2 border-b border-border-muted pb-1">Positive Momentum</div>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 font-data-table-cell text-data-table-cell text-on-surface">
+<span class="material-symbols-outlined text-success text-sm mt-0.5">add_circle</span>
+                                Food cost variance decreased by 2.1% this week.
+                            </li>
+<li class="flex items-start gap-2 font-data-table-cell text-data-table-cell text-on-surface">
+<span class="material-symbols-outlined text-success text-sm mt-0.5">add_circle</span>
+                                Customer Satisfaction averaged 4.8/5 based on recent surveys.
+                            </li>
+</ul>
+</div>
+<div>
+<div class="font-label-xs text-label-xs uppercase text-error mb-2 border-b border-border-muted pb-1">Friction Points</div>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 font-data-table-cell text-data-table-cell text-on-surface">
+<span class="material-symbols-outlined text-error text-sm mt-0.5">remove_circle</span>
+                                Kitchen delays (ticket times &gt; 15m) up 12% during peak dinner service.
+                            </li>
+<li class="flex items-start gap-2 font-data-table-cell text-data-table-cell text-on-surface">
+<span class="material-symbols-outlined text-error text-sm mt-0.5">remove_circle</span>
+                                Staff turnover warning: 2 FOH resignations this period.
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

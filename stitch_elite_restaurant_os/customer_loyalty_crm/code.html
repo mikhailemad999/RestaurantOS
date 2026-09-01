@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Customers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002113",
+                        "surface-variant": "#353535",
+                        "on-background": "#e5e2e1",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-secondary-fixed-variant": "#005236",
+                        "background": "#131313",
+                        "tertiary-container": "#ff949c",
+                        "inverse-surface": "#e5e2e1",
+                        "on-surface-variant": "#d0c5af",
+                        "surface": "#131313",
+                        "primary-fixed": "#ffe088",
+                        "surface-dim": "#131313",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#8e0029",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "secondary-container": "#00a572",
+                        "tertiary": "#ffbec1",
+                        "secondary": "#4edea3",
+                        "on-primary-fixed-variant": "#574500",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary": "#3c2f00",
+                        "surface-bright": "#393939",
+                        "primary": "#f2ca50",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-container": "#00311f",
+                        "on-tertiary": "#67001b",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-primary": "#735c00",
+                        "surface-container": "#20201f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed-dim": "#e9c349",
+                        "primary-container": "#d4af37",
+                        "surface-tint": "#e9c349",
+                        "surface-container-highest": "#353535",
+                        "outline": "#99907c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(32, 32, 31, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        .border-void {
+            border-color: #262626;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen flex selection:bg-primary selection:text-on-primary overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-lowest text-primary docked left-0 h-full w-64 border-r border-void fixed left-0 top-0 flex-col pt-16 pb-4 z-40">
+<div class="px-gutter mb-xl flex items-center justify-between">
+<span class="text-headline-lg font-headline-lg text-primary">RestaurantOS</span>
+</div>
+<div class="px-gutter mb-lg">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A striking portrait of a sophisticated restaurant manager in a dimly lit, high-end environment. The lighting is cinematic, casting subtle shadows that highlight their focused expression. The background is slightly blurred, showing elements of a premium dark-themed dining room. The mood is calm and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJslcjL7J60U4npeQ9-FxsUl3Jpt8QteX7xH6f-qD0PYpdo3mFTd92Ti-PrvlXNPiG2BTryqcmwP5P7s4cHu2E3DY2s1_2tRdPk2hO1kB-4MiPM3RotmOFhB1i5EOaqCPcVpqsGWE8VHe3c0MQ-QdnKxe-WA7LidRKTD-c_gP5TOI-VA-uSNvfNRuTUvzEoowq0WN8EzVHDo_iCssmXdjLQyKSkh6T8KKQo7Ha9ImgLkah7l_9y5kTww"/>
+</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-semibold">Manager</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant text-[10px]">Downtown Branch</div>
+</div>
+</div>
+<button class="mt-4 w-full bg-primary text-on-primary py-2 rounded flex items-center justify-center gap-2 hover:bg-primary-fixed-dim transition-colors text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                New Order
+            </button>
+</div>
+<ul class="flex-1 overflow-y-auto no-scrollbar px-sm space-y-1">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+                    POS
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="table_restaurant">table_restaurant</span>
+                    Tables
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                    Menu
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    Inventory
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-container bg-primary-container rounded-lg font-bold scale-95 duration-100 text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+                    Customers
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+                    Reports
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+                    Staff
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+</nav>
+<!-- TopNavBar (Mobile only for layout structure, hidden on md+) -->
+<header class="md:hidden flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50 bg-surface border-b border-void">
+<div class="flex items-center gap-sm">
+<span class="text-title-md font-title-md text-primary font-bold">RestaurantOS</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity">search</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 pt-16 md:pt-0 h-screen overflow-hidden flex flex-col md:flex-row bg-surface">
+<!-- Left Column: Customer List (Bento style grid/list hybrid) -->
+<div class="w-full md:w-5/12 lg:w-4/12 h-full flex flex-col border-r border-void bg-surface-container-lowest z-10">
+<!-- Search & Filters -->
+<div class="p-gutter border-b border-void bg-surface-container-low shrink-0 z-20">
+<div class="flex items-center justify-between mb-4">
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface tracking-tight">CRM</h1>
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface p-2 rounded transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px] group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface border border-void focus:border-primary-container rounded pl-10 pr-4 py-3 text-body-sm font-body-sm text-on-surface placeholder-on-surface-variant outline-none transition-colors" placeholder="Search customers..." type="text"/>
+</div>
+</div>
+<!-- List -->
+<div class="flex-1 overflow-y-auto no-scrollbar p-sm space-y-sm relative">
+<!-- Gradient mask for scrolling -->
+<div class="sticky top-0 h-4 w-full bg-gradient-to-b from-surface-container-lowest to-transparent z-10 pointer-events-none"></div>
+<!-- Customer Item: Active -->
+<div class="p-4 rounded-lg bg-surface-container border border-primary-container cursor-pointer relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary opacity-5"></div> <!-- Active subtle glow -->
+<div class="flex justify-between items-start mb-2 relative z-10">
+<div>
+<h3 class="text-title-md font-title-md text-on-surface">Eleanor Vance</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container text-label-caps font-label-caps border border-primary-container/30">VIP</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">Last: 2 days ago</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-pos font-data-pos text-primary">12,450</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">pts</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant relative z-10">
+<span class="material-symbols-outlined text-[16px]">local_dining</span>
+<span>Avg Spend: $145</span>
+</div>
+</div>
+<!-- Customer Item: Inactive -->
+<div class="p-4 rounded-lg bg-surface border border-void hover:bg-surface-container hover:border-surface-variant cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-title-md font-title-md text-on-surface">Marcus Thorne</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Last: 1 week ago</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-pos font-data-pos text-on-surface">8,200</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">pts</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">local_dining</span>
+<span>Avg Spend: $95</span>
+</div>
+</div>
+<!-- Customer Item: Inactive -->
+<div class="p-4 rounded-lg bg-surface border border-void hover:bg-surface-container hover:border-surface-variant cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-title-md font-title-md text-on-surface">Sarah Jenkins</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Last: 3 weeks ago</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-pos font-data-pos text-on-surface">3,150</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">pts</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">local_dining</span>
+<span>Avg Spend: $65</span>
+</div>
+</div>
+<!-- Customer Item: Inactive -->
+<div class="p-4 rounded-lg bg-surface border border-void hover:bg-surface-container hover:border-surface-variant cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-title-md font-title-md text-on-surface">David Chen</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-surface-variant text-on-surface text-label-caps font-label-caps border border-outline-variant">Regular</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">Last: 2 days ago</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-pos font-data-pos text-on-surface">5,600</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">pts</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">local_dining</span>
+<span>Avg Spend: $110</span>
+</div>
+</div>
+<!-- Customer Item: Inactive -->
+<div class="p-4 rounded-lg bg-surface border border-void hover:bg-surface-container hover:border-surface-variant cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-title-md font-title-md text-on-surface text-on-surface-variant">Elena Rodriguez</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-caps font-label-caps text-error">Churn Risk</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">Last: 4 months ago</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-pos font-data-pos text-on-surface-variant">1,200</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">pts</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">local_dining</span>
+<span>Avg Spend: $45</span>
+</div>
+</div>
+<div class="h-8 w-full"></div> <!-- Bottom spacer -->
+</div>
+</div>
+<!-- Right Column: Detail View (Bento Grid Layout) -->
+<div class="hidden md:flex flex-1 h-full bg-surface flex-col relative overflow-hidden">
+<!-- Background Texture/Subtle graphic -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 100% 0%, #353535 0%, transparent 50%);"></div>
+<!-- Header Profile Section -->
+<div class="p-margin-desktop border-b border-void bg-surface-container-low relative z-10">
+<div class="flex justify-between items-start">
+<div class="flex gap-lg items-center">
+<div class="w-24 h-24 rounded-full bg-surface-variant border-2 border-primary-container p-1 relative">
+<img class="w-full h-full object-cover rounded-full" data-alt="A candid, high-quality portrait of a stylish woman in her 30s. The lighting is sophisticated and warm, evoking a premium hospitality setting. She has a subtle smile. The background is a very dark, out-of-focus restaurant interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKD7bhNCpoXfaQ99-XKxY4sRFXPOFLtbNlmqbYYha67JS0uF2CLrrRuaqxgrJDtFIY0G2AYItSPbJCY4hbEQXIaZHyVAw3D0vu-etI-VzsMdyyIrouxafJm07nVjPZfDJUtrT5h79ZqjwGvn1p6MI0UwwX_pl6BTwDW86hc8PakeqIDWrDsI9ObNrN8JDSiF6tdbdIvAoilHR2Diy8SeZZoymgl7_QHw0GzkxN_Tnhx4wzp0GP43L1Q"/>
+<div class="absolute bottom-0 right-0 w-6 h-6 bg-secondary-container rounded-full border-2 border-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-white">star</span>
+</div>
+</div>
+<div>
+<h2 class="text-display font-display text-on-surface">Eleanor Vance</h2>
+<div class="flex gap-4 mt-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">mail</span> e.vance@example.com</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">phone</span> +1 (555) 019-2834</span>
+</div>
+<div class="mt-4 flex gap-2">
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface px-4 py-2 rounded text-label-caps font-label-caps transition-colors flex items-center gap-2 border border-void">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit Profile
+                                </button>
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface px-4 py-2 rounded text-label-caps font-label-caps transition-colors flex items-center gap-2 border border-void">
+<span class="material-symbols-outlined text-[16px]">forum</span> Send Message
+                                </button>
+</div>
+</div>
+</div>
+<!-- Loyalty Quick Adjust -->
+<div class="bg-surface border border-void p-4 rounded-lg min-w-[200px]">
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-1">Loyalty Balance</div>
+<div class="text-display font-display text-primary leading-none mb-4">12,450</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-variant hover:bg-surface-bright text-on-surface py-2 rounded flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<button class="flex-1 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 py-2 rounded flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Scrollable Bento Content -->
+<div class="flex-1 overflow-y-auto no-scrollbar p-margin-desktop z-10 relative">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Spending Metrics -->
+<div class="lg:col-span-2 grid grid-cols-2 gap-md">
+<div class="bg-surface-container border border-void p-lg rounded-lg">
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-4 flex items-center justify-between">
+                                Lifetime Value
+                                <span class="material-symbols-outlined text-[18px]">trending_up</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">$4,285.50</div>
+<div class="text-body-sm font-body-sm text-secondary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12% vs last year
+                            </div>
+</div>
+<div class="bg-surface-container border border-void p-lg rounded-lg">
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-4 flex items-center justify-between">
+                                Total Visits
+                                <span class="material-symbols-outlined text-[18px]">event_available</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">34</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-2">
+                                Approx 2 visits / month
+                            </div>
+</div>
+</div>
+<!-- Internal Notes -->
+<div class="lg:col-span-1 lg:row-span-2 bg-surface-container border border-void rounded-lg flex flex-col overflow-hidden">
+<div class="p-4 border-b border-void bg-surface-container-low flex justify-between items-center">
+<span class="text-label-caps font-label-caps text-on-surface">Internal Notes</span>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+</div>
+<div class="flex-1 p-4 overflow-y-auto no-scrollbar space-y-4">
+<div class="border-l-2 border-primary-container pl-3">
+<p class="text-body-sm font-body-sm text-on-surface">Prefers corner booth (Table 12 or 14). Severe allergy to pine nuts.</p>
+<span class="text-label-caps font-label-caps text-on-surface-variant mt-1 block">Added by Sarah • 2 mos ago</span>
+</div>
+<div class="border-l-2 border-surface-variant pl-3">
+<p class="text-body-sm font-body-sm text-on-surface-variant">Celebrated anniversary here last year. Send complimentary champagne if they book around Oct 15.</p>
+<span class="text-label-caps font-label-caps text-on-surface-variant mt-1 block">Added by Marcus • 1 yr ago</span>
+</div>
+</div>
+<div class="p-4 border-t border-void bg-surface">
+<input class="w-full bg-surface-variant border border-void focus:border-primary-container rounded px-3 py-2 text-body-sm font-body-sm text-on-surface outline-none transition-colors" placeholder="Add a quick note..." type="text"/>
+</div>
+</div>
+<!-- Favorite Items (Horizontal Scroll) -->
+<div class="lg:col-span-2 bg-surface-container border border-void rounded-lg p-lg">
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-4">Frequently Ordered</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<!-- Item -->
+<div class="shrink-0 w-40 bg-surface border border-void rounded p-3 text-center">
+<div class="w-16 h-16 mx-auto bg-surface-variant rounded-full mb-3 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">wine_bar</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface font-semibold truncate">Cabernet Reserve</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant mt-1">Ordered 18x</div>
+</div>
+<!-- Item -->
+<div class="shrink-0 w-40 bg-surface border border-void rounded p-3 text-center">
+<div class="w-16 h-16 mx-auto bg-surface-variant rounded-full mb-3 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">set_meal</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface font-semibold truncate">Truffle Risotto</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant mt-1">Ordered 12x</div>
+</div>
+<!-- Item -->
+<div class="shrink-0 w-40 bg-surface border border-void rounded p-3 text-center">
+<div class="w-16 h-16 mx-auto bg-surface-variant rounded-full mb-3 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">icecream</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface font-semibold truncate">Dark Chocolate Tart</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant mt-1">Ordered 8x</div>
+</div>
+</div>
+</div>
+<!-- Recent Order History -->
+<div class="lg:col-span-3 bg-surface-container border border-void rounded-lg overflow-hidden mt-2">
+<div class="p-4 border-b border-void bg-surface-container-low flex justify-between items-center">
+<span class="text-label-caps font-label-caps text-on-surface">Recent Orders</span>
+<button class="text-on-surface-variant hover:text-on-surface text-label-caps font-label-caps transition-colors">View All</button>
+</div>
+<div class="w-full">
+<!-- Table Header -->
+<div class="flex text-label-caps font-label-caps text-on-surface-variant border-b border-void bg-surface px-4 py-2">
+<div class="w-1/4">Date</div>
+<div class="w-1/4">Order ID</div>
+<div class="w-1/4">Items</div>
+<div class="w-1/4 text-right">Total</div>
+</div>
+<!-- Rows -->
+<div class="flex text-body-sm font-body-sm text-on-surface border-b border-void px-4 py-3 hover:bg-surface-variant transition-colors cursor-pointer">
+<div class="w-1/4">Oct 24, 2023</div>
+<div class="w-1/4 font-data-pos text-on-surface-variant">#ORD-9923</div>
+<div class="w-1/4 truncate">Truffle Risotto, Cabernet...</div>
+<div class="w-1/4 text-right font-data-pos">$185.00</div>
+</div>
+<div class="flex text-body-sm font-body-sm text-on-surface border-b border-void px-4 py-3 hover:bg-surface-variant transition-colors cursor-pointer">
+<div class="w-1/4">Sep 12, 2023</div>
+<div class="w-1/4 font-data-pos text-on-surface-variant">#ORD-8814</div>
+<div class="w-1/4 truncate">Steak Frites, Side Salad...</div>
+<div class="w-1/4 text-right font-data-pos">$142.50</div>
+</div>
+<div class="flex text-body-sm font-body-sm text-on-surface px-4 py-3 hover:bg-surface-variant transition-colors cursor-pointer">
+<div class="w-1/4">Aug 05, 2023</div>
+<div class="w-1/4 font-data-pos text-on-surface-variant">#ORD-7622</div>
+<div class="w-1/4 truncate">Seared Scallops, White Wine...</div>
+<div class="w-1/4 text-right font-data-pos">$210.00</div>
+</div>
+</div>
+</div>
+</div>
+<div class="h-16 w-full"></div> <!-- Bottom scroll padding -->
+</div>
+<!-- Floating Action button for POS quick add -->
+<button class="absolute bottom-margin-desktop right-margin-desktop w-14 h-14 bg-primary text-on-primary rounded-full shadow-[0_0_15px_rgba(212,175,55,0.3)] flex items-center justify-center hover:scale-105 transition-transform z-20 pulse-dot">
+<span class="material-symbols-outlined text-[24px]">point_of_sale</span>
+</button>
+</div>
+</main>
+</body></html>

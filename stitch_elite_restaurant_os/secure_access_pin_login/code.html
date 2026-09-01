@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#3c2f00",
+                        "primary-fixed": "#ffe088",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-background": "#e5e2e1",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary": "#ffbec1",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#67001b",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#735c00",
+                        "surface": "#131313",
+                        "secondary": "#4edea3",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#40000d",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-primary-container": "#554300",
+                        "primary-container": "#d4af37",
+                        "outline-variant": "#4d4635",
+                        "surface-tint": "#e9c349",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#99907c",
+                        "surface-bright": "#393939",
+                        "on-tertiary-container": "#8e0029",
+                        "tertiary-container": "#ff949c",
+                        "surface-container-high": "#2a2a2a",
+                        "primary": "#f2ca50",
+                        "error-container": "#93000a",
+                        "secondary-container": "#00a572",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-container": "#20201f",
+                        "on-primary-fixed": "#241a00",
+                        "surface-dim": "#131313",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary-container": "#00311f",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "40px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "title-md": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Custom styles for precise borders and focus states in dark mode */
+        .input-border { border: 1px solid #262626; }
+        .input-border:focus-within { border-color: theme('colors.primary-container'); }
+        .card-border { border: 1px solid #262626; }
+    </style>
+</head>
+<body class="h-screen w-full flex items-center justify-center bg-background overflow-hidden relative">
+<!-- Ambient background image for texture -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none" data-alt="A dark, moody, slightly blurred background image of a high-end restaurant interior at night, featuring subtle reflections on stainless steel kitchen surfaces and warm, dim, ambient golden lighting. The focus is soft, creating an atmospheric, cinematic backdrop suitable for a premium dark-mode interface. The image should convey quiet luxury and operational efficiency." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBacPmGXJfQDHXnvVgffv7fFYrt7Ei8sPp07SAlaxK_WHedgjCazTOje5SCDVTW38_pxHIqqaXVOSKvDyBQn_tovX2SQGcybGUb5dVHR4Q1hpS6ZN0AtP0vWBMgMG7uCmT6JNgPv6H679dV436Bj7VHmkMxWcRgr194FdVUjNcaolivIzuPCmCVyg_f11TLSnTEpgOfYJU1_76DASxm60XpbiZAdimEbPX-LOyYzWs36-vqEuNiUEFoPQ')"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-background via-transparent to-background opacity-80 pointer-events-none"></div>
+<div class="relative z-10 w-full max-w-6xl px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-center gap-xl h-full">
+<!-- Left Column: Branding & Manager Login (hidden on very small screens, stacked on small, side-by-side on lg) -->
+<div class="flex-1 flex flex-col justify-center items-start space-y-lg max-w-md w-full">
+<!-- Brand -->
+<div class="flex items-center space-x-sm mb-lg">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<div>
+<h1 class="font-display text-display text-on-background m-0 p-0 leading-none tracking-tight">Restaurant<span class="text-primary">OS</span></h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">ENTERPRISE MANAGEMENT SYSTEM</p>
+</div>
+</div>
+<!-- Management Login Form -->
+<div class="w-full bg-surface-container-low rounded-xl p-lg card-border relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-50"></div>
+<h2 class="font-title-md text-title-md text-on-background mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+                    Manager Access
+                </h2>
+<form class="space-y-md">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">EMAIL / ID</label>
+<div class="input-border rounded bg-surface-container-highest px-md py-sm flex items-center transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm">mail</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-background font-body-lg text-body-lg placeholder-on-surface-variant/50 p-0" placeholder="admin@restaurant.os" type="email"/>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">PASSWORD</label>
+<a class="font-label-caps text-label-caps text-primary hover:text-primary-fixed transition-colors" href="#">FORGOT?</a>
+</div>
+<div class="input-border rounded bg-surface-container-highest px-md py-sm flex items-center transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm">lock</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-background font-body-lg text-body-lg placeholder-on-surface-variant/50 p-0" placeholder="••••••••" type="password"/>
+<button class="text-on-surface-variant hover:text-on-background transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-md rounded hover:bg-primary-fixed transition-colors mt-lg flex justify-center items-center gap-sm" type="button">
+                        SECURE LOGIN <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</form>
+</div>
+</div>
+<!-- Divider (visible only on desktop) -->
+<div class="hidden md:block w-[1px] h-96 bg-outline-variant opacity-50"></div>
+<!-- Right Column: POS PIN Pad (Prominent) -->
+<div class="flex-1 flex flex-col justify-center items-center w-full max-w-md">
+<div class="w-full bg-surface-container-lowest rounded-xl p-lg card-border relative shadow-2xl">
+<!-- Subtle glow effect behind PIN pad -->
+<div class="absolute inset-0 bg-primary-container opacity-5 blur-3xl pointer-events-none rounded-xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-sm text-center">POS Terminal</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xl text-center">Enter 4-digit Server PIN</p>
+<!-- PIN Display -->
+<div class="flex justify-center gap-md mb-xl">
+<div class="w-4 h-4 rounded-full bg-primary"></div>
+<div class="w-4 h-4 rounded-full bg-primary"></div>
+<div class="w-4 h-4 rounded-full bg-surface-container-highest border border-outline-variant"></div>
+<div class="w-4 h-4 rounded-full bg-surface-container-highest border border-outline-variant"></div>
+</div>
+<!-- Numpad Grid -->
+<div class="grid grid-cols-3 gap-sm w-full max-w-[280px]">
+<!-- Row 1 -->
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">1</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">2</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">3</button>
+<!-- Row 2 -->
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">4</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">5</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">6</button>
+<!-- Row 3 -->
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">7</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">8</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">9</button>
+<!-- Row 4 -->
+<button class="bg-surface-container-high hover:bg-error-container hover:text-on-error-container text-on-surface-variant font-data-pos text-title-md py-md rounded-lg card-border transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">backspace</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-background font-data-pos text-display py-md rounded-lg card-border transition-all hover:border-primary-container active:bg-primary active:text-on-primary">0</button>
+<button class="bg-primary-container hover:bg-primary text-on-primary-container font-data-pos text-title-md py-md rounded-lg transition-all flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+<span class="material-symbols-outlined text-[32px]">check</span>
+</button>
+</div>
+<div class="mt-lg flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-secondary">SYSTEM ONLINE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

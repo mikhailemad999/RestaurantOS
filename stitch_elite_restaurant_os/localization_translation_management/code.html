@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Language &amp; Localization Settings - RestaurantOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#574500",
+                        "on-primary": "#3c2f00",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-bright": "#393939",
+                        "primary": "#f2ca50",
+                        "error": "#ffb4ab",
+                        "primary-container": "#d4af37",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "outline": "#99907c",
+                        "on-surface-variant": "#d0c5af",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#241a00",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#4edea3",
+                        "tertiary": "#ffbec1",
+                        "on-tertiary": "#67001b",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-tertiary-container": "#8e0029",
+                        "surface-container-highest": "#353535",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-secondary": "#003824",
+                        "secondary-container": "#00a572",
+                        "on-primary-container": "#554300",
+                        "surface": "#131313",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#e9c349",
+                        "tertiary-container": "#ff949c",
+                        "secondary": "#4edea3",
+                        "background": "#131313",
+                        "surface-container": "#20201f",
+                        "inverse-primary": "#735c00",
+                        "inverse-on-surface": "#313030",
+                        "surface-variant": "#353535",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-background": "#e5e2e1",
+                        "outline-variant": "#4d4635",
+                        "primary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "unit": "4px",
+                        "xl": "40px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "32px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Custom form overrides for dark theme */
+        [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+            background-color: theme('colors.surface-container-highest');
+            border-color: theme('colors.outline-variant');
+            color: theme('colors.on-surface');
+        }
+        [type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+            border-color: theme('colors.primary-container');
+            box-shadow: none;
+        }
+        
+        /* Toggle Switch styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary');
+        }
+        
+        /* Inner glow effect for active cards */
+        .glow-active {
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15); /* primary-container */
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg flex min-h-screen">
+<!-- SideNavBar (from JSON Anchor) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col pt-16 pb-4 z-40 bg-surface-container-lowest border-r border-outline-variant w-64">
+<!-- Brand -->
+<div class="px-md mb-xl">
+<h1 class="text-headline-lg font-headline-lg text-primary tracking-tight">RestaurantOS</h1>
+</div>
+<!-- User Info -->
+<div class="px-md mb-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden flex-shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close up, high resolution headshot of a restaurant manager in a professional dark suit against a dark grey background. Dramatic, high-contrast studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBekUni00zoQdbQsNyXUC8cfRJyXK_A9O4ucRuuY5X9uL89vD9hE_DLq0QBNX7ji6dJUNu5xzh5mdhlMbtvxMGJYI0qwNrSU-ZVn6gzf1dvYvEC2_-lEzRaN-8VCMmlEpoHax-E-J8sI00Iae98YBkp8cbKPXMqrJPEJp3Vj-zGj7dcvCeR6i4cFNML6Yy7_hlEoxZDHv4WHHngdZGMszFKHP98piFGJY02pW4iE7ilpIvpI4uTgI4R_w"/>
+</div>
+<div class="overflow-hidden">
+<p class="font-body-lg text-body-lg text-on-surface truncate">Manager</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Downtown Branch</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto px-sm space-y-unit">
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-lg text-body-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-body-lg text-body-lg">POS</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-lg text-body-lg">Orders</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-body-lg text-body-lg">Tables</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-body-lg text-body-lg">Menu</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-lg text-body-lg">Inventory</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-lg text-body-lg">Customers</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-body-lg text-body-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-body-lg text-body-lg">Staff</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-md px-sm py-sm text-on-primary-container bg-primary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-lg text-body-lg">Settings</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="px-md mt-auto pt-md border-t border-outline-variant">
+<button class="w-full bg-primary-container text-on-primary-container font-title-md text-title-md py-sm rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">add</span>
+                New Order
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 bg-surface p-margin-mobile md:p-margin-desktop min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between mb-xl gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-unit">Language &amp; Localization</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Configure system-wide language defaults and manage translations.</p>
+</div>
+<!-- User Preference Simulation Toggle -->
+<div class="flex items-center gap-sm bg-surface-container-low border border-surface-variant p-sm rounded-lg">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Preview Mode</span>
+<div class="flex items-center bg-surface-container-highest rounded-full p-xs border border-outline-variant">
+<button class="px-md py-unit rounded-full text-on-primary-container bg-primary font-body-sm text-body-sm transition-colors">EN</button>
+<button class="px-md py-unit rounded-full text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors">AR</button>
+</div>
+</div>
+</header>
+<!-- Content Grid (Bento style) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg flex-1 content-start">
+<!-- Global Configuration Card -->
+<div class="lg:col-span-2 bg-surface-container border border-surface-variant rounded-xl p-lg flex flex-col">
+<div class="flex items-center gap-sm mb-lg pb-sm border-b border-surface-variant">
+<span class="material-symbols-outlined text-outline">language</span>
+<h3 class="font-title-md text-title-md text-on-surface">Global Configuration</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<!-- Default Interface Language -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-outline uppercase">Default Manager Interface</label>
+<select class="w-full rounded-lg h-11 px-sm">
+<option value="en">English (EN)</option>
+<option value="ar">Arabic (AR)</option>
+</select>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-unit">Sets the fallback language for the backend dashboard.</p>
+</div>
+<!-- Default Guest/Kiosk Language -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-outline uppercase">Default Guest Interface (POS/Kiosk)</label>
+<select class="w-full rounded-lg h-11 px-sm">
+<option value="ar">Arabic (AR)</option>
+<option value="en">English (EN)</option>
+</select>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-unit">Primary language displayed on customer-facing screens.</p>
+</div>
+<!-- Receipt Mode -->
+<div class="space-y-sm md:col-span-2">
+<label class="block font-label-caps text-label-caps text-outline uppercase mb-sm">Receipt Output Mode</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<label class="relative flex cursor-pointer p-sm border border-surface-variant bg-surface-container-highest rounded-lg hover:bg-surface-variant transition-colors">
+<input class="peer sr-only" name="receipt_mode" type="radio" value="en"/>
+<div class="flex-1">
+<span class="block font-title-md text-title-md text-on-surface">English Only</span>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary-container pointer-events-none"></div>
+</label>
+<label class="relative flex cursor-pointer p-sm border border-surface-variant bg-surface-container-highest rounded-lg hover:bg-surface-variant transition-colors">
+<input class="peer sr-only" name="receipt_mode" type="radio" value="ar"/>
+<div class="flex-1">
+<span class="block font-title-md text-title-md text-on-surface">Arabic Only</span>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary-container pointer-events-none"></div>
+</label>
+<label class="relative flex cursor-pointer p-sm border border-primary-container bg-surface-container-highest rounded-lg glow-active transition-colors">
+<input checked="" class="peer sr-only" name="receipt_mode" type="radio" value="bilingual"/>
+<div class="flex-1">
+<span class="block font-title-md text-title-md text-primary">Bilingual</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant mt-unit">Primary language first</span>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-primary-container pointer-events-none"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Enabled Languages Card -->
+<div class="bg-surface-container border border-surface-variant rounded-xl p-lg flex flex-col">
+<div class="flex items-center justify-between mb-lg pb-sm border-b border-surface-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">translate</span>
+<h3 class="font-title-md text-title-md text-on-surface">Active Languages</h3>
+</div>
+<button class="text-primary hover:text-primary-container transition-colors"><span class="material-symbols-outlined">add_circle</span></button>
+</div>
+<div class="space-y-md">
+<!-- English Row -->
+<div class="flex items-center justify-between p-sm border border-surface-variant bg-surface-container-highest rounded-lg">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center font-data-pos text-data-pos text-on-surface">EN</div>
+<div>
+<p class="font-title-md text-title-md text-on-surface text-base">English</p>
+<span class="inline-block mt-xs bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded font-label-caps text-[10px]">SYSTEM</span>
+</div>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-on-surface border-2 border-surface-variant appearance-none cursor-pointer" disabled="" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary-container cursor-pointer opacity-50" for="toggle1"></label>
+</div>
+</div>
+<!-- Arabic Row -->
+<div class="flex items-center justify-between p-sm border border-surface-variant bg-surface-container-highest rounded-lg">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center font-data-pos text-data-pos text-on-surface">AR</div>
+<p class="font-title-md text-title-md text-on-surface text-base">Arabic</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-on-surface border-2 border-surface-variant appearance-none cursor-pointer" id="toggle2" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer" for="toggle2"></label>
+</div>
+</div>
+<!-- French (Placeholder) -->
+<div class="flex items-center justify-between p-sm border border-surface-variant border-dashed bg-surface-container-lowest opacity-60 rounded-lg">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center font-data-pos text-data-pos text-on-surface">FR</div>
+<p class="font-title-md text-title-md text-on-surface text-base">French</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-on-surface border-2 border-surface-variant appearance-none cursor-pointer" id="toggle3" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer" for="toggle3"></label>
+</div>
+</div>
+</div>
+</div>
+<!-- Translation Dashboard (Spans full width below) -->
+<div class="lg:col-span-3 bg-surface-container border border-surface-variant rounded-xl p-lg flex flex-col">
+<div class="flex items-center justify-between mb-lg pb-sm border-b border-surface-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">analytics</span>
+<h3 class="font-title-md text-title-md text-on-surface">Translation Coverage (Arabic)</h3>
+</div>
+<button class="text-primary font-label-caps text-label-caps hover:underline">Manage Strings</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl">
+<!-- Stat 1 -->
+<div class="space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-body-lg text-body-lg text-on-surface">Menu Items</span>
+<span class="font-data-pos text-data-pos text-primary">85%</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 85%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-outline">24 items missing translations</p>
+</div>
+<!-- Stat 2 -->
+<div class="space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-body-lg text-body-lg text-on-surface">KDS Interface</span>
+<span class="font-data-pos text-data-pos text-secondary">100%</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 100%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Fully localized</p>
+</div>
+<!-- Stat 3 -->
+<div class="space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-body-lg text-body-lg text-on-surface">Receipt Templates</span>
+<span class="font-data-pos text-data-pos text-primary-fixed-dim">92%</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed-dim h-full" style="width: 92%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-outline">3 templates require review</p>
+</div>
+</div>
+<!-- Alert Banner -->
+<div class="mt-lg p-md bg-surface-container-highest border border-outline-variant rounded-lg flex items-start gap-md border-l-4 border-l-primary-container">
+<span class="material-symbols-outlined text-primary-container mt-1">warning</span>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface text-base">Incomplete Menu Translations</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-unit">12 new menu items added today lack Arabic descriptions. This may affect guest kiosk experience.</p>
+</div>
+<button class="ml-auto mt-1 px-4 py-2 bg-surface-variant text-on-surface font-body-sm rounded hover:bg-surface-bright transition-colors">Review Now</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Inline JS for toggle visual logic if needed, basic CSS handles most state here.
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                if(this.checked) {
+                    this.nextElementSibling.classList.remove('bg-surface-variant');
+                    this.nextElementSibling.classList.add('bg-primary');
+                } else {
+                    this.nextElementSibling.classList.remove('bg-primary');
+                    this.nextElementSibling.classList.add('bg-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>

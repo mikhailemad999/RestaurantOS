@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - POS Terminal 01</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#00174b",
+                        "surface": "#121414",
+                        "background": "#121414",
+                        "surface-container-low": "#1a1c1c",
+                        "tertiary": "#bfcdff",
+                        "on-tertiary": "#082b72",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-tint": "#e9c349",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary-container": "#d4af37",
+                        "on-primary-fixed-variant": "#574500",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed": "#ffe088",
+                        "on-background": "#e2e2e2",
+                        "on-secondary": "#313030",
+                        "inverse-surface": "#e2e2e2",
+                        "inverse-on-surface": "#2f3131",
+                        "on-primary-container": "#554300",
+                        "tertiary-container": "#97b0ff",
+                        "secondary": "#c8c6c5",
+                        "primary": "#f2ca50",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-container-high": "#282a2b",
+                        "surface-container-highest": "#333535",
+                        "surface-dim": "#121414",
+                        "secondary-container": "#474746",
+                        "surface-container-lowest": "#0c0f0f",
+                        "surface-container": "#1e2020",
+                        "on-surface": "#e2e2e2",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#38393a",
+                        "inverse-primary": "#735c00",
+                        "surface-variant": "#333535",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary": "#3c2f00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#254188",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#dbe1ff",
+                        "outline": "#99907c",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-surface-variant": "#d0c5af",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-secondary-fixed-variant": "#474746"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "inline-start": "logical",
+                        "margin-page": "40px",
+                        "gutter": "24px",
+                        "inline-end": "logical"
+                    },
+                    "fontFamily": {
+                        "headline-lg-ar": ["IBM Plex Sans Arabic"],
+                        "body-md": ["Inter"],
+                        "body-md-ar": ["IBM Plex Sans Arabic"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-ar": ["30px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md-ar": ["16px", { "lineHeight": "1.8", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-rtl-flip {
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md-ar antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest text-primary docked left-0 h-full w-64 border-l border-outline-variant flat no shadows fixed right-0 top-0 h-full flex flex-col pt-16 pb-4 z-40">
+<div class="px-6 mb-8 text-headline-lg-ar text-primary">
+            RestaurantOS
+        </div>
+<div class="flex-1 overflow-y-auto px-4 space-y-2">
+<!-- Navigation Items -->
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-container bg-primary-container rounded-lg font-bold Active: scale-95 duration-100 text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span>POS</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span>Tables</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Menu</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Customers</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span>Staff</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto px-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined">add</span>
+                New Order
+            </button>
+<div class="mt-6 flex items-center gap-4 px-2 border-t border-outline-variant pt-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A detailed headshot portrait of a professional restaurant manager in a dark, moody high-end kitchen setting. Warm rim lighting highlights their features against a deep, dark culinary background. Clean corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLTepyjJLPPhaBgBjWK9UVRBEjCTfcPicKBkN6bD2C9KjcSTXIBcPV3Nl8lHNr1x03j_k9yhA5ev4IIaUd1wKcM4oo-sGntnt_lFvzwtG9DAm2kcPQ9ViDKXLUh8lGH6I2G0HJnT2NyKUxuCOj6mt8M91ULlxf6BeuhMGSF8vGZitz192gOymcP0rt8d6P3wTRbU-SAthqZ_BifnAsGPSzcvSJnTNR7AYTmCgYQ8e_jvJ-cPrs7wGyUQ"/>
+<div>
+<div class="text-body-md font-body-md text-on-surface font-bold">Manager</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Downtown Branch</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col mr-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface text-primary border-b border-outline-variant flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50 mr-64 w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-low text-on-surface border-none rounded-lg pl-4 pr-10 py-2 focus:ring-1 focus:ring-primary w-64 text-body-md-ar font-body-md-ar placeholder-on-surface-variant" placeholder="بحث..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps border border-outline-variant rounded-full px-4 py-1.5 hover:bg-surface-variant">
+                    Branch Switcher
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-variant p-2 rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-variant p-2 rounded-full transition-colors"><span class="material-symbols-outlined">sync_lock</span></button>
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-variant p-2 rounded-full transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</div>
+</header>
+<!-- POS Interface -->
+<main class="flex-1 flex mt-16 overflow-hidden">
+<!-- Category & Menu Grid (Right Side in RTL) -->
+<section class="flex-1 flex flex-col bg-surface-dim overflow-hidden">
+<!-- Categories -->
+<div class="px-6 py-4 flex gap-4 overflow-x-auto border-b border-outline-variant shrink-0">
+<button class="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-bold whitespace-nowrap">الكل</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">بيتزا</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">مشروبات</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">مقبلات</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">حلويات</button>
+</div>
+<!-- Menu Grid -->
+<div class="flex-1 overflow-y-auto p-6">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Product Card -->
+<div class="bg-surface-container rounded-xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary transition-all group">
+<div class="h-32 bg-surface-container-high relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A delicious overhead shot of a freshly baked pizza with ranch dressing drizzle, chicken pieces, and melted cheese on a dark slate slate background. High contrast, warm lighting, professional food photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFtrgKdyTjbJ1_LurCe5cF7Nxch4SVRJ3Bxq-5qipWFlkJ8IqISRMkjG84KwBa9pLMXm3uWvxb8EGTj2KjRNpBAtHyJqZ5mJOipXA8RlN7JDU9--oXP8_xFwe3HaGV7icbPDF9Ff9YlHfWtvqL54q6GJOvqzg4RxTfpKZeMS8k48z7-WVDAkWQa4gebNCxIuiAIIGw1ZXlzjHA51gjRqCwYS5d9LBNb0TXHvQR1nOCZOifJIQdoc1qxQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<span class="absolute bottom-2 right-2 font-bold text-lg text-white">١٢٠ ج.م</span>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-on-surface mb-1">بيتزا دجاج رانش</h3>
+<p class="text-on-surface-variant text-sm line-clamp-1">دجاج، صوص رانش، جبن موزاريلا</p>
+</div>
+</div>
+<!-- Product Card -->
+<div class="bg-surface-container rounded-xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary transition-all group">
+<div class="h-32 bg-surface-container-high relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A refreshing glass of cold cola with ice cubes and condensation on the glass, set against a dark moody background with subtle rim lighting. Professional beverage photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr78p4YbTjtuj5xeEmBBAFU5Y3QTJWrnLykE_YJX1lbZvIQiSphUckjQBg2ItQ1-W4tyTGzrcukbGjnja97RQMitGTQgSzvGx_J9-bJvU1xtH-WOBwDFCtOKZCdswHSDI2bv82oWqYUkg_VfsNm3eeevV0E1O3uJBxCxUJM5AdJr3Yos7tg7b1tWSpgX2Cgo1P3IdKsH4NfcqB6SkbV0rpT_w1CYm2lyQ8Abs_qQl4kgxMrwNvqbkfww"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<span class="absolute bottom-2 right-2 font-bold text-lg text-white">٢٥ ج.م</span>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-on-surface mb-1">بيبسي</h3>
+<p class="text-on-surface-variant text-sm line-clamp-1">مشروب غازي بارد</p>
+</div>
+</div>
+<!-- Product Card -->
+<div class="bg-surface-container rounded-xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary transition-all group">
+<div class="h-32 bg-surface-container-high relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A close up of crispy french fries in a dark metallic serving basket, sprinkled with sea salt and herbs. Dark slate background, warm directional lighting highlighting the golden texture of the fries." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBmeEzhfqPD7kaX9joOQC4qUkOBMAKyRO39JzCws8SdznjnwVdyRo_ButNSJsHVhYSLO71eDkGShQzbAkrkgALgx2wz7Hvx2aruTmOiMzA8Gs5sFEYMyUuXLzDlq0rMCGF4I-AOL4K7IyRPhbZUHAtTUDm2Bwj81warbp5lV5i0JFSe9JmOxaQgOQVqQpMmsa1pGa_ZwMTs9gihW1tKXMOxkeuV0FlZaqfNM0B7tE1q5xBhm5l_toOog"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<span class="absolute bottom-2 right-2 font-bold text-lg text-white">٤٠ ج.م</span>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-on-surface mb-1">بطاطس مقلية</h3>
+<p class="text-on-surface-variant text-sm line-clamp-1">مقرمشة ولذيذة</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cart / Order Summary (Left Side in RTL) -->
+<section class="w-96 bg-surface-container-low border-r border-outline-variant flex flex-col shrink-0">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<div>
+<h2 class="text-headline-lg-ar text-on-surface">الطلب الحالي</h2>
+<div class="text-on-surface-variant font-mono text-sm mt-1" dir="ltr">#ORD-2023-089</div>
+</div>
+<button class="text-error hover:bg-error/10 p-2 rounded-full transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+<!-- Order Items -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Item -->
+<div class="bg-surface rounded-lg p-4 flex gap-4 items-center border border-outline-variant/30">
+<div class="flex flex-col items-center gap-2 bg-surface-container-high rounded-full px-2 py-1">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">add</span></button>
+<span class="font-bold text-sm">٢</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">remove</span></button>
+</div>
+<div class="flex-1">
+<div class="font-bold text-on-surface flex justify-between">
+<span>بيتزا دجاج رانش</span>
+<span>٢٤٠ ج.م</span>
+</div>
+<div class="text-on-surface-variant text-sm mt-1">بدون بصل</div>
+</div>
+</div>
+<!-- Item -->
+<div class="bg-surface rounded-lg p-4 flex gap-4 items-center border border-outline-variant/30">
+<div class="flex flex-col items-center gap-2 bg-surface-container-high rounded-full px-2 py-1">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">add</span></button>
+<span class="font-bold text-sm">١</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">remove</span></button>
+</div>
+<div class="flex-1">
+<div class="font-bold text-on-surface flex justify-between">
+<span>بيبسي</span>
+<span>٢٥ ج.م</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals & Pay -->
+<div class="p-6 bg-surface-container border-t border-outline-variant mt-auto">
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-on-surface-variant">
+<span>المجموع الفرعي</span>
+<span>٢٦٥ ج.م</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>الضريبة (١٤٪)</span>
+<span>٣٧.١ ج.م</span>
+</div>
+<div class="flex justify-between text-on-surface font-bold text-lg pt-3 border-t border-outline-variant/50">
+<span>الإجمالي</span>
+<span class="text-primary">٣٠٢.١ ج.م</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold text-lg hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined icon-rtl-flip">payments</span>
+                        دفع
+                    </button>
+</div>
+</section>
+</main>
+</div>
+</body></html>

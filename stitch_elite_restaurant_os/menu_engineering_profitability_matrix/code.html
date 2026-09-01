@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Menu Engineering</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#d0c5af",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-container": "#ff949c",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "tertiary-fixed": "#ffdadb",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#67001b",
+                        "outline": "#99907c",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "on-primary-fixed": "#241a00",
+                        "surface-container": "#20201f",
+                        "on-tertiary-container": "#8e0029",
+                        "primary-fixed": "#ffe088",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-secondary-fixed": "#002113",
+                        "outline-variant": "#4d4635",
+                        "surface-dim": "#131313",
+                        "on-secondary": "#003824",
+                        "primary-fixed-dim": "#e9c349",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-primary-container": "#554300",
+                        "surface-variant": "#353535",
+                        "surface": "#131313",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#735c00",
+                        "primary": "#f2ca50",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#e9c349",
+                        "surface-container-highest": "#353535",
+                        "surface-bright": "#393939",
+                        "primary-container": "#d4af37",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#4edea3",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-container": "#00a572",
+                        "on-secondary-container": "#00311f",
+                        "tertiary": "#ffbec1",
+                        "error-container": "#93000a",
+                        "on-primary": "#3c2f00",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "md": "16px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest font-body-sm text-body-sm h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant flex flex-col h-full py-lg px-md z-50">
+<div class="mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary tracking-tighter">RestaurantOS</h1>
+<p class="text-on-surface-variant text-xs mt-1">Premium Management</p>
+</div>
+<ul class="flex flex-col gap-sm flex-grow">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+                    POS
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="table_restaurant">table_restaurant</span>
+                    Tables
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container font-semibold transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                    Menu
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    Inventory
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+</nav>
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface font-title-md text-title-md fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant dark:border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center gap-md">
+<span class="text-on-surface">Menu Engineering</span>
+<span class="text-on-surface-variant mx-2">|</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">Downtown Branch</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="relative focus-within:border-primary border border-transparent rounded-full px-sm py-xs flex items-center bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant ml-xs" data-icon="search">search</span>
+<input class="bg-transparent border-none text-on-surface placeholder-on-surface-variant font-body-sm text-body-sm focus:ring-0 w-48" placeholder="Search items..." type="text"/>
+</div>
+<div class="flex gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 mt-16 p-margin-desktop min-h-screen">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Menu Matrix Analysis</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary pulse-dot"></span>
+                    Live data syncing for Q3
+                </p>
+</div>
+<div class="flex gap-md">
+<button class="px-md py-sm rounded border border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors">Export Report</button>
+<button class="px-md py-sm rounded bg-primary text-on-primary font-body-sm text-body-sm hover:bg-primary-container transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+                    Run AI Optimization
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Matrix Chart Card (Stars, Plow Horses, Puzzles, Dogs) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low border border-outline-variant rounded-xl p-lg relative overflow-hidden">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-md text-title-md text-on-surface">Performance Matrix</h3>
+<div class="font-label-caps text-label-caps text-on-surface-variant flex gap-sm">
+<span class="flex items-center gap-xs"><span class="w-3 h-3 bg-primary rounded-sm"></span> High Profit</span>
+<span class="flex items-center gap-xs"><span class="w-3 h-3 bg-surface-variant border border-outline-variant rounded-sm"></span> Low Profit</span>
+</div>
+</div>
+<div class="h-[400px] border border-outline-variant rounded relative flex flex-col bg-surface-dim">
+<!-- Matrix Grid Overlay -->
+<div class="absolute inset-0 grid grid-cols-2 grid-rows-2 pointer-events-none opacity-20">
+<div class="border-r border-b border-outline"></div>
+<div class="border-b border-outline"></div>
+<div class="border-r border-outline"></div>
+<div></div>
+</div>
+<!-- Labels -->
+<div class="absolute top-2 left-2 font-label-caps text-label-caps text-on-surface-variant opacity-50">PUZZLE<br/>(High Profit / Low Sales)</div>
+<div class="absolute top-2 right-2 font-label-caps text-label-caps text-primary opacity-80 text-right">STAR<br/>(High Profit / High Sales)</div>
+<div class="absolute bottom-2 left-2 font-label-caps text-label-caps text-on-error opacity-50">DOG<br/>(Low Profit / Low Sales)</div>
+<div class="absolute bottom-2 right-2 font-label-caps text-label-caps text-on-surface-variant opacity-50 text-right">PLOW HORSE<br/>(Low Profit / High Sales)</div>
+<!-- Axes -->
+<div class="absolute bottom-[-24px] w-full text-center font-label-caps text-label-caps text-on-surface-variant">Sales Volume →</div>
+<div class="absolute left-[-24px] h-full flex items-center justify-center font-label-caps text-label-caps text-on-surface-variant" style="writing-mode: vertical-rl; transform: rotate(180deg);">↑ Profit Margin</div>
+<!-- Scatter Points (Simulated) -->
+<div class="relative w-full h-full p-4">
+<!-- Stars -->
+<div class="absolute top-[15%] right-[20%] w-6 h-6 rounded-full bg-primary/20 border border-primary flex items-center justify-center hover:bg-primary/40 cursor-pointer group transition-colors">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+<div class="absolute bottom-full mb-2 hidden group-hover:block w-max bg-surface-container-highest p-2 border border-outline-variant rounded shadow-lg z-10">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Truffle Risotto</p>
+<p class="font-label-caps text-label-caps text-primary">Margin: 72% | Vol: 450</p>
+</div>
+</div>
+<div class="absolute top-[25%] right-[10%] w-5 h-5 rounded-full bg-primary/20 border border-primary flex items-center justify-center hover:bg-primary/40 cursor-pointer group transition-colors">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+</div>
+<!-- Puzzles -->
+<div class="absolute top-[20%] left-[30%] w-4 h-4 rounded-full bg-on-surface-variant/20 border border-on-surface-variant flex items-center justify-center hover:bg-on-surface-variant/40 cursor-pointer group transition-colors">
+<span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full"></span>
+<div class="absolute bottom-full mb-2 hidden group-hover:block w-max bg-surface-container-highest p-2 border border-outline-variant rounded shadow-lg z-10">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Wagyu Tartare</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Margin: 68% | Vol: 85</p>
+</div>
+</div>
+<!-- Plow Horses -->
+<div class="absolute bottom-[20%] right-[15%] w-8 h-8 rounded-full bg-on-surface-variant/20 border border-on-surface-variant flex items-center justify-center hover:bg-on-surface-variant/40 cursor-pointer group transition-colors">
+<span class="w-3 h-3 bg-on-surface-variant rounded-full"></span>
+<div class="absolute bottom-full mb-2 hidden group-hover:block w-max bg-surface-container-highest p-2 border border-outline-variant rounded shadow-lg z-10">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Classic Burger</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Margin: 25% | Vol: 890</p>
+</div>
+</div>
+<!-- Dogs -->
+<div class="absolute bottom-[30%] left-[15%] w-3 h-3 rounded-full bg-error/20 border border-error flex items-center justify-center hover:bg-error/40 cursor-pointer group transition-colors">
+<span class="w-1 h-1 bg-error rounded-full"></span>
+<div class="absolute bottom-full mb-2 hidden group-hover:block w-max bg-surface-container-highest p-2 border border-outline-variant rounded shadow-lg z-10">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Tofu Stir-fry</p>
+<p class="font-label-caps text-label-caps text-error">Margin: 15% | Vol: 40</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Recommendations Card -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-lg flex-grow relative overflow-hidden">
+<!-- Glassmorphism overlay for premium feel -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<h3 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="psychology">psychology</span>
+                        AI Optimization Insights
+                    </h3>
+<div class="flex flex-col gap-md">
+<!-- Recommendation Item -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-caps text-label-caps bg-surface-variant px-2 py-1 rounded text-on-surface">PLOW HORSE → STAR</span>
+<span class="font-data-pos text-data-pos text-primary">+12% Profit</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-semibold text-on-surface mb-xs">Classic Burger</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-sm">High volume but low margin (25%).</p>
+<div class="flex gap-sm">
+<button class="font-label-caps text-label-caps text-on-surface border border-outline-variant rounded px-2 py-1 hover:bg-surface-variant transition-colors w-full">Increase Price $1.50</button>
+<button class="font-label-caps text-label-caps text-on-surface border border-outline-variant rounded px-2 py-1 hover:bg-surface-variant transition-colors w-full">Review Recipe Cost</button>
+</div>
+</div>
+<!-- Recommendation Item -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-caps text-label-caps bg-surface-variant px-2 py-1 rounded text-on-surface">PUZZLE → STAR</span>
+<span class="font-data-pos text-data-pos text-primary">+45 Vol</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-semibold text-on-surface mb-xs">Wagyu Tartare</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-sm">High margin (68%) but low sales.</p>
+<button class="font-label-caps text-label-caps text-primary border border-primary/50 bg-primary/10 rounded px-2 py-1 hover:bg-primary/20 transition-colors w-full flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="campaign">campaign</span>
+                                Run Promo / Highlight on Menu
+                            </button>
+</div>
+<!-- Recommendation Item -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-error/50 transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-caps text-label-caps bg-error/20 px-2 py-1 rounded text-error">DOG ALERT</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-semibold text-on-surface mb-xs">Tofu Stir-fry</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-sm">Underperforming across all metrics.</p>
+<button class="font-label-caps text-label-caps text-error border border-error/50 bg-error/10 rounded px-2 py-1 hover:bg-error/20 transition-colors w-full">Consider Removal</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="col-span-12 bg-surface-container-low border border-outline-variant rounded-xl p-lg overflow-x-auto">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-md text-title-md text-on-surface">Item Level Metrics</h3>
+<div class="flex gap-sm">
+<select class="bg-surface border border-outline-variant rounded px-2 py-1 font-body-sm text-body-sm text-on-surface focus:ring-0 focus:border-primary">
+<option>All Categories</option>
+<option>Mains</option>
+<option>Starters</option>
+</select>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant font-label-caps text-label-caps text-on-surface-variant">
+<th class="py-sm px-xs font-semibold">Item Name</th>
+<th class="py-sm px-xs font-semibold">Class</th>
+<th class="py-sm px-xs font-semibold text-right">Units Sold</th>
+<th class="py-sm px-xs font-semibold text-right">Revenue</th>
+<th class="py-sm px-xs font-semibold text-right">Food Cost</th>
+<th class="py-sm px-xs font-semibold text-right">Gross Profit</th>
+<th class="py-sm px-xs font-semibold text-right">Margin %</th>
+<th class="py-sm px-xs font-semibold text-center">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface">
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-md px-xs font-medium">Truffle Risotto</td>
+<td class="py-md px-xs"><span class="bg-primary/20 text-primary px-2 py-1 rounded font-label-caps text-[10px]">STAR</span></td>
+<td class="py-md px-xs text-right font-data-pos">450</td>
+<td class="py-md px-xs text-right font-data-pos">$12,600</td>
+<td class="py-md px-xs text-right font-data-pos">$3,528</td>
+<td class="py-md px-xs text-right font-data-pos">$9,072</td>
+<td class="py-md px-xs text-right font-data-pos text-primary">72%</td>
+<td class="py-md px-xs text-center"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-md px-xs font-medium">Classic Burger</td>
+<td class="py-md px-xs"><span class="bg-on-surface-variant/20 text-on-surface-variant px-2 py-1 rounded font-label-caps text-[10px]">PLOW HORSE</span></td>
+<td class="py-md px-xs text-right font-data-pos">890</td>
+<td class="py-md px-xs text-right font-data-pos">$16,020</td>
+<td class="py-md px-xs text-right font-data-pos">$12,015</td>
+<td class="py-md px-xs text-right font-data-pos">$4,005</td>
+<td class="py-md px-xs text-right font-data-pos">25%</td>
+<td class="py-md px-xs text-center"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-md px-xs font-medium">Wagyu Tartare</td>
+<td class="py-md px-xs"><span class="bg-secondary/20 text-secondary px-2 py-1 rounded font-label-caps text-[10px]">PUZZLE</span></td>
+<td class="py-md px-xs text-right font-data-pos">85</td>
+<td class="py-md px-xs text-right font-data-pos">$2,975</td>
+<td class="py-md px-xs text-right font-data-pos">$952</td>
+<td class="py-md px-xs text-right font-data-pos">$2,023</td>
+<td class="py-md px-xs text-right font-data-pos text-primary">68%</td>
+<td class="py-md px-xs text-center"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-md px-xs font-medium">Tofu Stir-fry</td>
+<td class="py-md px-xs"><span class="bg-error/20 text-error px-2 py-1 rounded font-label-caps text-[10px]">DOG</span></td>
+<td class="py-md px-xs text-right font-data-pos">40</td>
+<td class="py-md px-xs text-right font-data-pos">$640</td>
+<td class="py-md px-xs text-right font-data-pos">$544</td>
+<td class="py-md px-xs text-right font-data-pos">$96</td>
+<td class="py-md px-xs text-right font-data-pos text-error">15%</td>
+<td class="py-md px-xs text-center"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

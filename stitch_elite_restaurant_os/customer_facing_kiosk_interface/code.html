@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS Kiosk</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "background": "#131313",
+                        "surface-container-highest": "#353535",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#00311f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-primary": "#735c00",
+                        "on-primary": "#3c2f00",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-tint": "#e9c349",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-container": "#20201f",
+                        "inverse-on-surface": "#313030",
+                        "outline-variant": "#4d4635",
+                        "on-surface": "#e5e2e1",
+                        "primary": "#f2ca50",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary": "#003824",
+                        "tertiary-container": "#ff949c",
+                        "on-tertiary": "#67001b",
+                        "secondary": "#4edea3",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-primary-fixed": "#241a00",
+                        "outline": "#99907c",
+                        "primary-fixed-dim": "#e9c349",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "secondary-container": "#00a572",
+                        "surface-dim": "#131313",
+                        "on-tertiary-container": "#8e0029",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary": "#ffbec1",
+                        "surface": "#131313",
+                        "surface-variant": "#353535",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary-fixed": "#ffdadb",
+                        "surface-bright": "#393939",
+                        "surface-container-low": "#1c1b1b",
+                        "on-background": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed": "#ffe088",
+                        "primary-container": "#d4af37"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Hide scrollbar for clean kiosk look */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col bg-background text-on-background selection:bg-primary selection:text-on-primary">
+<!-- Landing View (Overlay) - Initially visible, hidden via JS -->
+<div class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-background bg-opacity-95 backdrop-blur-md transition-opacity duration-500" id="landing-view">
+<h1 class="font-display text-display text-primary mb-xl tracking-tight text-center max-w-4xl">Experience Culinary Precision</h1>
+<button class="bg-primary text-on-primary font-headline-lg text-headline-lg px-xl py-lg rounded-full hover:bg-primary-container active:scale-95 transition-all shadow-[0_0_40px_rgba(242,202,80,0.3)]" id="start-order-btn">
+            Start Ordering
+        </button>
+</div>
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky border-b border-outline-variant bg-background dark:bg-background text-primary dark:text-primary font-headline-lg text-headline-lg flex justify-between items-center px-margin-desktop py-md z-40">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[32px]">restaurant</span>
+<span class="font-headline-lg text-headline-lg tracking-tight">RESTAURANT OS</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-xl">language</span>
+<span class="font-label-caps text-label-caps text-on-surface">EN</span>
+</div>
+<button class="flex items-center justify-center h-12 w-12 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Main Layout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Navigation Drawer (Left Sidebar) -->
+<nav class="h-full w-72 rounded-r-xl border-r border-outline-variant shadow-xl bg-surface dark:bg-surface flex flex-col py-lg shrink-0 z-30">
+<h2 class="font-title-md text-title-md text-secondary dark:text-secondary px-lg mb-md">MENU</h2>
+<ul class="flex-1 overflow-y-auto space-y-sm px-sm">
+<!-- Active Tab: Appetizers -->
+<li>
+<button class="w-full flex items-center gap-md px-md py-md rounded-lg text-secondary font-bold bg-secondary-container/10 border-l-4 border-secondary text-left transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fastfood</span>
+<span class="font-body-lg text-body-lg">Appetizers</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center gap-md px-md py-md rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high duration-200 text-left transition-colors">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-body-lg text-body-lg">Main Course</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center gap-md px-md py-md rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high duration-200 text-left transition-colors">
+<span class="material-symbols-outlined">icecream</span>
+<span class="font-body-lg text-body-lg">Desserts</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center gap-md px-md py-md rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high duration-200 text-left transition-colors">
+<span class="material-symbols-outlined">local_bar</span>
+<span class="font-body-lg text-body-lg">Beverages</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center gap-md px-md py-md rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high duration-200 text-left transition-colors">
+<span class="material-symbols-outlined text-primary">star</span>
+<span class="font-body-lg text-body-lg text-primary">Specials</span>
+</button>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area (Menu Grid) -->
+<main class="flex-1 bg-background overflow-y-auto p-margin-desktop">
+<div class="mb-lg flex justify-between items-end">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Appetizers</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant">8 ITEMS</span>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Item Card 1 -->
+<div class="bg-surface-container border border-[#262626] rounded-xl overflow-hidden hover:border-outline-variant transition-colors group cursor-pointer relative">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A high-resolution, close-up food photography shot of a gourmet beef tartare appetizer. Plated on a sleek, matte black ceramic dish, the vibrant red meat is garnished with microgreens and a raw quail egg yolk. The lighting is dramatic, high-contrast studio lighting emphasizing the textures and vivid colors against a pitch-black background, fitting a premium, modern restaurant aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyCm8Ck0OnMspZ9G2lJuOcWp-lHly1rsqAQPbRV2rov6F2NKTRUxAjlF7ep2JhqRUU4wVfOjcV7Hff3nU8nBWnXqgvjHEVC7XH_tavmZ-3gnnEbsCsyaAI-1PF6VR4ZOBENCoBroRGUdhtskrBizP84JMIIb3aUmFQjx1T9af3JjZC8XViwOKlV3stkJWpFEkl1S5TFLuHMehxK2j2hCDI1RuEZdD6-JZtFRXPm8Mui6_rGv8lnPpt7g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm border border-[#262626] rounded-full px-sm py-xs">
+<span class="font-data-pos text-data-pos text-primary">$18</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Wagyu Beef Tartare</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md">Hand-cut A5 Wagyu, cured egg yolk, caper dust, house-made sourdough crisps.</p>
+<button class="w-full py-sm bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps rounded flex items-center justify-center gap-xs transition-colors border border-[#262626]">
+<span class="material-symbols-outlined text-[18px]">add</span> ADD TO ORDER
+                        </button>
+</div>
+</div>
+<!-- Item Card 2 -->
+<div class="bg-surface-container border border-[#262626] rounded-xl overflow-hidden hover:border-outline-variant transition-colors group cursor-pointer relative">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A macro shot of seared scallops appetizer on a dark slate plate. The scallops have a perfect golden-brown crust. They rest on a vivid green pea purée, accented with delicate edible flowers and a drizzle of dark balsamic reduction. Lit with precise, directional spotlighting to highlight the moisture and texture against a deep, dark culinary environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrTuhhfnz06el4T0gS9mlIi_0Sy3aqVw7kG6qYkm4pr3cBTspaqGSDkDNtRghzIQEmK3J3Q-lChxLAH3Xn2s2IRpnlD-MBL_lUxM1XYON0OYKCYuinWH1C3u3L-_7U_uGjCHNS6R1fy-td4XuiBW3DD4tq4z_9bhCwJHXy9RXh9PjRevqImcvIaVvSTdIntj0byGX7YKjZqRtVWqTeqkSue_y780Hon005DkBICGIWKR3-IT2x5z4u0Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm border border-[#262626] rounded-full px-sm py-xs">
+<span class="font-data-pos text-data-pos text-primary">$22</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Hokkaido Scallops</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md">Pan-seared, sweet corn silk, smoked pancetta crumb, yuzu emulsion.</p>
+<button class="w-full py-sm bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps rounded flex items-center justify-center gap-xs transition-colors border border-[#262626]">
+<span class="material-symbols-outlined text-[18px]">add</span> ADD TO ORDER
+                        </button>
+</div>
+</div>
+<!-- Item Card 3 -->
+<div class="bg-surface-container border border-[#262626] rounded-xl overflow-hidden hover:border-outline-variant transition-colors group cursor-pointer relative">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="An elegant presentation of a burrata salad appetizer. A pristine white globe of fresh burrata sits atop a bed of heirloom tomatoes in deep reds and purples. Scattered fresh basil leaves and a heavy pour of golden olive oil. The scene is shot from a top-down angle on a dark, textured stone table, bathed in soft, moody, directional light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqLtMVvAt2GGySo-Hx_IlMHrc1f2OW8e59fGj18jM3Emi-b-ZzD7rbwa9DE--UVauteDbR-y6vqE_O8SVSPDBuB0DAdBi7lRm8buIhq9aOxsqiL7KS-y48MMUXBODhbyYZ2X0rc5yqMj7n-Ez8Njt5DzCqiRQUmQoGWn_Ino3x___Jca9dcEloX2ayRNRI-g_0-uFZPL6MMbv9ad4vyMml-3bLYvqDNVNftiWzvbTbKhjEDjg4phCTUw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm left-sm bg-secondary-container/20 text-secondary border border-secondary/50 rounded px-sm py-xs backdrop-blur-md">
+<span class="font-label-caps text-[10px] tracking-wider">VEGETARIAN</span>
+</div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm border border-[#262626] rounded-full px-sm py-xs">
+<span class="font-data-pos text-data-pos text-primary">$16</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Smoked Burrata</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md">Heirloom tomato variations, basil oil, 25-year aged balsamic, micro basil.</p>
+<button class="w-full py-sm bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps rounded flex items-center justify-center gap-xs transition-colors border border-[#262626]">
+<span class="material-symbols-outlined text-[18px]">add</span> ADD TO ORDER
+                        </button>
+</div>
+</div>
+<!-- Item Card 4 (Added to Basket State) -->
+<div class="bg-surface-container border border-primary/50 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(242,202,80,0.1)] relative">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img class="w-full h-full object-cover opacity-60" data-alt="A modern, minimalist plating of grilled octopus tentacles. The octopus is deeply charred, resting on a stark white smear of potato purée against a matte black bowl. Splashes of bright red chili oil dot the purée. The lighting is harsh and angular, creating strong shadows and highlighting the suction cups and char on the seafood, matching a high-end, dark-themed culinary interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIpQREgsOzTLEmIcJR5sIBcZQ0YH6_D1NhIe4aXnB3X7AhWpUay85A-E0WX_0gpc2EsqdGH3_weoxsEVKWjxj_8bckmZSowD9pFojX5oNKx0rnLIvSpkau77jdw2gUzaCYzK8Yc04c02833Yuu1lV2cEEXc84vh-9lpBwLrbFA-00RHENbrJepK2mdUQRDYA5WsjKY4PEP0HGxM2lgd3g4_dIfQS7SuRkOsBg8QJpTF7JX89o4xUt3xA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm border border-[#262626] rounded-full px-sm py-xs">
+<span class="font-data-pos text-data-pos text-primary">$24</span>
+</div>
+<!-- Active Indicator -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="bg-primary/20 backdrop-blur-md border border-primary rounded-full p-md text-primary flex flex-col items-center">
+<span class="material-symbols-outlined text-3xl mb-xs">check_circle</span>
+<span class="font-label-caps text-label-caps">IN BASKET</span>
+</div>
+</div>
+</div>
+<div class="p-md opacity-80">
+<h3 class="font-title-md text-title-md text-primary mb-xs">Charred Octopus</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md">Confit marble potatoes, nduja vinaigrette, squid ink tuile.</p>
+<!-- Quantity Control -->
+<div class="flex items-center justify-between border border-[#262626] rounded bg-surface p-unit">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<span class="font-data-pos text-data-pos text-on-surface">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Sidebar (Order Basket) -->
+<aside class="w-[360px] bg-surface-container-lowest border-l border-[#262626] flex flex-col shrink-0 z-30">
+<!-- Header -->
+<div class="p-md border-b border-[#262626] flex justify-between items-center bg-surface-container">
+<h2 class="font-title-md text-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Current Order
+                </h2>
+<div class="bg-surface-bright px-sm py-xs rounded font-label-caps text-label-caps text-on-surface-variant">
+                    TABLE 12
+                </div>
+</div>
+<!-- Order Items List -->
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<!-- Basket Item -->
+<div class="flex gap-md border-b border-[#262626] pb-md">
+<div class="flex flex-col items-center gap-xs">
+<button class="w-6 h-6 rounded bg-surface-container-highest hover:bg-surface-bright flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]">keyboard_arrow_up</span>
+</button>
+<span class="font-data-pos text-[16px] text-primary font-bold">1</span>
+<button class="w-6 h-6 rounded bg-surface-container-highest hover:bg-surface-bright flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-body-lg text-body-lg text-on-surface font-medium leading-tight">Charred Octopus</span>
+<span class="font-data-pos text-[16px] text-on-surface-variant">$24.00</span>
+</div>
+<!-- Modifications -->
+<ul class="mt-xs space-y-xs">
+<li class="font-body-sm text-[12px] text-on-surface-variant/70 flex items-center gap-xs">
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span> No squid ink tuile
+                                </li>
+</ul>
+</div>
+<button class="text-error/70 hover:text-error text-left font-label-caps text-[10px] mt-sm flex items-center gap-xs transition-colors w-max">
+<span class="material-symbols-outlined text-[14px]">delete</span> REMOVE
+                        </button>
+</div>
+</div>
+</div>
+<!-- Footer / Checkout -->
+<div class="bg-surface-container p-md border-t border-[#262626]">
+<div class="space-y-sm mb-lg">
+<div class="flex justify-between text-on-surface-variant font-body-sm">
+<span>Subtotal</span>
+<span class="font-data-pos">$24.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-body-sm">
+<span>Tax (8.5%)</span>
+<span class="font-data-pos">$2.04</span>
+</div>
+<div class="flex justify-between text-on-surface font-title-md border-t border-[#262626] pt-sm mt-sm">
+<span>Total</span>
+<span class="font-data-pos text-primary">$26.04</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-headline-lg-mobile text-headline-lg-mobile py-md rounded-lg hover:bg-primary-container active:scale-[0.98] transition-all flex justify-between items-center px-lg shadow-[0_4px_20px_rgba(242,202,80,0.15)] group">
+<span>Send Order</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="w-full mt-sm py-sm text-on-surface-variant font-label-caps text-label-caps hover:text-on-surface transition-colors">
+                    CANCEL ORDER
+                </button>
+</div>
+</aside>
+</div>
+<script>
+        // Simple interaction for the landing screen
+        document.getElementById('start-order-btn').addEventListener('click', function() {
+            const landing = document.getElementById('landing-view');
+            landing.style.opacity = '0';
+            setTimeout(() => {
+                landing.style.display = 'none';
+            }, 500);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Delivery Order Entry</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#d4af37",
+                        "outline-variant": "#4d4635",
+                        "inverse-surface": "#e5e2e1",
+                        "outline": "#99907c",
+                        "tertiary": "#ffbec1",
+                        "on-primary-fixed": "#241a00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-tint": "#e9c349",
+                        "secondary-fixed": "#6ffbbe",
+                        "tertiary-container": "#ff949c",
+                        "secondary-container": "#00a572",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#ffe088",
+                        "on-secondary": "#003824",
+                        "surface-variant": "#353535",
+                        "surface": "#131313",
+                        "primary": "#f2ca50",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "on-primary-fixed-variant": "#574500",
+                        "secondary": "#4edea3",
+                        "surface-container": "#20201f",
+                        "tertiary-fixed": "#ffdadb",
+                        "background": "#131313",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-bright": "#393939",
+                        "on-tertiary": "#67001b",
+                        "on-tertiary-container": "#8e0029",
+                        "inverse-primary": "#735c00",
+                        "surface-container-highest": "#353535",
+                        "surface-dim": "#131313",
+                        "error-container": "#93000a",
+                        "on-surface-variant": "#d0c5af",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-primary-container": "#554300",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "on-primary": "#3c2f00",
+                        "inverse-on-surface": "#313030",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#002113"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "data-pos": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e5e2e1;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(242, 202, 80, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(242, 202, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(242, 202, 80, 0); }
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg flex h-screen overflow-hidden antialiased">
+<!-- TopAppBar (From JSON - Simplified for layout context) -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center h-16 px-margin-desktop shadow-none">
+<div class="flex items-center gap-4">
+<span class="font-display text-display text-primary tracking-tight" style="font-size: 24px;">RestaurantOS</span>
+</div>
+<div class="flex-1 max-w-md mx-8">
+<!-- Search omitted as requested search is in column -->
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors" data-icon="help">help</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden">
+<img alt="Manager Avatar" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark-themed restaurant manager avatar, high contrast, professional lighting, cinematic, 8k resolution, minimalist dark grey and subtle gold tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp6pafOL1T_5L1EzPyrmjOn4GSPNu5tBUuTk_uSNoLDo4MQgLofuNSa66N7mF-6hNpWVrHjZCADC-SfnyHUrFkYGvxEf8VDYm4KEhyrJOJxSHGTy8qv22UZIVlxFByBc599pdFjz7ZAb-GS8VuhqddywwJpzzuiQuhy8UncBC2zdgm3VslPaD4a8gN1NgM-QRtsAZLmXy6h0qJkCRprLBmiBLZpxRJakpFOcveNlbebNIQsZup2RfZoA"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (From JSON) -->
+<nav class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container-lowest border-r border-outline-variant flex flex-col pt-20 pb-8 px-4 transition-all duration-200 ease-in-out shadow-none">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-variant border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Main Kitchen</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Terminal 01</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-title-md text-title-md py-3 rounded-lg hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="phone_in_talk">phone_in_talk</span>
+                New Phone Order
+            </button>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-label-caps text-label-caps">POS</span>
+</a>
+<!-- Active -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-primary bg-surface-container-high border-r-4 border-primary transition-colors cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-label-caps text-label-caps font-bold">Delivery</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-caps text-label-caps">CRM</span>
+</a>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-label-caps text-label-caps">Shift Info</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-DEFAULT text-error hover:bg-error/10 transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 mt-16 p-4 bg-background flex gap-4 h-[calc(100vh-64px)]">
+<!-- Left Column: Customer Lookup -->
+<section class="w-1/4 flex flex-col gap-4">
+<!-- Search Input -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-DEFAULT py-4 pl-12 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors placeholder:text-on-surface-variant font-body-lg text-body-lg h-14" placeholder="Search by name or phone..." type="text" value="01012345678"/>
+</div>
+<!-- Customer Found Card -->
+<div class="bg-surface border border-outline-variant rounded-lg p-5 flex flex-col gap-4 flex-1">
+<div class="flex items-start justify-between border-b border-outline-variant pb-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary font-headline-lg-mobile text-headline-lg-mobile">
+                            AM
+                        </div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+                                Ahmed Mohamed
+                                <span class="material-symbols-outlined text-secondary-container" data-icon="verified" style="font-variation-settings: 'FILL' 1; font-size: 18px;">verified</span>
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-data-pos">01012345678</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">TOTAL ORDERS</span>
+<span class="font-data-pos text-data-pos text-primary">27</span>
+</div>
+</div>
+<!-- Default Address -->
+<div class="flex gap-3 items-start p-3 bg-surface-container-lowest rounded-DEFAULT border border-[#262626]">
+<span class="material-symbols-outlined text-on-surface-variant mt-1" data-icon="location_on">location_on</span>
+<div class="flex-1">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">DEFAULT ADDRESS</p>
+<p class="font-body-sm text-body-sm text-on-surface">Apt 42, Bldg 7, 90th Street North</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">New Cairo, Cairo</p>
+</div>
+</div>
+<!-- Last Order Summary -->
+<div class="flex-1 mt-2">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-3 flex items-center justify-between">
+                        FAVORITE ITEMS
+                        <span class="material-symbols-outlined text-primary" data-icon="star" style="font-size: 16px;">star</span>
+</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between p-2 rounded-DEFAULT bg-surface-container-lowest border border-[#262626] hover:bg-surface-container-low cursor-pointer transition-colors">
+<span class="font-body-sm text-body-sm text-on-surface">Chicken Ranch Pizza</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="add_circle">add_circle</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-DEFAULT bg-surface-container-lowest border border-[#262626] hover:bg-surface-container-low cursor-pointer transition-colors">
+<span class="font-body-sm text-body-sm text-on-surface">Cola (1L)</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-auto py-3 bg-surface-container-highest border border-outline-variant text-on-surface font-title-md text-title-md rounded-DEFAULT hover:bg-surface-variant transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                    Repeat Last Order
+                </button>
+</div>
+</section>
+<!-- Center Column: Menu Selection -->
+<section class="flex-1 flex flex-col gap-4 border-l border-outline-variant pl-4">
+<!-- Category Filter -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-label-caps text-label-caps whitespace-nowrap border border-primary">All Items</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface font-label-caps text-label-caps whitespace-nowrap border border-outline-variant hover:bg-surface-variant transition-colors">Pizzas</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface font-label-caps text-label-caps whitespace-nowrap border border-outline-variant hover:bg-surface-variant transition-colors">Burgers</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface font-label-caps text-label-caps whitespace-nowrap border border-outline-variant hover:bg-surface-variant transition-colors">Sides</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface font-label-caps text-label-caps whitespace-nowrap border border-outline-variant hover:bg-surface-variant transition-colors">Drinks</button>
+</div>
+<!-- Menu Grid -->
+<div class="flex-1 overflow-y-auto hide-scrollbar grid grid-cols-2 lg:grid-cols-3 gap-3 pr-2">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest border border-[#262626] rounded-DEFAULT p-3 flex flex-col justify-between cursor-pointer hover:border-outline-variant transition-colors group relative overflow-hidden h-32">
+<div class="flex justify-between items-start z-10">
+<span class="font-body-lg text-body-lg text-on-surface font-medium pr-8">Pepperoni Pizza (L)</span>
+<span class="font-data-pos text-data-pos text-primary">220</span>
+</div>
+<div class="mt-auto flex justify-between items-end z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">PIZZA</span>
+<button class="w-8 h-8 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add" style="font-size: 20px;">add</span>
+</button>
+</div>
+</div>
+<!-- Item 2 (Active/Added) -->
+<div class="bg-surface-container-low border border-primary rounded-DEFAULT p-3 flex flex-col justify-between cursor-pointer h-32 relative shadow-[inset_0_0_15px_rgba(212,175,55,0.1)]">
+<div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary pulse-dot"></div>
+<div class="flex justify-between items-start">
+<span class="font-body-lg text-body-lg text-on-surface font-medium pr-8">Chicken Ranch (L)</span>
+<span class="font-data-pos text-data-pos text-primary">240</span>
+</div>
+<div class="mt-auto flex justify-between items-end">
+<div class="flex items-center gap-2 bg-surface-container-highest rounded border border-outline-variant p-1">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-white" data-icon="remove" style="font-size: 16px;">remove</span>
+<span class="font-data-pos text-body-sm w-4 text-center">1</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-white" data-icon="add" style="font-size: 16px;">add</span>
+</div>
+</div>
+</div>
+<!-- Additional items... (Simplified for brevity) -->
+<div class="bg-surface-container-lowest border border-[#262626] rounded-DEFAULT p-3 flex flex-col justify-between cursor-pointer hover:border-outline-variant transition-colors group h-32">
+<div class="flex justify-between items-start">
+<span class="font-body-lg text-body-lg text-on-surface font-medium pr-8">Classic Smash Burger</span>
+<span class="font-data-pos text-data-pos text-primary">150</span>
+</div>
+<div class="mt-auto flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant">BURGER</span>
+<button class="w-8 h-8 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add" style="font-size: 20px;">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Order Summary -->
+<section class="w-[30%] min-w-[320px] border-l border-outline-variant pl-4 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<h2 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_cart">shopping_cart</span>
+                    Current Order
+                </h2>
+<span class="bg-surface-container-high px-2 py-1 rounded font-data-pos text-body-sm text-on-surface border border-outline-variant">#4029</span>
+</div>
+<!-- Cart Items -->
+<div class="flex-1 overflow-y-auto hide-scrollbar flex flex-col gap-3">
+<div class="flex flex-col gap-1 pb-3 border-b border-[#262626]">
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="font-data-pos text-body-sm text-on-surface-variant pt-1">1x</span>
+<span class="font-body-lg text-body-lg text-on-surface font-medium">Chicken Ranch (L)</span>
+</div>
+<span class="font-data-pos text-data-pos text-on-surface">240</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-6">Extra Cheese</span>
+</div>
+</div>
+<!-- Delivery Details & Totals -->
+<div class="bg-surface border border-outline-variant rounded-lg p-4 flex flex-col gap-3 mt-auto">
+<div class="bg-surface-container-lowest border border-[#262626] rounded-DEFAULT p-3 mb-2">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DELIVERY TO</span>
+<button class="text-primary font-label-caps text-label-caps hover:underline">EDIT</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface truncate">Apt 42, Bldg 7, 90th Street North</p>
+<input class="w-full bg-surface border-b border-[#262626] py-2 text-on-surface focus:outline-none focus:border-primary transition-colors placeholder:text-on-surface-variant font-body-sm text-body-sm mt-2" placeholder="Add delivery note..." type="text" value="Call before arrival"/>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Subtotal</span>
+<span class="font-data-pos text-body-lg text-on-surface">240.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Delivery Fee</span>
+<span class="font-data-pos text-body-lg text-on-surface">30.00</span>
+</div>
+<div class="border-t border-outline-variant pt-3 mt-1 flex justify-between items-end">
+<span class="font-title-md text-title-md text-on-surface">Total</span>
+<div class="text-right">
+<span class="font-data-pos text-headline-lg-mobile text-primary block leading-none">270.00</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">EGP</span>
+</div>
+</div>
+<button class="w-full mt-4 py-4 bg-primary text-on-primary font-title-md text-title-md rounded-lg hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+                    Send to Kitchen &amp; Dispatch
+                </button>
+</div>
+</section>
+</main>
+</body></html>

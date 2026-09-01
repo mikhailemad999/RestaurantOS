@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Kitchen Display System</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed": "#ffdadb",
+                        "surface": "#131313",
+                        "tertiary-container": "#ff949c",
+                        "surface-bright": "#393939",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#e9c349",
+                        "tertiary": "#ffbec1",
+                        "secondary-container": "#00a572",
+                        "on-tertiary-fixed": "#40000d",
+                        "surface-container": "#20201f",
+                        "secondary": "#4edea3",
+                        "on-tertiary-container": "#8e0029",
+                        "outline": "#99907c",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-variant": "#353535",
+                        "on-primary-fixed": "#241a00",
+                        "on-secondary-fixed": "#002113",
+                        "surface-tint": "#e9c349",
+                        "primary-fixed": "#ffe088",
+                        "surface-container-highest": "#353535",
+                        "primary": "#f2ca50",
+                        "surface-container-low": "#1c1b1b",
+                        "background": "#131313",
+                        "inverse-primary": "#735c00",
+                        "secondary-fixed": "#6ffbbe",
+                        "primary-container": "#d4af37",
+                        "on-surface-variant": "#d0c5af",
+                        "on-background": "#e5e2e1",
+                        "on-error": "#690005",
+                        "on-secondary": "#003824",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-container": "#554300",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-tertiary": "#67001b",
+                        "surface-dim": "#131313",
+                        "outline-variant": "#4d4635",
+                        "on-primary": "#3c2f00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "xl": "40px",
+                        "gutter": "16px",
+                        "lg": "24px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "title-md": ["20px", { lineHeight: "1.4", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "data-pos": ["18px", { lineHeight: "1.0", fontWeight: "500" }],
+                        "label-caps": ["12px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom scrollbar for KDS grid */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353535;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4d4635;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden flex font-body-lg">
+<!-- SideNavBar Component -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+<div class="mb-xl flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-weight="fill">restaurant</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter leading-none">RestaurantOS</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs">Premium Management</p>
+</div>
+</div>
+<ul class="flex flex-col gap-xs flex-1">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+                    POS
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-semibold transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+                    Tables
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                    Menu
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Inventory
+                </a>
+</li>
+<li class="mt-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col h-screen relative">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center gap-md">
+<h2 class="font-title-md text-title-md text-primary font-bold">Downtown Branch</h2>
+<div class="h-4 w-[1px] bg-outline-variant mx-xs"></div>
+<span class="bg-error px-2 py-1 rounded text-on-error font-label-caps text-label-caps animate-pulse flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-on-error"></span>
+                    2 OVERDUE
+                </span>
+</div>
+<div class="flex items-center gap-md text-on-surface-variant">
+<button class="hover:text-primary transition-colors focus-within:border-primary relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</button>
+<button class="hover:text-primary transition-colors focus-within:border-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- KDS Canvas Workspace -->
+<div class="pt-[80px] px-md pb-md flex-1 flex flex-col overflow-hidden bg-surface-container-low">
+<!-- Station Filters -->
+<div class="flex gap-sm mb-md overflow-x-auto pb-xs shrink-0">
+<button class="px-md py-xs rounded-full border border-primary bg-primary-container text-on-primary-container font-title-md text-title-md whitespace-nowrap">
+                    All Stations
+                </button>
+<button class="px-md py-xs rounded-full border border-outline-variant bg-surface text-on-surface hover:bg-surface-variant transition-colors font-title-md text-title-md whitespace-nowrap">
+                    Grill
+                </button>
+<button class="px-md py-xs rounded-full border border-outline-variant bg-surface text-on-surface hover:bg-surface-variant transition-colors font-title-md text-title-md whitespace-nowrap">
+                    Pizza
+                </button>
+<button class="px-md py-xs rounded-full border border-outline-variant bg-surface text-on-surface hover:bg-surface-variant transition-colors font-title-md text-title-md whitespace-nowrap">
+                    Fryer
+                </button>
+<button class="px-md py-xs rounded-full border border-outline-variant bg-surface text-on-surface hover:bg-surface-variant transition-colors font-title-md text-title-md whitespace-nowrap">
+                    Garde Manger
+                </button>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-md overflow-y-auto flex-1 pr-xs pb-xl items-start align-content-start">
+<!-- Card 1: Overdue -->
+<div class="flex flex-col border border-error bg-surface rounded-lg overflow-hidden relative shadow-[0_0_15px_rgba(255,180,171,0.1)]">
+<div class="absolute inset-0 border-2 border-error pointer-events-none rounded-lg z-10 opacity-50"></div>
+<!-- Header -->
+<div class="flex justify-between items-center p-sm bg-error-container border-b border-error">
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<span class="font-data-pos text-data-pos font-bold text-on-error-container">T-12</span>
+<span class="bg-surface/20 text-on-error-container font-label-caps text-label-caps px-1.5 py-0.5 rounded backdrop-blur-sm">DINE-IN</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-error-container/70">#4092 • Jane</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-data-pos text-headline-lg-mobile text-on-error-container animate-pulse">24:15</div>
+</div>
+</div>
+<!-- Items -->
+<div class="p-sm flex flex-col gap-sm">
+<div class="flex flex-col relative group cursor-pointer p-xs -mx-xs rounded hover:bg-surface-variant/50 transition-colors">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-error mt-0.5">2x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Dry-Aged Ribeye</span>
+</div>
+</div>
+<div class="pl-[28px] mt-xs flex flex-col gap-xs">
+<span class="font-body-sm text-body-sm text-error bg-error/10 px-1.5 py-0.5 rounded w-fit border border-error/20">Allergy: Dairy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center before:content-['└'] before:mr-2 before:text-outline-variant">Medium Rare</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center before:content-['└'] before:mr-2 before:text-outline-variant">Sub Truffle Fries</span>
+</div>
+</div>
+<hr class="border-outline-variant border-t-[1px] border-dashed"/>
+<div class="flex flex-col relative group cursor-pointer p-xs -mx-xs rounded hover:bg-surface-variant/50 transition-colors">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-outline mt-0.5">1x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight line-through text-outline">Caesar Salad</span>
+</div>
+</div>
+<div class="pl-[28px] mt-xs flex flex-col gap-xs">
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> Prepared</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-xs p-sm border-t border-outline-variant bg-surface-container-low mt-auto">
+<button class="bg-surface-variant text-on-surface hover:bg-surface-bright py-sm rounded-md font-title-md text-title-md transition-colors border border-outline-variant">Bump</button>
+<button class="bg-secondary-container text-on-secondary-container hover:brightness-110 py-sm rounded-md font-title-md text-title-md transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">Ready</button>
+</div>
+</div>
+<!-- Card 2: Preparing Normal -->
+<div class="flex flex-col border border-outline-variant bg-surface rounded-lg overflow-hidden relative">
+<!-- Header -->
+<div class="flex justify-between items-center p-sm bg-surface-container-highest border-b border-outline-variant">
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<span class="font-data-pos text-data-pos font-bold text-primary">T-04</span>
+<span class="bg-surface-variant text-on-surface font-label-caps text-label-caps px-1.5 py-0.5 rounded border border-outline-variant">DINE-IN</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">#4095 • Mark</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-data-pos text-headline-lg-mobile text-on-surface">12:30</div>
+</div>
+</div>
+<!-- Items -->
+<div class="p-sm flex flex-col gap-sm">
+<div class="flex flex-col relative group cursor-pointer p-xs -mx-xs rounded hover:bg-surface-variant/50 transition-colors">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-primary mt-0.5">3x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Wagyu Smashburger</span>
+</div>
+</div>
+<div class="pl-[28px] mt-xs flex flex-col gap-xs">
+<span class="font-body-sm text-body-sm text-error bg-error-container/20 px-1.5 py-0.5 rounded w-fit text-error">No Onions (x1)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center before:content-['└'] before:mr-2 before:text-outline-variant">Extra Pickles (x3)</span>
+</div>
+</div>
+<hr class="border-outline-variant border-t-[1px]"/>
+<div class="flex flex-col relative group cursor-pointer p-xs -mx-xs rounded hover:bg-surface-variant/50 transition-colors">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-primary mt-0.5">1x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Lobster Mac &amp; Cheese</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-xs p-sm border-t border-outline-variant bg-surface-container-low mt-auto">
+<button class="bg-surface-variant text-on-surface hover:bg-surface-bright py-sm rounded-md font-title-md text-title-md transition-colors border border-outline-variant">Bump</button>
+<button class="bg-secondary-container text-on-secondary-container hover:brightness-110 py-sm rounded-md font-title-md text-title-md transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">Ready</button>
+</div>
+</div>
+<!-- Card 3: Just In / Not Started -->
+<div class="flex flex-col border border-outline-variant bg-surface rounded-lg overflow-hidden relative opacity-90">
+<!-- Header -->
+<div class="flex justify-between items-center p-sm bg-surface-container border-b border-outline-variant">
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<span class="font-data-pos text-data-pos font-bold text-on-surface">TAKEAWAY</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">#4098 • UberEats</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-data-pos text-headline-lg-mobile text-on-surface-variant">02:10</div>
+</div>
+</div>
+<!-- Items -->
+<div class="p-sm flex flex-col gap-sm">
+<div class="flex flex-col relative group cursor-pointer p-xs -mx-xs rounded hover:bg-surface-variant/50 transition-colors">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-on-surface-variant mt-0.5">1x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Margarita Pizza</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant border-t-[1px]"/>
+<div class="flex flex-col relative group cursor-pointer p-xs -mx-xs rounded hover:bg-surface-variant/50 transition-colors">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-on-surface-variant mt-0.5">1x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Garlic Knots</span>
+</div>
+</div>
+<div class="pl-[28px] mt-xs flex flex-col gap-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center before:content-['└'] before:mr-2 before:text-outline-variant">Side Marinara</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-1 gap-xs p-sm border-t border-outline-variant bg-surface-container-low mt-auto">
+<button class="bg-primary-container text-on-primary-container hover:brightness-110 py-sm rounded-md font-title-md text-title-md transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">Start Order</button>
+</div>
+</div>
+<!-- Card 4: Long List -->
+<div class="flex flex-col border border-outline-variant bg-surface rounded-lg overflow-hidden relative">
+<!-- Header -->
+<div class="flex justify-between items-center p-sm bg-surface-container-highest border-b border-outline-variant">
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<span class="font-data-pos text-data-pos font-bold text-primary">T-22</span>
+<span class="bg-surface-variant text-on-surface font-label-caps text-label-caps px-1.5 py-0.5 rounded border border-outline-variant">DINE-IN</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">#4096 • Sarah</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-data-pos text-headline-lg-mobile text-on-surface">15:40</div>
+</div>
+</div>
+<!-- Items -->
+<div class="p-sm flex flex-col gap-sm h-[200px] overflow-y-auto">
+<div class="flex flex-col relative p-xs -mx-xs">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-primary mt-0.5">2x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Seafood Risotto</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant border-t-[1px]"/>
+<div class="flex flex-col relative p-xs -mx-xs">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-primary mt-0.5">1x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Crispy Skin Salmon</span>
+</div>
+</div>
+<div class="pl-[28px] mt-xs flex flex-col gap-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center before:content-['└'] before:mr-2 before:text-outline-variant">Sauce on side</span>
+</div>
+</div>
+<hr class="border-outline-variant border-t-[1px]"/>
+<div class="flex flex-col relative p-xs -mx-xs">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-primary mt-0.5">1x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">Grilled Asparagus</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant border-t-[1px]"/>
+<div class="flex flex-col relative p-xs -mx-xs">
+<div class="flex justify-between items-start gap-sm">
+<div class="flex gap-sm w-full">
+<span class="font-data-pos text-body-lg font-bold text-primary mt-0.5">2x</span>
+<span class="font-title-md text-title-md text-on-surface leading-tight">French Onion Soup</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-xs p-sm border-t border-outline-variant bg-surface-container-low mt-auto shadow-[0_-4px_10px_rgba(0,0,0,0.5)]">
+<button class="bg-surface-variant text-on-surface hover:bg-surface-bright py-sm rounded-md font-title-md text-title-md transition-colors border border-outline-variant">Bump</button>
+<button class="bg-secondary-container text-on-secondary-container hover:brightness-110 py-sm rounded-md font-title-md text-title-md transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">Ready</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitchen Display System (KDS)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#00174b",
+                        "surface": "#121414",
+                        "background": "#121414",
+                        "surface-container-low": "#1a1c1c",
+                        "tertiary": "#bfcdff",
+                        "on-tertiary": "#082b72",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-tint": "#e9c349",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary-container": "#d4af37",
+                        "on-primary-fixed-variant": "#574500",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed": "#ffe088",
+                        "on-background": "#e2e2e2",
+                        "on-secondary": "#313030",
+                        "inverse-surface": "#e2e2e2",
+                        "inverse-on-surface": "#2f3131",
+                        "on-primary-container": "#554300",
+                        "tertiary-container": "#97b0ff",
+                        "secondary": "#c8c6c5",
+                        "primary": "#f2ca50",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-container-high": "#282a2b",
+                        "surface-container-highest": "#333535",
+                        "surface-dim": "#121414",
+                        "secondary-container": "#474746",
+                        "surface-container-lowest": "#0c0f0f",
+                        "surface-container": "#1e2020",
+                        "on-surface": "#e2e2e2",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#38393a",
+                        "inverse-primary": "#735c00",
+                        "surface-variant": "#333535",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary": "#3c2f00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#254188",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#dbe1ff",
+                        "outline": "#99907c",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-surface-variant": "#d0c5af",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-secondary-fixed-variant": "#474746"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "inline-start": "logical",
+                        "margin-page": "40px",
+                        "gutter": "24px",
+                        "inline-end": "logical"
+                    },
+                    "fontFamily": {
+                        "headline-lg-ar": ["IBM Plex Sans Arabic"],
+                        "body-md": ["Inter"],
+                        "body-md-ar": ["IBM Plex Sans Arabic"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-ar": ["30px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md-ar": ["16px", { "lineHeight": "1.8", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .logical-padding {
+            padding-inline-start: 1rem;
+            padding-inline-end: 1rem;
+        }
+        .logical-margin {
+            margin-inline-start: 1rem;
+            margin-inline-end: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md-ar h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface border-b border-outline-variant flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="text-title-md font-title-md text-primary dark:text-primary font-headline-lg-ar text-headline-lg-ar">RestaurantOS</span>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary">
+<button class="hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors p-2 rounded-full opacity-80 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors p-2 rounded-full opacity-80 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sync_lock</span>
+</button>
+<button class="hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors p-2 rounded-full opacity-80 duration-150 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+<span class="font-body-md-ar text-body-md-ar">Branch Switcher</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest border-l border-outline-variant fixed right-0 top-0 h-full flex flex-col pt-16 pb-4 z-40 w-64 hidden md:flex">
+<div class="p-6 border-b border-outline-variant/30 flex flex-col items-center">
+<div class="w-16 h-16 bg-surface-variant rounded-full mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">person</span>
+</div>
+<h2 class="text-on-surface font-body-md-ar text-body-md-ar font-bold">Manager</h2>
+<p class="text-on-surface-variant text-label-caps font-label-caps mt-1">Downtown Branch</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+                    POS
+                </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-primary-container bg-primary-container font-bold scale-95 duration-100 text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Orders
+                </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+                    Tables
+                </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                    Menu
+                </a>
+</div>
+<div class="p-4 mt-auto">
+<button class="w-full bg-primary text-on-primary font-body-md-ar text-body-md-ar py-3 rounded-lg font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                    New Order
+                </button>
+</div>
+</nav>
+<!-- Main Content (KDS) -->
+<main class="flex-1 mr-0 md:mr-64 p-gutter overflow-x-auto bg-surface flex gap-6">
+<!-- Order Column (New) -->
+<div class="w-80 flex-shrink-0 flex flex-col gap-4">
+<div class="flex justify-between items-center bg-surface-container-low p-3 rounded-xl border border-outline-variant/30">
+<h2 class="font-headline-lg-ar text-headline-lg-ar text-on-surface text-lg">جديد</h2>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-full text-label-caps font-label-caps">٣ طلبات</span>
+</div>
+<!-- Ticket -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-4 flex flex-col gap-3 shadow-lg shadow-black/20">
+<div class="flex justify-between items-start border-b border-outline-variant/50 pb-3">
+<div>
+<span class="text-primary font-label-caps text-label-caps bg-primary/10 px-2 py-1 rounded">#٤٠٥٢</span>
+<h3 class="font-body-md-ar text-body-md-ar font-bold text-on-surface mt-1">طاولة ١٢</h3>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-error font-body-md-ar text-body-md-ar flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span>
+                                ٥ دقائق
+                            </span>
+<span class="text-on-surface-variant text-label-caps font-label-caps mt-1">طلبات خارجية</span>
+</div>
+</div>
+<ul class="space-y-3 pt-2">
+<li class="flex items-start gap-3">
+<span class="text-on-surface font-body-md-ar text-body-md-ar font-bold bg-surface-variant px-2 py-1 rounded text-sm">٢</span>
+<div>
+<p class="text-on-surface font-body-md-ar text-body-md-ar">برجر لحم كلاسيك</p>
+<p class="text-on-surface-variant text-sm mt-1 flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-xs">remove_circle</span>
+                                    بدون بصل
+                                </p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-on-surface font-body-md-ar text-body-md-ar font-bold bg-surface-variant px-2 py-1 rounded text-sm">١</span>
+<div>
+<p class="text-on-surface font-body-md-ar text-body-md-ar">بطاطس مقلية</p>
+</div>
+</li>
+</ul>
+<div class="mt-4 pt-3 border-t border-outline-variant/50">
+<button class="w-full bg-surface-variant text-on-surface hover:bg-surface-bright transition-colors py-2 rounded-lg font-body-md-ar text-body-md-ar flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                            بدء التحضير
+                        </button>
+</div>
+</div>
+</div>
+<!-- Order Column (Preparing) -->
+<div class="w-80 flex-shrink-0 flex flex-col gap-4">
+<div class="flex justify-between items-center bg-surface-container-low p-3 rounded-xl border border-outline-variant/30">
+<h2 class="font-headline-lg-ar text-headline-lg-ar text-on-surface text-lg text-primary">قيد التحضير</h2>
+<span class="bg-primary/20 text-primary px-2 py-1 rounded-full text-label-caps font-label-caps">١ طلب</span>
+</div>
+<!-- Ticket -->
+<div class="bg-surface-container-low border-2 border-primary/50 rounded-xl p-4 flex flex-col gap-3 shadow-lg shadow-primary/5">
+<div class="flex justify-between items-start border-b border-outline-variant/50 pb-3">
+<div>
+<span class="text-on-surface-variant font-label-caps text-label-caps bg-surface-variant px-2 py-1 rounded">#٤٠٥٠</span>
+<h3 class="font-body-md-ar text-body-md-ar font-bold text-on-surface mt-1">تيك أواي</h3>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-primary font-body-md-ar text-body-md-ar flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span>
+                                ١٢ دقيقة
+                            </span>
+</div>
+</div>
+<ul class="space-y-3 pt-2">
+<li class="flex items-start gap-3 opacity-50 line-through">
+<span class="text-on-surface font-body-md-ar text-body-md-ar font-bold bg-surface-variant px-2 py-1 rounded text-sm">١</span>
+<div>
+<p class="text-on-surface font-body-md-ar text-body-md-ar">سلطة سيزر الدجاج</p>
+</div>
+</li>
+<li class="flex items-start gap-3 border-r-2 border-primary pr-2">
+<span class="text-on-surface font-body-md-ar text-body-md-ar font-bold bg-surface-variant px-2 py-1 rounded text-sm">٣</span>
+<div>
+<p class="text-on-surface font-body-md-ar text-body-md-ar">باستا ألفريدو</p>
+<p class="text-on-surface-variant text-sm mt-1 flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-xs">add_circle</span>
+                                    دجاج إضافي
+                                </p>
+</div>
+</li>
+</ul>
+<div class="mt-4 pt-3 border-t border-outline-variant/50 flex gap-2">
+<button class="flex-1 bg-primary text-on-primary hover:bg-primary-container transition-colors py-2 rounded-lg font-body-md-ar text-body-md-ar flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">check</span>
+                            جاهز
+                        </button>
+</div>
+</div>
+</div>
+<!-- Order Column (Ready) -->
+<div class="w-80 flex-shrink-0 flex flex-col gap-4 opacity-75">
+<div class="flex justify-between items-center bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/20">
+<h2 class="font-headline-lg-ar text-headline-lg-ar text-on-surface-variant text-lg">جاهز</h2>
+</div>
+</div>
+</main>
+</div>
+</body></html>

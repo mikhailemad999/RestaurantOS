@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Global Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#574500",
+                      "outline-variant": "#4d4635",
+                      "on-error": "#690005",
+                      "on-tertiary": "#67001b",
+                      "secondary-fixed-dim": "#4edea3",
+                      "surface-dim": "#131313",
+                      "surface-variant": "#353535",
+                      "on-tertiary-fixed-variant": "#92002a",
+                      "on-primary-container": "#554300",
+                      "surface-container-highest": "#353535",
+                      "surface": "#131313",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-tint": "#e9c349",
+                      "inverse-primary": "#735c00",
+                      "surface-bright": "#393939",
+                      "on-secondary-container": "#00311f",
+                      "inverse-on-surface": "#313030",
+                      "surface-container-low": "#1c1b1b",
+                      "primary-fixed": "#ffe088",
+                      "tertiary-container": "#ff949c",
+                      "background": "#131313",
+                      "error": "#ffb4ab",
+                      "on-primary": "#3c2f00",
+                      "secondary-fixed": "#6ffbbe",
+                      "secondary-container": "#00a572",
+                      "on-tertiary-container": "#8e0029",
+                      "outline": "#99907c",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#005236",
+                      "tertiary-fixed": "#ffdadb",
+                      "on-secondary": "#003824",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed-dim": "#e9c349",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "primary-container": "#d4af37",
+                      "on-primary-fixed": "#241a00",
+                      "primary": "#f2ca50",
+                      "tertiary": "#ffbec1",
+                      "on-tertiary-fixed": "#40000d",
+                      "on-secondary-fixed": "#002113",
+                      "tertiary-fixed-dim": "#ffb2b7",
+                      "secondary": "#4edea3",
+                      "on-surface": "#e5e2e1",
+                      "surface-container": "#20201f",
+                      "on-surface-variant": "#d0c5af",
+                      "on-background": "#e5e2e1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "gutter": "16px",
+                      "sm": "8px",
+                      "margin-desktop": "32px",
+                      "md": "16px",
+                      "xl": "40px"
+              },
+              "fontFamily": {
+                      "title-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-caps": ["JetBrains Mono"],
+                      "body-sm": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "display": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "data-pos": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "data-pos": ["18px", {"lineHeight": "1.0", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #353535; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #4d4635; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<nav aria-label="Top Navigation" class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-background/80 backdrop-blur-md border-b border-border-muted">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary">Command Center</span>
+</div>
+<div class="hidden md:flex gap-md absolute left-1/2 transform -translate-x-1/2">
+<!-- Navigation is suppressed due to 'focused journey' settings page -->
+</div>
+<div class="flex items-center gap-md">
+<button class="text-primary font-medium hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-200 p-sm rounded-DEFAULT flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<button class="text-primary font-medium hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-200 p-sm rounded-DEFAULT flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
+</button>
+<button class="text-primary font-medium hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-200 p-sm rounded-DEFAULT flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</nav>
+<div class="flex flex-1 pt-16 overflow-hidden h-[calc(100vh)]">
+<!-- SideNavBar -->
+<aside aria-label="Side Navigation" class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] flex flex-col p-pane-padding bg-surface docked left-0 h-full w-64 border-r border-border-muted">
+<div class="p-lg border-b border-[#262626]">
+<div class="flex items-center gap-md mb-sm">
+<img alt="User Profile" class="w-12 h-12 rounded-full border border-outline-variant object-cover" data-alt="A futuristic minimalist avatar placeholder featuring a glowing neon gold outline against a deep charcoal background. The style is sleek, corporate, and highly technological, fitting a premium restaurant management system interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADPinSosK9KzRRH2vjHpYivY-sopBTPn3zEMgPxXpnx8PRFC7BIRyIEt9U4VvIRkynJTNiN2_lIxDK2sYB31uyqJ2DxDkkdlm_7YkJMU89X8tTMYgqdyX7vb47u7ytKSstHLj23e0IXEtgdMLxG1opLlw3cXbsAUhjyGEdTNH-T-HeVyhe54tm5XQT3bzwSsts9-vpmuELodefHRrqb7B2dj_FU2-RNyKLtgNjIHqE6RanNzJk1Do1sg"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Branch Alpha</h2>
+<p class="font-label-caps text-label-caps text-secondary">Systems Online</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-md overflow-y-auto custom-scrollbar flex flex-col gap-xs px-md">
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all w-full text-left">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Intelligence</span>
+</button>
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all w-full text-left">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Operations</span>
+</button>
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all w-full text-left">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Logistics</span>
+</button>
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all w-full text-left">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Growth</span>
+</button>
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container w-full text-left">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Administration</span>
+</button>
+</nav>
+<div class="mt-auto border-t border-[#262626] p-md flex flex-col gap-xs">
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all w-full text-left">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Help</span>
+</button>
+<button class="group cursor-pointer duration-150 flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all w-full text-left">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-margin-desktop overflow-y-auto custom-scrollbar bg-background">
+<div class="max-w-5xl mx-auto flex flex-col gap-lg h-full">
+<header class="flex justify-between items-end pb-sm border-b border-[#262626]">
+<div>
+<h1 class="font-display text-display text-on-surface mb-xs">Global Settings</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Configure core system parameters for RestaurantOS.</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm border border-[#262626] text-on-surface hover:bg-surface-container transition-colors rounded-DEFAULT font-label-caps text-label-caps uppercase">Discard Changes</button>
+<button class="px-md py-sm bg-primary text-on-primary-fixed hover:bg-primary-fixed-dim transition-colors rounded-DEFAULT font-label-caps text-label-caps uppercase font-bold shadow-[0_0_15px_rgba(242,202,80,0.15)]">Save Configuration</button>
+</div>
+</header>
+<div class="flex flex-1 gap-lg overflow-hidden flex-col lg:flex-row">
+<!-- Internal Navigation -->
+<nav class="w-full lg:w-48 flex lg:flex-col gap-xs overflow-x-auto lg:overflow-x-visible pb-sm lg:pb-0 shrink-0 border-b lg:border-b-0 lg:border-r border-[#262626]">
+<button class="tab-btn active text-left px-md py-sm rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider bg-surface-container-high text-primary border-l-2 border-primary whitespace-nowrap lg:whitespace-normal" onclick="switchTab('profile')">Restaurant Profile</button>
+<button class="tab-btn text-left px-md py-sm rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant hover:bg-surface-container border-l-2 border-transparent whitespace-nowrap lg:whitespace-normal" onclick="switchTab('regional')">Regional Settings</button>
+<button class="tab-btn text-left px-md py-sm rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant hover:bg-surface-container border-l-2 border-transparent whitespace-nowrap lg:whitespace-normal" onclick="switchTab('localization')">Localization</button>
+<button class="tab-btn text-left px-md py-sm rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant hover:bg-surface-container border-l-2 border-transparent whitespace-nowrap lg:whitespace-normal" onclick="switchTab('tax')">Tax &amp; Legal</button>
+<button class="tab-btn text-left px-md py-sm rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant hover:bg-surface-container border-l-2 border-transparent whitespace-nowrap lg:whitespace-normal" onclick="switchTab('integration')">Integration</button>
+<button class="tab-btn text-left px-md py-sm rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant hover:bg-surface-container border-l-2 border-transparent whitespace-nowrap lg:whitespace-normal" onclick="switchTab('system')">System Backup</button>
+</nav>
+<!-- Settings Canvas -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-sm">
+<!-- Profile Tab -->
+<div class="tab-content active" id="profile">
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Restaurant Profile</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface p-md border border-[#262626] rounded-lg">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Legal Business Name</label>
+<input class="w-full bg-surface-container-low border border-[#262626] rounded-DEFAULT p-sm text-on-surface font-body-sm focus:outline-none focus:border-primary transition-colors" type="text" value="Alpha Branch Holdings LLC"/>
+</div>
+<div class="bg-surface p-md border border-[#262626] rounded-lg">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Trading Name (DBA)</label>
+<input class="w-full bg-surface-container-low border border-[#262626] rounded-DEFAULT p-sm text-on-surface font-body-sm focus:outline-none focus:border-primary transition-colors" type="text" value="Branch Alpha"/>
+</div>
+<div class="bg-surface p-md border border-[#262626] rounded-lg md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Corporate Address</label>
+<textarea class="w-full bg-surface-container-low border border-[#262626] rounded-DEFAULT p-sm text-on-surface font-body-sm focus:outline-none focus:border-primary transition-colors resize-none" rows="3">1200 Tech Boulevard, Suite 400
+Metropolis, NY 10001</textarea>
+</div>
+</div>
+</div>
+<!-- Regional Tab -->
+<div class="tab-content" id="regional">
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Regional Settings</h2>
+<div class="grid grid-cols-1 gap-md">
+<div class="bg-surface p-md border border-[#262626] rounded-lg flex items-center justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface mb-xs">Timezone</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">System-wide operational timezone.</p>
+</div>
+<select class="bg-surface-container-low border border-[#262626] rounded-DEFAULT p-sm text-on-surface font-body-sm focus:outline-none focus:border-primary transition-colors w-64 appearance-none custom-select">
+<option>America/New_York (EST/EDT)</option>
+<option>America/Chicago (CST/CDT)</option>
+<option>America/Los_Angeles (PST/PDT)</option>
+</select>
+</div>
+<div class="bg-surface p-md border border-[#262626] rounded-lg flex items-center justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface mb-xs">Base Currency</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Primary currency for reporting and POS.</p>
+</div>
+<select class="bg-surface-container-low border border-[#262626] rounded-DEFAULT p-sm text-on-surface font-body-sm focus:outline-none focus:border-primary transition-colors w-64 appearance-none">
+<option>USD ($)</option>
+<option>EUR (€)</option>
+<option>GBP (£)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update tab button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-surface-container-high', 'text-primary', 'border-primary');
+                btn.classList.add('text-on-surface-variant', 'border-transparent');
+                
+                // Add hover class back to inactive tabs
+                if(!btn.classList.contains('hover:bg-surface-container')) {
+                     btn.classList.add('hover:bg-surface-container');
+                }
+            });
+            
+            // Set active style for clicked button
+            const activeBtn = event.currentTarget;
+            activeBtn.classList.remove('text-on-surface-variant', 'border-transparent', 'hover:bg-surface-container');
+            activeBtn.classList.add('bg-surface-container-high', 'text-primary', 'border-primary');
+        }
+    </script>
+</body></html>

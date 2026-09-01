@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payroll &amp; Labor Cost Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#241a00",
+                    "on-secondary-fixed": "#002113",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-bright": "#393939",
+                    "on-primary-fixed-variant": "#574500",
+                    "on-tertiary": "#67001b",
+                    "surface-tint": "#e9c349",
+                    "on-secondary": "#003824",
+                    "on-primary": "#3c2f00",
+                    "secondary-container": "#00a572",
+                    "tertiary": "#ffbec1",
+                    "surface-container-highest": "#353535",
+                    "on-tertiary-container": "#8e0029",
+                    "surface-variant": "#353535",
+                    "inverse-primary": "#735c00",
+                    "outline": "#99907c",
+                    "surface-dim": "#131313",
+                    "on-error": "#690005",
+                    "on-primary-container": "#554300",
+                    "background": "#131313",
+                    "surface": "#131313",
+                    "error": "#ffb4ab",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container": "#20201f",
+                    "primary-fixed-dim": "#e9c349",
+                    "on-error-container": "#ffdad6",
+                    "outline-variant": "#4d4635",
+                    "primary-fixed": "#ffe088",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-container": "#00311f",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary-fixed": "#40000d",
+                    "secondary": "#4edea3",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-surface-variant": "#d0c5af",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "primary": "#f2ca50",
+                    "tertiary-container": "#ff949c",
+                    "primary-container": "#d4af37",
+                    "on-background": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "tertiary-fixed": "#ffdadb",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-fixed-dim": "#ffb2b7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "xs": "4px",
+                    "gutter": "16px",
+                    "sm": "8px",
+                    "xl": "40px",
+                    "md": "16px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "data-pos": ["JetBrains Mono"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "data-pos": ["18px", {"lineHeight": "1.0", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .glow-active { box-shadow: inset 0 0 15px rgba(242, 202, 80, 0.15); }
+        .glass-panel { background: rgba(32, 32, 31, 0.7); backdrop-filter: blur(20px); border: 1px solid #262626; }
+        .border-void { border-color: #262626; }
+    </style>
+</head>
+<body class="font-body-sm text-body-sm bg-background text-on-background min-h-screen flex selection:bg-primary selection:text-on-primary">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline-variant py-lg px-md z-50">
+<div class="mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary tracking-tighter">RestaurantOS</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs uppercase">Premium Management</p>
+</div>
+<div class="flex-1 space-y-unit">
+<a class="flex items-center space-x-sm px-sm py-xs text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-xs text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">point_of_sale</span>
+<span>POS</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-xs text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-xs text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">table_restaurant</span>
+<span>Tables</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-xs text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span>Menu</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-xs text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span>Inventory</span>
+</a>
+<!-- Active State - Semantically mapped to Settings/Admin functions -->
+<a class="flex items-center space-x-sm px-sm py-xs bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-lg font-semibold active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-lg border-t border-void">
+<div class="flex items-center space-x-sm">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A macro photography shot of a sleek, brushed titanium employee badge with a minimalist geometric logo engraved in gold. The lighting is moody and dramatic, typical of a high-end restaurant back-office. Dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDugfNCvmaYi23ZNn1W0MUWneDyyM9sYHXJ31OC9XfpKqQp-tMDDaXLp1BZbGlwSInfr95UjOfZk3zqcaNOU539aRrzbELukmB1LVfIdje4nUhSpV9aE_DjkNjmnF9EelJtkssCP0wqjO1KkSTWzl7bmidjlmfsrd2ruRubRj9ZnHYSyeUdoDB6MRRMZtZnAedbzvB87IhasHvwpfvJmAbqC0nXLN0iq3fxwqbaefVRmYyoY9HG7k9aBw"/>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface">Admin User</p>
+<p class="text-[10px] text-on-surface-variant">General Manager</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="hidden md:flex fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center space-x-md">
+<div class="relative focus-within:border-primary border border-void rounded-lg bg-surface-container-low px-sm py-xs flex items-center w-64">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs text-[18px]">search</span>
+<input class="bg-transparent border-none outline-none text-on-surface font-body-sm w-full placeholder-on-surface-variant focus:ring-0 p-0 h-auto" placeholder="Search payroll records..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-lg">
+<span class="font-title-md text-title-md text-primary dark:text-primary font-bold">Downtown Branch</span>
+<div class="flex items-center space-x-sm border-l border-void pl-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pt-16 min-h-screen bg-background">
+<div class="p-margin-desktop max-w-[1600px] mx-auto space-y-lg">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Payroll &amp; Labor Analysis</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Period: Oct 1 - Oct 15, 2023</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="glass-panel px-md py-sm rounded-lg font-label-caps text-label-caps text-on-surface hover:bg-surface-container transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+                        CHANGE PERIOD
+                    </button>
+<button class="bg-primary text-on-primary-fixed px-md py-sm rounded-lg font-label-caps text-label-caps hover:bg-primary-fixed transition-colors flex items-center gap-xs glow-active active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[16px]">file_upload</span>
+                        EXPORT TO ACCOUNTING
+                    </button>
+</div>
+</div>
+<!-- Bento Grid - High Level Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-sm">
+<!-- Total Payroll -->
+<div class="bg-surface-container p-md rounded-xl border border-void relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-high to-transparent opacity-50"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Payroll Est.</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">payments</span>
+</div>
+<div>
+<div class="font-data-pos text-[36px] font-semibold text-on-surface mb-xs">$42,850.00</div>
+<div class="flex items-center text-error font-body-sm text-[12px]">
+<span class="material-symbols-outlined text-[14px] mr-unit">trending_up</span>
+                                +2.4% vs last period
+                            </div>
+</div>
+</div>
+</div>
+<!-- Labor % -->
+<div class="bg-surface-container p-md rounded-xl border border-void relative overflow-hidden">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Labor % of Sales</span>
+<span class="material-symbols-outlined text-primary text-[20px]">pie_chart</span>
+</div>
+<div>
+<div class="font-data-pos text-[36px] font-semibold text-primary mb-xs">28.4%</div>
+<div class="flex items-center text-secondary font-body-sm text-[12px]">
+<span class="material-symbols-outlined text-[14px] mr-unit">trending_down</span>
+                                -0.6% vs target (29%)
+                            </div>
+</div>
+</div>
+</div>
+<!-- Total Hours -->
+<div class="bg-surface-container p-md rounded-xl border border-void relative overflow-hidden">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Hours Logged</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">schedule</span>
+</div>
+<div>
+<div class="font-data-pos text-[36px] font-semibold text-on-surface mb-xs">1,842.5</div>
+<div class="flex items-center text-on-surface-variant font-body-sm text-[12px]">
+<span class="material-symbols-outlined text-[14px] mr-unit">warning</span>
+                                42h Overtime (Est. $1,250)
+                            </div>
+</div>
+</div>
+</div>
+<!-- Commissions Pool -->
+<div class="bg-surface-container p-md rounded-xl border border-void relative overflow-hidden">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Bonus/Commission Pool</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">redeem</span>
+</div>
+<div>
+<div class="font-data-pos text-[36px] font-semibold text-on-surface mb-xs">$3,420.00</div>
+<div class="flex items-center text-on-surface-variant font-body-sm text-[12px]">
+                                Based on BOH efficiency &amp; FOH up-sells
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Data Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Detailed Labor Table -->
+<div class="lg:col-span-2 bg-surface-container p-md rounded-xl border border-void flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-md text-title-md text-on-surface">Department Breakdown</h3>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">filter_list</span></button>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-void">
+<th class="py-sm font-label-caps text-label-caps text-on-surface-variant font-normal">Department</th>
+<th class="py-sm font-label-caps text-label-caps text-on-surface-variant font-normal text-right">Hours</th>
+<th class="py-sm font-label-caps text-label-caps text-on-surface-variant font-normal text-right">OT Hours</th>
+<th class="py-sm font-label-caps text-label-caps text-on-surface-variant font-normal text-right">Base Cost</th>
+<th class="py-sm font-label-caps text-label-caps text-on-surface-variant font-normal text-right">Bonus/Tips</th>
+<th class="py-sm font-label-caps text-label-caps text-on-surface-variant font-normal text-right">Total Est.</th>
+</tr>
+</thead>
+<tbody class="font-data-pos text-[14px]">
+<tr class="border-b border-void hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<td class="py-md flex items-center gap-xs font-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+                                        Front of House (FOH)
+                                    </td>
+<td class="py-md text-right text-on-surface-variant">840.0</td>
+<td class="py-md text-right text-error">12.5</td>
+<td class="py-md text-right text-on-surface-variant">$14,200</td>
+<td class="py-md text-right text-secondary-fixed">+$2,100</td>
+<td class="py-md text-right text-on-surface font-semibold">$16,300</td>
+</tr>
+<tr class="border-b border-void hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<td class="py-md flex items-center gap-xs font-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                        Back of House (BOH)
+                                    </td>
+<td class="py-md text-right text-on-surface-variant">720.5</td>
+<td class="py-md text-right text-error">28.0</td>
+<td class="py-md text-right text-on-surface-variant">$18,400</td>
+<td class="py-md text-right text-secondary-fixed">+$950</td>
+<td class="py-md text-right text-on-surface font-semibold">$19,350</td>
+</tr>
+<tr class="border-b border-void hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<td class="py-md flex items-center gap-xs font-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                                        Management
+                                    </td>
+<td class="py-md text-right text-on-surface-variant">240.0</td>
+<td class="py-md text-right text-on-surface-variant">--</td>
+<td class="py-md text-right text-on-surface-variant">$6,400</td>
+<td class="py-md text-right text-secondary-fixed">+$370</td>
+<td class="py-md text-right text-on-surface font-semibold">$6,770</td>
+</tr>
+<tr class="hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<td class="py-md flex items-center gap-xs font-body-sm text-on-surface">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+                                        Support/Clean
+                                    </td>
+<td class="py-md text-right text-on-surface-variant">42.0</td>
+<td class="py-md text-right text-error">1.5</td>
+<td class="py-md text-right text-on-surface-variant">$430</td>
+<td class="py-md text-right text-on-surface-variant">--</td>
+<td class="py-md text-right text-on-surface font-semibold">$430</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Performance Bonuses & Alerts -->
+<div class="bg-surface-container rounded-xl border border-void p-md flex flex-col gap-md">
+<h3 class="font-title-md text-title-md text-on-surface">Alerts &amp; Actions</h3>
+<div class="space-y-sm">
+<!-- Alert Item -->
+<div class="bg-[#2a1a1a] border border-error-container p-sm rounded-lg flex gap-sm items-start">
+<span class="material-symbols-outlined text-error mt-xs text-[18px]">warning</span>
+<div>
+<h4 class="font-body-sm font-semibold text-error">High Overtime Alert (BOH)</h4>
+<p class="text-[12px] text-on-surface-variant mt-unit">BOH overtime is 15% above target. Review scheduling for Grill and Sauté stations.</p>
+<button class="mt-xs text-[12px] font-label-caps text-label-caps text-error hover:text-on-error-container underline">REVIEW SCHEDULE</button>
+</div>
+</div>
+<!-- Action Item -->
+<div class="bg-surface-container-high border border-void p-sm rounded-lg flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary mt-xs text-[18px]">approval</span>
+<div class="flex-1">
+<h4 class="font-body-sm font-semibold text-on-surface">Pending Bonus Approvals</h4>
+<p class="text-[12px] text-on-surface-variant mt-unit">3 managers pending Q3 KPI bonus approval.</p>
+<button class="mt-sm w-full py-xs border border-primary text-primary font-label-caps text-label-caps rounded hover:bg-primary hover:text-on-primary transition-colors">REVIEW &amp; APPROVE</button>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-void">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">Top Earners (Commission)</h3>
+<div class="space-y-xs">
+<div class="flex justify-between items-center text-[13px]">
+<span class="text-on-surface font-body-sm">S. Jenkins (Server)</span>
+<span class="font-data-pos text-secondary-fixed">$450.00</span>
+</div>
+<div class="flex justify-between items-center text-[13px]">
+<span class="text-on-surface font-body-sm">M. Rodriguez (Bartender)</span>
+<span class="font-data-pos text-secondary-fixed">$380.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

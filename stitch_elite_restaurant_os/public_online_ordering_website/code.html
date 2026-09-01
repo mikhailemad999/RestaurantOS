@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Noir Platform - Online Ordering</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#67001b",
+                      "secondary": "#4edea3",
+                      "on-error-container": "#ffdad6",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-fixed": "#6ffbbe",
+                      "on-primary": "#3c2f00",
+                      "on-error": "#690005",
+                      "on-surface-variant": "#d0c5af",
+                      "surface-container-highest": "#353535",
+                      "surface-dim": "#131313",
+                      "primary": "#f2ca50",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-primary-container": "#554300",
+                      "surface-variant": "#353535",
+                      "inverse-primary": "#735c00",
+                      "background": "#131313",
+                      "tertiary-container": "#ff949c",
+                      "tertiary": "#ffbec1",
+                      "surface-container-low": "#1c1b1b",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed-dim": "#ffb2b7",
+                      "tertiary-fixed": "#ffdadb",
+                      "on-primary-fixed": "#241a00",
+                      "surface-bright": "#393939",
+                      "outline-variant": "#4d4635",
+                      "on-secondary-fixed": "#002113",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-container": "#20201f",
+                      "primary-fixed-dim": "#e9c349",
+                      "primary-fixed": "#ffe088",
+                      "surface-container-high": "#2a2a2a",
+                      "on-secondary": "#003824",
+                      "surface-tint": "#e9c349",
+                      "on-surface": "#e5e2e1",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-tertiary-fixed": "#40000d",
+                      "outline": "#99907c",
+                      "on-secondary-container": "#00311f",
+                      "on-tertiary-fixed-variant": "#92002a",
+                      "on-background": "#e5e2e1",
+                      "secondary-container": "#00a572",
+                      "surface": "#131313",
+                      "on-primary-fixed-variant": "#574500",
+                      "primary-container": "#d4af37",
+                      "on-tertiary-container": "#8e0029",
+                      "inverse-on-surface": "#313030",
+                      "error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "40px",
+                      "xs": "4px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "label-caps": ["JetBrains Mono"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "data-pos": ["JetBrains Mono"],
+                      "body-sm": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "data-pos": ["18px", {"lineHeight": "1.0", "fontWeight": "500"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #353535; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4d4635; }
+        
+        .glass-panel {
+            background: rgba(19, 19, 19, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid #262626;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col pt-16">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-background dark:bg-background text-primary dark:text-primary font-title-md text-title-md fixed top-0 w-full z-50 border-b border-outline-variant flat no shadows flex justify-between items-center h-16 px-margin-desktop w-full">
+<div class="font-display text-display text-primary uppercase tracking-tighter">NOIR PLATFORM</div>
+<div class="flex items-center gap-lg">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-surface-container-high border border-outline-variant rounded-full py-2 pl-10 pr-4 text-body-sm focus:border-primary-container focus:outline-none transition-colors w-64" placeholder="Search menu..." type="text"/>
+</div>
+<div class="flex gap-sm">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 Active: opacity-80 scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 Active: opacity-80 scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden ml-md">
+<img alt="Manager Profile" class="w-full h-full object-cover" data-alt="A close up professional headshot of a restaurant manager in a high end modern kitchen. The lighting is cinematic with a dark background and sharp focus on the subject. The style reflects a premium hospitality environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-GodPYAzCJ7UQS3vBJy7nmEEvll5KIDVJtYxHSiFmz6qw8mWjfz52w_8w3wGV0vO0MTOkMBfNPRvV9iUtTuHO21SMM3tVMWA5sJjVICz9f7pZ0xKBderMQ7GcIGoxOmVxt1KfYBGKRBSzG32CpbYqiTH6e79fNshx0ikK0N-JBVgypGDLjNSFmF7zKC4GYkp7_iAo_WD3XioDAL1o3CV3E7Mc4JnbWG7rQyQu-GdWZaep1yROzMFqfg"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex w-full relative">
+<!-- Left Nav (Categories) -->
+<aside class="hidden lg:flex flex-col w-64 bg-surface-container-lowest border-r border-outline-variant fixed h-[calc(100vh-4rem)] pt-lg pb-md px-md overflow-y-auto z-40">
+<div class="mb-xl px-2">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant mb-md">ORDER TYPE</h2>
+<div class="flex bg-surface-container-high rounded-full p-1 border border-outline-variant">
+<button class="flex-1 py-1 px-3 rounded-full bg-primary text-on-primary font-body-sm font-semibold text-sm transition-all shadow-sm">Delivery</button>
+<button class="flex-1 py-1 px-3 rounded-full text-on-surface-variant font-body-sm text-sm hover:text-on-surface transition-colors">Pickup</button>
+</div>
+</div>
+<h2 class="font-label-caps text-label-caps text-on-surface-variant mb-md px-2">MENU</h2>
+<nav class="flex flex-col gap-unit">
+<a class="bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 flex items-center justify-between group cursor-pointer Active: scale-[0.98] transition-transform" href="#">
+<span class="font-body-lg font-semibold">Signatures</span>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg px-4 py-3 flex items-center justify-between group cursor-pointer" href="#">
+<span class="font-body-lg">Appetizers</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg px-4 py-3 flex items-center justify-between group cursor-pointer" href="#">
+<span class="font-body-lg">Mains</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg px-4 py-3 flex items-center justify-between group cursor-pointer" href="#">
+<span class="font-body-lg">Desserts</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg px-4 py-3 flex items-center justify-between group cursor-pointer" href="#">
+<span class="font-body-lg">Beverages</span>
+</a>
+</nav>
+</aside>
+<!-- Center Menu Grid -->
+<section class="flex-1 lg:ml-64 lg:mr-80 px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Hero -->
+<div class="relative h-64 rounded-xl overflow-hidden mb-xl border border-outline-variant">
+<div class="bg-cover bg-center w-full h-full absolute inset-0" data-alt="A stunning overhead macro shot of a meticulously plated high-end culinary dish featuring seared scallops and a dark reduction sauce. The lighting is dramatic and cinematic, emphasizing textures and vibrant natural colors against a sleek dark stone plate. The aesthetic is modern, premium, and appetizing." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACpfUdmIFeQdqvFDYbKtqi4pHH0hjTgkzEGsg-weqXRHuCJtFb6hxhe-wzj46fhgxMSLwm3HCldtVnW-ignK_eTi1C5RXgFdCgG-htdPnzCUDaWEx5A77QXWQVFGgwn6uO5tMd-FIVC_AmEUDrUJh9EvQJWHRjRDJVt9JWK1TPti6mZ4iDQ7ThoZyyucTili1lQ3GrAP2fX3B4lENtxebmHZS3MCnpSxIOZq3XiT9xi5cLlQXY2uIbrw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full">
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-unit">Signatures</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Precision crafted dishes designed for exceptional dining experiences, available for immediate preparation.</p>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Item Card 1 -->
+<div class="bg-surface-container-low border border-[#262626] rounded-lg overflow-hidden group cursor-pointer hover:border-primary-container transition-colors duration-300 flex flex-col relative">
+<div class="h-48 bg-surface-container-high overflow-hidden relative">
+<img alt="Wagyu Ribeye" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close up shot of a beautifully cooked wagyu steak sliced to reveal a perfect medium rare pink center. Served on a dark slate board with subtle garnishes. The lighting is moody and focused, highlighting the rich marbling and premium quality of the meat." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3t2rfN05lZfBd4Apls7gZKDM-_cr9M9vfianNbo4s7pHOGmxONuMiPfWUSaKRQ63VI-SqObnsidQmQzQIQi8fx6lEPxt5SQm1YHT_32yWa6CsWF-7dMwp4tTMwWKN5b3GTBcnDkNEZw-qUtW85NbOO9rNndk3_pbryYLVditKxA3BiGpoZp2VLNmwwpqyie7g8MWy3DTNxPhJ5wIBEqsgFD1DOWfikx3CI4WVmDFuGXjtn32TRTi2jA"/>
+<div class="absolute top-sm right-sm bg-background/80 backdrop-blur-md px-2 py-1 rounded text-primary font-data-pos text-data-pos border border-[#262626]">$85</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">A5 Wagyu Ribeye</h3>
+<p class="font-body-sm text-on-surface-variant flex-1 mb-md line-clamp-2">8oz cut, truffled pomme purée, charred asparagus, bone marrow demi-glace.</p>
+<button class="w-full py-2 bg-surface-bright text-on-surface hover:bg-primary hover:text-on-primary font-body-sm font-semibold rounded border border-[#262626] transition-all flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add to Order
+                        </button>
+</div>
+</div>
+<!-- Item Card 2 -->
+<div class="bg-surface-container-low border border-[#262626] rounded-lg overflow-hidden group cursor-pointer hover:border-primary-container transition-colors duration-300 flex flex-col relative">
+<div class="h-48 bg-surface-container-high overflow-hidden relative">
+<img alt="Scallops" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant culinary presentation of seared scallops on a bed of dark squid ink risotto. Garnished with bright micro-greens. The plate is dark ceramic, and the lighting is harsh overhead spotlighting the texture of the scallops against the dark void aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHcafOIQGiUwAsexmAaJdpZ7OxXMHxNWxf2R9HLPAuIHtz4_3DD4FRIh64eaAf7mS0T1yc7gmUf_lFW3enxcLTHRJ1-QQCtgeD5a0AfNXLsSeEA3EDHHInnlqDM9hDBi8q_YdSYfMi9V6492SKsvzyjoAL6uSoXt65CHJ47G_DHvCXu1PLKQCTfCMycnWXfQL2HTEnbyGVubqjOxYb8Iu0MFFnFqQzd_BRDUXSVD6K8xxGGvfngqlfhw"/>
+<div class="absolute top-sm right-sm bg-background/80 backdrop-blur-md px-2 py-1 rounded text-primary font-data-pos text-data-pos border border-[#262626]">$42</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Diver Scallops</h3>
+<p class="font-body-sm text-on-surface-variant flex-1 mb-md line-clamp-2">Pan-seared, squid ink risotto, saffron emulsion, crispy pancetta.</p>
+<button class="w-full py-2 bg-surface-bright text-on-surface hover:bg-primary hover:text-on-primary font-body-sm font-semibold rounded border border-[#262626] transition-all flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add to Order
+                        </button>
+</div>
+</div>
+<!-- Item Card 3 -->
+<div class="bg-surface-container-low border border-[#262626] rounded-lg overflow-hidden group cursor-pointer hover:border-primary-container transition-colors duration-300 flex flex-col relative">
+<div class="h-48 bg-surface-container-high overflow-hidden relative">
+<img alt="Chocolate Tart" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A dark and moody shot of a rich chocolate tart dessert on a matte black plate. The tart has a glossy ganache finish and is accompanied by a quenelle of stark white vanilla bean ice cream. Lighting is side-lit, highlighting the shine of the chocolate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjCFk6tcCyFt0WMvze1Rw9EafqPHQ2bU4gp06q4VQl_CCLKAryY6zvCh_FLiyii1TX5X2o-8duHeI7ybR52ZMp9FwMceplsfOBsV0IsXchPko05OgBQ0ei3wN85cAJKobrunHCocGL10nKSnnS-0JbwgB6-tGS4cyKK20MhltAnrWzek5KVMfvjQvsrKPR5nIFLI_I-EccHOSMMGcwfA-YNUcnutuB9FCYMsbIyghoNlKz3370qKy8Uw"/>
+<div class="absolute top-sm right-sm bg-background/80 backdrop-blur-md px-2 py-1 rounded text-primary font-data-pos text-data-pos border border-[#262626]">$18</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Noir Tart</h3>
+<p class="font-body-sm text-on-surface-variant flex-1 mb-md line-clamp-2">Dark chocolate ganache, espresso infused crust, smoked sea salt.</p>
+<button class="w-full py-2 bg-surface-bright text-on-surface hover:bg-primary hover:text-on-primary font-body-sm font-semibold rounded border border-[#262626] transition-all flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add to Order
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar (Cart) -->
+<aside class="hidden lg:flex flex-col w-80 glass-panel fixed right-0 h-[calc(100vh-4rem)] z-40 border-l border-[#262626]">
+<div class="p-md border-b border-[#262626] flex justify-between items-center">
+<h2 class="font-title-md text-title-md text-on-surface">Current Order</h2>
+<span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-full text-xs font-semibold">2 Items</span>
+</div>
+<!-- Cart Items -->
+<div class="flex-1 overflow-y-auto p-md flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-body-lg font-semibold text-on-surface">A5 Wagyu Ribeye</h4>
+<div class="text-on-surface-variant text-sm mt-1 flex items-center gap-2">
+<button class="text-on-surface hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="remove">remove</span></button>
+<span class="font-data-pos">1</span>
+<button class="text-on-surface hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="add">add</span></button>
+</div>
+</div>
+<span class="font-data-pos text-primary">$85.00</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-body-lg font-semibold text-on-surface">Noir Tart</h4>
+<div class="text-on-surface-variant text-sm mt-1 flex items-center gap-2">
+<button class="text-on-surface hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="remove">remove</span></button>
+<span class="font-data-pos">1</span>
+<button class="text-on-surface hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="add">add</span></button>
+</div>
+</div>
+<span class="font-data-pos text-primary">$18.00</span>
+</div>
+</div>
+<!-- Totals & Checkout -->
+<div class="p-md bg-surface-container-low border-t border-[#262626]">
+<div class="space-y-2 mb-md">
+<div class="flex justify-between text-on-surface-variant text-sm">
+<span>Subtotal</span>
+<span class="font-data-pos">$103.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant text-sm">
+<span>Taxes (8%)</span>
+<span class="font-data-pos">$8.24</span>
+</div>
+<div class="flex justify-between text-on-surface-variant text-sm">
+<span>Delivery Fee</span>
+<span class="font-data-pos">$5.00</span>
+</div>
+<div class="pt-2 border-t border-[#262626] flex justify-between text-on-surface font-title-md text-title-md mt-2">
+<span>Total</span>
+<span class="text-primary font-data-pos">$116.24</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded font-title-md font-semibold hover:opacity-90 transition-opacity">
+                    Proceed to Checkout
+                </button>
+</div>
+</aside>
+<!-- Mobile Bottom Cart Bar -->
+<div class="lg:hidden fixed bottom-0 w-full bg-surface-container-highest border-t border-outline-variant p-md flex justify-between items-center z-50">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-sm">2 Items</span>
+<span class="font-data-pos text-primary text-title-md">$116.24</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-2 rounded font-body-lg font-semibold">
+                View Order
+            </button>
+</div>
+</main>
+</body></html>

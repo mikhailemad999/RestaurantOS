@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - POS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#3c2f00",
+                        "primary-fixed": "#ffe088",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-background": "#e5e2e1",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary": "#ffbec1",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#67001b",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#735c00",
+                        "surface": "#131313",
+                        "secondary": "#4edea3",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#40000d",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-primary-container": "#554300",
+                        "primary-container": "#d4af37",
+                        "outline-variant": "#4d4635",
+                        "surface-tint": "#e9c349",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#99907c",
+                        "surface-bright": "#393939",
+                        "on-tertiary-container": "#8e0029",
+                        "tertiary-container": "#ff949c",
+                        "surface-container-high": "#2a2a2a",
+                        "primary": "#f2ca50",
+                        "error-container": "#93000a",
+                        "secondary-container": "#00a572",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-container": "#20201f",
+                        "on-primary-fixed": "#241a00",
+                        "surface-dim": "#131313",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary-container": "#00311f",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "40px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "title-md": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .pos-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+        @media (min-width: 600px) { .pos-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; } }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden flex flex-col antialiased">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50 bg-surface dark:bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary text-title-md font-title-md">restaurant_menu</span>
+<span class="text-title-md font-title-md text-primary dark:text-primary">RestaurantOS</span>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary">
+<button class="p-2 rounded hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors opacity-80 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors opacity-80 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sync_lock</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors opacity-80 duration-150 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+<span class="hidden md:inline text-label-caps font-label-caps">Branch Switcher</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 mt-16 flex flex-col md:flex-row overflow-hidden relative">
+<!-- SideNav (Desktop Only) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col pt-16 pb-4 z-40 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-outline-variant w-64">
+<div class="px-lg py-md mb-md border-b border-outline-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark metallic surface with subtle gold flecks catching low-light reflections, conveying premium quality and robust performance in a high-end hospitality environment. Minimalist, professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcfoH5I0p9Y6AcZUYi3TO29Xomlp-WsQ5qJUQQMU-qaMy7KD5r-wNZQNDUi9Q8bmlfncKM2SzTan9Qa9OysuMwpfA4dR5iIETEVznWO6yPE4GAcQ-7rARe5If8DNm5anK5nyuUlHettWrvWwMzr0L5_eFdLeRtH12ox8ZOEeZGb38SoPREUjn88eRQX4acz7_Wr61v6L_BEBE30TimM1NHOVu59ECGPA7y7qunBE0GerZx_RvXoeUJZQ"/>
+</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-semibold">Manager</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Downtown Branch</div>
+</div>
+</div>
+<ul class="flex-1 overflow-y-auto px-xs space-y-1 hide-scroll">
+<li><a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined">dashboard</span>Dashboard</a></li>
+<li><a class="flex items-center gap-3 px-md py-sm text-on-primary-container bg-primary-container rounded-lg font-bold hover:bg-surface-variant transition-all scale-95 duration-100 text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined">point_of_sale</span>POS</a></li>
+<li><a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined">receipt_long</span>Orders</a></li>
+<li><a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined">table_restaurant</span>Tables</a></li>
+<li><a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined">menu_book</span>Menu</a></li>
+</ul>
+<div class="px-md mt-auto">
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-semibold text-body-sm hover:bg-primary-fixed-dim transition-colors">New Order</button>
+</div>
+</nav>
+<!-- POS Canvas -->
+<section class="flex-1 flex flex-col md:ml-64 w-full h-full bg-background overflow-hidden">
+<!-- Context Header -->
+<div class="flex-none px-margin-mobile md:px-margin-desktop py-md border-b border-[#262626] bg-surface-container-lowest flex justify-between items-end">
+<div>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary">Table 12</h1>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                        Seated • 4 Guests
+                    </div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-highest border border-[#262626] rounded text-label-caps font-label-caps text-on-surface hover:bg-surface-variant transition-colors">Seat 1</button>
+<button class="px-4 py-2 bg-primary-container border border-primary text-on-primary-container rounded text-label-caps font-label-caps font-bold">Seat 2</button>
+<button class="px-4 py-2 bg-surface-container-highest border border-[#262626] rounded text-label-caps font-label-caps text-on-surface hover:bg-surface-variant transition-colors">Seat 3</button>
+</div>
+</div>
+<!-- Menu Grid -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop hide-scroll">
+<!-- Category Tabs -->
+<div class="flex gap-2 mb-lg overflow-x-auto hide-scroll pb-2">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary text-label-caps font-label-caps whitespace-nowrap">Starters</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-highest border border-[#262626] text-on-surface text-label-caps font-label-caps whitespace-nowrap hover:bg-surface-variant">Mains</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-highest border border-[#262626] text-on-surface text-label-caps font-label-caps whitespace-nowrap hover:bg-surface-variant">Sides</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-highest border border-[#262626] text-on-surface text-label-caps font-label-caps whitespace-nowrap hover:bg-surface-variant">Drinks</button>
+</div>
+<!-- Grid -->
+<div class="pos-grid">
+<!-- Item 1 -->
+<button class="relative w-full aspect-square md:aspect-[4/3] bg-surface-container-low border border-[#262626] rounded-lg p-sm flex flex-col justify-end text-left hover:bg-surface-container-high transition-colors active:bg-primary/10 overflow-hidden group">
+<div class="absolute top-sm right-sm text-data-pos font-data-pos text-primary-fixed">14.00</div>
+<h3 class="text-body-lg font-body-lg font-semibold text-on-surface mt-auto z-10 group-active:text-primary">Truffle Fries</h3>
+</button>
+<!-- Item 2 -->
+<button class="relative w-full aspect-square md:aspect-[4/3] bg-surface-container-low border border-[#262626] rounded-lg p-sm flex flex-col justify-end text-left hover:bg-surface-container-high transition-colors active:bg-primary/10 overflow-hidden group">
+<div class="absolute top-sm right-sm text-data-pos font-data-pos text-primary-fixed">18.50</div>
+<h3 class="text-body-lg font-body-lg font-semibold text-on-surface mt-auto z-10 group-active:text-primary">Calamari</h3>
+</button>
+<!-- Item 3 -->
+<button class="relative w-full aspect-square md:aspect-[4/3] bg-surface-container-low border border-[#262626] rounded-lg p-sm flex flex-col justify-end text-left hover:bg-surface-container-high transition-colors active:bg-primary/10 overflow-hidden group">
+<div class="absolute top-sm right-sm text-data-pos font-data-pos text-primary-fixed">12.00</div>
+<h3 class="text-body-lg font-body-lg font-semibold text-on-surface mt-auto z-10 group-active:text-primary">Bruschetta</h3>
+</button>
+<!-- Item 4 -->
+<button class="relative w-full aspect-square md:aspect-[4/3] bg-surface-container-low border border-[#262626] rounded-lg p-sm flex flex-col justify-end text-left hover:bg-surface-container-high transition-colors active:bg-primary/10 overflow-hidden group">
+<div class="absolute top-sm right-sm text-data-pos font-data-pos text-primary-fixed">22.00</div>
+<h3 class="text-body-lg font-body-lg font-semibold text-on-surface mt-auto z-10 group-active:text-primary">Wagyu Sliders</h3>
+</button>
+</div>
+</div>
+</section>
+<!-- Current Order Panel (Fixed Right) -->
+<aside class="w-full md:w-80 h-[353px] md:h-full bg-surface-container-lowest border-t md:border-t-0 md:border-l border-[#262626] flex flex-col z-30">
+<div class="px-md py-sm border-b border-[#262626] flex justify-between items-center bg-surface-container-highest">
+<span class="text-label-caps font-label-caps text-on-surface">Current Order</span>
+<span class="text-data-pos font-data-pos text-primary">3 Items</span>
+</div>
+<div class="flex-1 overflow-y-auto px-xs py-sm space-y-1 hide-scroll">
+<!-- Order Item -->
+<div class="p-sm bg-surface-container-low border border-[#262626] flex justify-between items-start rounded">
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-semibold">Truffle Fries</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Seat 2</div>
+</div>
+<div class="text-right">
+<div class="text-data-pos font-data-pos text-on-surface">14.00</div>
+<div class="text-label-caps font-label-caps text-primary cursor-pointer hover:underline">Edit</div>
+</div>
+</div>
+</div>
+<div class="p-md bg-surface border-t border-[#262626]">
+<div class="flex justify-between mb-sm">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Subtotal</span>
+<span class="text-data-pos font-data-pos text-on-surface">54.50</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded font-bold text-title-md font-title-md hover:bg-primary-fixed-dim transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+                    Send to Kitchen
+                </button>
+</div>
+</aside>
+</main>
+<!-- Bottom Nav (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full h-16 bg-surface-container-lowest border-t border-outline-variant flex justify-around items-center z-50">
+<a class="flex flex-col items-center p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+</a>
+<a class="flex flex-col items-center p-2 text-primary font-bold" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">point_of_sale</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">receipt_long</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">table_restaurant</span>
+</a>
+</nav>
+</body></html>

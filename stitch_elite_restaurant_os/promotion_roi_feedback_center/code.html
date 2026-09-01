@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promotion ROI &amp; Feedback - LUMINA POS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#e9c349",
+                        "surface-container": "#20201f",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#ffe088",
+                        "background": "#131313",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#ffdadb",
+                        "error-container": "#93000a",
+                        "secondary-container": "#00a572",
+                        "on-background": "#e5e2e1",
+                        "on-secondary-fixed": "#002113",
+                        "secondary": "#4edea3",
+                        "on-secondary": "#003824",
+                        "inverse-surface": "#e5e2e1",
+                        "surface": "#131313",
+                        "inverse-primary": "#735c00",
+                        "on-primary-container": "#554300",
+                        "surface-variant": "#353535",
+                        "outline": "#99907c",
+                        "primary": "#f2ca50",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-container-highest": "#353535",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-container": "#00311f",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary": "#ffbec1",
+                        "surface-bright": "#393939",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "tertiary-container": "#ff949c",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-tertiary-fixed": "#40000d",
+                        "primary-container": "#d4af37",
+                        "on-tertiary": "#67001b",
+                        "outline-variant": "#4d4635",
+                        "surface-dim": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-container": "#8e0029",
+                        "on-surface-variant": "#d0c5af",
+                        "on-primary-fixed": "#241a00",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-secondary-fixed-variant": "#005236"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "title-md": ["Inter"],
+                        "display": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-sm min-h-screen flex flex-col md:flex-row antialiased">
+<!-- Mobile Top Navigation Bar -->
+<header class="hidden md:flex justify-between items-center px-md w-full sticky top-0 z-50 h-16 border-b border-surface-variant bg-background dark:bg-background text-primary dark:text-primary md:hidden">
+<div class="font-display text-display text-primary uppercase tracking-tighter text-2xl">LUMINA POS</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined cursor-pointer active:scale-95 text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer active:scale-95 text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full" data-icon="store">store</span>
+<span class="material-symbols-outlined cursor-pointer active:scale-95 text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full" data-icon="sync">sync</span>
+<img alt="Manager Avatar" class="w-8 h-8 rounded-full border border-surface-variant ml-2 object-cover" data-alt="A small circular avatar image of a restaurant manager in a dark high-contrast setting, wearing a sharp dark suit, professional and focused expression, moody lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9a4EVc7jgZVEokzhm-jROX11xhSLf8yuyLPPK97pXlxlVTZR1aj4UgxpdjExAeRvsb70R80ZWHs2se4Fpk1X27f3DO656IdeKI4B3bYw2udrgeZgBYuoH6GlyGFk27FB9atLfB3Ln85mXaAGpG8e6WIWuUccp_2dPMK-aAFIAztj9Vf-7C33neCCfEMYMNa6z6HSIyiotglxGOa39ipki9u3VxLt_bCLfh5aeXRiFzp0HSXHjfxJOAQ"/>
+</div>
+</header>
+<!-- Desktop Side Navigation Bar -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 bottom-0 z-40 h-screen w-20 md:w-64 border-r border-surface-variant bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary">
+<div class="p-lg border-b border-surface-variant flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border border-surface-variant">
+<img alt="Branch Logo" class="w-full h-full object-cover" data-alt="A minimalist logo for a high-end restaurant branch, utilizing absolute blacks and deep golds, sleek and geometric, fitting a premium dark mode dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOdQZRAo_qC2K-3rJ7N3YpPDDH5eTYgJvSxavPdsKAGKhaZP1lJdHDQStZAdMbnR_rOH-DlBYqt3TWXf2QRlNpkhaDZ4rI57CN93GlvzkgP14QXs5-LgxlMCDO6T_k3957UQzyTT50V6uG9khQaU8UL3g7kVH_fHjFnhkEd9G4PCUzrdmxe-NYTikOAeOkvr-ygutyrA0Niq1MjqUTs3Tf5RDcPRTMa3Q5PIH1R5l0czdlPpdsNMiD2g"/>
+</div>
+<div class="hidden md:block">
+<h2 class="font-title-md text-title-md text-on-surface truncate">Main Floor</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Terminal 01</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-md flex flex-col gap-unit">
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps hidden md:block">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-label-caps text-label-caps hidden md:block">POS</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-caps text-label-caps hidden md:block">Orders</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="skillet">skillet</span>
+<span class="font-label-caps text-label-caps hidden md:block">Kitchen</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-caps text-label-caps hidden md:block">Inventory</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md bg-secondary-container text-on-secondary-container border-r-4 border-secondary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-caps text-label-caps hidden md:block">Reports</span>
+</a>
+</div>
+<div class="border-t border-surface-variant py-md flex flex-col gap-unit">
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps hidden md:block">Settings</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-caps text-label-caps hidden md:block">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-surface flex flex-col gap-lg">
+<!-- Header -->
+<div class="flex justify-between items-end border-b border-surface-variant pb-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Promotion ROI &amp; Feedback</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Real-time analysis of promotional performance and guest sentiment.</p>
+</div>
+<div class="hidden md:flex items-center gap-sm">
+<button class="bg-surface-container-high hover:bg-surface-variant text-on-surface border border-surface-variant px-md py-sm rounded-DEFAULT font-label-caps text-label-caps flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span> Export Report
+                </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column: Promos (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Active Promotions Bento -->
+<div class="bg-surface-container rounded-lg border border-[#262626] p-lg">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-title-md text-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="campaign">campaign</span>
+                            Active Promotions
+                        </h2>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Promo Item 1: High Performer -->
+<div class="bg-surface-container-low border border-surface-variant rounded p-md hover:bg-[#1A1A1A] transition-colors relative overflow-hidden group cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h3 class="font-title-md text-on-surface">Happy Hour 50% Off Apps</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs">CODE: HAPPS50 • ENDS: 20:00</p>
+</div>
+<div class="flex gap-md md:gap-xl">
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">ROI SCORE</p>
+<p class="font-data-pos text-data-pos text-secondary text-2xl">4.2x</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">REDEMPTION</p>
+<p class="font-data-pos text-data-pos text-on-surface text-2xl">24%</p>
+</div>
+<div class="text-right hidden sm:block">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">NET REV</p>
+<p class="font-data-pos text-data-pos text-on-surface text-2xl">+$1.2k</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Item 2: Low Performer -->
+<div class="bg-surface-container-low border border-surface-variant rounded p-md hover:bg-[#1A1A1A] transition-colors relative overflow-hidden group cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h3 class="font-title-md text-on-surface">Free Dessert w/ Entree</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs">CODE: SWEET24 • ENDS: EOD</p>
+</div>
+<div class="flex gap-md md:gap-xl">
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">ROI SCORE</p>
+<p class="font-data-pos text-data-pos text-error text-2xl">0.8x</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">REDEMPTION</p>
+<p class="font-data-pos text-data-pos text-on-surface text-2xl">42%</p>
+</div>
+<div class="text-right hidden sm:block">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">NET REV</p>
+<p class="font-data-pos text-data-pos text-error text-2xl">-$450</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Chart Area (Conceptual) -->
+<div class="bg-surface-container rounded-lg border border-[#262626] p-lg flex-1">
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Cost vs. Incremental Revenue</h2>
+<div class="w-full h-64 border border-surface-variant relative overflow-hidden rounded bg-surface-container-low flex items-end p-md gap-sm">
+<!-- Simplified bar chart representation -->
+<div class="w-1/4 bg-primary-container h-[80%] rounded-t opacity-80 hover:opacity-100 transition-opacity"></div>
+<div class="w-1/4 bg-surface-variant h-[40%] rounded-t"></div>
+<div class="w-1/4 bg-secondary-container h-[60%] rounded-t opacity-80 hover:opacity-100 transition-opacity"></div>
+<div class="w-1/4 bg-error-container h-[90%] rounded-t opacity-80 hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex justify-center gap-lg mt-sm font-label-caps text-label-caps text-on-surface-variant">
+<span class="flex items-center gap-xs"><span class="w-3 h-3 bg-primary-container rounded-sm"></span> Revenue</span>
+<span class="flex items-center gap-xs"><span class="w-3 h-3 bg-surface-variant rounded-sm"></span> Cost</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Feedback Feed (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface-container rounded-lg border border-[#262626] flex flex-col h-full overflow-hidden">
+<div class="p-lg border-b border-[#262626] flex justify-between items-center bg-surface-container-high">
+<h2 class="font-title-md text-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="reviews">reviews</span>
+                            Live Feedback
+                        </h2>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded font-data-pos text-xs">4 New</span>
+</div>
+<div class="flex-1 overflow-y-auto p-md flex flex-col gap-md">
+<!-- Negative Feedback (Needs Action) -->
+<div class="border border-error-container bg-[#130000] p-md rounded relative">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-xs text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-surface-variant" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm text-surface-variant" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm text-surface-variant" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm text-surface-variant" data-icon="star">star</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2m ago</span>
+</div>
+<p class="font-body-sm text-on-surface mb-md">"Food was cold and the server (Mike) ignored us for 20 mins while chatting."</p>
+<div class="flex justify-between items-center border-t border-[#3a0000] pt-sm">
+<span class="font-data-pos text-xs text-on-surface-variant">Order #4492 • Table 12</span>
+<button class="bg-error text-on-error px-sm py-xs rounded font-label-caps text-[10px] hover:bg-tertiary-fixed transition-colors flex items-center gap-1">
+                                    RESOLVE <span class="material-symbols-outlined text-[12px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Positive Feedback -->
+<div class="border border-surface-variant bg-surface-container-low p-md rounded">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-xs text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">15m ago</span>
+</div>
+<p class="font-body-sm text-on-surface mb-md">"Used the promo code, great value! Sarah was an amazing server."</p>
+<div class="flex justify-between items-center border-t border-surface-variant pt-sm">
+<span class="font-data-pos text-xs text-on-surface-variant">Order #4480 • Table 4</span>
+<span class="text-secondary font-label-caps text-[10px] bg-secondary-container/20 px-2 py-1 rounded">PROMO APPLIED</span>
+</div>
+</div>
+<!-- Neutral Feedback -->
+<div class="border border-surface-variant bg-surface-container-low p-md rounded">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-xs text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-surface-variant" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm text-surface-variant" data-icon="star">star</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">1h ago</span>
+</div>
+<p class="font-body-sm text-on-surface mb-md">"Okay food, but a bit pricey without the discount."</p>
+<div class="flex justify-between items-center border-t border-surface-variant pt-sm">
+<span class="font-data-pos text-xs text-on-surface-variant">Order #4421 • Pickup</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

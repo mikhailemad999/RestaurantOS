@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Staff &amp; Role Management - RestaurantOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002113",
+                        "surface-variant": "#353535",
+                        "on-background": "#e5e2e1",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-secondary-fixed-variant": "#005236",
+                        "background": "#131313",
+                        "tertiary-container": "#ff949c",
+                        "inverse-surface": "#e5e2e1",
+                        "on-surface-variant": "#d0c5af",
+                        "surface": "#131313",
+                        "primary-fixed": "#ffe088",
+                        "surface-dim": "#131313",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#8e0029",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "secondary-container": "#00a572",
+                        "tertiary": "#ffbec1",
+                        "secondary": "#4edea3",
+                        "on-primary-fixed-variant": "#574500",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary": "#3c2f00",
+                        "surface-bright": "#393939",
+                        "primary": "#f2ca50",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-container": "#00311f",
+                        "on-tertiary": "#67001b",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-primary": "#735c00",
+                        "surface-container": "#20201f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed-dim": "#e9c349",
+                        "primary-container": "#d4af37",
+                        "surface-tint": "#e9c349",
+                        "surface-container-highest": "#353535",
+                        "outline": "#99907c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .border-pos { border-color: #262626; }
+        .glow-active { box-shadow: inset 0 0 10px rgba(242, 202, 80, 0.15); }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg bg-surface text-on-surface antialiased overflow-x-hidden min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Hidden on Mobile, Visible on md+) -->
+<nav class="hidden md:flex flex-col bg-surface-container-lowest fixed left-0 top-0 h-full w-64 border-r border-outline-variant pt-16 pb-4 z-40">
+<div class="px-gutter mb-lg">
+<h1 class="text-headline-lg font-headline-lg text-primary">RestaurantOS</h1>
+</div>
+<div class="px-gutter mb-lg flex items-center space-x-md">
+<img class="w-12 h-12 rounded-full object-cover border border-pos" data-alt="A professional headshot of a restaurant manager in a softly lit, modern, high-contrast dark environment with subtle gold accents, conveying authority and competence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7W6W0U5gf_DJXt5T-t4DCHOc5rTh9bBrk1ECZkqHrnO8JWBjjAyo63W3Zo8RRR6nWEmpXs1PPirwxQgjJSNkB5RO9mUt68_1qOEjoUYLjg3Pkf4N9-cLvzYQjoXGcKCSoG6xmP7SGKNu0M6t-pSnUbcIEpG8zuEQFqtba7QThbWDhjVKwZbOuOYdQ0ff7jckTH5w-B43rtJezgkpZZaL3YstV8ZESr_BvY-C5GIRbxhnF_SIeTHy3Ww"/>
+<div>
+<p class="text-title-md font-title-md text-on-surface">Manager</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Downtown Branch</p>
+</div>
+</div>
+<div class="px-gutter mb-lg">
+<button class="w-full bg-primary text-on-primary font-bold py-sm px-md rounded-lg flex items-center justify-center space-x-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+<span>New Order</span>
+</button>
+</div>
+<ul class="flex-1 overflow-y-auto px-sm space-y-xs">
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">dashboard</span>Dashboard</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">point_of_sale</span>POS</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">receipt_long</span>Orders</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">table_restaurant</span>Tables</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">menu_book</span>Menu</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">inventory_2</span>Inventory</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">group</span>Customers</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">assessment</span>Reports</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-primary-container bg-primary-container font-bold transition-all text-label-caps font-label-caps scale-95 duration-100" href="#"><span class="material-symbols-outlined mr-md">badge</span>Staff</a></li>
+<li><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all text-label-caps font-label-caps" href="#"><span class="material-symbols-outlined mr-md">settings</span>Settings</a></li>
+</ul>
+</nav>
+<!-- TopNavBar (Visible on Mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50 bg-surface border-b border-outline-variant">
+<h1 class="text-title-md font-title-md text-primary">RestaurantOS</h1>
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant">sync_lock</span>
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pt-16 md:pt-0 p-gutter md:p-margin-desktop min-h-screen flex flex-col">
+<header class="mb-lg flex justify-between items-end border-b border-pos pb-md">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Staff &amp; Role Management</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-xs">Manage directory, roles, and system permissions.</p>
+</div>
+<div class="flex space-x-md">
+<button class="px-md py-sm bg-surface-container border border-pos rounded hover:bg-surface-variant transition-colors text-label-caps font-label-caps">Export CSV</button>
+<button class="px-md py-sm bg-primary text-on-primary font-bold rounded flex items-center space-x-xs hover:opacity-90 transition-opacity text-label-caps font-label-caps">
+<span class="material-symbols-outlined" style="font-size: 16px;">person_add</span>
+<span>Add Staff</span>
+</button>
+</div>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-lg flex-1">
+<!-- Left Column: Staff Directory (Bento/Card Style) -->
+<section class="xl:col-span-8 flex flex-col space-y-md">
+<!-- Search & Filters -->
+<div class="flex flex-col sm:flex-row gap-md p-md bg-surface-container-low border border-pos rounded-lg">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border border-pos rounded pl-10 pr-sm py-sm text-body-sm font-body-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors" placeholder="Search staff by name, ID, or role..." type="text"/>
+</div>
+<div class="flex space-x-sm">
+<select class="bg-surface-container border border-pos rounded px-md py-sm text-body-sm font-body-sm focus:border-primary focus:outline-none appearance-none">
+<option>All Branches</option>
+<option>Downtown</option>
+<option>Uptown</option>
+</select>
+<select class="bg-surface-container border border-pos rounded px-md py-sm text-body-sm font-body-sm focus:border-primary focus:outline-none appearance-none">
+<option>All Roles</option>
+<option>Manager</option>
+<option>Captain</option>
+<option>Cashier</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-low border border-pos rounded-lg flex-1 overflow-hidden flex flex-col">
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-pos bg-surface-container">
+<th class="px-md py-sm text-label-caps font-label-caps text-on-surface-variant">Name</th>
+<th class="px-md py-sm text-label-caps font-label-caps text-on-surface-variant">Role</th>
+<th class="px-md py-sm text-label-caps font-label-caps text-on-surface-variant">Branch</th>
+<th class="px-md py-sm text-label-caps font-label-caps text-on-surface-variant">Status</th>
+<th class="px-md py-sm text-label-caps font-label-caps text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-sm font-body-sm">
+<!-- Row 1 -->
+<tr class="border-b border-pos hover:bg-[#1A1A1A] transition-colors group">
+<td class="px-md py-md flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-caps font-label-caps text-on-surface border border-pos">SJ</div>
+<div>
+<p class="font-medium text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</p>
+<p class="text-on-surface-variant text-xs">ID: EMP-042</p>
+</div>
+</td>
+<td class="px-md py-md"><span class="px-2 py-1 bg-surface-variant text-on-surface rounded text-xs border border-pos font-data-pos">Manager</span></td>
+<td class="px-md py-md text-on-surface-variant">Downtown</td>
+<td class="px-md py-md"><span class="px-2 py-1 bg-[#1A1A1A] text-[#4edea3] rounded text-xs border border-[#4edea3]/30 font-medium">Active</span></td>
+<td class="px-md py-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-pos hover:bg-[#1A1A1A] transition-colors group">
+<td class="px-md py-md flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-caps font-label-caps text-on-surface border border-pos">MC</div>
+<div>
+<p class="font-medium text-on-surface group-hover:text-primary transition-colors">Michael Chen</p>
+<p class="text-on-surface-variant text-xs">ID: EMP-108</p>
+</div>
+</td>
+<td class="px-md py-md"><span class="px-2 py-1 bg-surface-variant text-on-surface rounded text-xs border border-pos font-data-pos">Captain</span></td>
+<td class="px-md py-md text-on-surface-variant">Downtown</td>
+<td class="px-md py-md"><span class="px-2 py-1 bg-[#1A1A1A] text-[#4edea3] rounded text-xs border border-[#4edea3]/30 font-medium">Active</span></td>
+<td class="px-md py-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-pos hover:bg-[#1A1A1A] transition-colors group">
+<td class="px-md py-md flex items-center space-x-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-caps font-label-caps text-on-surface border border-pos">AP</div>
+<div>
+<p class="font-medium text-on-surface group-hover:text-primary transition-colors">Alice Patel</p>
+<p class="text-on-surface-variant text-xs">ID: EMP-215</p>
+</div>
+</td>
+<td class="px-md py-md"><span class="px-2 py-1 bg-surface-variant text-on-surface rounded text-xs border border-pos font-data-pos">Cashier</span></td>
+<td class="px-md py-md text-on-surface-variant">Uptown</td>
+<td class="px-md py-md"><span class="px-2 py-1 bg-surface-variant text-on-surface-variant rounded text-xs border border-pos font-medium">On Leave</span></td>
+<td class="px-md py-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="border-t border-pos p-sm flex justify-between items-center bg-surface-container">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Showing 3 of 42</span>
+<div class="flex space-x-xs">
+<button class="p-xs text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-xs text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Role Permissions Matrix -->
+<section class="xl:col-span-4 bg-surface-container-low border border-pos rounded-lg flex flex-col overflow-hidden">
+<header class="p-md border-b border-pos bg-surface-container flex justify-between items-center">
+<h3 class="text-title-md font-title-md text-on-surface">Role Matrix</h3>
+<select class="bg-surface text-on-surface border border-pos rounded px-sm py-xs text-label-caps font-label-caps focus:border-primary focus:outline-none appearance-none">
+<option>Manager</option>
+<option>Captain</option>
+<option>Cashier</option>
+</select>
+</header>
+<div class="p-md flex-1 overflow-y-auto space-y-lg">
+<!-- Permission Group 1 -->
+<div>
+<h4 class="text-label-caps font-label-caps text-primary mb-sm border-b border-pos pb-xs">Point of Sale (POS)</h4>
+<ul class="space-y-sm">
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">Process Orders</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">Apply Discounts</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">Void Items</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+</ul>
+</div>
+<!-- Permission Group 2 -->
+<div>
+<h4 class="text-label-caps font-label-caps text-primary mb-sm border-b border-pos pb-xs">Inventory &amp; Menu</h4>
+<ul class="space-y-sm">
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">View Stock</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">Edit Menu Items</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+</ul>
+</div>
+<!-- Permission Group 3 -->
+<div>
+<h4 class="text-label-caps font-label-caps text-primary mb-sm border-b border-pos pb-xs">System &amp; Staff</h4>
+<ul class="space-y-sm">
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">Manage Staff</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface">Access Reports</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+</ul>
+</div>
+</div>
+<div class="p-md border-t border-pos bg-surface-container">
+<button class="w-full py-sm bg-surface-variant text-on-surface border border-pos rounded font-medium hover:bg-[#393939] transition-colors text-label-caps font-label-caps">Save Changes</button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#005236",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed": "#dbe1ff",
+                      "secondary-fixed": "#6ffbbe",
+                      "secondary-fixed-dim": "#4edea3",
+                      "border-muted": "#2a2a2a",
+                      "primary": "#f2ca50",
+                      "secondary-container": "#00a572",
+                      "on-tertiary-container": "#254188",
+                      "tertiary-fixed-dim": "#b4c5ff",
+                      "success": "#10b981",
+                      "on-primary-fixed": "#241a00",
+                      "primary-fixed": "#ffe088",
+                      "tertiary": "#bfcdff",
+                      "surface-dim": "#16130b",
+                      "surface-container": "#231f17",
+                      "on-secondary-fixed": "#002113",
+                      "on-tertiary-fixed": "#00174b",
+                      "on-primary": "#3c2f00",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#082b72",
+                      "warning": "#f59e0b",
+                      "background": "#131313",
+                      "surface-bright": "#3d392f",
+                      "surface": "#16130b",
+                      "surface-container-highest": "#38342b",
+                      "secondary": "#4edea3",
+                      "on-background": "#eae1d4",
+                      "surface-container-high": "#2d2a21",
+                      "info": "#3b82f6",
+                      "surface-tint": "#e9c349",
+                      "inverse-surface": "#eae1d4",
+                      "on-secondary": "#003824",
+                      "on-surface-variant": "#d0c5af",
+                      "on-surface": "#eae1d4",
+                      "on-secondary-container": "#00311f",
+                      "surface-container-lowest": "#110e07",
+                      "tertiary-container": "#97b0ff",
+                      "surface-variant": "#38342b",
+                      "inverse-primary": "#735c00",
+                      "on-tertiary-fixed-variant": "#27438a",
+                      "on-primary-container": "#554300",
+                      "primary-fixed-dim": "#e9c349",
+                      "surface-data": "#1c1c1c",
+                      "outline-variant": "#4d4635",
+                      "on-error": "#690005",
+                      "outline": "#99907c",
+                      "primary-container": "#d4af37",
+                      "error": "#f43f5e",
+                      "surface-container-low": "#1f1b13",
+                      "on-primary-fixed-variant": "#574500",
+                      "inverse-on-surface": "#343027"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "pane-padding": "12px",
+                      "gutter": "16px",
+                      "compact-gap": "4px",
+                      "grid-margin": "24px",
+                      "cell-padding-h": "12px",
+                      "cell-padding-v": "8px"
+              },
+              "fontFamily": {
+                      "data-table-cell": [
+                              "JetBrains Mono"
+                      ],
+                      "data-table-header": [
+                              "Inter"
+                      ],
+                      "label-xs": [
+                              "JetBrains Mono"
+                      ],
+                      "stat-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "data-table-cell": [
+                              "13px",
+                              {
+                                      "lineHeight": "1rem",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-table-header": [
+                              "12px",
+                              {
+                                      "lineHeight": "1rem",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-xs": [
+                              "11px",
+                              {
+                                      "lineHeight": "1rem",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "stat-lg": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-grid-margin h-16 bg-background/80 backdrop-blur-md border-b border-border-muted flat no shadows">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">Command Center</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-[#0e0e0e] border border-border-muted rounded-DEFAULT pl-10 pr-4 py-2 text-data-table-cell font-data-table-cell focus:outline-none focus:border-primary/50 text-on-surface w-64" placeholder="Search operations..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">settings_suggest</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] flex-col p-pane-padding w-64 bg-surface border-r border-border-muted flat no shadows z-40">
+<div class="mb-8 px-4 py-2">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border border-border-muted" data-alt="A macro shot of a sleek, brushed metal data core pulsating with faint amber light, set against a completely black background. The style is hyper-realistic industrial sci-fi, emphasizing precision engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-leDi9MYD4ZQXFdrBU6Wag3lIZXJ49I_rm6cX8BWcInTdQv7ikTBXYTHg236yBRv75rI2jc1AKXw0Tz02tf9OoC3Rmtjt1r5UkjgrAloxw_aQwkync-Fx_4BhlmUd-nMHUHilKcL1zWDufWNOmTfAZPikaMU7Sc2xythly-6HcCnP7v13PpPhmaVfVmlQ8ESw0NNEgMJbByhSCdTu_9PEmQG4UORHrWbLgIcwW9Oce-RxHr41y0mRmQ"/>
+<div>
+<div class="font-headline-sm text-headline-sm text-primary">Branch Alpha</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase">Systems Online</div>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-2">
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Intelligence</span>
+</a>
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Operations</span>
+</a>
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Logistics</span>
+</a>
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Growth</span>
+</a>
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Administration</span>
+</a>
+</div>
+<div class="mt-auto space-y-2 pt-4 border-t border-border-muted">
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Help</span>
+</a>
+<a class="group cursor-pointer duration-150 flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-8 px-4 md:pl-[280px] md:pr-grid-margin min-h-screen">
+<!-- Header Section -->
+<div class="mb-6 flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Intelligence Dashboard</h1>
+<p class="text-on-surface-variant mt-1">Real-time holistic performance &amp; operational vitals.</p>
+</div>
+<div class="text-right">
+<div class="font-data-table-cell text-data-table-cell text-on-surface-variant">Last Synced: <span class="text-secondary font-medium">LIVE</span></div>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Revenue Ticker (Top Row, Span Full) -->
+<div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-compact-gap">
+<div class="bg-surface border border-border-muted p-pane-padding rounded-DEFAULT relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10">
+<span class="material-symbols-outlined text-4xl">payments</span>
+</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-2">Today's Revenue</div>
+<div class="flex items-baseline gap-2">
+<span class="font-stat-lg text-stat-lg text-on-surface">$14,250</span>
+<span class="font-label-xs text-label-xs text-success flex items-center bg-success/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 4.2%
+                        </span>
+</div>
+</div>
+<div class="bg-surface border border-border-muted p-pane-padding rounded-DEFAULT relative overflow-hidden">
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-2">Week-to-Date</div>
+<div class="flex items-baseline gap-2">
+<span class="font-stat-lg text-stat-lg text-on-surface">$89,400</span>
+<span class="font-label-xs text-label-xs text-error flex items-center bg-error/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> 1.1%
+                        </span>
+</div>
+</div>
+<div class="bg-surface border border-border-muted p-pane-padding rounded-DEFAULT relative overflow-hidden">
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-2">Month Proj.</div>
+<div class="flex items-baseline gap-2">
+<span class="font-stat-lg text-stat-lg text-on-surface">$340K</span>
+<span class="font-label-xs text-label-xs text-success flex items-center bg-success/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 8.5%
+                        </span>
+</div>
+</div>
+</div>
+<!-- Left Column: Operations & Profitability -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Operations Snapshot Bento -->
+<div class="bg-surface border border-border-muted rounded-DEFAULT p-pane-padding">
+<div class="flex justify-between items-center border-b border-border-muted pb-3 mb-4">
+<h2 class="font-data-table-header text-data-table-header text-on-surface uppercase">Operations Pulse</h2>
+<button class="text-primary font-label-xs text-label-xs hover:underline">View Floor</button>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<!-- Metric Tile -->
+<div class="bg-surface-data p-3 rounded-sm border border-border-muted flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-on-surface-variant">table_restaurant</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div>
+<div class="font-stat-lg text-stat-lg text-on-surface">24<span class="text-lg text-on-surface-variant">/30</span></div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-1">Open Tables</div>
+</div>
+</div>
+<!-- Metric Tile -->
+<div class="bg-surface-data p-3 rounded-sm border border-warning/50 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 bg-warning/5 animate-pulse"></div>
+<div class="flex justify-between items-start mb-2 relative z-10">
+<span class="material-symbols-outlined text-warning">receipt_long</span>
+<span class="font-label-xs text-label-xs text-warning bg-warning/10 px-1 rounded">DELAYED</span>
+</div>
+<div class="relative z-10">
+<div class="font-stat-lg text-stat-lg text-on-surface">8</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-1">Kitchen Queue</div>
+</div>
+</div>
+<!-- Metric Tile -->
+<div class="bg-surface-data p-3 rounded-sm border border-border-muted flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-info">moped</span>
+</div>
+<div>
+<div class="font-stat-lg text-stat-lg text-on-surface">12</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-1">Active Deliveries</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Profitability Metrics Table -->
+<div class="bg-surface border border-border-muted rounded-DEFAULT flex-1">
+<div class="p-pane-padding border-b border-border-muted">
+<h2 class="font-data-table-header text-data-table-header text-on-surface uppercase">Profitability Matrix</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-data border-b border-border-muted">
+<th class="px-cell-padding-h py-cell-padding-v font-data-table-header text-data-table-header text-on-surface-variant">Metric</th>
+<th class="px-cell-padding-h py-cell-padding-v font-data-table-header text-data-table-header text-on-surface-variant">Current</th>
+<th class="px-cell-padding-h py-cell-padding-v font-data-table-header text-data-table-header text-on-surface-variant">Target</th>
+<th class="px-cell-padding-h py-cell-padding-v font-data-table-header text-data-table-header text-on-surface-variant">Variance</th>
+</tr>
+</thead>
+<tbody class="font-data-table-cell text-data-table-cell text-on-surface">
+<tr class="border-b border-border-muted hover:bg-surface-container-high transition-colors">
+<td class="px-cell-padding-h py-cell-padding-v flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div> Food Cost %
+                                    </td>
+<td class="px-cell-padding-h py-cell-padding-v">32.4%</td>
+<td class="px-cell-padding-h py-cell-padding-v text-on-surface-variant">28.0%</td>
+<td class="px-cell-padding-h py-cell-padding-v text-error">+4.4%</td>
+</tr>
+<tr class="border-b border-border-muted hover:bg-surface-container-high transition-colors">
+<td class="px-cell-padding-h py-cell-padding-v flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-warning"></div> Waste Cost
+                                    </td>
+<td class="px-cell-padding-h py-cell-padding-v">$450</td>
+<td class="px-cell-padding-h py-cell-padding-v text-on-surface-variant">&lt; $300</td>
+<td class="px-cell-padding-h py-cell-padding-v text-warning">+$150</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-cell-padding-h py-cell-padding-v flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-success"></div> Est. Net Profit
+                                    </td>
+<td class="px-cell-padding-h py-cell-padding-v font-bold text-primary">$3,200</td>
+<td class="px-cell-padding-h py-cell-padding-v text-on-surface-variant">$3,000</td>
+<td class="px-cell-padding-h py-cell-padding-v text-success">+$200</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Insights & Alerts -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Customer Segment Pulse -->
+<div class="bg-surface border border-border-muted rounded-DEFAULT p-pane-padding">
+<h2 class="font-data-table-header text-data-table-header text-on-surface uppercase border-b border-border-muted pb-2 mb-3">Customer Segments</h2>
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1 bg-surface-data p-3 rounded-sm border border-border-muted text-center">
+<div class="font-stat-lg text-stat-lg text-primary">42</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-1">VIP In-House</div>
+</div>
+<div class="flex-1 bg-surface-data p-3 rounded-sm border border-border-muted text-center">
+<div class="font-stat-lg text-stat-lg text-error">15</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-1">At-Risk</div>
+</div>
+</div>
+</div>
+<!-- Smart Recommendations -->
+<div class="bg-surface border border-border-muted rounded-DEFAULT flex-1 flex flex-col">
+<div class="p-pane-padding border-b border-border-muted flex justify-between items-center bg-surface-bright">
+<h2 class="font-data-table-header text-data-table-header text-primary flex items-center gap-2 uppercase">
+<span class="material-symbols-outlined text-[16px]">lightbulb</span>
+                            AI Insights
+                        </h2>
+</div>
+<div class="p-pane-padding space-y-3 overflow-y-auto max-h-[300px]">
+<div class="group flex gap-3 p-2 hover:bg-surface-container-high rounded transition-colors border border-transparent hover:border-border-muted cursor-pointer">
+<span class="material-symbols-outlined text-info mt-0.5 text-[20px]">trending_up</span>
+<div>
+<div class="font-data-table-cell text-data-table-cell text-on-surface font-medium">Increase Price of Truffle Fries</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant mt-1">Demand elastic; est. +$400/wk impact.</div>
+</div>
+</div>
+<div class="group flex gap-3 p-2 hover:bg-surface-container-high rounded transition-colors border border-transparent hover:border-border-muted cursor-pointer">
+<span class="material-symbols-outlined text-warning mt-0.5 text-[20px]">inventory_2</span>
+<div>
+<div class="font-data-table-cell text-data-table-cell text-on-surface font-medium">Review Supplier Y (Produce)</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant mt-1">Spoilage rates 15% above baseline.</div>
+</div>
+</div>
+<div class="group flex gap-3 p-2 hover:bg-surface-container-high rounded transition-colors border border-transparent hover:border-border-muted cursor-pointer">
+<span class="material-symbols-outlined text-secondary mt-0.5 text-[20px]">schedule</span>
+<div>
+<div class="font-data-table-cell text-data-table-cell text-on-surface font-medium">Optimize Staffing: Tue PM</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant mt-1">Overstaffed by 2 FOH roles based on projection.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Critical Alerts -->
+<div class="bg-[#2a1012] border border-error/30 rounded-DEFAULT">
+<div class="p-pane-padding border-b border-error/20 flex justify-between items-center">
+<h2 class="font-data-table-header text-data-table-header text-error flex items-center gap-2 uppercase">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                            Critical Alerts
+                        </h2>
+<span class="bg-error text-on-error font-label-xs text-label-xs px-2 py-0.5 rounded-full">2</span>
+</div>
+<div class="p-pane-padding space-y-2">
+<div class="flex gap-2 items-start bg-error/10 p-2 rounded border border-error/20">
+<span class="material-symbols-outlined text-error text-[18px]">ac_unit</span>
+<div class="font-data-table-cell text-data-table-cell text-on-error-container">Walk-in Freezer Temp: 40°F (Critical)</div>
+</div>
+<div class="flex gap-2 items-start bg-error/10 p-2 rounded border border-error/20">
+<span class="material-symbols-outlined text-error text-[18px]">gavel</span>
+<div class="font-data-table-cell text-data-table-cell text-on-error-container">Void Spike detected on Terminal 3.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

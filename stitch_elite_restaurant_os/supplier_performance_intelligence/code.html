@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Supplier Analytics &amp; Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#554300",
+                        "on-tertiary-container": "#8e0029",
+                        "tertiary-container": "#ff949c",
+                        "surface-variant": "#353535",
+                        "outline": "#99907c",
+                        "on-primary": "#3c2f00",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-surface": "#e5e2e1",
+                        "tertiary": "#ffbec1",
+                        "on-primary-fixed": "#241a00",
+                        "primary-container": "#d4af37",
+                        "secondary-container": "#00a572",
+                        "on-secondary-container": "#00311f",
+                        "inverse-surface": "#e5e2e1",
+                        "outline-variant": "#4d4635",
+                        "error": "#ffb4ab",
+                        "surface": "#131313",
+                        "background": "#131313",
+                        "on-primary-fixed-variant": "#574500",
+                        "primary": "#f2ca50",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#ffe088",
+                        "on-tertiary": "#67001b",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-bright": "#393939",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353535",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container": "#20201f",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed": "#002113",
+                        "surface-tint": "#e9c349",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "on-secondary": "#003824",
+                        "surface-dim": "#131313",
+                        "inverse-primary": "#735c00",
+                        "on-tertiary-fixed": "#40000d",
+                        "secondary": "#4edea3",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xl": "40px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .card-outline {
+            border: 1px solid #262626;
+        }
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(0.8); }
+        }
+        .bar-chart-fill {
+            background: linear-gradient(90deg, #d4af37 0%, #f2ca50 100%);
+        }
+        .score-circle {
+            stroke-dasharray: 283; /* 2 * pi * r (45) */
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (JSON Component) -->
+<nav class="hidden md:flex bg-surface-container-lowest h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex-col py-lg z-40">
+<div class="px-md mb-xl flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<h1 class="font-title-md text-title-md font-bold text-primary">SupplyIntelligence</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Global Admin</p>
+</div>
+</div>
+<button class="mx-md mb-xl bg-primary text-on-primary font-title-md text-title-md py-sm px-md rounded hover:bg-primary-fixed transition-colors duration-200 ease-in-out flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">add</span>
+            Quick Order
+        </button>
+<ul class="flex-1 space-y-unit px-sm">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-sm text-body-sm">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-body-sm text-body-sm">Purchasing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-surface-container-highest text-primary font-bold border-r-2 border-primary transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-body-sm text-body-sm">Suppliers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-sm text-body-sm">Reports</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-sm border-t border-outline-variant pt-md">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 bg-background min-h-screen">
+<!-- TopAppBar (JSON Component) -->
+<header class="bg-surface fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] z-30 border-b border-outline-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop h-xl">
+<div class="flex items-center gap-lg">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-black text-primary md:hidden">SupplyIntel</h2>
+<div class="hidden lg:flex gap-md">
+<a class="text-primary border-b-2 border-primary pb-1 font-title-md text-title-md transition-all scale-95 active:scale-90" href="#">Main Branch</a>
+<a class="text-on-surface-variant hover:text-primary pb-1 font-title-md text-title-md transition-all scale-95 active:scale-90" href="#">Downtown Kitchen</a>
+<a class="text-on-surface-variant hover:text-primary pb-1 font-title-md text-title-md transition-all scale-95 active:scale-90" href="#">Westside Depot</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded pl-8 pr-3 py-1 text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-48 transition-colors" placeholder="Search suppliers..." type="text"/>
+</div>
+<button class="bg-surface-container-highest text-primary font-label-caps text-label-caps px-sm py-1 rounded hover:bg-surface-bright transition-colors border border-outline-variant flex items-center gap-xs">
+                    New Alert
+                </button>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<button class="p-1 hover:text-primary transition-colors relative scale-95 active:scale-90">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full pulse-dot"></span>
+</button>
+<button class="p-1 hover:text-primary transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-1 hover:text-primary transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="pt-[calc(40px+32px)] px-margin-mobile md:px-margin-desktop pb-xl max-w-[1600px] mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-lg gap-md">
+<div>
+<h2 class="font-display text-display text-on-surface mb-unit">Supplier Performance</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-sm">
+<span class="w-2 h-2 bg-secondary rounded-full pulse-dot"></span>
+                        Live tracking 24 active vendors across 3 regions
+                    </p>
+</div>
+<div class="flex gap-sm">
+<select class="bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps text-on-surface py-1 px-3 focus:border-primary focus:ring-0">
+<option>Last 30 Days</option>
+<option>Last Quarter</option>
+<option>Year to Date</option>
+</select>
+<button class="bg-surface-container-high border border-outline-variant p-1 rounded hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-on-surface">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Top Suppliers Score Cards (Span 8) -->
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+<!-- Supplier 1 -->
+<div class="bg-surface-container-low card-outline rounded-lg p-md relative overflow-hidden group hover:border-outline transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary opacity-5 rounded-bl-full"></div>
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Oceanic Catch</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Seafood • Premium</p>
+</div>
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#262626" stroke-width="8"></circle>
+<circle class="score-circle" cx="50" cy="50" fill="none" r="45" stroke="#00a572" stroke-width="8" style="stroke-dashoffset: calc(283 - (283 * 94) / 100);"></circle>
+</svg>
+<span class="absolute font-data-pos text-data-pos text-secondary-fixed-dim">94</span>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">DELIVERY</span>
+<span class="text-on-surface font-data-pos">98/100</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">QUALITY</span>
+<span class="text-on-surface font-data-pos">95/100</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">PRICE STB</span>
+<span class="text-on-surface font-data-pos">89/100</span>
+</div>
+</div>
+</div>
+<!-- Supplier 2 -->
+<div class="bg-surface-container-low card-outline rounded-lg p-md relative overflow-hidden group hover:border-outline transition-colors">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Farm Direct</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Produce • Local</p>
+</div>
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#262626" stroke-width="8"></circle>
+<circle class="score-circle" cx="50" cy="50" fill="none" r="45" stroke="#d4af37" stroke-width="8" style="stroke-dashoffset: calc(283 - (283 * 78) / 100);"></circle>
+</svg>
+<span class="absolute font-data-pos text-data-pos text-primary-fixed">78</span>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">DELIVERY</span>
+<span class="text-on-surface font-data-pos text-primary-fixed">72/100</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">QUALITY</span>
+<span class="text-on-surface font-data-pos">88/100</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">PRICE STB</span>
+<span class="text-on-surface font-data-pos">74/100</span>
+</div>
+</div>
+</div>
+<!-- Supplier 3 -->
+<div class="bg-surface-container-low card-outline rounded-lg p-md relative overflow-hidden group hover:border-outline transition-colors">
+<div class="absolute inset-0 bg-error opacity-[0.02]"></div>
+<div class="flex justify-between items-start mb-md relative z-10">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Global Meats</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Proteins • Bulk</p>
+</div>
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#262626" stroke-width="8"></circle>
+<circle class="score-circle" cx="50" cy="50" fill="none" r="45" stroke="#ffb4ab" stroke-width="8" style="stroke-dashoffset: calc(283 - (283 * 62) / 100);"></circle>
+</svg>
+<span class="absolute font-data-pos text-data-pos text-error">62</span>
+</div>
+</div>
+<div class="space-y-sm relative z-10">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">DELIVERY</span>
+<span class="text-on-surface font-data-pos">80/100</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">QUALITY</span>
+<span class="text-on-surface font-data-pos">85/100</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-label-caps">PRICE STB</span>
+<span class="text-error font-data-pos">21/100</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Alerts Panel (Span 4) -->
+<div class="md:col-span-4 bg-surface-container-low card-outline rounded-lg flex flex-col">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-error">warning</span>
+                            Active Alerts
+                        </h3>
+<span class="bg-error-container text-on-error-container font-label-caps text-label-caps px-2 py-1 rounded">3 NEW</span>
+</div>
+<div class="flex-1 overflow-y-auto p-sm space-y-sm">
+<!-- Alert Item -->
+<div class="bg-surface-container p-sm rounded border border-outline-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="bg-[#353535] text-primary font-label-caps text-[10px] px-1 rounded uppercase">Price Hike</span>
+<span class="text-on-surface-variant text-xs">2h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Global Meats increased <span class="text-error font-data-pos">Wagyu A5</span> by 12%.</p>
+</div>
+<!-- Alert Item -->
+<div class="bg-surface-container p-sm rounded border border-outline-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="bg-[#353535] text-secondary font-label-caps text-[10px] px-1 rounded uppercase">Late Delivery</span>
+<span class="text-on-surface-variant text-xs">5h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Farm Direct delivery delayed by 4 hours. Kitchen notified.</p>
+</div>
+<!-- Alert Item -->
+<div class="bg-surface-container p-sm rounded border border-outline-variant hover:bg-surface-container-high transition-colors cursor-pointer opacity-70">
+<div class="flex justify-between items-start mb-1">
+<span class="bg-[#353535] text-tertiary font-label-caps text-[10px] px-1 rounded uppercase">Quality Issue</span>
+<span class="text-on-surface-variant text-xs">1d ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Produce reject rate &gt;5% for Valley Greens.</p>
+</div>
+</div>
+</div>
+<!-- Comparative Price Chart (Span 12) -->
+<div class="md:col-span-12 bg-surface-container-low card-outline rounded-lg p-md">
+<div class="flex justify-between items-center mb-lg">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Ingredient Price Volatility</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Top 5 volatile ingredients across multiple suppliers (30 Days)</p>
+</div>
+<div class="flex gap-sm">
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-sm bg-primary"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Oceanic</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-sm bg-surface-variant border border-outline-variant"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Market Avg</span>
+</div>
+</div>
+</div>
+<!-- CSS Bar Chart Representation -->
+<div class="h-64 flex items-end gap-md pt-lg relative border-b border-outline-variant pb-1">
+<!-- Y Axis Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none z-0">
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+</div>
+<!-- Bar Group 1 -->
+<div class="flex-1 flex justify-center items-end gap-1 z-10 group relative">
+<div class="w-1/3 bg-surface-variant border border-outline-variant rounded-t" style="height: 40%"></div>
+<div class="w-1/3 bar-chart-fill rounded-t" style="height: 60%"></div>
+<!-- Tooltip -->
+<div class="absolute -top-10 bg-surface-container-highest border border-outline-variant rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<span class="font-data-pos text-data-pos text-primary text-sm">$24.50/lb</span>
+</div>
+</div>
+<!-- Bar Group 2 -->
+<div class="flex-1 flex justify-center items-end gap-1 z-10 group relative">
+<div class="w-1/3 bg-surface-variant border border-outline-variant rounded-t" style="height: 55%"></div>
+<div class="w-1/3 bar-chart-fill rounded-t" style="height: 85%"></div>
+<div class="absolute -top-10 bg-surface-container-highest border border-outline-variant rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<span class="font-data-pos text-data-pos text-primary text-sm">$32.00/lb</span>
+</div>
+</div>
+<!-- Bar Group 3 -->
+<div class="flex-1 flex justify-center items-end gap-1 z-10 group relative">
+<div class="w-1/3 bg-surface-variant border border-outline-variant rounded-t" style="height: 70%"></div>
+<div class="w-1/3 bar-chart-fill rounded-t" style="height: 65%"></div>
+<div class="absolute -top-10 bg-surface-container-highest border border-outline-variant rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<span class="font-data-pos text-data-pos text-primary text-sm">$18.20/lb</span>
+</div>
+</div>
+<!-- Bar Group 4 -->
+<div class="flex-1 flex justify-center items-end gap-1 z-10 group relative">
+<div class="w-1/3 bg-surface-variant border border-outline-variant rounded-t" style="height: 30%"></div>
+<div class="w-1/3 bar-chart-fill rounded-t" style="height: 35%"></div>
+</div>
+<!-- Bar Group 5 -->
+<div class="flex-1 flex justify-center items-end gap-1 z-10 group relative">
+<div class="w-1/3 bg-surface-variant border border-outline-variant rounded-t" style="height: 90%"></div>
+<div class="w-1/3 bg-error rounded-t" style="height: 100%"></div> <!-- Spike -->
+<div class="absolute -top-10 bg-error-container border border-error rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<span class="font-data-pos text-data-pos text-on-error-container text-sm">$45.00/lb</span>
+</div>
+</div>
+</div>
+<!-- X Axis Labels -->
+<div class="flex justify-between mt-2 px-md">
+<span class="flex-1 text-center font-label-caps text-label-caps text-on-surface-variant">Salmon</span>
+<span class="flex-1 text-center font-label-caps text-label-caps text-on-surface-variant">Truffle Oil</span>
+<span class="flex-1 text-center font-label-caps text-label-caps text-on-surface-variant">Ribeye</span>
+<span class="flex-1 text-center font-label-caps text-label-caps text-on-surface-variant">Avocado</span>
+<span class="flex-1 text-center font-label-caps text-label-caps text-error">Saffron</span>
+</div>
+</div>
+<!-- Late Deliveries Data Table (Span 12) -->
+<div class="md:col-span-12 bg-surface-container-low card-outline rounded-lg overflow-hidden">
+<div class="p-md border-b border-outline-variant">
+<h3 class="font-title-md text-title-md text-on-surface">Late Deliveries Log</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-lowest">
+<th class="p-sm font-label-caps text-label-caps text-on-surface-variant font-semibold">SUPPLIER</th>
+<th class="p-sm font-label-caps text-label-caps text-on-surface-variant font-semibold">PO #</th>
+<th class="p-sm font-label-caps text-label-caps text-on-surface-variant font-semibold">EXPECTED</th>
+<th class="p-sm font-label-caps text-label-caps text-on-surface-variant font-semibold">ACTUAL</th>
+<th class="p-sm font-label-caps text-label-caps text-on-surface-variant font-semibold text-right">DELAY (HRS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors">
+<td class="p-sm font-body-sm text-body-sm text-on-surface">Farm Direct</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface-variant text-sm">PO-8821</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface text-sm">08:00 AM</td>
+<td class="p-sm font-data-pos text-data-pos text-error text-sm">12:30 PM</td>
+<td class="p-sm font-data-pos text-data-pos text-error text-right text-sm">+4.5</td>
+</tr>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors">
+<td class="p-sm font-body-sm text-body-sm text-on-surface">Global Meats</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface-variant text-sm">PO-8819</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface text-sm">06:00 AM</td>
+<td class="p-sm font-data-pos text-data-pos text-primary text-sm">08:15 AM</td>
+<td class="p-sm font-data-pos text-data-pos text-primary text-right text-sm">+2.25</td>
+</tr>
+<tr class="hover:bg-[#1A1A1A] transition-colors">
+<td class="p-sm font-body-sm text-body-sm text-on-surface">Valley Greens</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface-variant text-sm">PO-8810</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface text-sm">07:30 AM</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface-variant text-sm">08:00 AM</td>
+<td class="p-sm font-data-pos text-data-pos text-on-surface-variant text-right text-sm">+0.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only Fallback/Mockup logic) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant flex justify-around items-center h-16 z-40 pb-safe">
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">dashboard</span>
+<span class="text-[10px] font-label-caps">Dash</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-primary" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="text-[10px] font-label-caps font-bold">Suppliers</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">analytics</span>
+<span class="text-[10px] font-label-caps">Reports</span>
+</a>
+</nav>
+<script>
+        // Simple animation trigger for circular progress bars
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const circles = document.querySelectorAll('.score-circle');
+                circles.forEach(circle => {
+                    // Force reflow
+                    circle.getBoundingClientRect();
+                    // Let CSS transition handle it based on inline style
+                });
+            }, 100);
+        });
+    </script>
+</body></html>

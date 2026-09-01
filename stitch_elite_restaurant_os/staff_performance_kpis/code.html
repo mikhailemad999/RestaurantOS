@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Staff Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#241a00",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-bright": "#393939",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-tertiary": "#67001b",
+                        "surface-tint": "#e9c349",
+                        "on-secondary": "#003824",
+                        "on-primary": "#3c2f00",
+                        "secondary-container": "#00a572",
+                        "tertiary": "#ffbec1",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary-container": "#8e0029",
+                        "surface-variant": "#353535",
+                        "inverse-primary": "#735c00",
+                        "outline": "#99907c",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#313030",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container": "#20201f",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#4d4635",
+                        "primary-fixed": "#ffe088",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-container": "#00311f",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed": "#40000d",
+                        "secondary": "#4edea3",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface-variant": "#d0c5af",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "primary": "#f2ca50",
+                        "tertiary-container": "#ff949c",
+                        "primary-container": "#d4af37",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdadb",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #e5e2e1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+        .glass-panel { background: rgba(28, 27, 27, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid #262626; }
+        .card-border { border: 1px solid #262626; }
+        .glow-active { box-shadow: inset 0 0 20px rgba(242, 202, 80, 0.15); }
+        .pulse-dot { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(78, 222, 163, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(78, 222, 163, 0); } 100% { box-shadow: 0 0 0 0 rgba(78, 222, 163, 0); } }
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #353535; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4d4635; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex items-center justify-between px-margin-mobile h-16 bg-surface border-b border-outline-variant z-40 fixed top-0 w-full">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">restaurant</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">RestaurantOS</span>
+</div>
+<div class="flex gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant py-lg px-md z-50">
+<div class="flex items-center gap-md mb-xl px-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center card-border overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sleek, minimalist vector logo of a chef knife crossed with a fork, rendered in deep charcoal grey and vibrant gold on a solid black background. High contrast, professional restaurant branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_XkFj3otNoQWpM8XY15p0y2OnebdQVLeDecl02Y6h953xvhKfQjTWnAmh_GhNwJs6oTwFLqLJQFBmRX1nzhlt6vf3Xb-UYqS89Av76Sb5CuqMpgAlDo6l3jlXj8ATDL0HWUER3vjLXAgxYRPo1omYwubRnTPOYwvQ8fOo7clo9JsJnyMTI4OYuyLaBGA0ZmlNFLp7kImDeST5IHgFdELkOyCPmRVjZSDV6f20kjhW4_yC1k46VlMN2w"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-[20px] font-bold text-primary tracking-tighter leading-tight">RestaurantOS</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Premium Management</p>
+</div>
+</div>
+<ul class="flex flex-col gap-unit flex-grow">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm font-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-body-sm text-body-sm font-medium">POS</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-sm text-body-sm font-medium">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary-container text-on-primary-container font-semibold active:scale-95 transition-transform glow-active" href="#">
+<span class="material-symbols-outlined filled-icon">military_tech</span>
+<span class="font-body-sm text-body-sm">Performance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-body-sm text-body-sm font-medium">Tables</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-sm text-body-sm font-medium">Staff</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm font-medium">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<div class="flex items-center gap-md px-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a restaurant manager in a dimly lit, high-end restaurant setting. Sharp focus on the face, subtle gold ambient lighting. Black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfUozey0SoN7zVLnq4TrtMM_KawbmCi3K61Pzc3pMh4jIK8h_zJ0Wa_q_lqd5TkBPaBIdk7So_AUKDsHNuxyLZ-WDj2GKAMha5J0bGYpLuBSU7D8WL-idxaMAAvvFadvnqIK9Sc0F9wGbMCJ03uEuks1pnsOiqf6aYTWKw3a1n5MtIWYbEDj6uwMdaaRSLKiqAoL82tRx8gR-v-KC7nwkxx637dKcADXr3zuBBRq7STHSRucUevecI-A"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Alex M.</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">General Manager</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pt-16 md:pt-0 min-h-screen bg-background relative overflow-hidden">
+<!-- TopNavBar (Desktop - Content Area Header) -->
+<header class="hidden md:flex items-center justify-between px-margin-desktop h-16 bg-surface border-b border-outline-variant sticky top-0 z-30">
+<h2 class="font-title-md text-title-md text-on-surface">Performance Dashboard</h2>
+<div class="flex items-center gap-lg">
+<div class="relative flex items-center focus-within:text-primary text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined absolute left-sm">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded-lg pl-xl pr-md py-sm text-body-sm font-body-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary w-64 placeholder:text-on-surface-variant transition-all" placeholder="Search staff..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<div class="p-margin-mobile md:p-margin-desktop space-y-lg max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs hidden md:block">Staff Performance</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time metrics for current shift. Data refreshed 2 mins ago.</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-label-caps text-label-caps text-on-surface hover:bg-surface-variant transition-colors">FOH</button>
+<button class="px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-label-caps text-label-caps text-on-surface hover:bg-surface-variant transition-colors">BOH</button>
+<button class="px-md py-sm bg-primary text-on-primary font-label-caps text-label-caps rounded-lg hover:bg-primary-container transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- KPI Card: Avg Table Turn Time -->
+<div class="col-span-1 md:col-span-4 bg-surface-container rounded-xl p-lg card-border relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 text-surface-container-highest opacity-50 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]">timer</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Avg Turn Time</h3>
+<div class="w-2 h-2 bg-secondary rounded-full pulse-dot"></div>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-display text-display text-on-surface">42</span>
+<span class="font-data-pos text-data-pos text-on-surface-variant">min</span>
+</div>
+<div class="mt-sm flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span class="font-body-sm text-[12px]">-3 min vs last week</span>
+</div>
+</div>
+</div>
+<!-- KPI Card: Upsell Rate -->
+<div class="col-span-1 md:col-span-4 bg-surface-container rounded-xl p-lg card-border relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 text-surface-container-highest opacity-50 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]">trending_up</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Upsell Rate</h3>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-display text-display text-primary">18.5</span>
+<span class="font-data-pos text-data-pos text-on-surface-variant">%</span>
+</div>
+<div class="mt-sm flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span class="font-body-sm text-[12px]">+2.1% today</span>
+</div>
+</div>
+</div>
+<!-- KPI Card: Order Accuracy (BOH focus) -->
+<div class="col-span-1 md:col-span-4 bg-surface-container rounded-xl p-lg card-border relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 text-surface-container-highest opacity-50 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]">done_all</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Order Accuracy</h3>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-display text-display text-on-surface">99.2</span>
+<span class="font-data-pos text-data-pos text-on-surface-variant">%</span>
+</div>
+<div class="mt-sm flex items-center gap-xs text-error">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+<span class="font-body-sm text-[12px]">-0.5% vs target</span>
+</div>
+</div>
+</div>
+<!-- Leaderboard Section -->
+<div class="col-span-1 md:col-span-7 bg-surface-container-low rounded-xl card-border flex flex-col h-full">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+                            Monthly Leaderboard
+                        </h3>
+<span class="font-label-caps text-label-caps px-sm py-xs bg-surface-variant rounded text-on-surface-variant">OCTOBER</span>
+</div>
+<div class="p-md flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-on-surface-variant font-label-caps text-label-caps border-b border-[#262626]">
+<th class="pb-sm font-medium pl-sm">Rank</th>
+<th class="pb-sm font-medium">Staff</th>
+<th class="pb-sm font-medium text-right">Score</th>
+<th class="pb-sm font-medium text-right pr-sm">Trend</th>
+</tr>
+</thead>
+<tbody>
+<!-- Rank 1 -->
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md pl-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-body-sm">1</div>
+</td>
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a smiling female server in a neat black apron. Cinematic dark restaurant lighting with subtle golden hour rim light. Black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2MTh2f8SnI1nEAbfQPn6tS3oTIQRM_y0RhCbN1YZWQkHl7b5fQeBIOXdjPcun2512qqMbyuv_1GUgtvPKvsHLGhm8655rSY86n1P-9zFO5L58JOBogR0HOk6S9203IsBgraGG3aomw5BwfhONgLUIlU0ba0vIyMcgvzXBNxh5gg3mdIhPxM_fkadnrnO_Nuu6LqzQW0uwSwkK3Br5Ol8bXA3aCybym5PG7PH-JgfN9NEDWAdG3SspfA"/>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Sarah Jenkins</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Senior Server</p>
+</div>
+</div>
+</td>
+<td class="py-md text-right font-data-pos text-data-pos text-primary">9,450</td>
+<td class="py-md text-right pr-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+</td>
+</tr>
+<!-- Rank 2 -->
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md pl-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-bold text-body-sm card-border">2</div>
+</td>
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a focused male line cook in a crisp white chef coat. Gritty, high-contrast dark kitchen environment. Moody, dramatic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvNw0Bt5Kl25iyAQl02lBu8lYECJwmJHBM65GOGU4DL07a_z_Vm7CyZmJ4_OEX_OxEdEEevFQYbpFQdqflxOr0BCE6hl72cYC45eA_h9wrGtLBBVKQNjSXTOmXemrj6maIRxp_x1YHPtC0zLbe9q3pM51WTR2vA0PW1WKq1e4tRpDSV_eg7StCK7eRbB73nM-yggv1yXvJH6Lqo87WesUSllTwIoxEW0mJzZ4eyPtjPDBBHR7INJvIJg"/>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Marcus Chen</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Line Cook</p>
+</div>
+</div>
+</td>
+<td class="py-md text-right font-data-pos text-data-pos text-on-surface">8,920</td>
+<td class="py-md text-right pr-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">horizontal_rule</span>
+</td>
+</tr>
+<!-- Rank 3 -->
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors group">
+<td class="py-md pl-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-bold text-body-sm card-border">3</div>
+</td>
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-surface-variant overflow-hidden flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Elena Rodriguez</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Bartender</p>
+</div>
+</div>
+</td>
+<td class="py-md text-right font-data-pos text-data-pos text-on-surface">8,105</td>
+<td class="py-md text-right pr-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<button class="text-primary font-label-caps text-label-caps hover:underline">View Full Roster</button>
+</div>
+</div>
+<!-- Gamification / Recent Badges -->
+<div class="col-span-1 md:col-span-5 flex flex-col gap-gutter">
+<!-- Current Shift Focus -->
+<div class="bg-surface-container rounded-xl p-md card-border relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container opacity-5 rounded-full -mr-10 -mt-10 blur-xl"></div>
+<h3 class="font-title-md text-title-md text-on-surface mb-sm">Active Challenge</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Sell 20 Signature Truffle Risottos tonight to unlock shift bonus.</p>
+<div class="relative w-full h-4 bg-surface-variant rounded-full overflow-hidden mb-xs">
+<div class="absolute top-0 left-0 h-full bg-primary" style="width: 65%;"></div>
+</div>
+<div class="flex justify-between font-label-caps text-[10px] text-on-surface-variant">
+<span>13 Sold</span>
+<span>7 Remaining</span>
+</div>
+</div>
+<!-- Recent Achievements -->
+<div class="bg-surface-container-low rounded-xl p-md card-border flex-1">
+<h3 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined">star</span>
+                            Recent Badges
+                        </h3>
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container p-sm rounded-lg card-border flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-[#1c1c1c] border border-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[20px]">speed</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-secondary">SPEED DEMON</p>
+<p class="font-body-sm text-[12px] text-on-surface">Sub-30m avg turn</p>
+</div>
+</div>
+<div class="bg-surface-container p-sm rounded-lg card-border flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-[#1c1c1c] border border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">local_bar</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-primary">UPSELL KING</p>
+<p class="font-body-sm text-[12px] text-on-surface">+$500 Bev Sales</p>
+</div>
+</div>
+<div class="bg-surface-container p-sm rounded-lg card-border flex items-center gap-sm opacity-50 grayscale">
+<div class="w-10 h-10 rounded-full bg-surface-variant border border-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">lock</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant">LOCKED</p>
+<p class="font-body-sm text-[12px] text-on-surface">Flawless Shift</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

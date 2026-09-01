@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QR Table Ordering - NOIR PLATFORM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#67001b",
+                        "secondary": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-primary": "#3c2f00",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-container-highest": "#353535",
+                        "surface-dim": "#131313",
+                        "primary": "#f2ca50",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#554300",
+                        "surface-variant": "#353535",
+                        "inverse-primary": "#735c00",
+                        "background": "#131313",
+                        "tertiary-container": "#ff949c",
+                        "tertiary": "#ffbec1",
+                        "surface-container-low": "#1c1b1b",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "tertiary-fixed": "#ffdadb",
+                        "on-primary-fixed": "#241a00",
+                        "surface-bright": "#393939",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container": "#20201f",
+                        "primary-fixed-dim": "#e9c349",
+                        "primary-fixed": "#ffe088",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary": "#003824",
+                        "surface-tint": "#e9c349",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#40000d",
+                        "outline": "#99907c",
+                        "on-secondary-container": "#00311f",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-background": "#e5e2e1",
+                        "secondary-container": "#00a572",
+                        "surface": "#131313",
+                        "on-primary-fixed-variant": "#574500",
+                        "primary-container": "#d4af37",
+                        "on-tertiary-container": "#8e0029",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-container-low'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+        
+        /* High-Contrast Modern Utilities */
+        .pos-border { border: 1px solid theme('colors.outline-variant'); }
+        .pos-card-hover:hover { background-color: theme('colors.surface-container-high'); transition: background-color 0.2s; }
+        .active-ring { border: 1px solid theme('colors.primary'); box-shadow: inset 0 0 10px rgba(242, 202, 80, 0.15); }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden antialiased">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant flex justify-between items-center h-16 px-margin-desktop">
+<div class="flex items-center gap-md">
+<span class="font-display text-display text-primary uppercase tracking-tighter">NOIR PLATFORM</span>
+<div class="h-6 w-px bg-outline-variant mx-sm"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 16px;">table_restaurant</span> TABLE 12
+            </span>
+</div>
+<div class="flex items-center gap-lg">
+<button class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-lg hover:bg-surface-bright transition-colors pos-border">
+<span class="material-symbols-outlined text-primary">room_service</span>
+<span class="font-label-caps text-label-caps text-primary">Call Waiter</span>
+</button>
+<button class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-lg hover:bg-surface-bright transition-colors pos-border">
+<span class="material-symbols-outlined text-on-surface">receipt_long</span>
+<span class="font-label-caps text-label-caps text-on-surface">Request Bill</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex pt-16 h-full">
+<!-- Left: Menu Section -->
+<section class="flex-1 flex flex-col h-full bg-surface-container-lowest border-r border-outline-variant">
+<!-- Categories Filter (Bento Header) -->
+<div class="px-lg py-md border-b border-outline-variant bg-surface">
+<h1 class="font-headline-lg text-headline-lg mb-md">Menu</h1>
+<div class="flex gap-sm overflow-x-auto pb-xs">
+<button class="px-md py-sm rounded-full bg-primary-container text-on-primary-container font-label-caps text-label-caps active-ring whitespace-nowrap">All Items</button>
+<button class="px-md py-sm rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps pos-border whitespace-nowrap">Appetizers</button>
+<button class="px-md py-sm rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps pos-border whitespace-nowrap">Mains</button>
+<button class="px-md py-sm rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps pos-border whitespace-nowrap">Drinks</button>
+<button class="px-md py-sm rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps pos-border whitespace-nowrap">Desserts</button>
+</div>
+</div>
+<!-- Menu Grid (Bento Style) -->
+<div class="flex-1 overflow-y-auto p-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Menu Item Card 1 -->
+<div class="bg-surface-container pos-border rounded-xl overflow-hidden flex flex-col pos-card-hover cursor-pointer group">
+<div class="h-48 relative w-full bg-surface-dim">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A close-up, high-end food photography shot of a perfectly seared Wagyu ribeye steak resting on a dark slate plate. The lighting is dramatic and moody, with a spotlight highlighting the juicy texture and a sprinkle of coarse sea salt. The background is a deep, out-of-focus charcoal void. A subtle touch of gold leaf garnishes the edge. The overall aesthetic is strictly premium dark mode, matching a luxury steakhouse vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqbODApPCNiooGxAi96AS_WI5J5iTUaQYLlaNBl-FMJ3KdYZwA9Bw-4O98WD4j5Mc_xG6-xH8UvlD8yETweR6rP-NabZgVEEBvpjAsKCbbpdIrX92J3ot-GqBvjN9yzMR3SlKX1R3Whjm4t7984LWeiGuv-qKwxwQWq6QcCY2seTvhOclhwJDhpyEZy2tp01p3zy3vjsKla29HtlKXiFXWriNj4VwVeKzkkxSSNufcOBhlH43wCxqKCg"/>
+<div class="absolute top-sm right-sm bg-surface-dim/80 backdrop-blur-md px-sm py-xs rounded font-data-pos text-data-pos text-primary pos-border">$65</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-title-md text-title-md">Wagyu Ribeye</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md flex-1">A5 Grade, charcoal grilled, truffle butter, charred asparagus.</p>
+<button class="w-full py-sm bg-surface-container-high text-on-surface font-label-caps text-label-caps rounded flex items-center justify-center gap-xs hover:bg-primary hover:text-on-primary transition-colors pos-border">
+<span class="material-symbols-outlined" style="font-size: 16px;">add</span> Add to Order
+                            </button>
+</div>
+</div>
+<!-- Menu Item Card 2 -->
+<div class="bg-surface-container pos-border rounded-xl overflow-hidden flex flex-col pos-card-hover cursor-pointer group">
+<div class="h-48 relative w-full bg-surface-dim">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A sophisticated presentation of a vibrant, deep red tuna tartare served in a minimalist black bowl. The dish is accented with microgreens and delicate edible gold flakes. The scene is lit with precise, high-contrast spotlighting against a pitch-black background, emphasizing the fresh, glossy texture of the fish. The style is strictly dark mode luxury dining, evoking a serene yet intense culinary experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl2mzsMJ_k_JLezTqVCYMKo0SEioEujTVODta6AwOFu6sLmUpMZ1K3k76IXFxzzeKmO1nR5nCUR5FXbySGcVWDGOP2McospXw_dCq1I_GeqLuwsU8rHKlocOrPrxiA0SGjuzVrvPUjMkNxMtK_FDCvrskXHJHutgzqB1i_l7yoS1zqzz6AhmmG5l-KpeH0KVo7e-JxikJwVu1TUZpqmyYmsozHNnN7y2XEurrUm-eGNwudVH9dKMDTVg"/>
+<div class="absolute top-sm right-sm bg-surface-dim/80 backdrop-blur-md px-sm py-xs rounded font-data-pos text-data-pos text-primary pos-border">$28</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-title-md text-title-md">Tuna Tartare</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md flex-1">Bluefin tuna, ponzu, avocado mousse, squid ink tuile.</p>
+<button class="w-full py-sm bg-surface-container-high text-on-surface font-label-caps text-label-caps rounded flex items-center justify-center gap-xs hover:bg-primary hover:text-on-primary transition-colors pos-border">
+<span class="material-symbols-outlined" style="font-size: 16px;">add</span> Add to Order
+                            </button>
+</div>
+</div>
+<!-- Menu Item Card 3 -->
+<div class="bg-surface-container pos-border rounded-xl overflow-hidden flex flex-col pos-card-hover cursor-pointer group">
+<div class="h-48 relative w-full bg-surface-dim">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A crafted cocktail in a crystal rocks glass, featuring a large, perfectly clear ice cube. The drink is a deep amber hue, garnished with a smoking cinnamon stick and an orange peel. The background is a pure black void, allowing the rich golden tones of the liquid and the subtle smoke wisps to stand out sharply. The aesthetic is high-contrast, modern dark mode luxury bar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI3-qnaBpT6d6-wv3BTGEGmdTwKgFeAvvfhFlKItDXfpxnrw-Ko_yZnns_BPb_On_SSLTj5bdZhT3r54doWb30_O-4TFIPq-510-7e-ER9rYfeF2CiK4TkiKcbiELvABs1Y1-sJOO533xw96QASArfbP1GP-ZSB4ROt0793FPD6iR7LXF8ZsxCa7gqoasG4O11tWmu-1YEhGx6VCxgCip-TyWAnqoT-Dq0dMR2onjl6x8uXNvKNZf1UA"/>
+<div class="absolute top-sm right-sm bg-surface-dim/80 backdrop-blur-md px-sm py-xs rounded font-data-pos text-data-pos text-primary pos-border">$22</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-title-md text-title-md">Smoked Old Fashioned</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md flex-1">Japanese whisky, cherry wood smoke, black walnut bitters.</p>
+<button class="w-full py-sm bg-surface-container-high text-on-surface font-label-caps text-label-caps rounded flex items-center justify-center gap-xs hover:bg-primary hover:text-on-primary transition-colors pos-border">
+<span class="material-symbols-outlined" style="font-size: 16px;">add</span> Add to Order
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: Active Cart / Order Preview -->
+<aside class="w-96 bg-surface flex flex-col h-full border-l border-outline-variant z-10 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h2 class="font-title-md text-title-md flex items-center gap-sm">
+<span class="material-symbols-outlined">shopping_cart</span> Your Order
+                </h2>
+<span class="bg-surface-container-high px-xs py-[2px] rounded text-label-caps font-label-caps pos-border">3 ITEMS</span>
+</div>
+<div class="flex-1 overflow-y-auto p-md flex flex-col gap-sm">
+<!-- Cart Item -->
+<div class="bg-surface-container p-sm rounded border border-outline-variant flex gap-sm">
+<div class="w-16 h-16 bg-surface-dim rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover opacity-70" data-alt="A small thumbnail showing a piece of grilled Wagyu beef, tightly cropped to focus on the charred crust and juicy interior against a dark background. High contrast, dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL_hdXf85d6CYLqgiZpcOYlUuLrwgKpi-yK2MThql0gboOo25NydYu1wz0ZhdxgHtWT5TlvbG1PnLLKP-IkOgASWK_40fYz1Lm608Azix6HG-1P88gmGmajbjlwSe5VWRfXp36TG6EUNO90xIlYDcYCJCP-m6LwBXWc1zSBM2KZbmgcr7c3FR6XyxhOzmny8n9vgy45RML1P5K183tdWvgIvvzjTKnLJLOQhy1nqznWnFVyc3nNruQ6w"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between">
+<span class="font-body-sm text-body-sm font-semibold">Wagyu Ribeye</span>
+<span class="font-data-pos text-data-pos text-primary">$65</span>
+</div>
+<div class="text-xs text-on-surface-variant font-body-sm">Med-Rare, No Asparagus</div>
+<div class="flex items-center justify-between mt-sm">
+<div class="flex items-center gap-xs bg-surface-dim rounded pos-border p-[2px]">
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary"><span class="material-symbols-outlined" style="font-size: 14px;">remove</span></button>
+<span class="font-data-pos text-[14px]">1</span>
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary"><span class="material-symbols-outlined" style="font-size: 14px;">add</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Item -->
+<div class="bg-surface-container p-sm rounded border border-outline-variant flex gap-sm">
+<div class="w-16 h-16 bg-surface-dim rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover opacity-70" data-alt="A small thumbnail showing the top view of a dark cocktail glass with an amber liquid and a large ice cube, dramatic spot lighting against black." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA12x5m-Br2MVQLr82OJHPI5KEOMBAnytYtMn9gkal8bEs4bFgGI4Sr_P76Xrx6Pe8_fhAccKW1vCoF0Kp1I_5JtA2oqDs4j2VBCG2kSP5k6-Riqjo9yKIVdoU9tRvh2dhLsJGACj0BcI-8aN_aqv3o7DR2idt86T4f5t6AGnMgHDPcjr9x902ub4fWR1Vv3WDkLxFIW0xromDnVmbJRhsdgifcHe6zx8zc_ivI-pt3mOzedc3Ntgz6HA"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between">
+<span class="font-body-sm text-body-sm font-semibold">Smoked Old Fashioned</span>
+<span class="font-data-pos text-data-pos text-primary">$44</span>
+</div>
+<div class="flex items-center justify-between mt-sm">
+<div class="flex items-center gap-xs bg-surface-dim rounded pos-border p-[2px]">
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary"><span class="material-symbols-outlined" style="font-size: 14px;">remove</span></button>
+<span class="font-data-pos text-[14px]">2</span>
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary"><span class="material-symbols-outlined" style="font-size: 14px;">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary & Checkout Action -->
+<div class="p-md bg-surface-container-lowest border-t border-outline-variant flex flex-col gap-md">
+<div class="flex justify-between items-center font-body-sm text-on-surface-variant">
+<span>Subtotal</span>
+<span class="font-data-pos">$109.00</span>
+</div>
+<div class="flex justify-between items-center font-body-sm text-on-surface-variant">
+<span>Tax (8%)</span>
+<span class="font-data-pos">$8.72</span>
+</div>
+<div class="h-px bg-outline-variant w-full my-xs"></div>
+<div class="flex justify-between items-end mb-sm">
+<span class="font-title-md text-title-md uppercase tracking-wider">Total</span>
+<span class="font-data-pos text-[24px] text-primary">$117.72</span>
+</div>
+<button class="w-full py-md bg-primary text-on-primary font-headline-lg-mobile text-headline-lg-mobile rounded-lg hover:bg-primary-container transition-colors flex justify-center items-center gap-sm">
+                    Send Order to Kitchen <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</aside>
+</main>
+</body></html>

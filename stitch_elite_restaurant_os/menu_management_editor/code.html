@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Menu Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdadb",
+                    "surface": "#131313",
+                    "tertiary-container": "#ff949c",
+                    "surface-bright": "#393939",
+                    "on-secondary-container": "#00311f",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "error": "#ffb4ab",
+                    "inverse-on-surface": "#313030",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed-dim": "#e9c349",
+                    "tertiary": "#ffbec1",
+                    "secondary-container": "#00a572",
+                    "on-tertiary-fixed": "#40000d",
+                    "surface-container": "#20201f",
+                    "secondary": "#4edea3",
+                    "on-tertiary-container": "#8e0029",
+                    "outline": "#99907c",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-variant": "#353535",
+                    "on-primary-fixed": "#241a00",
+                    "on-secondary-fixed": "#002113",
+                    "surface-tint": "#e9c349",
+                    "primary-fixed": "#ffe088",
+                    "surface-container-highest": "#353535",
+                    "primary": "#f2ca50",
+                    "surface-container-low": "#1c1b1b",
+                    "background": "#131313",
+                    "inverse-primary": "#735c00",
+                    "secondary-fixed": "#6ffbbe",
+                    "primary-container": "#d4af37",
+                    "on-surface-variant": "#d0c5af",
+                    "on-background": "#e5e2e1",
+                    "on-error": "#690005",
+                    "on-secondary": "#003824",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-primary-container": "#554300",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "on-primary-fixed-variant": "#574500",
+                    "on-tertiary": "#67001b",
+                    "surface-dim": "#131313",
+                    "outline-variant": "#4d4635",
+                    "on-primary": "#3c2f00",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-surface": "#e5e2e1",
+                    "surface-container-high": "#2a2a2a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "xl": "40px",
+                    "gutter": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "title-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "display": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "data-pos": [
+                            "JetBrains Mono"
+                    ],
+                    "label-caps": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "title-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-pos": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353535;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4d4635;
+        }
+        
+        .nav-item-active {
+            background-color: #d4af37;
+            color: #554300;
+        }
+        .nav-item-active .material-symbols-outlined {
+            color: #554300;
+        }
+        .table-row-hover:hover {
+            background-color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm overflow-hidden flex h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline-variant flex flex-col h-full py-lg px-md z-50">
+<div class="mb-xl flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary font-bold">R</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary tracking-tighter" style="font-size: 24px; line-height: 1.1;">RestaurantOS</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-surface-variant text-[10px] uppercase tracking-wider">Premium Management</p>
+</div>
+</div>
+<nav class="flex flex-col gap-sm flex-1">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+                POS
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Orders
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="table_restaurant">table_restaurant</span>
+                Tables
+            </a>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-lg font-semibold hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                Menu
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors duration-200 active:scale-95 transition-transform font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-64 flex-1 flex flex-col h-screen relative w-[calc(100%-16rem)]">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center gap-md">
+<div class="relative focus-within:border-primary transition-colors border border-outline-variant rounded bg-surface-container-low flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-[20px]" data-icon="search">search</span>
+<input class="bg-transparent border-none text-on-surface focus:ring-0 font-body-sm text-body-sm w-64 placeholder:text-on-surface-variant/50 p-0" placeholder="Search menu..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<span class="font-title-md text-title-md text-on-surface">Downtown Branch</span>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full hover:bg-surface-variant flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-variant flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="mt-16 p-margin-desktop flex-1 flex gap-lg overflow-hidden h-[calc(100vh-64px)]">
+<!-- Categories Sidebar -->
+<div class="w-48 flex flex-col gap-sm border-r border-[#262626] pr-lg h-full overflow-y-auto">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant mb-sm">CATEGORIES</h2>
+<button class="text-left px-sm py-xs rounded bg-surface-variant text-on-surface font-body-sm text-body-sm border border-[#262626] hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    All Items <span class="text-xs text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">124</span>
+</button>
+<button class="text-left px-sm py-xs rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    Starters <span class="text-xs text-on-surface-variant">12</span>
+</button>
+<button class="text-left px-sm py-xs rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    Mains <span class="text-xs text-on-surface-variant">34</span>
+</button>
+<button class="text-left px-sm py-xs rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    Pizza <span class="text-xs text-on-surface-variant">28</span>
+</button>
+<button class="text-left px-sm py-xs rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    Burgers <span class="text-xs text-on-surface-variant">16</span>
+</button>
+<button class="text-left px-sm py-xs rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    Desserts <span class="text-xs text-on-surface-variant">14</span>
+</button>
+<button class="text-left px-sm py-xs rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex justify-between items-center">
+                    Beverages <span class="text-xs text-on-surface-variant">20</span>
+</button>
+<button class="mt-md flex items-center gap-xs text-primary font-label-caps text-label-caps hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span> ADD CATEGORY
+                </button>
+</div>
+<!-- Items List -->
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<div class="flex justify-between items-end mb-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">All Items</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manage your menu offerings, pricing, and availability.</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm border border-outline-variant rounded bg-surface hover:bg-surface-container-high text-on-surface font-title-md text-title-md text-[14px] flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span> Filter
+                        </button>
+<button class="px-md py-sm bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md text-[14px] rounded flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span> New Item
+                        </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="flex-1 border border-[#262626] rounded-lg bg-surface-container-lowest overflow-hidden flex flex-col">
+<!-- Table Header -->
+<div class="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-sm p-sm border-b border-[#262626] bg-surface-container-low items-center">
+<div class="font-label-caps text-label-caps text-on-surface-variant pl-md">ITEM</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-right">SKU</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-right">COST / PRICE</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-center">STATUS</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-right pr-md">ACTIONS</div>
+</div>
+<!-- Table Body (Scrollable) -->
+<div class="overflow-y-auto flex-1">
+<!-- Item Row 1 -->
+<div class="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-sm p-sm border-b border-[#262626] items-center table-row-hover transition-colors">
+<div class="flex items-center gap-md pl-sm">
+<img class="w-12 h-12 rounded object-cover border border-[#262626]" data-alt="A top-down view of a classic Margherita pizza on a dark slate surface, moody lighting, professional food photography style, emphasizing fresh basil and melted mozzarella." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACDYtY5cOGcmO5tX-Tunaax6sX8x7EkE4uILwmOgL7ksv_X5KpjIq1ZZ66YTaSSsLJWw-3pNH-QYG5gYvUlbVW5jwd-UkTCX_nr6Pm_ErSzKL-K57bFa7EEYSZlXAVPdTLiXyhoruu-RTlUECOnBwZQTUusZoem1epkl9xBG3SORuGxlffo7auf-t6BCf8s-hA8F0Ehb99AaFrvcoqxIOALY2MjLj16RF-0P8Z9iWAOPmn_E9ZFPEaYw"/>
+<div>
+<div class="font-title-md text-title-md text-[16px] text-on-surface">Margherita Pizza</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Pizza • Wood-fired</div>
+</div>
+</div>
+<div class="font-data-pos text-data-pos text-[14px] text-on-surface-variant text-right">PZ-MRG-01</div>
+<div class="text-right">
+<div class="font-data-pos text-data-pos text-[16px] text-on-surface">$14.00</div>
+<div class="font-data-pos text-data-pos text-[12px] text-on-surface-variant">Cost: $3.50</div>
+</div>
+<div class="flex justify-center">
+<div class="bg-[#00a572] text-white px-2 py-0.5 rounded font-label-caps text-label-caps text-[10px]">AVAILABLE</div>
+</div>
+<div class="flex justify-end gap-sm pr-sm">
+<button class="w-8 h-8 rounded border border-[#262626] flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</button>
+<button class="w-8 h-8 rounded border border-[#262626] flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Item Row 2 -->
+<div class="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-sm p-sm border-b border-[#262626] items-center table-row-hover transition-colors opacity-60">
+<div class="flex items-center gap-md pl-sm">
+<img class="w-12 h-12 rounded object-cover border border-[#262626] grayscale" data-alt="A close-up of a juicy double cheeseburger with brioche bun, dark background, cinematic lighting, high contrast modern food styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn2afslAjqhlz9EyB5Q7wM5a5XWFpUUzU_OIFj2LTldH1DRtMvOi6ODxStOI6oeD9BFu9x7jPGiYfc2877sj6fTiGquEYA22vylHJceb9aKUW3aFk3Z0pfmH75AOksqnm3fq7n2EZtLMlpSZ7z_GsHEdHh31-4QYlsIte3wsS3PYb6FaIGGKraLZjijAoAYtw2oDnC2ScvlZ3RJugpy4f0tTbKy2dHmaCnKlVLtoj0b2_xiLrDZESddQ"/>
+<div>
+<div class="font-title-md text-title-md text-[16px] text-on-surface line-through decoration-[#4d4635]">Classic Double Burger</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Burgers • Beef</div>
+</div>
+</div>
+<div class="font-data-pos text-data-pos text-[14px] text-on-surface-variant text-right">BG-DBL-02</div>
+<div class="text-right">
+<div class="font-data-pos text-data-pos text-[16px] text-on-surface">$16.50</div>
+<div class="font-data-pos text-data-pos text-[12px] text-on-surface-variant">Cost: $4.20</div>
+</div>
+<div class="flex justify-center">
+<div class="bg-error-container text-on-error-container px-2 py-0.5 rounded font-label-caps text-label-caps text-[10px]">OUT OF STOCK</div>
+</div>
+<div class="flex justify-end gap-sm pr-sm">
+<button class="w-8 h-8 rounded border border-[#262626] flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</button>
+<button class="w-8 h-8 rounded border border-[#262626] flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Item Row 3 -->
+<div class="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-sm p-sm border-b border-[#262626] items-center table-row-hover transition-colors">
+<div class="flex items-center gap-md pl-sm">
+<div class="w-12 h-12 rounded border border-[#262626] bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-[16px] text-on-surface">Truffle Fries</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Starters • Sides</div>
+</div>
+</div>
+<div class="font-data-pos text-data-pos text-[14px] text-on-surface-variant text-right">ST-TRF-05</div>
+<div class="text-right">
+<div class="font-data-pos text-data-pos text-[16px] text-on-surface">$9.00</div>
+<div class="font-data-pos text-data-pos text-[12px] text-on-surface-variant">Cost: $1.80</div>
+</div>
+<div class="flex justify-center">
+<div class="bg-[#00a572] text-white px-2 py-0.5 rounded font-label-caps text-label-caps text-[10px]">AVAILABLE</div>
+</div>
+<div class="flex justify-end gap-sm pr-sm">
+<button class="w-8 h-8 rounded border border-[#262626] flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</button>
+<button class="w-8 h-8 rounded border border-[#262626] flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

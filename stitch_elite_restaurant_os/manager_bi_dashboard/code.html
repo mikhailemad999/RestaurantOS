@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS - Manager Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdadb",
+                        "on-tertiary-container": "#8e0029",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary": "#67001b",
+                        "on-primary": "#3c2f00",
+                        "on-secondary": "#003824",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#4d4635",
+                        "surface-dim": "#131313",
+                        "on-primary-container": "#554300",
+                        "secondary": "#4edea3",
+                        "primary-fixed": "#ffe088",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#40000d",
+                        "primary-container": "#d4af37",
+                        "surface-container-low": "#1c1b1b",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "background": "#131313",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-variant": "#353535",
+                        "tertiary": "#ffbec1",
+                        "on-secondary-fixed": "#002113",
+                        "secondary-container": "#00a572",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "inverse-primary": "#735c00",
+                        "surface-tint": "#e9c349",
+                        "primary": "#f2ca50",
+                        "surface-container-highest": "#353535",
+                        "primary-fixed-dim": "#e9c349",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-fixed": "#241a00",
+                        "error": "#ffb4ab",
+                        "outline": "#99907c",
+                        "surface-bright": "#393939",
+                        "surface": "#131313",
+                        "surface-container": "#20201f",
+                        "on-secondary-container": "#00311f",
+                        "on-surface-variant": "#d0c5af",
+                        "tertiary-container": "#ff949c",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-container-lowest": "#0e0e0e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        
+        .toast-enter {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        .toast-enter-active {
+            transform: translateX(0);
+            opacity: 1;
+            transition: all 300ms ease-out;
+        }
+        .toast-exit {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .toast-exit-active {
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 300ms ease-in;
+        }
+
+        /* Chart placeholder styling */
+        .chart-grid {
+            background-image: linear-gradient(to right, #262626 1px, transparent 1px),
+                              linear-gradient(to bottom, #262626 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .chart-line-today {
+            stroke: #f2ca50; /* primary */
+            stroke-width: 2;
+            fill: none;
+            filter: drop-shadow(0 0 4px rgba(242, 202, 80, 0.3));
+        }
+        .chart-line-yesterday {
+            stroke: #4d4635; /* outline-variant */
+            stroke-width: 1.5;
+            stroke-dasharray: 4;
+            fill: none;
+        }
+        .chart-fill-today {
+            fill: url(#gradientToday);
+        }
+
+        /* Pulse animation for live data */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            80% { transform: scale(2.5); opacity: 0; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        .live-dot::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: inherit;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-lg flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col bg-surface-container-lowest dark:bg-surface-container-lowest fixed left-0 top-0 h-full w-64 border-r border-outline-variant pt-16 pb-4 z-40">
+<div class="px-gutter mb-xl flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-variant flex items-center justify-center mb-md border border-outline-variant overflow-hidden">
+<span class="material-symbols-outlined text-[32px] text-on-surface-variant" data-icon="account_circle">account_circle</span>
+</div>
+<h2 class="text-title-md font-title-md text-primary dark:text-primary mb-xs">Manager</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Downtown Branch</p>
+</div>
+<ul class="flex flex-col gap-xs px-sm flex-grow">
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container bg-primary-container rounded-lg font-bold text-label-caps font-label-caps transition-all scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+                    POS
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="table_restaurant">table_restaurant</span>
+                    Tables
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                    Menu
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    Inventory
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                    Customers
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+                    Reports
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+                    Staff
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-all text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="px-gutter mt-auto">
+<button class="w-full py-md bg-primary text-on-primary font-label-caps text-label-caps rounded-lg hover:bg-surface-tint transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New Order
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-0 md:ml-64 h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface flex justify-between items-center w-full px-gutter h-16 fixed top-0 z-50 border-b border-outline-variant docked full-width top-0 w-[calc(100%-16rem)] ml-0 md:ml-64 transition-all">
+<div class="flex items-center gap-md">
+<span class="text-title-md font-title-md text-primary dark:text-primary">RestaurantOS</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex items-center gap-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+<span class="text-label-caps font-label-caps font-medium">Branch Switcher</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="expand_more">expand_more</span>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-xs text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-[6px] right-[6px] w-[6px] h-[6px] bg-error rounded-full"></span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="sync_lock">sync_lock</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors rounded-full md:hidden">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<main class="flex-1 overflow-y-auto pt-20 pb-lg px-gutter md:px-margin-desktop scroll-smooth">
+<div class="max-w-[1400px] mx-auto space-y-md">
+<!-- KPI Cards Top Row -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+<!-- Today's Sales -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-lg">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Today's Sales</span>
+<div class="w-2 h-2 rounded-full bg-secondary relative live-dot"></div>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-display font-display text-primary">$4,285</span>
+<span class="text-data-pos font-data-pos text-on-surface-variant">.50</span>
+</div>
+<div class="mt-sm flex items-center gap-xs text-secondary-fixed text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                            +12.5% vs yesterday
+                        </div>
+</div>
+<!-- Total Orders -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-lg">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Total Orders</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-display font-display text-on-surface">142</span>
+</div>
+<div class="mt-sm flex items-center gap-xs text-secondary-fixed text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                            +8 vs yesterday
+                        </div>
+</div>
+<!-- Active Tables -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-lg">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Active Tables</span>
+<span class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-sm py-[2px] rounded-full">85% Occ</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-display font-display text-on-surface">24</span>
+<span class="text-title-md font-title-md text-on-surface-variant">/ 28</span>
+</div>
+<div class="mt-sm w-full bg-surface-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Pending Deliveries -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-lg">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Pending Deliveries</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-display font-display text-error">12</span>
+</div>
+<div class="mt-sm flex items-center gap-xs text-error text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+                            3 Overdue
+                        </div>
+</div>
+</section>
+<!-- Middle Section: Chart & Queue -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-md h-[400px]">
+<!-- Revenue Overview Chart -->
+<div class="lg:col-span-2 bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-title-md font-title-md text-on-surface">Revenue Overview</h3>
+<div class="flex gap-md text-label-caps font-label-caps">
+<div class="flex items-center gap-xs text-primary">
+<div class="w-3 h-1 bg-primary"></div> Today
+                                </div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<div class="w-3 h-1 bg-outline-variant border-dashed border-t border-outline-variant"></div> Yesterday
+                                </div>
+</div>
+</div>
+<div class="flex-1 relative chart-grid rounded border border-[#262626] overflow-hidden">
+<!-- SVG Placeholder for Line Chart -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="gradientToday" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#f2ca50" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#f2ca50" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path class="chart-fill-today" d="M0,80 L20,75 L40,40 L60,50 L80,20 L100,10 L100,100 L0,100 Z"></path>
+<path class="chart-line-today" d="M0,80 L20,75 L40,40 L60,50 L80,20 L100,10"></path>
+<path class="chart-line-yesterday" d="M0,90 L20,85 L40,60 L60,65 L80,45 L100,30"></path>
+</svg>
+</div>
+</div>
+<!-- Live Order Queue -->
+<div class="bg-surface-container border border-outline-variant rounded-lg flex flex-col overflow-hidden">
+<div class="p-md border-b border-[#262626] flex justify-between items-center bg-surface-container-high">
+<h3 class="text-title-md font-title-md text-on-surface">Live Queue</h3>
+<span class="text-label-caps font-label-caps text-on-surface-variant bg-surface-variant px-sm py-[2px] rounded">18 Active</span>
+</div>
+<div class="flex-1 overflow-y-auto p-xs space-y-xs">
+<!-- Order Item -->
+<div class="bg-surface p-sm rounded border border-[#262626] flex justify-between items-center hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<div>
+<div class="text-data-pos font-data-pos text-on-surface">#402</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Table 12 • 4 items</div>
+</div>
+<div class="bg-[#1c1c1c] text-[#f2ca50] border border-[#d4af37]/30 px-sm py-xs rounded text-label-caps font-label-caps">
+                                    Preparing
+                                </div>
+</div>
+<!-- Order Item -->
+<div class="bg-surface p-sm rounded border border-[#262626] flex justify-between items-center hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<div>
+<div class="text-data-pos font-data-pos text-on-surface">#401</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Delivery • 2 items</div>
+</div>
+<div class="bg-secondary-container/20 text-secondary border border-secondary/30 px-sm py-xs rounded text-label-caps font-label-caps">
+                                    Ready
+                                </div>
+</div>
+<!-- Order Item Overdue -->
+<div class="bg-surface p-sm rounded border border-error/50 flex justify-between items-center hover:bg-[#1A1A1A] transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute inset-0 bg-error/5 animate-pulse"></div>
+<div class="relative z-10">
+<div class="text-data-pos font-data-pos text-error">#398</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Table 4 • 6 items</div>
+</div>
+<div class="bg-error text-on-error px-sm py-xs rounded text-label-caps font-label-caps relative z-10">
+                                    Overdue 5m
+                                </div>
+</div>
+<!-- Order Item -->
+<div class="bg-surface p-sm rounded border border-[#262626] flex justify-between items-center hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<div>
+<div class="text-data-pos font-data-pos text-on-surface">#403</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Takeout • 1 item</div>
+</div>
+<div class="bg-[#1c1c1c] text-[#f2ca50] border border-[#d4af37]/30 px-sm py-xs rounded text-label-caps font-label-caps">
+                                    Preparing
+                                </div>
+</div>
+<!-- Order Item -->
+<div class="bg-surface p-sm rounded border border-[#262626] flex justify-between items-center hover:bg-[#1A1A1A] transition-colors cursor-pointer group">
+<div>
+<div class="text-data-pos font-data-pos text-on-surface">#399</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Delivery • 3 items</div>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-sm py-xs rounded text-label-caps font-label-caps">
+                                    Out for Delivery
+                                </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Top Items & Alerts -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-md">
+<!-- Top Selling Items -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden">
+<div class="p-md border-b border-[#262626] bg-surface-container-high">
+<h3 class="text-title-md font-title-md text-on-surface">Top Selling Items</h3>
+</div>
+<div class="p-xs">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-label-caps font-label-caps text-on-surface-variant border-b border-[#262626]">
+<th class="py-sm px-sm font-normal">Item</th>
+<th class="py-sm px-sm font-normal text-right">Sold</th>
+<th class="py-sm px-sm font-normal text-right">Revenue</th>
+</tr>
+</thead>
+<tbody class="text-body-sm font-body-sm text-on-surface">
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors">
+<td class="py-sm px-sm">Truffle Burger</td>
+<td class="py-sm px-sm text-right font-data-pos text-data-pos">42</td>
+<td class="py-sm px-sm text-right font-data-pos text-data-pos text-primary">$1,050</td>
+</tr>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors">
+<td class="py-sm px-sm">Spicy Tuna Roll</td>
+<td class="py-sm px-sm text-right font-data-pos text-data-pos">38</td>
+<td class="py-sm px-sm text-right font-data-pos text-data-pos text-primary">$684</td>
+</tr>
+<tr class="border-b border-[#262626] hover:bg-[#1A1A1A] transition-colors">
+<td class="py-sm px-sm">Wagyu Steak (8oz)</td>
+<td class="py-sm px-sm text-right font-data-pos text-data-pos">15</td>
+<td class="py-sm px-sm text-right font-data-pos text-data-pos text-primary">$1,275</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Low Stock Alerts -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden">
+<div class="p-md border-b border-[#262626] bg-surface-container-high flex justify-between items-center">
+<h3 class="text-title-md font-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+                                Low Stock Alerts
+                            </h3>
+</div>
+<div class="p-sm space-y-xs">
+<div class="flex justify-between items-center p-sm bg-surface rounded border border-[#262626]">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="grocery">grocery</span>
+</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface">Whole Milk</div>
+<div class="text-label-caps font-label-caps text-error">Below threshold (5L)</div>
+</div>
+</div>
+<div class="text-data-pos font-data-pos text-error">2L left</div>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface rounded border border-[#262626]">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="tapas">tapas</span>
+</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface">Truffle Oil</div>
+<div class="text-label-caps font-label-caps text-primary">Reorder recommended</div>
+</div>
+</div>
+<div class="text-data-pos font-data-pos text-primary">1 Btl left</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Notification Toasts Container -->
+<div class="fixed bottom-lg right-lg z-[100] flex flex-col gap-sm" id="toast-container">
+<!-- Toasts injected via JS -->
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toastContainer = document.getElementById('toast-container');
+            
+            const createToast = (title, message, type = 'info', icon = 'info') => {
+                const toast = document.createElement('div');
+                
+                let bgColor = 'bg-surface-container-high border-outline-variant';
+                let iconColor = 'text-primary';
+                
+                if(type === 'success') { iconColor = 'text-secondary'; }
+                if(type === 'warning') { iconColor = 'text-error'; bgColor = 'bg-error-container/20 border-error/50'; }
+
+                toast.className = `p-sm rounded-lg border ${bgColor} shadow-lg flex items-start gap-sm w-72 backdrop-blur-md toast-enter relative overflow-hidden`;
+                
+                toast.innerHTML = `
+                    <span class="material-symbols-outlined ${iconColor} mt-[2px]" data-icon="${icon}">${icon}</span>
+                    <div class="flex-1">
+                        <h4 class="text-label-caps font-label-caps text-on-surface">${title}</h4>
+                        <p class="text-body-sm font-body-sm text-on-surface-variant leading-tight mt-[2px]">${message}</p>
+                    </div>
+                    <button class="text-on-surface-variant hover:text-on-surface transition-colors p-[2px]" onclick="this.parentElement.remove()">
+                        <span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+                    </button>
+                `;
+
+                toastContainer.appendChild(toast);
+                
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    toast.classList.remove('toast-enter');
+                    toast.classList.add('toast-enter-active');
+                });
+
+                // Auto remove
+                setTimeout(() => {
+                    toast.classList.remove('toast-enter-active');
+                    toast.classList.add('toast-exit-active');
+                    setTimeout(() => toast.remove(), 300);
+                }, 5000);
+            };
+
+            // Simulate incoming real-time notifications
+            setTimeout(() => {
+                createToast('Kitchen Alert', 'Order #402 Ready for pickup', 'success', 'done_all');
+            }, 1000);
+
+            setTimeout(() => {
+                createToast('Inventory Alert', 'Milk stock critically low (2L remaining)', 'warning', 'warning');
+            }, 3500);
+        });
+    </script>
+</body></html>

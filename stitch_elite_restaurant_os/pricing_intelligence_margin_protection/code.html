@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing Intelligence - RestaurantOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#d0c5af",
+                      "on-surface": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#005236",
+                      "tertiary-container": "#ff949c",
+                      "on-tertiary-fixed-variant": "#92002a",
+                      "tertiary-fixed": "#ffdadb",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary": "#67001b",
+                      "outline": "#99907c",
+                      "tertiary-fixed-dim": "#ffb2b7",
+                      "on-primary-fixed": "#241a00",
+                      "surface-container": "#20201f",
+                      "on-tertiary-container": "#8e0029",
+                      "primary-fixed": "#ffe088",
+                      "inverse-on-surface": "#313030",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container-low": "#1c1b1b",
+                      "on-primary-fixed-variant": "#574500",
+                      "on-error": "#690005",
+                      "background": "#131313",
+                      "on-tertiary-fixed": "#40000d",
+                      "on-secondary-fixed": "#002113",
+                      "outline-variant": "#4d4635",
+                      "surface-dim": "#131313",
+                      "on-secondary": "#003824",
+                      "primary-fixed-dim": "#e9c349",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-primary-container": "#554300",
+                      "surface-variant": "#353535",
+                      "surface": "#131313",
+                      "inverse-surface": "#e5e2e1",
+                      "inverse-primary": "#735c00",
+                      "primary": "#f2ca50",
+                      "on-error-container": "#ffdad6",
+                      "surface-tint": "#e9c349",
+                      "surface-container-highest": "#353535",
+                      "surface-bright": "#393939",
+                      "primary-container": "#d4af37",
+                      "on-background": "#e5e2e1",
+                      "secondary": "#4edea3",
+                      "secondary-fixed": "#6ffbbe",
+                      "secondary-container": "#00a572",
+                      "on-secondary-container": "#00311f",
+                      "tertiary": "#ffbec1",
+                      "error-container": "#93000a",
+                      "on-primary": "#3c2f00",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "40px",
+                      "md": "16px",
+                      "unit": "4px",
+                      "margin-desktop": "32px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "sm": "8px",
+                      "margin-mobile": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "title-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "display": ["Inter"],
+                      "label-caps": ["JetBrains Mono"],
+                      "data-pos": ["JetBrains Mono"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                      "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                      "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                      "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                      "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                      "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                      "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Utility for 1px subtle outlines replacing shadows in dark mode */
+        .card-outline { border: 1px solid #4d4635; } /* Using outline-variant */
+        
+        /* Real-time pulse animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(2.4); opacity: 0; }
+        }
+        .pulse-dot { position: relative; }
+        .pulse-dot::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: inherit;
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        /* Chart placeholder background styling */
+        .chart-grid-bg {
+            background-image: 
+                linear-gradient(to right, #2a2a2a 1px, transparent 1px),
+                linear-gradient(to bottom, #2a2a2a 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-sm antialiased h-screen overflow-hidden flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter">RestaurantOS</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mt-unit">Premium Management</p>
+</div>
+<ul class="flex flex-col gap-unit flex-grow">
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined">dashboard</span><span class="font-body-sm text-body-sm">Dashboard</span></a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined">point_of_sale</span><span class="font-body-sm text-body-sm">POS</span></a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-body-sm text-body-sm">Orders</span></a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined">table_restaurant</span><span class="font-body-sm text-body-sm">Tables</span></a></li>
+<!-- Active State: Menu (Pricing Intelligence logically sits here) -->
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary-container text-on-primary-container font-semibold transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined icon-fill">menu_book</span><span class="font-body-sm text-body-sm">Menu</span></a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined">inventory_2</span><span class="font-body-sm text-body-sm">Inventory</span></a></li>
+</ul>
+<div class="mt-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 transition-transform" href="#"><span class="material-symbols-outlined">settings</span><span class="font-body-sm text-body-sm">Settings</span></a>
+</div>
+</nav>
+<!-- Main Workspace -->
+<div class="ml-64 flex flex-col flex-grow h-screen overflow-hidden bg-background">
+<!-- TopNavBar (from JSON) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center gap-md">
+<h2 class="font-title-md text-title-md text-primary">Downtown Branch</h2>
+</div>
+<div class="flex items-center gap-lg">
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="mt-16 p-margin-desktop overflow-y-auto flex-grow scrollbar-hide">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-unit">Pricing Intelligence</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time margin analysis &amp; intelligent pricing recommendations.</p>
+</div>
+<div class="flex gap-md">
+<button class="flex items-center gap-sm px-md py-sm bg-surface-container-high border border-outline-variant rounded-lg text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Last 30 Days</span>
+</button>
+<button class="flex items-center gap-sm px-md py-sm bg-primary text-on-primary font-semibold rounded-lg hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>Sync Costs</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- KPI 1: Overall Margin Status -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-low card-outline rounded-xl p-md flex flex-col justify-between">
+<div class="flex justify-between items-start mb-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Est. Margin Leakage</span>
+<span class="material-symbols-outlined text-error">trending_down</span>
+</div>
+<div>
+<div class="font-display text-display text-error mb-unit">-$4,250</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Projected monthly loss due to cost inflation.</p>
+</div>
+</div>
+<!-- KPI 2: Cost Inflation Avg -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-low card-outline rounded-xl p-md flex flex-col justify-between">
+<div class="flex justify-between items-start mb-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Avg. Ingredient Inflation</span>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<div class="font-display text-display text-on-surface mb-unit">+8.4%</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Across top 20 high-volume ingredients.</p>
+</div>
+</div>
+<!-- KPI 3: Pending Approvals -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-low card-outline rounded-xl p-md flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start mb-lg relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pending Adjustments</span>
+<div class="w-2 h-2 rounded-full bg-primary pulse-dot mt-1"></div>
+</div>
+<div class="relative z-10">
+<div class="font-display text-display text-primary mb-unit">12</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Items require manager approval for price change.</p>
+</div>
+<!-- Subtle background decoration -->
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-[120px] text-surface-container-highest opacity-50 z-0">rule_folder</span>
+</div>
+<!-- Margin Protection Alerts (High Priority Focus) -->
+<div class="col-span-12 md:col-span-5 bg-error-container/10 border border-error/30 rounded-xl p-md flex flex-col">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-error">warning</span>
+<h3 class="font-title-md text-title-md text-error">Margin Protection Alerts</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Items below target 65% margin due to recent cost spikes.</p>
+<div class="flex flex-col gap-sm overflow-y-auto max-h-[200px] pr-sm">
+<!-- Alert Item 1 -->
+<div class="bg-surface-container card-outline rounded-lg p-sm flex justify-between items-center hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-semibold">Truffle Parm Fries</div>
+<div class="flex gap-md mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Cost: <span class="text-error font-data-pos">+15%</span></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Margin: <span class="text-error font-data-pos">58%</span></span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant group-hover:border-primary group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Alert Item 2 -->
+<div class="bg-surface-container card-outline rounded-lg p-sm flex justify-between items-center hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-semibold">Dry-Aged Ribeye</div>
+<div class="flex gap-md mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Cost: <span class="text-error font-data-pos">+8.2%</span></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Margin: <span class="text-error font-data-pos">61%</span></span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant group-hover:border-primary group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Alert Item 3 -->
+<div class="bg-surface-container card-outline rounded-lg p-sm flex justify-between items-center hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-semibold">Burrata Salad</div>
+<div class="flex gap-md mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Cost: <span class="text-error font-data-pos">+12%</span></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Margin: <span class="text-error font-data-pos">54%</span></span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant group-hover:border-primary group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Trend Chart Area -->
+<div class="col-span-12 md:col-span-7 bg-surface-container-low card-outline rounded-xl p-md flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-md text-title-md text-on-surface">Cost vs. Price Stability Index</h3>
+<select class="bg-surface-container border border-outline-variant rounded-md text-on-surface font-body-sm px-sm py-xs focus:ring-1 focus:ring-primary focus:border-primary outline-none">
+<option>White Truffle Oil</option>
+<option>Premium Ground Beef</option>
+<option>Gruyère Cheese</option>
+</select>
+</div>
+<!-- Chart Placeholder Layout -->
+<div class="flex-grow chart-grid-bg border-l border-b border-outline-variant relative mt-sm min-h-[200px]">
+<!-- Y-Axis Labels -->
+<div class="absolute -left-8 top-0 h-full flex flex-col justify-between text-[10px] text-on-surface-variant font-data-pos items-end pb-6">
+<span>+20%</span>
+<span>+10%</span>
+<span>0%</span>
+</div>
+<!-- Abstract Data Lines (CSS based for visual proxy) -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Menu Price Line (Flat/Stable) -->
+<polyline fill="none" points="0,70 20,70 40,70 60,70 80,70 100,70" stroke="#d0c5af" stroke-dasharray="4" stroke-width="2"></polyline>
+<!-- Ingredient Cost Line (Volatile/Rising) -->
+<path d="M0,80 Q20,75 40,60 T80,30 T100,20" fill="none" stroke="#f2ca50" stroke-width="3"></path>
+<!-- Intersection Highlight -->
+<circle cx="60" cy="45" fill="#131313" r="4" stroke="#f2ca50" stroke-width="2"></circle>
+<line opacity="0.5" stroke="#f2ca50" stroke-dasharray="2" stroke-width="1" x1="60" x2="60" y1="45" y2="100"></line>
+</svg>
+<!-- X-Axis Labels -->
+<div class="absolute bottom-[-24px] w-full flex justify-between text-[10px] text-on-surface-variant font-data-pos px-2">
+<span>Wk 1</span>
+<span>Wk 2</span>
+<span>Wk 3</span>
+<span>Wk 4</span>
+<span>Current</span>
+</div>
+<!-- Legend -->
+<div class="absolute top-2 right-2 bg-surface-container/80 backdrop-blur-sm border border-outline-variant p-2 rounded flex flex-col gap-1">
+<div class="flex items-center gap-1"><div class="w-3 h-[2px] bg-primary"></div><span class="text-[10px] text-on-surface">Ingredient Cost</span></div>
+<div class="flex items-center gap-1"><div class="w-3 h-[2px] bg-on-surface-variant border-dashed border-t"></div><span class="text-[10px] text-on-surface">Menu Price</span></div>
+</div>
+</div>
+</div>
+<!-- Recommended Price Adjustments (Actionable Data Table) -->
+<div class="col-span-12 bg-surface-container-low card-outline rounded-xl overflow-hidden mt-md">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container/50">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">rule</span>
+                            Manager Approval Queue
+                        </h3>
+<span class="bg-primary-container text-on-primary-container font-label-caps text-label-caps px-sm py-xs rounded uppercase">Action Required</span>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="p-md font-label-caps text-label-caps text-on-surface-variant uppercase w-1/4">Menu Item</th>
+<th class="p-md font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Cost Delta</th>
+<th class="p-md font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Current Price</th>
+<th class="p-md font-label-caps text-label-caps text-primary uppercase text-right">Rec. Price</th>
+<th class="p-md font-label-caps text-label-caps text-on-surface-variant uppercase w-1/4 pl-lg">Intelligence Reason</th>
+<th class="p-md font-label-caps text-label-caps text-on-surface-variant uppercase text-center w-[160px]">Action</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-[#1A1A1A] transition-colors group">
+<td class="p-md">
+<div class="font-body-lg text-on-surface font-semibold">Truffle Parm Fries</div>
+<div class="text-on-surface-variant text-[12px]">Appetizers</div>
+</td>
+<td class="p-md text-right font-data-pos text-error">+$0.85</td>
+<td class="p-md text-right font-data-pos text-on-surface-variant">$12.00</td>
+<td class="p-md text-right font-data-pos text-primary text-[20px] font-semibold">$14.00</td>
+<td class="p-md pl-lg">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-[16px] text-surface-tint mt-[2px]">trending_up</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant leading-tight">White truffle oil wholesale increased 22%. Adjusting +$2 restores 65% target margin.</span>
+</div>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-center gap-xs">
+<button class="h-10 px-sm bg-primary text-on-primary rounded hover:bg-primary-fixed-dim transition-colors flex items-center justify-center group-hover:shadow-[0_0_8px_rgba(212,175,55,0.4)]" title="Approve">
+<span class="material-symbols-outlined">check</span>
+</button>
+<button class="h-10 px-sm border border-outline-variant text-on-surface-variant rounded hover:text-error hover:border-error transition-colors flex items-center justify-center" title="Reject">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant hover:bg-[#1A1A1A] transition-colors group">
+<td class="p-md">
+<div class="font-body-lg text-on-surface font-semibold">Dry-Aged Ribeye</div>
+<div class="text-on-surface-variant text-[12px]">Mains</div>
+</td>
+<td class="p-md text-right font-data-pos text-error">+$4.20</td>
+<td class="p-md text-right font-data-pos text-on-surface-variant">$65.00</td>
+<td class="p-md text-right font-data-pos text-primary text-[20px] font-semibold">$72.00</td>
+<td class="p-md pl-lg">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-[16px] text-surface-tint mt-[2px]">warning</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant leading-tight">Premium beef supplier base price hike. Competitor analysis supports +$7 increase.</span>
+</div>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-center gap-xs">
+<button class="h-10 px-sm bg-primary text-on-primary rounded hover:bg-primary-fixed-dim transition-colors flex items-center justify-center group-hover:shadow-[0_0_8px_rgba(212,175,55,0.4)]" title="Approve">
+<span class="material-symbols-outlined">check</span>
+</button>
+<button class="h-10 px-sm border border-outline-variant text-on-surface-variant rounded hover:text-error hover:border-error transition-colors flex items-center justify-center" title="Reject">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#1A1A1A] transition-colors group">
+<td class="p-md">
+<div class="font-body-lg text-on-surface font-semibold">House Sangria Pitcher</div>
+<div class="text-on-surface-variant text-[12px]">Beverage</div>
+</td>
+<td class="p-md text-right font-data-pos text-primary">-$1.10</td>
+<td class="p-md text-right font-data-pos text-on-surface-variant">$38.00</td>
+<td class="p-md text-right font-data-pos text-primary text-[20px] font-semibold">$35.00</td>
+<td class="p-md pl-lg">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary mt-[2px]">trending_down</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant leading-tight">Fruit yield efficiency improved. Recommend price drop to drive volume during happy hour.</span>
+</div>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-center gap-xs">
+<button class="h-10 px-sm bg-primary text-on-primary rounded hover:bg-primary-fixed-dim transition-colors flex items-center justify-center group-hover:shadow-[0_0_8px_rgba(212,175,55,0.4)]" title="Approve">
+<span class="material-symbols-outlined">check</span>
+</button>
+<button class="h-10 px-sm border border-outline-variant text-on-surface-variant rounded hover:text-error hover:border-error transition-colors flex items-center justify-center" title="Reject">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Bottom padding for scroll clearance -->
+<div class="h-xl"></div>
+</main>
+</div>
+</body></html>

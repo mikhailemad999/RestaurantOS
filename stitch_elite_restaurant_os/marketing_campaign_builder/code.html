@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marketing Campaign Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#313030",
+                      "surface-tint": "#e9c349",
+                      "surface-container": "#20201f",
+                      "surface-container-low": "#1c1b1b",
+                      "primary-fixed": "#ffe088",
+                      "background": "#131313",
+                      "on-error": "#690005",
+                      "tertiary-fixed": "#ffdadb",
+                      "error-container": "#93000a",
+                      "secondary-container": "#00a572",
+                      "on-background": "#e5e2e1",
+                      "on-secondary-fixed": "#002113",
+                      "secondary": "#4edea3",
+                      "on-secondary": "#003824",
+                      "inverse-surface": "#e5e2e1",
+                      "surface": "#131313",
+                      "inverse-primary": "#735c00",
+                      "on-primary-container": "#554300",
+                      "surface-variant": "#353535",
+                      "outline": "#99907c",
+                      "primary": "#f2ca50",
+                      "error": "#ffb4ab",
+                      "secondary-fixed": "#6ffbbe",
+                      "surface-container-highest": "#353535",
+                      "on-primary": "#3c2f00",
+                      "on-secondary-container": "#00311f",
+                      "tertiary-fixed-dim": "#ffb2b7",
+                      "surface-container-lowest": "#0e0e0e",
+                      "tertiary": "#ffbec1",
+                      "surface-bright": "#393939",
+                      "on-surface": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#92002a",
+                      "tertiary-container": "#ff949c",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-primary-fixed-variant": "#574500",
+                      "on-tertiary-fixed": "#40000d",
+                      "primary-container": "#d4af37",
+                      "on-tertiary": "#67001b",
+                      "outline-variant": "#4d4635",
+                      "surface-dim": "#131313",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary-container": "#8e0029",
+                      "on-surface-variant": "#d0c5af",
+                      "on-primary-fixed": "#241a00",
+                      "primary-fixed-dim": "#e9c349",
+                      "on-secondary-fixed-variant": "#005236"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "40px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "gutter": "16px",
+                      "margin-desktop": "32px",
+                      "sm": "8px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "data-pos": [
+                              "JetBrains Mono"
+                      ],
+                      "title-md": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-pos": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353535;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4d4635;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex">
+<!-- SideNavBar -->
+<nav class="h-screen w-20 md:w-64 flex flex-col bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary font-label-caps text-label-caps border-r border-surface-variant fixed left-0 top-0 bottom-0 z-40 hidden md:flex">
+<!-- Header -->
+<div class="p-lg flex items-center gap-md border-b border-surface-variant">
+<img alt="Branch Logo" class="w-10 h-10 rounded-full object-cover border border-surface-variant" data-alt="A minimalist logo for a premium restaurant management system, featuring geometric shapes in gold against a deep black background. High contrast, sharp edges, professional and modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXE2qamV9StJnJE5w_veLNzCOs4ZDclIyA9qJMZKnfFssjQ-U4VEmjaNse5FMaZBpr885Ema-n4AqJEtLk-KRIu46WeBsVsg5XG8ocFnzsKoCIVCsFlVoITR6mF01HwO0RFlDctUXNZT5Ma09Oq34brO9a0RzBJrjHn6M4gS1ikpaHKIJyywUgwibyzjvfX-FElmpCniiR44No0eLh3ZZiqzmmhxzvPpmfwZnpmuoQ0aCnNy1YjDBzQg"/>
+<div class="hidden md:block">
+<div class="font-headline-lg text-primary text-title-md">Main Floor</div>
+<div class="text-on-surface-variant">Terminal 01</div>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex-1 overflow-y-auto py-md space-y-xs">
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">POS</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Orders</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">skillet</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Kitchen</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Inventory</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-md px-lg py-md bg-secondary-container text-on-secondary-container border-r-4 border-secondary duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined fill">campaign</span>
+<span class="hidden md:block">Marketing</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Reports</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="mt-auto border-t border-surface-variant py-md space-y-xs">
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Settings</span>
+</a>
+<a class="flex items-center gap-md px-lg py-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="hidden md:block group-hover:pl-xs transition-all">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col md:ml-64 h-screen bg-background relative overflow-hidden">
+<!-- TopNavBar -->
+<header class="w-full h-16 bg-background dark:bg-background border-b border-surface-variant flex justify-between items-center px-md sticky top-0 z-50">
+<!-- Mobile Menu Toggle (Visible only on md screens) -->
+<button class="md:hidden p-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-DEFAULT cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Brand / Title -->
+<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary font-bold hidden md:block">
+                Campaign Builder
+            </div>
+<div class="font-display text-display text-primary uppercase tracking-tighter md:hidden text-headline-lg-mobile">
+                LUMINA POS
+            </div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-sm">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-DEFAULT cursor-pointer active:scale-95 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+</button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-DEFAULT cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">store</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-DEFAULT cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">sync</span>
+</button>
+<div class="w-px h-8 bg-surface-variant mx-sm"></div>
+<div class="relative cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Manager Avatar" class="w-8 h-8 rounded-full object-cover border border-surface-variant" data-alt="A professional headshot of a restaurant manager in a sleek, dark uniform. The background is slightly blurred showing a high-end restaurant interior with warm ambient lighting. Cinematic quality, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPrSxliDqkqquzZgexezDXPwvraHzsdJckM4yhw-RZrHBcRYjOSYRZj7xxBH5vFjj8V2lhJrgqK6tNcB-oYOhiYQ_Z5tQ-qaPzBkYWquxmt3A9YaPkOGwoSweGNw7Hs-QWTNecMtfZfIHf8UbMCxsEZyFHdi9S8e1yvBKt_7Y-wON-mwSEFcBUnhkV968u9f1alxZxtv8XDYCOyOFwEXo2_oohIiZxfwRXTThOfSN2sKEqS_ZcTAmhng"/>
+</div>
+</div>
+</header>
+<!-- Builder Content (Bento Layout) -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop">
+<div class="max-w-7xl mx-auto space-y-lg">
+<!-- Campaign Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-md">
+<div>
+<input class="bg-transparent border-none text-headline-lg font-headline-lg text-on-surface focus:ring-0 p-0 mb-xs w-full placeholder-on-surface-variant" placeholder="Campaign Name" type="text" value="Summer Menu Launch"/>
+<div class="text-on-surface-variant font-body-sm text-body-sm">Status: <span class="text-secondary">Draft</span> • Last saved 2 mins ago</div>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none px-lg py-sm border border-surface-variant text-on-surface rounded-DEFAULT font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">Test Send</button>
+<button class="flex-1 md:flex-none px-lg py-sm bg-primary text-on-primary rounded-DEFAULT font-label-caps text-label-caps hover:bg-primary-container transition-colors shadow-[0_0_15px_rgba(242,202,80,0.1)] active:scale-95 flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+                            Schedule
+                        </button>
+</div>
+</div>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md">
+<!-- Left Column: Setup & Targeting (7 cols) -->
+<div class="lg:col-span-7 space-y-md flex flex-col">
+<!-- Campaign Type -->
+<div class="bg-surface-container border border-surface-variant rounded-xl p-lg relative overflow-hidden group hover:border-outline-variant transition-colors">
+<div class="absolute top-0 right-0 p-md opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]">target</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">category</span>
+                                1. Campaign Objective
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+<!-- Option 1 (Selected) -->
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="camp_type" type="radio"/>
+<div class="h-full border border-primary bg-primary/10 rounded-lg p-md text-center hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-primary mb-xs block">star</span>
+<div class="font-body-sm text-body-sm text-on-surface font-semibold">Special Event</div>
+<div class="text-[11px] text-on-surface-variant mt-xs">Menus, pop-ups, holidays</div>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block text-primary">
+<span class="material-symbols-outlined text-[16px] fill">check_circle</span>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="camp_type" type="radio"/>
+<div class="h-full border border-surface-variant bg-surface rounded-lg p-md text-center hover:border-outline peer-checked:border-primary peer-checked:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mb-xs block">history</span>
+<div class="font-body-sm text-body-sm text-on-surface font-semibold">Win-Back</div>
+<div class="text-[11px] text-on-surface-variant mt-xs">Lapsed VIPs &amp; regulars</div>
+</div>
+</label>
+<!-- Option 3 -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="camp_type" type="radio"/>
+<div class="h-full border border-surface-variant bg-surface rounded-lg p-md text-center hover:border-outline peer-checked:border-primary peer-checked:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mb-xs block">flash_on</span>
+<div class="font-body-sm text-body-sm text-on-surface font-semibold">Flash Offer</div>
+<div class="text-[11px] text-on-surface-variant mt-xs">Slow shifts &amp; inventory</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Audience Targeting -->
+<div class="bg-surface-container border border-surface-variant rounded-xl p-lg flex-1 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">group</span>
+                                2. Audience Targeting
+                            </h3>
+<div class="space-y-md flex-1">
+<!-- Segment Select -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">Base Segment</label>
+<div class="relative">
+<select class="w-full bg-surface border border-surface-variant rounded-DEFAULT py-sm px-md text-on-surface font-body-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+<option>All Active Customers</option>
+<option selected="">VIPs (Top 10% Spend)</option>
+<option>Wine Lovers</option>
+<option>Lunch Regulars</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Filter Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md border-t border-surface-variant pt-md mt-md">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">Last Visit Date</label>
+<div class="flex items-center gap-sm bg-surface border border-surface-variant rounded-DEFAULT p-sm focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_today</span>
+<input class="bg-transparent border-none text-on-surface font-body-sm text-body-sm w-full p-0 focus:ring-0" type="text" value="&gt; 30 Days ago"/>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">Minimum LTV ($)</label>
+<div class="flex items-center gap-sm bg-surface border border-surface-variant rounded-DEFAULT p-sm focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">attach_money</span>
+<input class="bg-transparent border-none text-on-surface font-body-sm text-body-sm w-full p-0 focus:ring-0" type="number" value="500"/>
+</div>
+</div>
+</div>
+<!-- Estimated Reach Badge -->
+<div class="mt-auto pt-md flex items-center justify-between border-t border-surface-variant">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Estimated Reach</span>
+</div>
+<div class="font-data-pos text-data-pos text-on-surface text-xl">1,248 <span class="text-sm text-on-surface-variant">guests</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Creative & Schedule (5 cols) -->
+<div class="lg:col-span-5 space-y-md flex flex-col">
+<!-- Multi-Channel Editor (Glassmorphism inspired) -->
+<div class="bg-surface-container-high/50 backdrop-blur-md border border-surface-variant rounded-xl flex-1 flex flex-col overflow-hidden relative shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<!-- Channel Tabs -->
+<div class="flex border-b border-surface-variant bg-surface-container-low">
+<button class="flex-1 py-sm font-label-caps text-label-caps border-b-2 border-primary text-primary bg-surface-container flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">sms</span> SMS
+                                </button>
+<button class="flex-1 py-sm font-label-caps text-label-caps border-b-2 border-transparent text-on-surface-variant hover:bg-surface-container transition-colors flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">mail</span> Email
+                                </button>
+</div>
+<div class="p-lg flex-1 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                                    3. Message Creative
+                                </h3>
+<div class="space-y-md flex-1">
+<!-- Image Preview area (for MMS/Email) -->
+<div class="w-full h-32 rounded-lg border border-surface-variant bg-surface overflow-hidden relative group">
+<div class="bg-cover bg-center w-full h-full opacity-60" data-alt="A moody, high-end culinary photo of an artisanal summer dish. Shallow depth of field, dramatic directional lighting highlighting the textures of fresh ingredients against a dark slate plate. Dark mode aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfGJj6NPtQpb0uDHtZ8e37YFJ7GYdsSh3jvTa_yQLWFdyIXEZIg54K5iP_YzW3e-B6kDdbYDHxKfHVbBKNr6HaXxSnA91SIRX5XiolQwKdBT7xN6dZOYBY_baYYrFIfTCM0eGU-dh4y7d7d9BdEE7IC8zS4xq53dT6OhqGJBY-synAMTAwOFVw8NHdsqS2IjGdk9Cz5pBTvKwdgi7amTpTo51KL22aGCST0sbEUuwIaCT5G_9DRn_3uA')"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-md py-xs bg-surface-container border border-surface-variant rounded text-on-surface font-body-sm text-body-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">image</span> Change Media
+                                             </button>
+</div>
+</div>
+<!-- Text Area -->
+<div class="relative">
+<textarea class="w-full bg-surface border border-surface-variant rounded-DEFAULT p-sm text-on-surface font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary resize-none placeholder-on-surface-variant" placeholder="Enter your message here..." rows="4">Lumina VIPs: Our new Summer Menu drops Friday. Reply 'BOOK' to secure an early table before we open reservations to the public.</textarea>
+<div class="absolute bottom-2 right-2 text-xs text-on-surface-variant font-data-pos">132/160</div>
+</div>
+<!-- Dynamic Tags -->
+<div class="flex flex-wrap gap-xs">
+<button class="px-2 py-1 bg-surface border border-surface-variant rounded text-[10px] text-on-surface-variant font-label-caps hover:border-primary transition-colors">+ First Name</button>
+<button class="px-2 py-1 bg-surface border border-surface-variant rounded text-[10px] text-on-surface-variant font-label-caps hover:border-primary transition-colors">+ Booking Link</button>
+<button class="px-2 py-1 bg-surface border border-surface-variant rounded text-[10px] text-on-surface-variant font-label-caps hover:border-primary transition-colors">+ Offer Code</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Schedule & Budget -->
+<div class="bg-surface-container border border-surface-variant rounded-xl p-lg">
+<h3 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                                4. Logistics
+                            </h3>
+<div class="space-y-md">
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">Send Date</label>
+<input class="w-full bg-surface border border-surface-variant rounded-DEFAULT p-sm text-on-surface font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary [color-scheme:dark]" type="date"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">Time</label>
+<input class="w-full bg-surface border border-surface-variant rounded-DEFAULT p-sm text-on-surface font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary [color-scheme:dark]" type="time"/>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-surface-variant pt-md">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Est. Campaign Cost</div>
+<div class="font-data-pos text-data-pos text-primary text-xl">$62.40</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-on-surface-variant">ROI Goal</div>
+<div class="font-data-pos text-data-pos text-secondary text-xl">15x</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom padding for scroll -->
+<div class="h-lg"></div>
+</div>
+</div>
+</main>
+</body></html>

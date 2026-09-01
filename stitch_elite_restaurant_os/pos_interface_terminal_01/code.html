@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RestaurantOS POS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed-variant": "#574500",
+                        "background": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353535",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#554300",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-container": "#d4af37",
+                        "on-primary": "#3c2f00",
+                        "outline-variant": "#4d4635",
+                        "on-error": "#690005",
+                        "on-background": "#e5e2e1",
+                        "inverse-surface": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-container": "#00311f",
+                        "tertiary-fixed": "#ffdadb",
+                        "surface-variant": "#353535",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-dim": "#131313",
+                        "outline": "#99907c",
+                        "inverse-on-surface": "#313030",
+                        "secondary-container": "#00a572",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-container": "#20201f",
+                        "primary": "#f2ca50",
+                        "on-tertiary": "#67001b",
+                        "on-primary-fixed": "#241a00",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffe088",
+                        "surface-tint": "#e9c349",
+                        "on-tertiary-fixed": "#40000d",
+                        "on-tertiary-container": "#8e0029",
+                        "tertiary": "#ffbec1",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "surface": "#131313",
+                        "inverse-primary": "#735c00",
+                        "tertiary-container": "#ff949c",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary": "#003824",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-bright": "#393939",
+                        "secondary": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "40px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "data-pos": ["JetBrains Mono"],
+                        "title-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Custom scrollbar for dense POS feeling */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-container-lowest'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: theme('borderRadius.full'); }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased bg-background">
+<!-- SideNavBar (from JSON) -->
+<nav class="fixed left-0 top-0 bottom-0 z-40 bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary font-label-caps text-label-caps h-screen w-20 md:w-64 flex flex-col border-r border-surface-variant">
+<div class="flex items-center gap-md p-md border-b border-surface-variant h-16 shrink-0">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container shrink-0 border border-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">storefront</span>
+</div>
+<div class="hidden md:flex flex-col overflow-hidden">
+<span class="font-headline-lg text-primary text-headline-lg-mobile truncate">Main Floor</span>
+<span class="text-on-surface-variant text-label-caps truncate">Terminal 01</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-sm">
+<ul class="flex flex-col gap-xs">
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">dashboard</span>
+<span class="hidden md:block truncate">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container border-r-4 border-secondary duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">point_of_sale</span>
+<span class="hidden md:block truncate">POS</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">receipt_long</span>
+<span class="hidden md:block truncate">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">skillet</span>
+<span class="hidden md:block truncate">Kitchen</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">inventory_2</span>
+<span class="hidden md:block truncate">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">analytics</span>
+<span class="hidden md:block truncate">Reports</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto border-t border-surface-variant py-sm shrink-0">
+<ul class="flex flex-col gap-xs">
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">settings</span>
+<span class="hidden md:block truncate">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-error hover:text-on-error hover:bg-error transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0" data-weight="fill">logout</span>
+<span class="hidden md:block truncate">Logout</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col ml-20 md:ml-64 h-full relative">
+<!-- TopNavBar (from JSON, modified slightly for seamless integration) -->
+<header class="flex justify-between items-center px-md w-full sticky top-0 z-30 bg-background dark:bg-background border-b border-surface-variant w-full h-16 shrink-0">
+<div class="flex items-center">
+<span class="font-display text-display text-primary uppercase tracking-tighter text-headline-lg-mobile md:text-headline-lg">LUMINA POS</span>
+</div>
+<div class="flex items-center gap-sm md:gap-md">
+<!-- Search in TopNav logic per JSON, but moved to center col per prompt later, keeping nav actions here -->
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">store</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 relative">
+<span class="material-symbols-outlined">sync</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline ml-sm cursor-pointer active:scale-95">
+<div class="w-full h-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- POS Layout Grid -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Column: Categories (20%) -->
+<aside class="w-1/5 min-w-[120px] max-w-[200px] border-r border-surface-variant bg-surface-container-lowest flex flex-col h-full overflow-y-auto">
+<div class="p-md sticky top-0 bg-surface-container-lowest z-10 border-b border-surface-variant">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">Categories</h2>
+</div>
+<div class="flex flex-col gap-xs p-xs">
+<!-- Active Category -->
+<button class="w-full text-left px-md py-md rounded bg-surface-container-high border border-outline-variant relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary opacity-5"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<span class="font-title-md text-title-md text-primary relative z-10 block group-hover:text-primary-fixed transition-colors">Pizza</span>
+</button>
+<!-- Inactive Categories -->
+<button class="w-full text-left px-md py-md rounded bg-surface border border-[#262626] hover:bg-surface-container hover:border-outline-variant transition-all text-on-surface font-title-md text-title-md">
+                        Burgers
+                    </button>
+<button class="w-full text-left px-md py-md rounded bg-surface border border-[#262626] hover:bg-surface-container hover:border-outline-variant transition-all text-on-surface font-title-md text-title-md">
+                        Pasta
+                    </button>
+<button class="w-full text-left px-md py-md rounded bg-surface border border-[#262626] hover:bg-surface-container hover:border-outline-variant transition-all text-on-surface font-title-md text-title-md">
+                        Salads
+                    </button>
+<button class="w-full text-left px-md py-md rounded bg-surface border border-[#262626] hover:bg-surface-container hover:border-outline-variant transition-all text-on-surface font-title-md text-title-md">
+                        Starters
+                    </button>
+<button class="w-full text-left px-md py-md rounded bg-surface border border-[#262626] hover:bg-surface-container hover:border-outline-variant transition-all text-on-surface font-title-md text-title-md">
+                        Drinks
+                    </button>
+<button class="w-full text-left px-md py-md rounded bg-surface border border-[#262626] hover:bg-surface-container hover:border-outline-variant transition-all text-on-surface font-title-md text-title-md">
+                        Desserts
+                    </button>
+</div>
+</aside>
+<!-- Center Column: Items Grid (50%) -->
+<section class="flex-1 flex flex-col h-full bg-background relative border-r border-surface-variant">
+<!-- Search Bar -->
+<div class="p-md border-b border-surface-variant bg-background sticky top-0 z-10 shrink-0">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border border-[#262626] rounded-full py-sm pl-xl pr-md text-on-surface font-body-lg text-body-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-on-surface-variant transition-colors h-12" placeholder="Search menu..." type="text"/>
+</div>
+</div>
+<!-- Grid -->
+<div class="flex-1 overflow-y-auto p-md">
+<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Item Card 1 -->
+<button class="bg-surface-container flex flex-col border border-[#262626] rounded-lg overflow-hidden hover:border-outline-variant hover:bg-surface-container-high transition-all active:scale-95 group text-left h-48 relative">
+<div class="h-2/3 w-full bg-surface-variant relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A highly detailed, professional food photography shot of a classic Margherita pizza fresh out of a wood-fired oven. The lighting is dramatic and warm, highlighting the bubbling mozzarella cheese, vibrant red tomato sauce, and fresh green basil leaves. The background is a dark, out-of-focus rustic wooden table, contrasting with the bright, high-saturation colors of the pizza. The image perfectly matches the dark, premium 'Culinary Precision' aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDs_u_4jNC37wNAMXcnV-2gTuCopGnpf1VLnXXB-tHkalzxuqTmiMql8hz5KFjxeKhMLw-NH8mWI90kBrTX99KAwHMXOCmtecjSBFZAYzn65mp6r1ktLhT62IAxcWna1FsFPo6ZWTzf8-7VrateOTy3vlqIVYyM5I7DqyVfZ5Dn7kKgxayxr4KBatdIGYHuFSN4f1YZOe5FW3ZhORfYLOuPbpyy6bMeMydBLdNlcIWPP2oGY0Yoip97Mw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm px-sm py-xs rounded border border-[#262626]">
+<span class="font-data-pos text-data-pos text-primary">$18</span>
+</div>
+</div>
+<div class="p-sm flex-1 flex flex-col justify-end bg-surface-container">
+<span class="font-title-md text-title-md text-on-surface truncate w-full">Margherita</span>
+</div>
+</button>
+<!-- Item Card 2 -->
+<button class="bg-surface-container flex flex-col border border-[#262626] rounded-lg overflow-hidden hover:border-outline-variant hover:bg-surface-container-high transition-all active:scale-95 group text-left h-48 relative">
+<div class="h-2/3 w-full bg-surface-variant relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A highly detailed, appetizing shot of a Pepperoni pizza. The image focuses on the slightly curled edges of the pepperoni slices, glistening with savory oils, set against melted, gooey cheese. The lighting is directional, creating deep shadows that emphasize the texture of the crust and toppings. The overall tone is rich, dark, and mouth-watering, suitable for a premium digital POS interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBC6bEn8sn5aYaOSNxWK7uuCz-XCRZGcRlonThtxSq3zf8Ly6j765J3-ogeIC55AQH1FW11RdVSxVw3r1HXdOr7HkZQygso39A9xXBAsaeaATAEsbhmjdmspyqTRroXSEvXnoUriiLnBlVO-uEeSyGfnglyTV6-ZPhAKX8hJz07aoiWL1hp23bZ_c8fD2NvJkhJXCg0uhdm1u9jk7LWT_lUqVj8EqMJZxSq7BfSncWk98msPuSoM4MVBg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm px-sm py-xs rounded border border-[#262626]">
+<span class="font-data-pos text-data-pos text-primary">$22</span>
+</div>
+</div>
+<div class="p-sm flex-1 flex flex-col justify-end bg-surface-container">
+<span class="font-title-md text-title-md text-on-surface truncate w-full">Pepperoni</span>
+</div>
+</button>
+<!-- Item Card 3 -->
+<button class="bg-surface-container flex flex-col border border-[#262626] rounded-lg overflow-hidden hover:border-outline-variant hover:bg-surface-container-high transition-all active:scale-95 group text-left h-48 relative">
+<div class="h-2/3 w-full bg-surface-variant relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A moody, high-end food photograph of a Truffle Mushroom pizza. Earthy tones dominate, with golden-brown roasted mushrooms and drizzles of truffle oil reflecting soft, focused light. The crust is charred in spots, indicating authentic stone-baking. The dark background ensures the food remains the hero element, aligning flawlessly with a sophisticated, high-contrast digital ordering system." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAeTikCr6AIQGNk_mw-4P5u8bNZaOc7aEPUQpOIJPdfCsqW-SN-JdQ-nxTV2qD-0AhuREZESvGTLV7FURbiHGAYAS1Q85NUWkGzG1Vtg_j_17TM0_mfwX8cM-DjHDkRo5GMomk8rT8IMSZbeVPvd9tFpVDnzyFNtAvnkVwL8nywiwiIhFOyUXRyy2gi_msrJlhwBpslpgLWAHquzh8BC0Oi_4Vjobh322EyXd_7Dad4HHeF3nD68dcW7A')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm px-sm py-xs rounded border border-[#262626]">
+<span class="font-data-pos text-data-pos text-primary">$26</span>
+</div>
+</div>
+<div class="p-sm flex-1 flex flex-col justify-end bg-surface-container">
+<span class="font-title-md text-title-md text-on-surface truncate w-full">Truffle Funghi</span>
+</div>
+</button>
+<!-- Item Card 4 (Sold Out state example) -->
+<button class="bg-surface-container flex flex-col border border-[#262626] rounded-lg overflow-hidden opacity-50 cursor-not-allowed text-left h-48 relative" disabled="">
+<div class="h-2/3 w-full bg-surface-variant relative grayscale">
+<div class="w-full h-full bg-cover bg-center" data-alt="A high-contrast, professional image of a BBQ Chicken pizza, shown in a desaturated, grayscale tone to indicate a 'sold out' state in the UI. The texture of the chicken, red onions, and BBQ sauce drizzle is still visible through dramatic, directional lighting typical of premium food photography, set against a void-black background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC7dp_NvsMwC6V-lwPT9QcnG0wJtTYrIHDGk5TzdY6DTE7PxkScQfxu9rnBc7yRFrQ1_K7Cvf8UGOaKuOn2QkDL7dsWQUw_hxFPb41z1amg8n1CeYwiJvRSGR5qMweguR2JG6m_XtvUZ-jtKBsbrwqJbdbXDTOTU9LtTI5tATbYHNhQ-PwFWRptI7gRK80_TxizvlgAK1ixGc-G9GLSvosB2-OgbzpPdXEYLQTzQqoy4KD__s1lmYrEMQ')"></div>
+<div class="absolute inset-0 bg-background/60 flex items-center justify-center">
+<span class="font-label-caps text-label-caps text-on-surface bg-background/90 px-sm py-xs rounded border border-[#262626]">SOLD OUT</span>
+</div>
+</div>
+<div class="p-sm flex-1 flex flex-col justify-end bg-surface-container">
+<span class="font-title-md text-title-md text-on-surface truncate w-full">BBQ Chicken</span>
+</div>
+</button>
+<!-- Item Card 5 -->
+<button class="bg-surface-container flex flex-col border border-[#262626] rounded-lg overflow-hidden hover:border-outline-variant hover:bg-surface-container-high transition-all active:scale-95 group text-left h-48 relative">
+<div class="h-2/3 w-full bg-surface-variant relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A stunning, close-up shot of a Quattro Formaggi pizza. The varied textures of mozzarella, gorgonzola, parmesan, and provolone are melting together perfectly. The lighting catches the glossy, bubbling surface of the cheese against a charred artisan crust. The aesthetic is warm and inviting yet sharply detailed, fitting for a modern dark-mode POS terminal." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDzi2pGlrBfPgNsV2nWYLrBH7Z9dmm9E3E4uBq7vZPFqFLptaSMscfGHMK8zKV-FCtc1HHGe_1Z0JPrQoIvWKOrgRwirmYITXwn0XHO6nQMggrQD-vZwNfv54B2WFFcOfJf7CeONxYUnByj-EL0n_GX-I3tMcv9BYYIV5-3HAe_hcG5PdtTTUX1y4mXxCnTlCMgDI3SPRFZPmusY2UiPLY7sVW3rAqsXXl7Kh1CBNFvdzIM-b0XMlE5qQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute top-sm right-sm bg-background/90 backdrop-blur-sm px-sm py-xs rounded border border-[#262626]">
+<span class="font-data-pos text-data-pos text-primary">$24</span>
+</div>
+</div>
+<div class="p-sm flex-1 flex flex-col justify-end bg-surface-container">
+<span class="font-title-md text-title-md text-on-surface truncate w-full">Quattro Formaggi</span>
+</div>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Column: Order Summary (30%) -->
+<aside class="w-[30%] min-w-[320px] max-w-[480px] bg-surface-container-lowest flex flex-col h-full shrink-0">
+<!-- Order Header -->
+<div class="p-md border-b border-surface-variant bg-surface-container-lowest flex justify-between items-center shrink-0 h-[73px]">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Order #4092</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Table 12</span>
+</div>
+<div class="flex gap-sm">
+<button class="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors text-error hover:text-error hover:border-error">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Cart Items List -->
+<div class="flex-1 overflow-y-auto p-xs">
+<!-- Cart Item 1 -->
+<div class="p-sm bg-surface rounded-lg border border-[#262626] mb-xs flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="font-title-md text-title-md text-on-surface">Margherita</span>
+<span class="font-data-pos text-data-pos text-on-surface">$18.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">No basil</span>
+<!-- Quantity Control -->
+<div class="flex items-center bg-surface-container-high rounded-full border border-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 18px;">remove</span>
+</button>
+<span class="font-data-pos text-data-pos text-on-surface w-6 text-center">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="p-sm bg-surface rounded-lg border border-[#262626] mb-xs flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="font-title-md text-title-md text-on-surface">Pepperoni</span>
+<span class="font-data-pos text-data-pos text-on-surface">$44.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Extra cheese</span>
+<!-- Quantity Control -->
+<div class="flex items-center bg-surface-container-high rounded-full border border-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 18px;">remove</span>
+</button>
+<span class="font-data-pos text-data-pos text-on-surface w-6 text-center">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Cart Item 3 -->
+<div class="p-sm bg-surface rounded-lg border border-[#262626] mb-xs flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="font-title-md text-title-md text-on-surface">Coke</span>
+<span class="font-data-pos text-data-pos text-on-surface">$10.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1"></span>
+<!-- Quantity Control -->
+<div class="flex items-center bg-surface-container-high rounded-full border border-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 18px;">remove</span>
+</button>
+<span class="font-data-pos text-data-pos text-on-surface w-6 text-center">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals & Actions -->
+<div class="bg-surface border-t border-surface-variant flex flex-col shrink-0 relative z-20">
+<!-- Totals -->
+<div class="p-md flex flex-col gap-xs border-b border-[#262626]">
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Subtotal</span>
+<span class="font-data-pos">$72.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Tax (8%)</span>
+<span class="font-data-pos">$5.76</span>
+</div>
+<div class="flex justify-between font-headline-lg-mobile text-headline-lg-mobile text-on-surface pt-xs mt-xs border-t border-[#262626]">
+<span>Total</span>
+<span class="font-data-pos text-primary">$77.76</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="p-sm grid grid-cols-2 gap-sm">
+<button class="col-span-1 py-md rounded bg-surface-container border border-surface-variant text-on-surface font-title-md text-title-md active:bg-surface-container-high transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 20px;">pause</span> Hold
+                        </button>
+<button class="col-span-1 py-md rounded bg-primary text-on-primary font-title-md text-title-md font-bold active:scale-[0.98] transition-transform flex items-center justify-center gap-xs shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+<span class="material-symbols-outlined" style="font-size: 20px;">send</span> Send
+                        </button>
+<button class="col-span-2 py-md rounded bg-secondary-container text-on-secondary-container font-title-md text-title-md font-bold active:scale-[0.98] transition-transform flex items-center justify-center gap-xs mt-xs">
+<span class="material-symbols-outlined" style="font-size: 24px;">payments</span> Pay $77.76
+                        </button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>
