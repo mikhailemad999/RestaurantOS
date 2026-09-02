@@ -22,9 +22,17 @@ export default function Navbar() {
   const getPageTitle = (pathname) => {
     switch (pathname) {
       case '/':
+      case '/owner': return 'Owner Strategic Console';
+      case '/manager': return 'Manager Command Center';
+      case '/cashier': return 'Cashier POS Workspace';
+      case '/captain': return "Captain's Operational Dashboard";
+      case '/chef': return "Chef's Multi-Station KDS";
+      case '/packing': return 'Packing & Dispatch Center';
+      case '/call-center': return 'Call Center Order Entry';
+      case '/multi-brand': return 'Multi-Brand Portfolio BI';
       case '/pos': return 'POS Terminal 01';
       case '/kds': return 'Kitchen Display System (KDS)';
-      case '/tables': return 'Floor Plan & Table Management';
+      case '/tables': return 'Universal Floor Plan 2.0';
       case '/menu': return 'Menu & Recipe Costing';
       case '/inventory': return 'Inventory & Stock Control';
       case '/dispatch': return 'Logistics Dispatch Board';
@@ -37,11 +45,13 @@ export default function Navbar() {
       case '/waiter-pos': return 'Waiter Handheld POS';
       case '/kitchen':
       case '/kitchen-command-center': return 'Kitchen Command Center';
+      case '/kitchen/expo': return 'Kitchen Expo Assembly Station';
       case '/station-screens': return 'Station Line Display';
       case '/settings/printers': return 'Printer Devices Configuration';
       case '/settings/printers/monitor': return 'Printer Fleet Status';
       case '/settings/printers/routing': return 'Printer Routing Rule Engine';
       case '/settings/printers/template': return 'Thermal Ticket Template';
+      case '/settings/business': return 'Master Business Architecture';
       case '/settings': return 'Global System Settings';
       case '/login': return 'Terminal PIN Access';
       default: return 'RestaurantOS Platform';

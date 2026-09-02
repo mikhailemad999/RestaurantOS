@@ -9,6 +9,12 @@ class StaffRole(models.TextChoices):
     WAITER = 'WAITER', 'Floor Captain / Waiter'
     CHEF = 'CHEF', 'Head Chef / Kitchen Staff'
     DRIVER = 'DRIVER', 'Logistics Courier'
+    PACKING = 'PACKING', 'Packing & Dispatch'
+    BAR = 'BAR', 'Bar & Beverage'
+    INVENTORY = 'INVENTORY', 'Inventory Controller'
+    CALL_CENTER = 'CALL_CENTER', 'Call Center Agent'
+    ACCOUNTING = 'ACCOUNTING', 'Financial Accountant'
+    HR = 'HR', 'HR & People Operations'
 
 class StaffMember(models.Model):
     name = models.CharField(max_length=120)

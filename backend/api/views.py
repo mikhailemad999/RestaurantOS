@@ -36,6 +36,18 @@ class StaffMemberViewSet(viewsets.ModelViewSet):
     queryset = StaffMember.objects.filter(is_active=True)
     serializer_class = StaffMemberSerializer
 
+    ROLE_HOME_MAP = {
+        'ADMIN': '/owner',
+        'MANAGER': '/manager',
+        'CASHIER': '/cashier',
+        'WAITER': '/captain',
+        'CHEF': '/chef',
+        'DRIVER': '/driver',
+        'PACKING': '/packing',
+        'INVENTORY': '/inventory',
+        'CALL_CENTER': '/call-center',
+    }
+
     @action(detail=False, methods=['post'], url_path='pin-login')
     def pin_login(self, request):
         pin = request.data.get('pin_code')
@@ -44,11 +56,31 @@ class StaffMemberViewSet(viewsets.ModelViewSet):
         
         staff = RestaurantService.authenticate_by_pin(pin)
         if staff:
+            data = StaffMemberSerializer(staff).data
+            data['role_home_path'] = self.ROLE_HOME_MAP.get(staff.role, '/command-center')
+            data['workspace'] = f"{staff.role}_WORKSPACE"
             return Response({
                 'success': True,
-                'staff': StaffMemberSerializer(staff).data
+                'staff': data
             })
         return Response({'success': False, 'error': 'Invalid PIN code'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    @action(detail=False, methods=['get'], url_path='role-accounts')
+    def role_accounts(self, request):
+        staff_members = StaffMember.objects.filter(is_active=True).order_by('id')
+        results = []
+        for s in staff_members:
+            results.append({
+                'id': s.id,
+                'name': s.name,
+                'role': s.role,
+                'title': s.get_role_display(),
+                'pin_code': s.pin_code,
+                'avatar_url': s.avatar_url,
+                'role_home_path': self.ROLE_HOME_MAP.get(s.role, '/command-center'),
+                'workspace': f"{s.role}_WORKSPACE"
+            })
+        return Response(results)
 
     @action(detail=False, methods=['post'], url_path='update-language')
     def update_language(self, request):

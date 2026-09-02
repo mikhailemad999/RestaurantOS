@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#353535","secondary":"#4edea3","surface-tint":"#e9c349","on-error-container":"#ffdad6","on-secondary-fixed-variant":"#005236","surface-dim":"#131313","on-surface":"#e5e2e1","surface-variant":"#353535","on-primary-fixed":"#241a00","error":"#ffb4ab","surface-container-low":"#1c1b1b","on-secondary":"#003824","secondary-fixed":"#6ffbbe","on-tertiary-container":"#8e0029","tertiary-container":"#ff949c","inverse-primary":"#735c00","primary-container":"#d4af37","error-container":"#93000a","inverse-on-surface":"#313030","secondary-container":"#00a572","on-secondary-container":"#00311f","on-tertiary-fixed-variant":"#92002a","on-primary-container":"#554300","on-surface-variant":"#d0c5af","on-error":"#690005","primary":"#f2ca50","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","on-tertiary":"#67001b","tertiary-fixed-dim":"#ffb2b7","surface-container-high":"#2a2a2a","background":"#131313","outline-variant":"#4d4635","tertiary":"#ffbec1","surface":"#131313","outline":"#99907c","on-background":"#e5e2e1","secondary-fixed-dim":"#4edea3","primary-fixed-dim":"#e9c349","surface-container":"#20201f","on-primary":"#3c2f00","on-secondary-fixed":"#002113","on-tertiary-fixed":"#40000d","on-primary-fixed-variant":"#574500","tertiary-fixed":"#ffdadb","inverse-surface":"#e5e2e1","primary-fixed":"#ffe088"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","xl":"40px","margin-mobile":"16px","lg":"24px","sm":"8px","unit":"4px","md":"16px","gutter":"16px","xs":"4px"},"fontFamily":{"title-md":["Inter"],"data-pos":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"display":["Inter"]},"fontSize":{"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-lg text-on-surface dark"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col border-r border-surface-container-highest transition-all duration-300" id="sidebar"><div class="h-16 flex items-center px-6 border-b border-surface-container-highest flex-shrink-0"><span class="material-symbols-outlined text-primary mr-2">restaurant</span><span class="font-headline-lg text-title-md tracking-tight text-on-surface">RestaurantOS</span></div><nav class="flex-1 py-md px-sm overflow-y-auto space-y-xs" data-active-classes="bg-secondary-container text-on-secondary-container"><div class="px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Kitchen</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-command-center" href="#"><span class="material-symbols-outlined mr-md">grid_view</span><span class="font-body-sm">Command Center</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="station-screens" href="#"><span class="material-symbols-outlined mr-md">kitchen</span><span class="font-body-sm">Station Screens</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-analytics" href="#"><span class="material-symbols-outlined mr-md">analytics</span><span class="font-body-sm">Reports</span></a><div class="pt-lg px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Printers</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-monitor" href="#"><span class="material-symbols-outlined mr-md">print_connect</span><span class="font-body-sm">Monitor</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-routing" href="#"><span class="material-symbols-outlined mr-md">alt_route</span><span class="font-body-sm">Routing</span></a><a aria-current="page" class="flex items-center px-md py-sm rounded-DEFAULT transition-colors bg-secondary-container text-on-secondary-container" data-path="printer-settings" href="#"><span class="material-symbols-outlined mr-md">settings</span><span class="font-body-sm">Configuration</span></a></nav><div class="p-md border-t border-surface-container-highest"><button class="flex items-center justify-center w-full py-sm bg-surface-container-high rounded-DEFAULT text-on-surface-variant hover:text-primary transition-colors" onclick="document.getElementById('sidebar').classList.toggle('w-64');document.getElementById('sidebar').classList.toggle('w-20');"><span class="material-symbols-outlined">menu_open</span></button></div></aside><div class="pl-64 transition-all duration-300"><header class="fixed top-0 left-64 right-0 h-16 bg-background/80 backdrop-blur-xl border-b border-surface-container-highest z-40 flex items-center justify-between px-lg"><div class="flex items-center gap-md"><span class="text-label-caps font-label-caps text-secondary bg-secondary-container/20 px-sm py-unit rounded-lg">LIVE OPS</span><div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div><span class="font-label-caps text-on-surface-variant text-[10px]">SYNCED</span></div></div><div class="flex items-center gap-lg"><div class="flex flex-col items-end hidden md:flex"><span class="font-title-md text-body-sm text-on-surface">Chef de Cuisine</span><span class="font-label-caps text-[10px] text-outline uppercase">Master Kitchen</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-outline-variant"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-background"><div class="flex flex-col w-full px-lg py-xl space-y-xl">
+<!-- Overview & High-Level KPIs -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface-container rounded-xl p-lg flex flex-col justify-between shadow-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="flex items-center justify-between mb-sm relative z-10">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Current Staffing</span>
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-on-surface">24<span class="text-title-md font-title-md text-on-surface-variant">/28</span></span>
+<p class="font-body-sm text-body-sm text-secondary mt-xs flex items-center gap-xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Optimal Coverage</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-lg flex flex-col justify-between shadow-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-container/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="flex items-center justify-between mb-sm relative z-10">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Labor Cost %</span>
+<span class="material-symbols-outlined text-tertiary-container">payments</span>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-on-surface">28.4%</span>
+<p class="font-body-sm text-body-sm text-tertiary-container mt-xs flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">arrow_upward</span> +1.2% vs Target</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-lg flex flex-col justify-between shadow-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="flex items-center justify-between mb-sm relative z-10">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Avg Service Time</span>
+<span class="material-symbols-outlined text-primary">timer</span>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-on-surface">14<span class="text-title-md font-title-md text-on-surface-variant">m</span> 32<span class="text-title-md font-title-md text-on-surface-variant">s</span></span>
+<p class="font-body-sm text-body-sm text-secondary mt-xs flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">arrow_downward</span> -45s vs Last Week</p>
+</div>
+</div>
+<div class="bg-primary rounded-xl p-lg flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-on-primary/10 rounded-full blur-2xl"></div>
+<div class="flex items-center justify-between mb-sm relative z-10">
+<span class="text-label-caps font-label-caps text-on-primary uppercase opacity-80">Pending Actions</span>
+<span class="material-symbols-outlined text-on-primary">notification_important</span>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-on-primary">3</span>
+<p class="font-body-sm text-body-sm text-on-primary mt-xs opacity-90">Time-off requests need approval</p>
+<button class="mt-md w-full bg-on-primary text-primary font-label-caps text-label-caps py-sm px-md rounded-lg hover:bg-on-primary/90 transition-colors">Review Now</button>
+</div>
+</div>
+</section>
+<!-- Active Shifts & Roster -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Active Roster Panel -->
+<div class="lg:col-span-2 bg-surface-container-low rounded-xl shadow-md p-lg flex flex-col relative overflow-hidden">
+<!-- Abstract background element -->
+<svg class="absolute top-0 right-0 w-64 h-64 text-surface-container-highest/50 transform translate-x-1/3 -translate-y-1/3 pointer-events-none" fill="currentColor" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="50" r="50"></circle>
+</svg>
+<div class="flex items-center justify-between mb-lg relative z-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Active Roster</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-unit">Live floor and kitchen status.</p>
+</div>
+<div class="flex bg-surface-container rounded-lg p-unit gap-unit">
+<button class="px-md py-sm rounded-md bg-surface-variant text-on-surface font-label-caps text-label-caps transition-colors shadow-sm">All</button>
+<button class="px-md py-sm rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-caps text-label-caps transition-colors">FOH</button>
+<button class="px-md py-sm rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-caps text-label-caps transition-colors">BOH</button>
+</div>
+</div>
+<!-- Roster Table -->
+<div class="flex-1 overflow-auto -mx-lg px-lg relative z-10">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-container-highest text-label-caps font-label-caps text-on-surface-variant">
+<th class="py-md font-normal">Team Member</th>
+<th class="py-md font-normal">Role</th>
+<th class="py-md font-normal">Shift Time</th>
+<th class="py-md font-normal text-right">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-lg text-body-lg">
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-high/30 transition-colors group">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-transparent group-hover:border-primary transition-colors" data-alt="Headshot of a professional female server in a dark apron, warm ambient restaurant lighting, high contrast, sharp focus, slightly desaturated background to emphasize the subject." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAIp73hJ-9oD7Qu10Xj_zyroID1Iw4_qAd97N_UQjWZ4FGiVDtNjK9VY59Uw25sPiveHH2X5neiQhBAK2vhoi0btMuo5EvsCtsVe0LZveygIj4Vyn6o41wIUWHuRs11_K7CBR2KFyrUJZGE11IK5FGmKtz30nwalpYSJ8MNLSznh-byT674JYWXWzTxaVGPq4srs00ijG64KIQRjcV0s_8IN0eltittZeNCrX4BZ8I_PIfkth_kK4ACA"/>
+<div>
+<div class="text-on-surface font-medium">Elena Rostova</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">ID: 4892</div>
+</div>
+</div>
+</td>
+<td class="py-md text-on-surface-variant">Lead Server</td>
+<td class="py-md font-data-pos text-data-pos text-on-surface">16:00 - 00:00</td>
+<td class="py-md text-right">
+<span class="inline-flex items-center px-sm py-unit rounded-full bg-secondary-container/20 text-secondary font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-xs animate-pulse"></span> On Floor
+                                </span>
+</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-high/30 transition-colors group">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-transparent group-hover:border-primary transition-colors" data-alt="Headshot of a focused male chef in a pristine white jacket, kitchen background slightly blurred, stark overhead lighting, serious expression, high detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-A2Vz3fbLcME3gUeUEaQgAHeW6uCf8U4UlEQYTvEO9elQz6G55Zsjj0PZOR-BmbqZ_agAi6o97u28S0raoZ6pfEv8M7FaPBAlX_SB3LKXokd_lz3l744ztITOCAyawpYP7EZd3EVunF6L5pThJmUymS7yvF580_UbGHMiwy7BanBOpQcs2IcL4aotQBY8nqnd4LJpAwSwAopxJAUhl8YXowR1HIT08guqwt8Ix5k5LiGcqfg94TCOSg"/>
+<div>
+<div class="text-on-surface font-medium">Marcus Chen</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">ID: 3105</div>
+</div>
+</div>
+</td>
+<td class="py-md text-on-surface-variant">Sous Chef</td>
+<td class="py-md font-data-pos text-data-pos text-on-surface">14:00 - 23:00</td>
+<td class="py-md text-right">
+<span class="inline-flex items-center px-sm py-unit rounded-full bg-secondary-container/20 text-secondary font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-xs animate-pulse"></span> On Line
+                                </span>
+</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-high/30 transition-colors group">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-title-md border-2 border-transparent group-hover:border-primary transition-colors">SJ</div>
+<div>
+<div class="text-on-surface font-medium">Sarah Jenkins</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">ID: 5521</div>
+</div>
+</div>
+</td>
+<td class="py-md text-on-surface-variant">Bartender</td>
+<td class="py-md font-data-pos text-data-pos text-on-surface">17:00 - 02:00</td>
+<td class="py-md text-right">
+<span class="inline-flex items-center px-sm py-unit rounded-full bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[12px] mr-xs">coffee</span> Break
+                                </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-transparent group-hover:border-error transition-colors" data-alt="Headshot of a young male busser, casual uniform, energetic expression, dimly lit dining room background with bokeh effect, cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcfrVVhMrrIIfA9JAZhik-oBJ4whZkxUCDwFG__MOLq28NBP857NFAyTDaNOOV2f-GAlVVM0aR7GRh5f5P4X7y954eivJMUj37Cmtm_RoBn3KXL8DRrg2eaFD5pYmwnI9ArA1GYyPfZcYavo8pDAHuHbbGvo2CvUem45U9XIcWN8MGtScvihqUc2go9NC5PAdI8pHUG6Tv8_dwHrTUaYjHjIWZgF5H4TENG3oLF7q22qIH857tKm-CIQ"/>
+<div>
+<div class="text-error font-medium">David Miller</div>
+<div class="text-body-sm font-body-sm text-error/70">ID: 6102</div>
+</div>
+</div>
+</td>
+<td class="py-md text-on-surface-variant">Busser</td>
+<td class="py-md font-data-pos text-data-pos text-on-surface">18:00 - 00:00</td>
+<td class="py-md text-right">
+<span class="inline-flex items-center px-sm py-unit rounded-full bg-error-container/20 text-error font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[12px] mr-xs">warning</span> Late (15m)
+                                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-md pt-md border-t border-surface-container-highest flex justify-end">
+<button class="text-primary font-label-caps text-label-caps flex items-center hover:text-primary-fixed transition-colors">
+                    View Full Schedule <span class="material-symbols-outlined ml-xs text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Performance & Payroll Summary Sidebar -->
+<div class="flex flex-col gap-lg">
+<!-- Performance KPIs -->
+<div class="bg-surface-container rounded-xl p-lg shadow-md flex-1">
+<h3 class="font-title-md text-title-md text-on-surface mb-md">Shift Performance</h3>
+<div class="space-y-md">
+<!-- Metric 1 -->
+<div>
+<div class="flex justify-between items-end mb-unit">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sales Per Hour (SPH)</span>
+<span class="font-data-pos text-data-pos text-primary">$845.50</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div>
+<div class="flex justify-between items-end mb-unit">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Table Turn Time</span>
+<span class="font-data-pos text-data-pos text-on-surface">1h 15m</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 60%"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div>
+<div class="flex justify-between items-end mb-unit">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Guest Feedback</span>
+<span class="font-data-pos text-data-pos text-on-surface">4.8/5.0</span>
+</div>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star_half</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Payroll Sync Widget -->
+<div class="bg-surface-container-highest rounded-xl p-lg shadow-md relative overflow-hidden">
+<!-- Graphic overlay -->
+<div class="absolute -right-4 -bottom-4 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">account_balance</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-surface-tint">sync</span>
+<h3 class="font-title-md text-title-md text-on-surface">Payroll Integration</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Last synced: <span class="font-data-pos">14:00 Today</span></p>
+<div class="bg-surface-container p-md rounded-lg mb-md flex justify-between items-center border border-outline-variant/30">
+<span class="font-body-sm text-body-sm text-on-surface">Unsynced Hours</span>
+<span class="font-data-pos text-data-pos text-error">12.5 hrs</span>
+</div>
+<button class="w-full bg-surface-tint text-on-primary font-label-caps text-label-caps py-sm px-md rounded-lg hover:bg-primary-fixed transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span> Sync to Payroll
+                    </button>
+</div>
+</div>
+</div>
+</section>
+</div></main></div></body></html>

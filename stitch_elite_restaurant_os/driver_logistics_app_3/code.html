@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#353535","secondary":"#4edea3","surface-tint":"#e9c349","on-error-container":"#ffdad6","on-secondary-fixed-variant":"#005236","surface-dim":"#131313","on-surface":"#e5e2e1","surface-variant":"#353535","on-primary-fixed":"#241a00","error":"#ffb4ab","surface-container-low":"#1c1b1b","on-secondary":"#003824","secondary-fixed":"#6ffbbe","on-tertiary-container":"#8e0029","tertiary-container":"#ff949c","inverse-primary":"#735c00","primary-container":"#d4af37","error-container":"#93000a","inverse-on-surface":"#313030","secondary-container":"#00a572","on-secondary-container":"#00311f","on-tertiary-fixed-variant":"#92002a","on-primary-container":"#554300","on-surface-variant":"#d0c5af","on-error":"#690005","primary":"#f2ca50","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","on-tertiary":"#67001b","tertiary-fixed-dim":"#ffb2b7","surface-container-high":"#2a2a2a","background":"#131313","outline-variant":"#4d4635","tertiary":"#ffbec1","surface":"#131313","outline":"#99907c","on-background":"#e5e2e1","secondary-fixed-dim":"#4edea3","primary-fixed-dim":"#e9c349","surface-container":"#20201f","on-primary":"#3c2f00","on-secondary-fixed":"#002113","on-tertiary-fixed":"#40000d","on-primary-fixed-variant":"#574500","tertiary-fixed":"#ffdadb","inverse-surface":"#e5e2e1","primary-fixed":"#ffe088"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","xl":"40px","margin-mobile":"16px","lg":"24px","sm":"8px","unit":"4px","md":"16px","gutter":"16px","xs":"4px"},"fontFamily":{"title-md":["Inter"],"data-pos":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"display":["Inter"]},"fontSize":{"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-lg text-on-surface dark"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col border-r border-surface-container-highest transition-all duration-300" id="sidebar"><div class="h-16 flex items-center px-6 border-b border-surface-container-highest flex-shrink-0"><span class="material-symbols-outlined text-primary mr-2">restaurant</span><span class="font-headline-lg text-title-md tracking-tight text-on-surface">RestaurantOS</span></div><nav class="flex-1 py-md px-sm overflow-y-auto space-y-xs" data-active-classes="bg-secondary-container text-on-secondary-container"><div class="px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Kitchen</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-command-center" href="#"><span class="material-symbols-outlined mr-md">grid_view</span><span class="font-body-sm">Command Center</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="station-screens" href="#"><span class="material-symbols-outlined mr-md">kitchen</span><span class="font-body-sm">Station Screens</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-analytics" href="#"><span class="material-symbols-outlined mr-md">analytics</span><span class="font-body-sm">Reports</span></a><div class="pt-lg px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Printers</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-monitor" href="#"><span class="material-symbols-outlined mr-md">print_connect</span><span class="font-body-sm">Monitor</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-routing" href="#"><span class="material-symbols-outlined mr-md">alt_route</span><span class="font-body-sm">Routing</span></a><a aria-current="page" class="flex items-center px-md py-sm rounded-DEFAULT transition-colors bg-secondary-container text-on-secondary-container" data-path="printer-settings" href="#"><span class="material-symbols-outlined mr-md">settings</span><span class="font-body-sm">Configuration</span></a></nav><div class="p-md border-t border-surface-container-highest"><button class="flex items-center justify-center w-full py-sm bg-surface-container-high rounded-DEFAULT text-on-surface-variant hover:text-primary transition-colors" onclick="document.getElementById('sidebar').classList.toggle('w-64');document.getElementById('sidebar').classList.toggle('w-20');"><span class="material-symbols-outlined">menu_open</span></button></div></aside><div class="pl-64 transition-all duration-300"><header class="fixed top-0 left-64 right-0 h-16 bg-background/80 backdrop-blur-xl border-b border-surface-container-highest z-40 flex items-center justify-between px-lg"><div class="flex items-center gap-md"><span class="text-label-caps font-label-caps text-secondary bg-secondary-container/20 px-sm py-unit rounded-lg">LIVE OPS</span><div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div><span class="font-label-caps text-on-surface-variant text-[10px]">SYNCED</span></div></div><div class="flex items-center gap-lg"><div class="flex flex-col items-end hidden md:flex"><span class="font-title-md text-body-sm text-on-surface">Chef de Cuisine</span><span class="font-label-caps text-[10px] text-outline uppercase">Master Kitchen</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-outline-variant"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-background"><div class="flex flex-col w-full px-margin-mobile py-margin-mobile gap-lg pb-32">
+<!-- Active Delivery Header & Map -->
+<div class="flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Active Delivery</h1>
+<span class="font-body-sm text-body-sm text-secondary">#ORD-8924A</span>
+</div>
+<div class="bg-secondary/20 px-md py-sm rounded-full flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-secondary">In Progress</span>
+</div>
+</div>
+<!-- Map Container -->
+<div class="w-full h-[240px] rounded-xl overflow-hidden relative" data-alt="A stylized overhead map view showing a route from a restaurant to a delivery address in an urban downtown area. The map style matches the dark mode UI with deep charcoal roads and subtle neon green route lines." data-location="1200 4th Ave, Seattle, WA 98101" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxm7rbHGBT0e8mRnUltOFFdlq3S4K09Y-aLrkOvpkUtljCkrA4UXjRwPosnWNjSob0rSUxoLXBjz4ornMgY-rf85ikiOXtBADzGfBJ383xB5VOHRzAYSJpqyQ13FkbDZ3_4BRJLzoYoNAXFqJrJvsv6Rfu-qoD8WtmaBW5bUsumwWSQDnhhD-1SwxFIPhSIDb7ls_f5D18T-RQfAGmOdpX41Qq8EO0lkoKQodwVjcZqcw1roUf0ASD3w')">
+<!-- Map overlay gradient -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent pointer-events-none"></div>
+<!-- ETA Badge on Map -->
+<div class="absolute bottom-md left-md bg-surface-container-high/90 backdrop-blur-md rounded-lg p-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">ETA</span>
+<span class="font-title-md text-title-md text-on-surface">12 mins</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Status Stepper -->
+<div class="bg-surface-container-low rounded-xl p-md flex flex-col gap-md">
+<div class="flex justify-between items-center relative">
+<!-- Connecting Line -->
+<div class="absolute top-1/2 left-4 right-4 h-[2px] bg-surface-container-highest -z-10 -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-4 right-[50%] h-[2px] bg-secondary -z-10 -translate-y-1/2"></div>
+<!-- Step 1: Picked Up -->
+<div class="flex flex-col items-center gap-xs bg-surface-container-low px-sm">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary text-[16px]">check</span>
+</div>
+<span class="font-label-caps text-label-caps text-secondary text-[10px]">Picked Up</span>
+</div>
+<!-- Step 2: Arrived -->
+<div class="flex flex-col items-center gap-xs bg-surface-container-low px-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center ring-2 ring-secondary ring-offset-2 ring-offset-surface-container-low animate-pulse">
+<span class="material-symbols-outlined text-on-secondary-container text-[16px]">location_on</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface text-[10px]">Heading There</span>
+</div>
+<!-- Step 3: Delivered -->
+<div class="flex flex-col items-center gap-xs bg-surface-container-low px-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">home</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Delivered</span>
+</div>
+</div>
+</div>
+<!-- Delivery Details -->
+<div class="bg-surface-container-low rounded-xl flex flex-col overflow-hidden">
+<!-- Address & Instructions -->
+<div class="p-md flex flex-col gap-sm">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">home_pin</span>
+</div>
+<div class="flex flex-col flex-1">
+<span class="font-title-md text-title-md text-on-surface">1200 4th Ave, Apt 4B</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Seattle, WA 98101</span>
+</div>
+</div>
+<div class="bg-surface-container-highest rounded-lg p-sm flex items-start gap-sm mt-xs">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-xs">info</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">"Gate code is 4921. Please leave on the small table next to the door. Do not knock."</span>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container-highest"></div>
+<!-- Customer & Contact -->
+<div class="p-md flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden" data-alt="Close up portrait photo of a young woman with curly hair, smiling slightly, isolated against a dark neutral background, high contrast lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBErVmvjvm9-yB32_ytPFLLQQQv9OAMUdrGcRz42lWho99UQ0-u0guvK2Cg9ghPtZjpsaQAfSk6CPBIAgjWUDO4HND4g6KF13jDfkxeUC6UAMrPtLLo1vvIXIhiwxQHcDVaOMWxA1OeG3fvyC_VO0Emxh8ELD944ZoUCYmwPRrXHnqVSMJ7Zk158937Z7YxxYV2iJrRmoMV3M9URivkv5zK7NkuC0FHpK0M_pxSvPUXaVHBEf6oT-76bg')"></div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Sarah Jenkins</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Customer</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary active:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sms</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary active:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">call</span>
+</button>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container-highest"></div>
+<!-- Payment Collect -->
+<div class="p-md bg-error-container/10 flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-error">payments</span>
+<span class="font-title-md text-title-md text-on-surface">Collect Cash</span>
+</div>
+<span class="font-data-pos text-data-pos text-error text-2xl font-bold">$42.50</span>
+</div>
+</div>
+<!-- Primary Action (Sticky-ish on mobile) -->
+<div class="pt-sm pb-md">
+<button class="w-full bg-secondary text-on-secondary font-title-md text-title-md py-md rounded-xl flex items-center justify-center gap-sm active:bg-secondary-fixed transition-colors shadow-lg">
+<span>Slide to Arrive</span>
+<span class="material-symbols-outlined animate-bounce-right">arrow_forward</span>
+</button>
+</div>
+<!-- Shift Summary -->
+<div class="flex flex-col gap-md pt-lg border-t border-surface-container-highest">
+<h2 class="font-title-md text-title-md text-on-surface">Shift Summary</h2>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-container-low rounded-xl p-md flex flex-col gap-sm border border-surface-container-highest">
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">account_balance_wallet</span> Earnings
+                </span>
+<div class="flex items-end gap-xs">
+<span class="font-display text-headline-lg-mobile text-on-surface font-bold">$142</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant pb-1">.50</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex flex-col gap-sm border border-surface-container-highest">
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Completed
+                </span>
+<div class="flex items-end gap-xs">
+<span class="font-display text-headline-lg-mobile text-on-surface font-bold">8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant pb-1">orders</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+    @keyframes bounce-right {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(4px); }
+    }
+    .animate-bounce-right {
+        animation: bounce-right 1s infinite;
+    }
+</style></main></div></body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#4d4635","inverse-surface":"#e5e2e1","surface-dim":"#131313","secondary-fixed-dim":"#4edea3","on-secondary-fixed-variant":"#005236","on-primary":"#3c2f00","primary-fixed":"#ffe088","inverse-on-surface":"#313030","on-tertiary-container":"#8e0029","on-background":"#e5e2e1","error-container":"#93000a","on-secondary-fixed":"#002113","primary-container":"#d4af37","background":"#131313","secondary-container":"#00a572","secondary-fixed":"#6ffbbe","on-surface-variant":"#d0c5af","on-primary-fixed":"#241a00","on-tertiary-fixed-variant":"#92002a","on-surface":"#e5e2e1","inverse-primary":"#735c00","surface-container-low":"#1c1b1b","primary-fixed-dim":"#e9c349","on-secondary":"#003824","surface":"#131313","tertiary-fixed":"#ffdadb","surface-container-highest":"#353535","secondary":"#4edea3","surface-container":"#20201f","on-tertiary":"#67001b","primary":"#f2ca50","error":"#ffb4ab","surface-tint":"#e9c349","on-tertiary-fixed":"#40000d","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","tertiary":"#ffbec1","on-primary-container":"#554300","surface-variant":"#353535","tertiary-fixed-dim":"#ffb2b7","on-error-container":"#ffdad6","on-primary-fixed-variant":"#574500","on-error":"#690005","on-secondary-container":"#00311f","tertiary-container":"#ff949c","outline":"#99907c","surface-container-high":"#2a2a2a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","sm":"8px","md":"16px","margin-mobile":"16px","unit":"4px","xl":"40px","xs":"4px","lg":"24px","gutter":"16px"},"fontFamily":{"body-sm":["Inter"],"data-pos":["JetBrains Mono"],"display":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"],"label-caps":["JetBrains Mono"],"body-lg":["Inter"],"title-md":["Inter"]},"fontSize":{"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-lg text-on-surface"><header class="fixed top-0 w-full h-20 bg-surface-container-lowest/90 backdrop-blur-md z-50 border-b border-outline-variant/10"><div class="max-w-7xl mx-auto px-lg h-full flex items-center justify-between"><div class="flex items-center gap-md"><div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(78,222,163,0.2)]"><span class="material-symbols-outlined text-on-secondary">fastfood</span></div><nav class="flex items-center gap-lg ml-lg" data-active-classes="text-secondary font-bold underline decoration-2 underline-offset-8"><a aria-current="page" class="transition-colors text-secondary font-bold underline decoration-2 underline-offset-8" data-path="pos-terminal" href="#">POS</a><a class="text-on-surface-variant hover:text-secondary font-label-caps transition-colors" data-path="orders-active" href="#">Orders</a><a class="text-on-surface-variant hover:text-secondary font-label-caps transition-colors" data-path="customers-list" href="#">Customers</a></nav></div><div class="flex items-center gap-md border-l border-outline-variant/30 pl-lg"><div class="text-right"><div class="text-body-sm font-bold text-on-surface">Alex Rivera</div><div class="text-[10px] font-label-caps text-secondary uppercase">Front House Cashier • Downtown</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full h-full p-lg gap-lg font-body-lg text-on-surface bg-surface">
+<div class="flex items-start justify-between">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-unit">Terminal 01</h1>
+<p class="font-label-caps text-label-caps text-secondary-fixed tracking-widest uppercase">Cashier Workspace</p>
+</div>
+<div class="flex gap-md">
+<div class="flex items-center gap-sm bg-surface-container px-md py-sm rounded-full">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Network Online</span>
+</div>
+<div class="flex items-center gap-sm bg-surface-container px-md py-sm rounded-full">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">print</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Printer Ready</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-lg flex-1">
+<div class="col-span-8 grid grid-cols-2 gap-md content-start">
+<button class="col-span-2 group relative overflow-hidden bg-primary p-xl rounded-xl flex flex-col items-center justify-center min-h-[240px] hover:bg-primary-fixed transition-all duration-300 transform active:scale-95 shadow-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<span class="material-symbols-outlined text-[64px] text-on-primary mb-md group-hover:scale-110 transition-transform duration-300">add_circle</span>
+<span class="font-display text-display text-on-primary tracking-tighter">NEW ORDER</span>
+<div class="absolute top-sm right-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="font-data-pos text-data-pos text-on-primary">CMD+N</span>
+</div>
+</button>
+<button class="group relative overflow-hidden bg-surface-container-high p-lg rounded-xl flex flex-col items-start justify-end min-h-[160px] hover:bg-surface-container-highest transition-colors active:scale-95 shadow-md">
+<span class="material-symbols-outlined absolute top-lg right-lg text-[32px] text-primary opacity-50 group-hover:opacity-100 transition-opacity">table_restaurant</span>
+<span class="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary transition-colors mt-auto">OPEN<br/>TABLE</span>
+</button>
+<button class="group relative overflow-hidden bg-surface-container-high p-lg rounded-xl flex flex-col items-start justify-end min-h-[160px] hover:bg-surface-container-highest transition-colors active:scale-95 shadow-md">
+<span class="material-symbols-outlined absolute top-lg right-lg text-[32px] text-secondary opacity-50 group-hover:opacity-100 transition-opacity">local_shipping</span>
+<span class="font-headline-lg text-headline-lg text-on-surface group-hover:text-secondary transition-colors mt-auto">DELIVERY<br/>ORDER</span>
+</button>
+<button class="col-span-2 group relative overflow-hidden bg-surface-container p-md rounded-xl flex items-center justify-between hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">search</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Customer Search</span>
+</div>
+<span class="font-data-pos text-data-pos text-on-surface-variant opacity-50 text-[14px]">CMD+K</span>
+</button>
+</div>
+<div class="col-span-4 flex flex-col gap-md">
+<div class="bg-surface-container-lowest p-lg rounded-xl h-full flex flex-col relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+<h2 class="font-label-caps text-label-caps text-on-surface-variant tracking-widest mb-xl uppercase flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+          Shift Summary
+        </h2>
+<div class="flex-1 flex flex-col justify-between">
+<div class="mb-lg">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Current Sales</p>
+<div class="flex items-baseline gap-sm">
+<span class="font-display text-display text-primary">$2,840</span>
+<span class="font-data-pos text-data-pos text-on-surface-variant text-[14px]">.00</span>
+</div>
+</div>
+<div class="h-px bg-outline-variant/30 w-full my-md"></div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Orders</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">42</p>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Drawer Cash</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">$1,200</p>
+</div>
+</div>
+</div>
+<div class="mt-xl pt-lg border-t border-outline-variant/30">
+<button class="w-full bg-surface-container-high hover:bg-surface-variant text-on-surface font-title-md text-title-md py-md rounded-lg flex items-center justify-center gap-sm transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+             Lock Terminal
+           </button>
+</div>
+</div>
+</div>
+</div>
+</div></main></body></html>

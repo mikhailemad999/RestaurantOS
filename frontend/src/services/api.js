@@ -222,5 +222,10 @@ export const api = {
   createMenuPricingRule: (data) => request('/menu-pricing-rules/', { method: 'POST', body: JSON.stringify(data) }),
   getKitchenExpoOrders: () => request('/kitchen-expo/'),
   bumpExpoOrder: (orderId) => request('/kitchen-expo/bump-order/', { method: 'POST', body: JSON.stringify({ order_id: orderId }) }),
+  // Staff & RBAC
+  pinLogin: (pin_code) => request('/staff/pin-login/', { method: 'POST', body: JSON.stringify({ pin_code }) }),
+  getStaff: () => request('/staff/'),
+  getRoleAccounts: () => request('/staff/role-accounts/'),
+  updateStaffLanguage: (staff_id, language) => request('/staff/update-language/', { method: 'POST', body: JSON.stringify({ staff_id, language }) }),
   getSystemHealthObservability: () => request('/system-health-observability/'),
 };

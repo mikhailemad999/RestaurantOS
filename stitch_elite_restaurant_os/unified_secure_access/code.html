@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#4d4635","inverse-surface":"#e5e2e1","surface-dim":"#131313","secondary-fixed-dim":"#4edea3","on-secondary-fixed-variant":"#005236","on-primary":"#3c2f00","primary-fixed":"#ffe088","inverse-on-surface":"#313030","on-tertiary-container":"#8e0029","on-background":"#e5e2e1","error-container":"#93000a","on-secondary-fixed":"#002113","primary-container":"#d4af37","background":"#131313","secondary-container":"#00a572","secondary-fixed":"#6ffbbe","on-surface-variant":"#d0c5af","on-primary-fixed":"#241a00","on-tertiary-fixed-variant":"#92002a","on-surface":"#e5e2e1","inverse-primary":"#735c00","surface-container-low":"#1c1b1b","primary-fixed-dim":"#e9c349","on-secondary":"#003824","surface":"#131313","tertiary-fixed":"#ffdadb","surface-container-highest":"#353535","secondary":"#4edea3","surface-container":"#20201f","on-tertiary":"#67001b","primary":"#f2ca50","error":"#ffb4ab","surface-tint":"#e9c349","on-tertiary-fixed":"#40000d","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","tertiary":"#ffbec1","on-primary-container":"#554300","surface-variant":"#353535","tertiary-fixed-dim":"#ffb2b7","on-error-container":"#ffdad6","on-primary-fixed-variant":"#574500","on-error":"#690005","on-secondary-container":"#00311f","tertiary-container":"#ff949c","outline":"#99907c","surface-container-high":"#2a2a2a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","sm":"8px","md":"16px","margin-mobile":"16px","unit":"4px","xl":"40px","xs":"4px","lg":"24px","gutter":"16px"},"fontFamily":{"body-sm":["Inter"],"data-pos":["JetBrains Mono"],"display":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"],"label-caps":["JetBrains Mono"],"body-lg":["Inter"],"title-md":["Inter"]},"fontSize":{"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-lg text-on-surface"><main class="w-full bg-surface h-screen flex flex-col justify-center items-center px-lg"><div class="flex flex-col w-full h-full relative overflow-hidden bg-background">
+<!-- Blurred Ambient Background -->
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="A moody, high-end restaurant interior at night, out of focus. Deep blacks, warm gold accents from low-hanging pendant lights, subtle reflections on dark marble surfaces. Cinematic lighting, soft bokeh effect, evoking a sense of premium hospitality and controlled chaos of a fine dining kitchen." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBwdczE9abdQKAuwPNPYrLZeXnluOF7HNUo6I92H4EOSO5ImmKvRg5bBeROqfK1oTtRYFewtPuP_WBNDdcxJ47-LCSLhr0hHfvKkL8xOQ8dUSqUpvO5pGe2A9rSO68KuAEkQFkUl3hEr0ItcnhKVslF-OyYK0ugY6V5DKkiEWctolf5UKiaiPVr3Yj5X0VGObh5KZK-gqTbQbMvaVr_SAM8ejqLCxHdUp2OTwEpVrSWwgGbiILUIlz56w')">
+<div class="absolute inset-0 bg-background/80 backdrop-blur-md"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+</div>
+<!-- Main Content Container -->
+<div class="relative z-10 flex flex-col items-center justify-center flex-grow p-lg min-h-screen">
+<!-- Header / Language Toggle -->
+<div class="absolute top-0 left-0 right-0 p-margin-desktop flex justify-between items-center w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed text-headline-lg-mobile" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-display text-display text-on-surface tracking-tighter">Resto<span class="text-primary">OS</span></span>
+</div>
+<!-- Language Toggle (Micro-interaction) -->
+<div class="flex bg-surface-container-low rounded-full p-unit shadow-sm border border-outline/20">
+<button class="px-md py-sm rounded-full bg-primary/10 text-primary font-label-caps text-label-caps transition-all duration-300">ENG</button>
+<button class="px-md py-sm rounded-full text-on-surface-variant font-label-caps text-label-caps hover:text-on-surface transition-all duration-300">عربي</button>
+</div>
+</div>
+<!-- Login Card -->
+<div class="w-full max-w-md bg-surface-container-highest/90 backdrop-blur-xl rounded-xl shadow-xl border border-outline/20 p-xl flex flex-col gap-lg relative overflow-hidden group">
+<!-- Active State Glow Indicator -->
+<div class="absolute -top-10 -left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-colors duration-700"></div>
+<!-- Title & Role Indication -->
+<div class="flex flex-col gap-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">System Access</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enter credentials to authenticate.</p>
+</div>
+<!-- Role Selection visualization (Visual only for now) -->
+<div class="flex justify-between items-center bg-surface-container-low p-md rounded-lg border border-outline/10">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Detected Role</span>
+<div class="flex items-center gap-sm mt-unit">
+<span class="material-symbols-outlined text-secondary text-[16px]">admin_panel_settings</span>
+<span class="font-data-pos text-data-pos text-secondary">Manager</span>
+</div>
+</div>
+<div class="w-2 h-2 bg-secondary rounded-full animate-pulse shadow-[0_0_8px_rgba(78,222,163,0.6)]"></div>
+</div>
+<!-- Form Inputs -->
+<form class="flex flex-col gap-md" onsubmit="event.preventDefault(); document.getElementById('login-btn-text').innerText = 'Authenticating...'; setTimeout(() => document.getElementById('login-btn-text').innerText = 'Secure Login', 2000);">
+<!-- ID Input -->
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-caps text-label-caps text-on-surface-variant absolute -top-2 left-3 bg-surface-container-highest px-unit z-10" for="userId">User ID / Email</label>
+<input autocomplete="username" class="w-full bg-surface-container-lowest text-on-surface font-body-lg text-body-lg px-md py-lg rounded-lg border border-outline/30 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-outline-variant" id="userId" placeholder="Enter ID" type="text"/>
+</div>
+<!-- PIN/Password Input -->
+<div class="flex flex-col gap-xs relative mt-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant absolute -top-2 left-3 bg-surface-container-highest px-unit z-10" for="passCode">PIN / Password</label>
+<input autocomplete="current-password" class="w-full bg-surface-container-lowest text-on-surface font-data-pos text-data-pos tracking-widest px-md py-lg rounded-lg border border-outline/30 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-outline-variant" id="passCode" placeholder="••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" onclick="const p = document.getElementById('passCode'); p.type = p.type === 'password' ? 'text' : 'password';" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<!-- Action Button -->
+<button class="w-full mt-md bg-primary hover:bg-primary-fixed-dim text-on-primary font-title-md text-title-md py-md rounded-lg transition-all active:scale-[0.98] shadow-md flex items-center justify-center gap-sm group" type="submit">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">login</span>
+<span id="login-btn-text">Secure Login</span>
+</button>
+</form>
+<!-- Forgot / Support links -->
+<div class="flex justify-between items-center mt-sm border-t border-outline/10 pt-md">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Recover Access</a>
+<div class="flex items-center gap-unit text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+<a class="font-body-sm text-body-sm hover:text-primary transition-colors" href="#">IT Support</a>
+</div>
+</div>
+</div>
+<!-- Terminal / Status Footer -->
+<div class="absolute bottom-margin-desktop left-margin-desktop right-margin-desktop flex justify-between items-end opacity-60">
+<div class="flex flex-col gap-unit font-data-pos text-[10px] text-on-surface-variant uppercase tracking-widest">
+<span>Node: POS-Terminal-04</span>
+<span>Net: Secured / Encrypted</span>
+</div>
+<div class="font-data-pos text-[10px] text-on-surface-variant uppercase tracking-widest text-right">
+<span>V 2.4.19</span><br/>
+<span>System Online</span>
+</div>
+</div>
+</div>
+</div></main></body></html>

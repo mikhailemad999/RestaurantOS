@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#4d4635","inverse-surface":"#e5e2e1","surface-dim":"#131313","secondary-fixed-dim":"#4edea3","on-secondary-fixed-variant":"#005236","on-primary":"#3c2f00","primary-fixed":"#ffe088","inverse-on-surface":"#313030","on-tertiary-container":"#8e0029","on-background":"#e5e2e1","error-container":"#93000a","on-secondary-fixed":"#002113","primary-container":"#d4af37","background":"#131313","secondary-container":"#00a572","secondary-fixed":"#6ffbbe","on-surface-variant":"#d0c5af","on-primary-fixed":"#241a00","on-tertiary-fixed-variant":"#92002a","on-surface":"#e5e2e1","inverse-primary":"#735c00","surface-container-low":"#1c1b1b","primary-fixed-dim":"#e9c349","on-secondary":"#003824","surface":"#131313","tertiary-fixed":"#ffdadb","surface-container-highest":"#353535","secondary":"#4edea3","surface-container":"#20201f","on-tertiary":"#67001b","primary":"#f2ca50","error":"#ffb4ab","surface-tint":"#e9c349","on-tertiary-fixed":"#40000d","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","tertiary":"#ffbec1","on-primary-container":"#554300","surface-variant":"#353535","tertiary-fixed-dim":"#ffb2b7","on-error-container":"#ffdad6","on-primary-fixed-variant":"#574500","on-error":"#690005","on-secondary-container":"#00311f","tertiary-container":"#ff949c","outline":"#99907c","surface-container-high":"#2a2a2a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","sm":"8px","md":"16px","margin-mobile":"16px","unit":"4px","xl":"40px","xs":"4px","lg":"24px","gutter":"16px"},"fontFamily":{"body-sm":["Inter"],"data-pos":["JetBrains Mono"],"display":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"],"label-caps":["JetBrains Mono"],"body-lg":["Inter"],"title-md":["Inter"]},"fontSize":{"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-lg text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col border-r border-outline-variant/20 shadow-xl"><div class="px-lg py-xl flex items-center gap-sm"><div class="w-8 h-8 bg-primary rounded flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">restaurant_menu</span></div><span class="font-headline-lg text-title-md tracking-tight text-on-surface uppercase">RestaurantOS</span></div><nav class="flex-1 overflow-y-auto px-md space-y-xs pb-lg" data-active-classes="bg-primary text-on-primary shadow-[0_0_15px_rgba(242,202,80,0.3)]"><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="owner-dashboard" href="#"><span class="material-symbols-outlined mr-md text-[20px]">dashboard</span><span class="font-label-caps">Dashboard</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-md text-[20px]">hub</span><span class="font-label-caps">Branches</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="brands" href="#"><span class="material-symbols-outlined mr-md text-[20px]">branding_watermark</span><span class="font-label-caps">Brands</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="financial" href="#"><span class="material-symbols-outlined mr-md text-[20px]">account_balance_wallet</span><span class="font-label-caps">Financial</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-md text-[20px]">insights</span><span class="font-label-caps">Analytics</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="customers" href="#"><span class="material-symbols-outlined mr-md text-[20px]">group</span><span class="font-label-caps">Customers</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="operations" href="#"><span class="material-symbols-outlined mr-md text-[20px]">settings_input_component</span><span class="font-label-caps">Operations</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff" href="#"><span class="material-symbols-outlined mr-md text-[20px]">badge</span><span class="font-label-caps">Staff</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="security" href="#"><span class="material-symbols-outlined mr-md text-[20px]">shield</span><span class="font-label-caps">Security</span></a><a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="system-health" href="#"><span class="material-symbols-outlined mr-md text-[20px]">monitor_heart</span><span class="font-label-caps">System Health</span></a></nav></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 flex items-center justify-between px-lg"><div class="flex flex-col"><span class="text-body-sm font-label-caps text-primary uppercase">Global HQ</span><span class="text-title-md font-headline-lg">Owner Console</span></div><div class="flex items-center gap-md"><div class="text-right mr-sm"><div class="text-body-sm font-bold text-on-surface">Master Admin</div><div class="text-xs font-label-caps text-on-surface-variant">Executive Owner</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full p-lg gap-lg">
+<div class="flex justify-between items-end mb-sm">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse shadow-[0_0_8px_rgba(78,222,163,0.6)]"></span>
+<span class="font-label-caps text-label-caps text-secondary-fixed uppercase">Live Operations</span>
+</div>
+<h1 class="font-display text-display text-on-surface">Downtown Flagship</h1>
+</div>
+<div class="flex items-center gap-md bg-surface-container-low px-md py-sm rounded-xl">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">storefront</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Manager</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Downtown Branch</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-md">
+<!-- KPIs -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="bg-surface-container rounded-xl p-md flex flex-col justify-between hover:bg-surface-container-high transition-colors group relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-lg relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Today's Sales</span>
+<span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+</div>
+<div class="flex flex-col relative z-10">
+<span class="font-headline-lg text-headline-lg text-on-surface">$12,450</span>
+<div class="flex items-center gap-xs mt-xs text-secondary-fixed">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-data-pos text-data-pos text-sm">+8.4%</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-md flex flex-col justify-between hover:bg-surface-container-high transition-colors group relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/5 rounded-full blur-xl group-hover:bg-secondary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-lg relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Guest Count</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+</div>
+<div class="flex flex-col relative z-10">
+<span class="font-headline-lg text-headline-lg text-on-surface">214</span>
+<div class="flex items-center gap-xs mt-xs text-secondary-fixed">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-data-pos text-data-pos text-sm">+12</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-md flex flex-col justify-between hover:bg-surface-container-high transition-colors group relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/5 rounded-full blur-xl group-hover:bg-tertiary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-lg relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Labor %</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">schedule</span>
+</div>
+<div class="flex flex-col relative z-10">
+<span class="font-headline-lg text-headline-lg text-on-surface">24.5%</span>
+<div class="flex items-center gap-xs mt-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">trending_flat</span>
+<span class="font-data-pos text-data-pos text-sm">Target: 25%</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-md flex flex-col justify-between hover:bg-surface-container-high transition-colors group relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-fixed/5 rounded-full blur-xl group-hover:bg-primary-fixed/10 transition-all"></div>
+<div class="flex justify-between items-start mb-lg relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Avg Ticket</span>
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">receipt_long</span>
+</div>
+<div class="flex flex-col relative z-10">
+<span class="font-headline-lg text-headline-lg text-on-surface">$58.17</span>
+<div class="flex items-center gap-xs mt-xs text-error">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span class="font-data-pos text-data-pos text-sm">-1.2%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Operations Pulse -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-md flex flex-col">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-title-md text-title-md text-on-surface">Operations Pulse</h2>
+<button class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<div class="flex items-center justify-between p-sm rounded-lg bg-surface hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center group-hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-error text-[24px]">local_fire_department</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Kitchen Queue</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Active Tickets</span>
+</div>
+</div>
+<div class="bg-error-container px-sm py-xs rounded flex items-center gap-xs shadow-[0_0_10px_rgba(147,0,10,0.3)]">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-data-pos text-data-pos text-on-error-container">08</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-sm rounded-lg bg-surface hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center group-hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary text-[24px]">two_wheeler</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Delivery Queue</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pending Orders</span>
+</div>
+</div>
+<div class="bg-primary-container/20 px-sm py-xs rounded flex items-center gap-xs">
+<span class="font-data-pos text-data-pos text-primary">12</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-sm rounded-lg bg-surface hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center group-hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-secondary text-[24px]">deck</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Table Occupancy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Seated Guests</span>
+</div>
+</div>
+<div class="flex items-end gap-xs">
+<span class="font-data-pos text-data-pos text-on-surface text-xl">24</span>
+<span class="font-data-pos text-data-pos text-on-surface-variant text-sm mb-[2px]">/32</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row -->
+<div class="col-span-12 grid grid-cols-12 gap-md mt-sm">
+<!-- Manager Approvals -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container rounded-xl p-md">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+<h2 class="font-title-md text-title-md text-on-surface">Approval Queue</h2>
+</div>
+<span class="bg-surface-container-highest text-on-surface px-sm py-xs rounded font-label-caps text-label-caps">3 Pending</span>
+</div>
+<div class="flex flex-col">
+<!-- Header -->
+<div class="grid grid-cols-12 gap-sm px-sm py-xs border-b border-outline-variant/30 mb-xs">
+<div class="col-span-2 font-label-caps text-label-caps text-on-surface-variant">Type</div>
+<div class="col-span-3 font-label-caps text-label-caps text-on-surface-variant">Requester</div>
+<div class="col-span-4 font-label-caps text-label-caps text-on-surface-variant">Details</div>
+<div class="col-span-3 font-label-caps text-label-caps text-on-surface-variant text-right">Action</div>
+</div>
+<!-- Items -->
+<div class="grid grid-cols-12 gap-sm items-center p-sm hover:bg-surface-container-high rounded-lg transition-colors group">
+<div class="col-span-2">
+<span class="inline-block px-xs py-[2px] bg-error-container/20 text-error rounded text-xs font-label-caps">Refund</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-label-caps text-[10px] text-on-surface">JD</div>
+<span class="font-body-sm text-body-sm text-on-surface truncate">J. Doe</span>
+</div>
+<div class="col-span-4 flex flex-col">
+<span class="font-data-pos text-data-pos text-sm text-on-surface">Order #4421</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate text-xs">Customer complaint - cold food</span>
+</div>
+<div class="col-span-3 flex justify-end gap-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded bg-surface hover:bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary hover:bg-primary-fixed flex items-center justify-center text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-sm items-center p-sm hover:bg-surface-container-high rounded-lg transition-colors group border-t border-outline-variant/10">
+<div class="col-span-2">
+<span class="inline-block px-xs py-[2px] bg-tertiary-container/20 text-tertiary rounded text-xs font-label-caps">Override</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-label-caps text-[10px] text-on-surface">SW</div>
+<span class="font-body-sm text-body-sm text-on-surface truncate">S. Wu</span>
+</div>
+<div class="col-span-4 flex flex-col">
+<span class="font-data-pos text-data-pos text-sm text-on-surface">VIP Discount</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate text-xs">Applying 20% to Table 14</span>
+</div>
+<div class="col-span-3 flex justify-end gap-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded bg-surface hover:bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary hover:bg-primary-fixed flex items-center justify-center text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-sm items-center p-sm hover:bg-surface-container-high rounded-lg transition-colors group border-t border-outline-variant/10">
+<div class="col-span-2">
+<span class="inline-block px-xs py-[2px] bg-primary-container/20 text-primary rounded text-xs font-label-caps">Void</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-label-caps text-[10px] text-on-surface">MR</div>
+<span class="font-body-sm text-body-sm text-on-surface truncate">M. Ruiz</span>
+</div>
+<div class="col-span-4 flex flex-col">
+<span class="font-data-pos text-data-pos text-sm text-on-surface">Item Void</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate text-xs">Accidental ring-in</span>
+</div>
+<div class="col-span-3 flex justify-end gap-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded bg-surface hover:bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary hover:bg-primary-fixed flex items-center justify-center text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inventory Alerts -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container rounded-xl p-md flex flex-col relative overflow-hidden">
+<!-- Decorative background blur -->
+<div class="absolute bottom-0 right-0 w-32 h-32 bg-error/5 rounded-full blur-2xl"></div>
+<div class="flex items-center justify-between mb-md relative z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-error text-[24px]">warning</span>
+<h2 class="font-title-md text-title-md text-on-surface">Low Stock Alerts</h2>
+</div>
+<button class="text-primary font-label-caps text-label-caps hover:text-primary-fixed transition-colors">View All</button>
+</div>
+<div class="flex flex-col gap-sm relative z-10 flex-1">
+<div class="bg-surface p-sm rounded-lg flex items-center justify-between border-l-2 border-error hover:bg-surface-container-highest transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of premium white truffle oil in a glass bottle, dark moody lighting, cinematic, culinary focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3ojoAq-IaO5olgT_vF9r2cNubG3EtP3YBxzokEt1QAPxW2DJwWUYrwR_9nUY-KDMs6ypObU373E8r60OG-A1iO0ZgfFpwQyXBHOPiF1H31vcer1oaWAwQWe7lU3XtEyGNSsm-I18sPUGgXNlssMP6v_qQH4GkNOc49VCN-8KnanTWA-NKPq73kSDLCuzcMGgYniRFWt4_gD0pJYezpZunjO3WkjWpWFCB_xowRjnUJO_72si6OvZD_A"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Truffle Oil</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">White, Premium</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-pos text-data-pos text-error">0.5 L</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Est. Out: 2hrs</span>
+</div>
+</div>
+<div class="bg-surface p-sm rounded-lg flex items-center justify-between border-l-2 border-error hover:bg-surface-container-highest transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Raw marbled ribeye steak on a dark slate board, professional kitchen lighting, high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3d0Z60_p2OUi4atHRRDXiitOVPH5CEP4iNU5Djusd7m1baMhPl8kjfKn1dcsZfDkL0bG--NFwZQjxhfSu3ff2Ib_UycOtKf0a4NXGa1EWZvW2GGGHRmPIHP03lgRfdOfbCLEC0w5iZxzQWGIuvEnIQOkThUwVty6NmpblFg5fcMPcZ1zrn41qOFBnQIg33gK7QvTPTVhNgNZlHicIM6k3ahSTalhuL1Fh_m2e98Vnra_ypCbEHmef0w"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Ribeye</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Prime, 16oz</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-pos text-data-pos text-error">4 Portions</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Critical</span>
+</div>
+</div>
+<div class="mt-auto pt-sm flex justify-center">
+<button class="w-full py-sm bg-surface-container-highest hover:bg-surface-container-low text-on-surface rounded font-label-caps text-label-caps transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+                        Reorder Critical Items
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

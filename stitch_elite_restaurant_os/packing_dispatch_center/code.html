@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-background": "#e5e2e1", "surface-bright": "#393939", "surface-tint": "#e9c349", "primary-container": "#d4af37", "on-tertiary-fixed-variant": "#92002a", "on-primary-fixed": "#241a00", "outline": "#99907c", "on-surface-variant": "#d0c5af", "surface-container-highest": "#353535", "tertiary-fixed-dim": "#ffb2b7", "on-tertiary-fixed": "#40000d", "tertiary-fixed": "#ffdadb", "on-secondary-fixed-variant": "#005236", "on-secondary": "#003824", "on-error-container": "#ffdad6", "error-container": "#93000a", "tertiary": "#ffbec1", "background": "#131313", "surface-container": "#20201f", "tertiary-container": "#ff949c", "on-primary-fixed-variant": "#574500", "inverse-on-surface": "#313030", "error": "#ffb4ab", "surface-container-high": "#2a2a2a", "on-secondary-container": "#00311f", "surface-container-lowest": "#0e0e0e", "on-primary": "#3c2f00", "on-tertiary": "#67001b", "surface-container-low": "#1c1b1b", "on-tertiary-container": "#8e0029", "primary-fixed-dim": "#e9c349", "on-surface": "#e5e2e1", "outline-variant": "#4d4635", "surface": "#131313", "inverse-primary": "#735c00", "primary-fixed": "#ffe088", "on-error": "#690005", "secondary-container": "#00a572", "on-primary-container": "#554300", "surface-variant": "#353535", "secondary-fixed-dim": "#4edea3", "surface-dim": "#131313", "primary": "#f2ca50", "on-secondary-fixed": "#002113", "secondary": "#4edea3", "secondary-fixed": "#6ffbbe", "inverse-surface": "#e5e2e1" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "xl": "40px", "margin-desktop": "32px", "unit": "4px", "sm": "8px", "md": "16px", "xs": "4px", "margin-mobile": "16px", "lg": "24px", "gutter": "16px" }, "fontFamily": { "label-caps": ["JetBrains Mono"], "body-sm": ["Inter"], "title-md": ["Inter"], "display": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "data-pos": ["JetBrains Mono"] }, "fontSize": { "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }], "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }], "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }], "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }], "data-pos": ["18px", { "lineHeight": "1.0", "fontWeight": "500" }] } } } }</script></head><body class="bg-background font-body-lg text-on-background"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col border-r border-outline-variant/10"><div class="p-lg mb-xl flex items-center gap-md"><div class="w-10 h-10 bg-primary-container rounded flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-fixed">restaurant</span></div><span class="font-headline-lg text-title-md text-primary tracking-tighter">RestaurantOS</span></div><div class="flex-1 px-md overflow-y-auto"><div class="mb-lg"><div class="px-md mb-sm font-label-caps text-label-caps text-outline uppercase">Captain</div><nav class="space-y-xs" data-active-classes="bg-primary-container text-on-primary-container"><a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="my-tables" href="#"><span class="material-symbols-outlined">table_restaurant</span><span class="font-body-lg text-body-lg">My Tables</span></a><a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="floor-map" href="#"><span class="material-symbols-outlined">map</span><span class="font-body-lg text-body-lg">Floor Map</span></a></nav></div><div class="mb-lg"><div class="px-md mb-sm font-label-caps text-label-caps text-outline uppercase">Chef</div><nav class="space-y-xs" data-active-classes="bg-primary-container text-on-primary-container"><a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="station-queue" href="#"><span class="material-symbols-outlined">skillet</span><span class="font-body-lg text-body-lg">Station Queue</span></a><a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="station-health" href="#"><span class="material-symbols-outlined">monitoring</span><span class="font-body-lg text-body-lg">Station Health</span></a><a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ingredient-status" href="#"><span class="material-symbols-outlined">inventory_2</span><span class="font-body-lg text-body-lg">Ingredients</span></a></nav></div><div class="mb-lg"><div class="px-md mb-sm font-label-caps text-label-caps text-outline uppercase">Packing</div><nav class="space-y-xs" data-active-classes="bg-primary-container text-on-primary-container"><a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ready-queue" href="#"><span class="material-symbols-outlined">inventory</span><span class="font-body-lg text-body-lg">Ready Queue</span></a><a aria-current="page" class="flex items-center gap-md px-md py-sm rounded-xl transition-all bg-primary-container text-on-primary-container" data-path="dispatch-center" href="#"><span class="material-symbols-outlined">local_shipping</span><span class="font-body-lg text-body-lg">Dispatch</span></a></nav></div></div><div class="p-lg border-t border-outline-variant/10"><div class="flex items-center gap-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="text-body-sm font-bold text-on-surface">Alex V.</span><span class="text-[10px] uppercase tracking-widest text-outline">Floor Captain</span></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-xl border-b border-outline-variant/5"><div class="flex items-center gap-xl"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-outline uppercase">Branch</span><span class="font-title-md text-body-lg text-on-surface">Downtown Flagship</span></div><div class="h-8 w-[1px] bg-outline-variant/20"></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-outline uppercase">System Status</span><div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div><span class="font-body-sm text-body-sm text-secondary">Live</span></div></div></div><div class="flex items-center gap-lg"><div class="flex items-center gap-sm bg-surface-container rounded-full px-md py-xs border border-outline-variant/10"><span class="material-symbols-outlined text-primary text-[20px]">notifications</span><span class="font-data-pos text-body-sm text-on-surface">12</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-background min-h-screen"><div class="flex flex-col w-full h-full relative overflow-hidden bg-background">
+<div class="grid grid-cols-12 gap-gutter p-md h-[calc(100vh-64px)] w-full">
+<!-- LEFT PANEL: Order Queue -->
+<div class="col-span-4 flex flex-col gap-md h-full">
+<div class="flex items-center justify-between px-xs py-sm">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Ready to Pack</h2>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">sort</span>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Sort: Time</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto space-y-sm pr-xs custom-scrollbar">
+<!-- Order Card: Active -->
+<div class="group relative bg-surface-container-high p-md rounded-xl cursor-pointer transition-all hover:bg-surface-container-highest shadow-sm before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-primary before:rounded-l-xl">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="font-data-pos text-title-md text-primary">#4092</span>
+<span class="px-2 py-0.5 rounded bg-surface-bright font-label-caps text-[10px] text-on-surface uppercase">Delivery</span>
+</div>
+<span class="font-data-pos text-body-sm text-error animate-pulse">04:12</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mb-md">
+                2x Wagyu Burger, 1x Truffle Fries, 2x Cola
+            </div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center border-2 border-surface-container-high z-10"><span class="font-label-caps text-[10px] text-on-surface">M</span></div>
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center border-2 border-surface-container-high z-0"><span class="font-label-caps text-[10px] text-on-surface">S</span></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline">Driver Waiting</span>
+</div>
+</div>
+<!-- Order Card: Waiting -->
+<div class="group bg-surface-container p-md rounded-xl cursor-pointer transition-all hover:bg-surface-container-high shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="font-data-pos text-title-md text-on-surface">#4093</span>
+<span class="px-2 py-0.5 rounded bg-surface-bright font-label-caps text-[10px] text-on-surface uppercase">Pickup</span>
+</div>
+<span class="font-data-pos text-body-sm text-secondary">01:45</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mb-md">
+                1x Caesar Salad, 1x Sparkling Water
+            </div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center border-2 border-surface-container z-10"><span class="font-label-caps text-[10px] text-on-surface">M</span></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline">Walk-in</span>
+</div>
+</div>
+<!-- Order Card: Waiting -->
+<div class="group bg-surface-container p-md rounded-xl cursor-pointer transition-all hover:bg-surface-container-high shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="font-data-pos text-title-md text-on-surface">#4094</span>
+<span class="px-2 py-0.5 rounded bg-surface-bright font-label-caps text-[10px] text-on-surface uppercase">Delivery</span>
+</div>
+<span class="font-data-pos text-body-sm text-on-surface-variant">00:12</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mb-md">
+                4x Spicy Tuna Roll, 2x Miso Soup
+            </div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center border-2 border-surface-container z-10"><span class="font-label-caps text-[10px] text-on-surface">M</span></div>
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center border-2 border-surface-container z-0"><span class="font-label-caps text-[10px] text-on-surface">S</span></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline">Driver 2m away</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MIDDLE PANEL: Packing Checklist -->
+<div class="col-span-5 h-full flex flex-col bg-surface-container rounded-2xl shadow-xl overflow-hidden relative">
+<!-- Header -->
+<div class="p-lg bg-surface-container-high flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Active Order</span>
+<h1 class="font-display text-display text-on-surface mt-xs">#4092</h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-surface-bright flex items-center justify-center relative shadow-inner">
+<svg class="w-full h-full transform -rotate-90 absolute" viewbox="0 0 36 36">
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary transition-all duration-500 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="60, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<span class="font-data-pos text-title-md text-on-surface relative z-10">2/3</span>
+</div>
+</div>
+<div class="flex items-center gap-md mt-sm">
+<div class="px-sm py-xs bg-error-container rounded flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-error-container">warning</span>
+<span class="font-label-caps text-[10px] text-on-error-container uppercase">Allergy: Peanuts</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline-variant">Customer: John D.</span>
+</div>
+</div>
+<!-- Checklist -->
+<div class="flex-1 overflow-y-auto p-lg space-y-md">
+<!-- Section: Mains -->
+<div>
+<h3 class="font-label-caps text-label-caps text-outline uppercase mb-sm">Mains</h3>
+<div class="space-y-xs">
+<!-- Item checked -->
+<label class="flex items-center p-md bg-surface-bright rounded-xl cursor-pointer transition-colors hover:bg-surface-container-highest group">
+<div class="relative flex items-center justify-center w-6 h-6 mr-md">
+<input checked="" class="peer appearance-none w-6 h-6 rounded bg-surface-container border border-outline-variant checked:bg-secondary checked:border-secondary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-on-secondary text-[16px] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">check</span>
+</div>
+<div class="flex-1">
+<span class="font-title-md text-body-lg text-on-surface line-through opacity-50 transition-all group-hover:opacity-75">2x Wagyu Burger</span>
+<div class="font-body-sm text-body-sm text-outline line-through opacity-50">No onions, extra sauce</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Section: Sides -->
+<div>
+<h3 class="font-label-caps text-label-caps text-outline uppercase mb-sm mt-md">Sides</h3>
+<div class="space-y-xs">
+<!-- Item unchecked -->
+<label class="flex items-center p-md bg-surface-container-high rounded-xl cursor-pointer transition-colors hover:bg-surface-bright group">
+<div class="relative flex items-center justify-center w-6 h-6 mr-md">
+<input class="peer appearance-none w-6 h-6 rounded bg-surface-container border border-outline-variant checked:bg-secondary checked:border-secondary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-on-secondary text-[16px] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">check</span>
+</div>
+<div class="flex-1">
+<span class="font-title-md text-body-lg text-on-surface group-hover:text-primary transition-colors">1x Truffle Fries</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant">In separate small bag</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Section: Drinks -->
+<div>
+<h3 class="font-label-caps text-label-caps text-outline uppercase mb-sm mt-md">Drinks & Extras</h3>
+<div class="space-y-xs">
+<!-- Item checked -->
+<label class="flex items-center p-md bg-surface-bright rounded-xl cursor-pointer transition-colors hover:bg-surface-container-highest group">
+<div class="relative flex items-center justify-center w-6 h-6 mr-md">
+<input checked="" class="peer appearance-none w-6 h-6 rounded bg-surface-container border border-outline-variant checked:bg-secondary checked:border-secondary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-on-secondary text-[16px] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">check</span>
+</div>
+<div class="flex-1">
+<span class="font-title-md text-body-lg text-on-surface line-through opacity-50 transition-all group-hover:opacity-75">2x Cola (Cold)</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Packaging Requirements -->
+<div class="mt-lg p-md bg-surface-container-lowest rounded-xl border-l-4 border-primary">
+<span class="font-label-caps text-label-caps text-primary uppercase block mb-xs">Packaging Protocol</span>
+<ul class="list-disc list-inside font-body-sm text-body-sm text-on-surface-variant space-y-xs">
+<li>Use Large Sealed Bag (Thermal)</li>
+<li>Include 4x Napkins, 2x Wet Wipes</li>
+<li>Staple receipt to outside</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Dispatch -->
+<div class="col-span-3 h-full flex flex-col gap-md">
+<!-- Action Button -->
+<button class="w-full py-xl bg-primary hover:bg-primary-fixed-dim transition-colors rounded-2xl shadow-md group relative overflow-hidden flex flex-col items-center justify-center">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+<span class="material-symbols-outlined text-[48px] text-on-primary mb-sm transform group-hover:scale-110 transition-transform duration-300">qr_code_scanner</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary uppercase tracking-tight">Scan to Complete</span>
+<span class="font-label-caps text-label-caps text-on-primary-fixed-variant mt-xs opacity-70">Awaiting scan...</span>
+</button>
+<!-- Driver Status -->
+<div class="flex-1 bg-surface-container rounded-2xl shadow-sm p-md flex flex-col">
+<h3 class="font-label-caps text-label-caps text-outline uppercase mb-md">Dispatch Status</h3>
+<!-- Map Snippet -->
+<div class="w-full h-32 bg-surface-bright rounded-xl mb-md overflow-hidden opacity-80" data-alt="A dark, minimalist map view showing a restaurant location in a dense urban grid, glowing cyan route lines indicating driver paths, high contrast, sleek UI aesthetic." data-location="Downtown Flagship Restaurant, NY" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHizqGOZuW6HyEywKEerVuGJm_JmGS_Mxsq31hpynkJr71C5JUXDAudSx6Zcvy6qTBYFxLus0D8S99YPvOeOyWnVTw3jx-RopPh7QeUbkrv_az9W5LT5QDKeX983AFohpOVZJNEaBDtaKhw5DgEwNQvH_5U7cg3IZ2rgOil9ua8MubQ_ghicx7jhTPQX02HTr8LXnFBNruRjKL9frlpDDk8DvdehitHr3rXXpifD_KtskxbG-a8a1VIA')"></div>
+<div class="space-y-sm flex-1">
+<!-- Assigned Driver -->
+<div class="p-sm bg-surface-bright rounded-xl flex items-center justify-between border border-primary/20">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-80" data-alt="A small circular avatar of a delivery driver wearing a helmet, high contrast black and white with a subtle gold tint, professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCla1SEBNGZWS3p1Qlg1lAXVSQt2nMHkrym3A7buLC_CSrqbOZXs7Orh9UgXvOB3pdJ2U-Eu-sLkRZx2HVT_CP81wsRPjV5U9Do2xvXpyI58Z0YmrZKAFIXa-UyDJ1Skcra90qX4Ab4cHl-LdMbcp6JepNpdi4Mietiu4VIanch-QootUAogQkHyLyjVD3phj4bwaRivx07DbkQKJ84Em7vOY4p0R-UYObjaqT7nBaR1WUXIdPmv6Bt7Q"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-bold">Mike R.</span>
+<span class="font-label-caps text-[10px] text-primary">Arrived</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-surface text-[18px]">chat</span>
+</button>
+</div>
+<!-- Pending Driver -->
+<div class="p-sm bg-surface-container-high rounded-xl flex items-center justify-between opacity-50">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">two_wheeler</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Unassigned</span>
+<span class="font-label-caps text-[10px] text-outline">Order #4094</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant/10 flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-outline">Avg Dispatch Time</span>
+<span class="font-data-pos text-title-md text-secondary">03:42</span>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

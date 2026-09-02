@@ -62,7 +62,23 @@ import KitchenExpoPage from './pages/KitchenExpoPage';
 import CateringEventsPage from './pages/CateringEventsPage';
 import MultiBrandBIPage from './pages/MultiBrandBIPage';
 import MenuPricingEnginePage from './pages/MenuPricingEnginePage';
+import ProtectedRoute from './components/ProtectedRoute';
+import OwnerWorkspacePage from './pages/OwnerWorkspacePage';
+import ManagerWorkspacePage from './pages/ManagerWorkspacePage';
+import CashierWorkspacePage from './pages/CashierWorkspacePage';
+import CaptainWorkspacePage from './pages/CaptainWorkspacePage';
+import ChefWorkspacePage from './pages/ChefWorkspacePage';
+import PackingWorkspacePage from './pages/PackingWorkspacePage';
+import CallCenterWorkspacePage from './pages/CallCenterWorkspacePage';
+import UnifiedRoleLoginPage from './pages/UnifiedRoleLoginPage';
 import IncomingCallSimulator from './components/IncomingCallSimulator';
+import { useAuth, getRoleHomePath } from './context/AuthContext';
+
+function RootRedirect() {
+  const { currentUser } = useAuth();
+  if (!currentUser) return <Navigate to="/login" replace />;
+  return <Navigate to={currentUser.role_home_path || getRoleHomePath(currentUser.role)} replace />;
+}
 
 export default function App() {
   return (
@@ -72,25 +88,39 @@ export default function App() {
           <BrowserRouter>
             <Layout>
             <Routes>
+              {/* Root & Role Workspaces */}
+              <Route path="/" element={<RootRedirect />} />
+              <Route path="/owner" element={<ProtectedRoute allowedRoles={['ADMIN']}><OwnerWorkspacePage /></ProtectedRoute>} />
+              <Route path="/manager" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><ManagerWorkspacePage /></ProtectedRoute>} />
+              <Route path="/cashier" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CASHIER']}><CashierWorkspacePage /></ProtectedRoute>} />
+              <Route path="/captain" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'WAITER']}><CaptainWorkspacePage /></ProtectedRoute>} />
+              <Route path="/chef" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><ChefWorkspacePage /></ProtectedRoute>} />
+              <Route path="/packing" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'PACKING']}><PackingWorkspacePage /></ProtectedRoute>} />
+              <Route path="/call-center" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CALL_CENTER']}><CallCenterWorkspacePage /></ProtectedRoute>} />
+              <Route path="/driver" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'DRIVER']}><DriverAppPage /></ProtectedRoute>} />
+
+              {/* Login & Role Access */}
+              <Route path="/login" element={<UnifiedRoleLoginPage />} />
+              <Route path="/login/:roleKey" element={<UnifiedRoleLoginPage />} />
+
               {/* Executive & Intelligence Suite */}
-              <Route path="/" element={<CommandCenterPage />} />
-              <Route path="/command-center" element={<CommandCenterPage />} />
-              <Route path="/multi-brand" element={<MultiBrandBIPage />} />
-              <Route path="/executive-bi" element={<MultiBrandBIPage />} />
-              <Route path="/daily-brief" element={<DailyBriefPage />} />
-              <Route path="/health" element={<HealthScorePage />} />
-              <Route path="/ai-manager" element={<AIManagerPage />} />
-              <Route path="/branch-intelligence" element={<BranchIntelligencePage />} />
+              <Route path="/command-center" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><CommandCenterPage /></ProtectedRoute>} />
+              <Route path="/multi-brand" element={<ProtectedRoute allowedRoles={['ADMIN']}><MultiBrandBIPage /></ProtectedRoute>} />
+              <Route path="/executive-bi" element={<ProtectedRoute allowedRoles={['ADMIN']}><MultiBrandBIPage /></ProtectedRoute>} />
+              <Route path="/daily-brief" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><DailyBriefPage /></ProtectedRoute>} />
+              <Route path="/health" element={<ProtectedRoute allowedRoles={['ADMIN']}><HealthScorePage /></ProtectedRoute>} />
+              <Route path="/ai-manager" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><AIManagerPage /></ProtectedRoute>} />
+              <Route path="/branch-intelligence" element={<ProtectedRoute allowedRoles={['ADMIN']}><BranchIntelligencePage /></ProtectedRoute>} />
 
               {/* FOH & Guest Operations */}
-              <Route path="/pos" element={<POSPage />} />
-              <Route path="/delivery-order" element={<DeliveryOrderPage />} />
-              <Route path="/tables" element={<UniversalTablesPage />} />
-              <Route path="/tables-v2" element={<UniversalTablesPage />} />
-              <Route path="/catering" element={<CateringEventsPage />} />
-              <Route path="/catering-events" element={<CateringEventsPage />} />
-              <Route path="/waitlist" element={<WaitlistPage />} />
-              <Route path="/waiter-pos" element={<WaiterPOSPage />} />
+              <Route path="/pos" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CASHIER']}><POSPage /></ProtectedRoute>} />
+              <Route path="/delivery-order" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CASHIER', 'CALL_CENTER']}><DeliveryOrderPage /></ProtectedRoute>} />
+              <Route path="/tables" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'WAITER']}><UniversalTablesPage /></ProtectedRoute>} />
+              <Route path="/tables-v2" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'WAITER']}><UniversalTablesPage /></ProtectedRoute>} />
+              <Route path="/catering" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><CateringEventsPage /></ProtectedRoute>} />
+              <Route path="/catering-events" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><CateringEventsPage /></ProtectedRoute>} />
+              <Route path="/waitlist" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'WAITER']}><WaitlistPage /></ProtectedRoute>} />
+              <Route path="/waiter-pos" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'WAITER']}><WaiterPOSPage /></ProtectedRoute>} />
               <Route path="/kiosk" element={<KioskPage />} />
               <Route path="/qr-ordering" element={<QROrderingPage />} />
               <Route path="/online-ordering" element={<OnlineOrderingPage />} />
@@ -99,61 +129,59 @@ export default function App() {
               <Route path="/order-tracking/:id" element={<OrderTrackingPage />} />
 
               {/* Kitchen Command Center & Dedicated Stations */}
-              <Route path="/kitchen" element={<KitchenCommandCenterPage />} />
-              <Route path="/kitchen-command-center" element={<KitchenCommandCenterPage />} />
-              <Route path="/kitchen/expo" element={<KitchenExpoPage />} />
-              <Route path="/expo" element={<KitchenExpoPage />} />
-              <Route path="/kitchen/station/:stationCode" element={<StationScreenPage />} />
-              <Route path="/station-screens" element={<StationScreenPage />} />
+              <Route path="/kitchen" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><KitchenCommandCenterPage /></ProtectedRoute>} />
+              <Route path="/kitchen-command-center" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><KitchenCommandCenterPage /></ProtectedRoute>} />
+              <Route path="/kitchen/expo" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF', 'PACKING']}><KitchenExpoPage /></ProtectedRoute>} />
+              <Route path="/expo" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF', 'PACKING']}><KitchenExpoPage /></ProtectedRoute>} />
+              <Route path="/kitchen/station/:stationCode" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><StationScreenPage /></ProtectedRoute>} />
+              <Route path="/station-screens" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><StationScreenPage /></ProtectedRoute>} />
 
               {/* Smart Printer Fleet & Routing */}
-              <Route path="/settings/printers" element={<PrinterSettingsPage />} />
-              <Route path="/settings/printers/monitor" element={<PrinterMonitorPage />} />
-              <Route path="/printer-monitor" element={<PrinterMonitorPage />} />
-              <Route path="/settings/printers/routing" element={<PrinterRoutingPage />} />
-              <Route path="/printer-routing" element={<PrinterRoutingPage />} />
-              <Route path="/settings/printers/template" element={<TicketTemplateEditorPage />} />
-              <Route path="/ticket-template" element={<TicketTemplateEditorPage />} />
+              <Route path="/settings/printers" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><PrinterSettingsPage /></ProtectedRoute>} />
+              <Route path="/settings/printers/monitor" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><PrinterMonitorPage /></ProtectedRoute>} />
+              <Route path="/printer-monitor" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><PrinterMonitorPage /></ProtectedRoute>} />
+              <Route path="/settings/printers/routing" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><PrinterRoutingPage /></ProtectedRoute>} />
+              <Route path="/printer-routing" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><PrinterRoutingPage /></ProtectedRoute>} />
+              <Route path="/settings/printers/template" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><TicketTemplateEditorPage /></ProtectedRoute>} />
+              <Route path="/ticket-template" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><TicketTemplateEditorPage /></ProtectedRoute>} />
 
               {/* BOH, Menu & Supply Intelligence */}
-              <Route path="/kds" element={<KDSPage />} />
-              <Route path="/menu/pricing-engine" element={<MenuPricingEnginePage />} />
-              <Route path="/pricing-engine" element={<MenuPricingEnginePage />} />
-              <Route path="/menu-engineering" element={<MenuEngineeringPage />} />
-              <Route path="/pricing" element={<SmartPricingPage />} />
-              <Route path="/inventory-intelligence" element={<InventoryIntelligencePage />} />
-              <Route path="/suppliers" element={<SupplierAnalyticsPage />} />
-              <Route path="/waste-analytics" element={<WasteAnalyticsPage />} />
-              <Route path="/kitchen-analytics" element={<KitchenAnalyticsPage />} />
-              <Route path="/menu" element={<MenuManagementPage />} />
-              <Route path="/inventory" element={<InventoryPage />} />
+              <Route path="/kds" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><KDSPage /></ProtectedRoute>} />
+              <Route path="/menu/pricing-engine" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><MenuPricingEnginePage /></ProtectedRoute>} />
+              <Route path="/pricing-engine" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><MenuPricingEnginePage /></ProtectedRoute>} />
+              <Route path="/menu-engineering" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><MenuEngineeringPage /></ProtectedRoute>} />
+              <Route path="/pricing" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><SmartPricingPage /></ProtectedRoute>} />
+              <Route path="/inventory-intelligence" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'INVENTORY']}><InventoryIntelligencePage /></ProtectedRoute>} />
+              <Route path="/suppliers" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'INVENTORY']}><SupplierAnalyticsPage /></ProtectedRoute>} />
+              <Route path="/waste-analytics" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF', 'INVENTORY']}><WasteAnalyticsPage /></ProtectedRoute>} />
+              <Route path="/kitchen-analytics" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CHEF']}><KitchenAnalyticsPage /></ProtectedRoute>} />
+              <Route path="/menu" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><MenuManagementPage /></ProtectedRoute>} />
+              <Route path="/inventory" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'INVENTORY']}><InventoryPage /></ProtectedRoute>} />
 
               {/* Growth, Governance & Logistics */}
-              <Route path="/customer-intelligence" element={<CustomerIntelligencePage />} />
-              <Route path="/marketing" element={<MarketingPage />} />
-              <Route path="/approvals" element={<ApprovalsPage />} />
-              <Route path="/risk-center" element={<RiskCenterPage />} />
-              <Route path="/feedback" element={<FeedbackPage />} />
-              <Route path="/expenses" element={<ExpenseAnalyticsPage />} />
-              <Route path="/staff-performance" element={<StaffPerformancePage />} />
-              <Route path="/dispatch" element={<DeliveryDispatchPage />} />
-              <Route path="/driver" element={<DriverAppPage />} />
-              <Route path="/crm" element={<CRMPage />} />
-              <Route path="/customers/:id" element={<CustomerProfilePage />} />
+              <Route path="/customer-intelligence" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><CustomerIntelligencePage /></ProtectedRoute>} />
+              <Route path="/marketing" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><MarketingPage /></ProtectedRoute>} />
+              <Route path="/approvals" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><ApprovalsPage /></ProtectedRoute>} />
+              <Route path="/risk-center" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><RiskCenterPage /></ProtectedRoute>} />
+              <Route path="/feedback" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><FeedbackPage /></ProtectedRoute>} />
+              <Route path="/expenses" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><ExpenseAnalyticsPage /></ProtectedRoute>} />
+              <Route path="/staff-performance" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><StaffPerformancePage /></ProtectedRoute>} />
+              <Route path="/dispatch" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'DRIVER', 'PACKING', 'CALL_CENTER']}><DeliveryDispatchPage /></ProtectedRoute>} />
+              <Route path="/crm" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CASHIER', 'CALL_CENTER']}><CRMPage /></ProtectedRoute>} />
+              <Route path="/customers/:id" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER', 'CASHIER', 'CALL_CENTER']}><CustomerProfilePage /></ProtectedRoute>} />
 
               {/* Analytics & System Management */}
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/reports" element={<FinancialReportsPage />} />
-              <Route path="/owner-mobile" element={<OwnerMobilePage />} />
-              <Route path="/manager-mobile" element={<ManagerMobilePage />} />
-              <Route path="/staff" element={<StaffPage />} />
-              <Route path="/system-health" element={<SystemHealthPage />} />
-              <Route path="/settings/business" element={<MasterBusinessSettingsPage />} />
-              <Route path="/master-settings" element={<MasterBusinessSettingsPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><DashboardPage /></ProtectedRoute>} />
+              <Route path="/reports" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><FinancialReportsPage /></ProtectedRoute>} />
+              <Route path="/owner-mobile" element={<ProtectedRoute allowedRoles={['ADMIN']}><OwnerMobilePage /></ProtectedRoute>} />
+              <Route path="/manager-mobile" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><ManagerMobilePage /></ProtectedRoute>} />
+              <Route path="/staff" element={<ProtectedRoute allowedRoles={['ADMIN', 'MANAGER']}><StaffPage /></ProtectedRoute>} />
+              <Route path="/system-health" element={<ProtectedRoute allowedRoles={['ADMIN']}><SystemHealthPage /></ProtectedRoute>} />
+              <Route path="/settings/business" element={<ProtectedRoute allowedRoles={['ADMIN']}><MasterBusinessSettingsPage /></ProtectedRoute>} />
+              <Route path="/master-settings" element={<ProtectedRoute allowedRoles={['ADMIN']}><MasterBusinessSettingsPage /></ProtectedRoute>} />
+              <Route path="/settings" element={<ProtectedRoute allowedRoles={['ADMIN']}><SettingsPage /></ProtectedRoute>} />
 
-              <Route path="*" element={<Navigate to="/command-center" replace />} />
+              <Route path="*" element={<RootRedirect />} />
             </Routes>
             <IncomingCallSimulator />
           </Layout>
