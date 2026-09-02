@@ -20,6 +20,7 @@ export default function Sidebar() {
       group: t('nav.executive_intelligence'),
       items: [
         { path: '/command-center', label: t('nav.command_center'), icon: Compass },
+        { path: '/multi-brand', label: t('nav.multi_brand_bi') || 'Multi-Brand Portfolio BI', icon: Building2 },
         { path: '/daily-brief', label: t('nav.daily_brief'), icon: Sparkles },
         { path: '/health', label: t('nav.health_score'), icon: Activity },
         { path: '/ai-manager', label: t('nav.ai_manager'), icon: Sparkles },
@@ -31,7 +32,8 @@ export default function Sidebar() {
       items: [
         { path: '/pos', label: t('nav.pos_terminal'), icon: ShoppingCart },
         { path: '/delivery-order', label: t('nav.delivery_order'), icon: Truck },
-        { path: '/tables', label: t('nav.floor_plan'), icon: LayoutGrid },
+        { path: '/tables', label: t('nav.tables_v2') || 'Floor Plan 2.0 & Coursing', icon: LayoutGrid },
+        { path: '/catering', label: t('nav.catering_events') || 'Catering & Events Hub', icon: Calendar },
         { path: '/waitlist', label: t('nav.waitlist_reservations'), icon: Calendar },
         { path: '/waiter-pos', label: t('nav.waiter_pos'), icon: Tablet },
         { path: '/kiosk', label: t('nav.self_kiosk'), icon: Monitor },
@@ -43,6 +45,7 @@ export default function Sidebar() {
       group: t('nav.boh_supply'),
       items: [
         { path: '/kds', label: t('nav.kds_station'), icon: Flame },
+        { path: '/menu/pricing-engine', label: t('nav.pricing_engine') || 'Channel Pricing Engine', icon: DollarSign },
         { path: '/menu-engineering', label: t('nav.menu_engineering'), icon: Grid },
         { path: '/pricing', label: t('nav.smart_pricing'), icon: DollarSign },
         { path: '/inventory-intelligence', label: t('nav.inventory_intelligence'), icon: Package },
@@ -57,6 +60,7 @@ export default function Sidebar() {
       group: t('nav.printers_kitchen_hardware') || 'Kitchen & Printer Hardware',
       items: [
         { path: '/kitchen', label: t('nav.kitchen_command_center') || 'Kitchen Command Center', icon: ChefHat },
+        { path: '/kitchen/expo', label: t('nav.kitchen_expo') || 'Assembly & Expo Station', icon: ChefHat },
         { path: '/station-screens', label: t('nav.station_screens') || 'Line Station Screens', icon: Flame },
         { path: '/settings/printers/monitor', label: t('nav.printer_monitor') || 'Printer Fleet Monitor', icon: Printer },
         { path: '/settings/printers/routing', label: t('nav.printer_routing') || 'Printer Routing Engine', icon: Layers },
@@ -86,7 +90,8 @@ export default function Sidebar() {
         { path: '/reports', label: t('nav.financial_analytics'), icon: TrendingUp },
         { path: '/owner-mobile', label: t('nav.owner_mobile'), icon: Smartphone },
         { path: '/staff', label: t('nav.staff_rbac'), icon: ShieldCheck },
-        { path: '/system-health', label: t('nav.system_health'), icon: Server },
+        { path: '/system-health', label: t('nav.system_health') || 'Cluster Observability', icon: Server },
+        { path: '/settings/business', label: t('nav.master_business_settings') || 'Master Architecture & Flags', icon: Settings },
         { path: '/settings', label: t('nav.system_settings'), icon: Settings },
         { path: '/login', label: t('nav.pin_login'), icon: KeyRound },
       ]

@@ -12,7 +12,9 @@ from .views import (
     RiskAlertViewSet, CustomerFeedbackViewSet, BusinessTargetViewSet,
     ExpenseRecordViewSet, AIRecommendationViewSet, CustomerAddressViewSet,
     CustomerNoteViewSet, DeliveryZoneViewSet, StationProfileViewSet,
-    PrinterDeviceViewSet, PrinterRoutingRuleViewSet, KitchenPrintJobViewSet
+    PrinterDeviceViewSet, PrinterRoutingRuleViewSet, KitchenPrintJobViewSet,
+    BusinessConfigViewSet, BrandViewSet, CateringEventViewSet,
+    MenuPricingRuleViewSet, KitchenExpoViewSet, SystemHealthObservabilityViewSet
 )
 
 router = DefaultRouter()
@@ -56,6 +58,14 @@ router.register(r'kitchen-stations', StationProfileViewSet, basename='kitchen-st
 router.register(r'printers', PrinterDeviceViewSet, basename='printers')
 router.register(r'printer-routing-rules', PrinterRoutingRuleViewSet, basename='printer-routing-rules')
 router.register(r'print-jobs', KitchenPrintJobViewSet, basename='print-jobs')
+
+# Universal Restaurant Operating System (UROS) Routers
+router.register(r'business-config', BusinessConfigViewSet, basename='business-config')
+router.register(r'brands', BrandViewSet, basename='brands')
+router.register(r'catering-events', CateringEventViewSet, basename='catering-events')
+router.register(r'menu-pricing-rules', MenuPricingRuleViewSet, basename='menu-pricing-rules')
+router.register(r'kitchen-expo', KitchenExpoViewSet, basename='kitchen-expo')
+router.register(r'system-health-observability', SystemHealthObservabilityViewSet, basename='system-health-observability')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -121,6 +121,8 @@ class TableStatus(models.TextChoices):
     OCCUPIED = 'OCCUPIED', 'Occupied'
     RESERVED = 'RESERVED', 'Reserved'
     BILL_REQUESTED = 'BILL_REQUESTED', 'Bill Requested'
+    CLEANING = 'CLEANING', 'Cleaning'
+    OUT_OF_SERVICE = 'OUT_OF_SERVICE', 'Out of Service'
 
 
 class DiningTable(models.Model):
@@ -133,6 +135,10 @@ class DiningTable(models.Model):
     width = models.IntegerField(default=90)
     height = models.IntegerField(default=90)
     status = models.CharField(max_length=20, choices=TableStatus.choices, default=TableStatus.AVAILABLE)
+    zone = models.CharField(max_length=50, default='Main Dining', blank=True) # Main Dining, VIP Lounge, Terrace, Bar
+    is_accessible = models.BooleanField(default=False)
+    seats_data = models.JSONField(default=list, blank=True)
+    coursing_status = models.CharField(max_length=30, default='STARTER_HOLD', blank=True)
     current_order_id = models.IntegerField(blank=True, null=True)
     seated_at = models.DateTimeField(blank=True, null=True)
     guest_count = models.IntegerField(default=0)
@@ -142,6 +148,7 @@ class DiningTable(models.Model):
 
     def __str__(self):
         return f"Table {self.table_number} ({self.section.name})"
+
 
 
 class CustomerTier(models.TextChoices):
@@ -751,5 +758,100 @@ class KitchenPrintJob(models.Model):
 
     def __str__(self):
         return f"PrintJob {self.job_number} for Order #{self.order.order_number} [{self.status}]"
+
+
+# ============================================================
+# UNIVERSAL RESTAURANT OPERATING SYSTEM (UROS) CORE MODELS
+# ============================================================
+
+class BusinessMode(models.TextChoices):
+    FAST_FOOD = 'FAST_FOOD', 'QSR / Fast Casual'
+    FINE_DINING = 'FINE_DINING', 'Fine Dining'
+    CASUAL_DINING = 'CASUAL_DINING', 'Casual Dining'
+    CAFE = 'CAFE', 'Cafe & Bakery'
+    PIZZERIA = 'PIZZERIA', 'Pizzeria'
+    BURGER = 'BURGER', 'Burger House'
+    FOOD_TRUCK = 'FOOD_TRUCK', 'Food Truck'
+    CLOUD_KITCHEN = 'CLOUD_KITCHEN', 'Cloud Kitchen'
+    CATERING = 'CATERING', 'Catering & Events'
+    DELIVERY_ONLY = 'DELIVERY_ONLY', 'Delivery Only'
+    MULTI_BRANCH = 'MULTI_BRANCH', 'Multi-Branch'
+    FRANCHISE = 'FRANCHISE', 'Franchise Network'
+
+
+class BusinessConfig(models.Model):
+    business_name = models.CharField(max_length=150, default='Noir Hospitality Group')
+    operating_tenant_code = models.CharField(max_length=50, default='TENANT-001')
+    business_mode = models.CharField(max_length=30, choices=BusinessMode.choices, default=BusinessMode.FINE_DINING)
+    active_brand_count = models.IntegerField(default=3)
+    active_branch_count = models.IntegerField(default=4)
+    currency_code = models.CharField(max_length=10, default='USD')
+    currency_symbol = models.CharField(max_length=10, default='$')
+    tax_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=14.00)
+    service_charge_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=12.00)
+    tax_inclusive = models.BooleanField(default=False)
+    feature_flags = models.JSONField(default=dict)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.business_name} ({self.get_business_mode_display()})"
+
+
+class Brand(models.Model):
+    code = models.CharField(max_length=40, unique=True)
+    name_en = models.CharField(max_length=100)
+    name_ar = models.CharField(max_length=100, blank=True, default='')
+    cuisine_type = models.CharField(max_length=80, default='Contemporary')
+    logo_url = models.CharField(max_length=500, blank=True, default='')
+    theme_color = models.CharField(max_length=30, default='#f2ca50')
+    gross_revenue = models.DecimalField(max_digits=14, decimal_places=2, default=0.00)
+    order_count = models.IntegerField(default=0)
+    cogs_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=30.00)
+    profit_lift_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Brand: {self.name_en} ({self.code})"
+
+
+class CateringEvent(models.Model):
+    event_number = models.CharField(max_length=40, unique=True)
+    title = models.CharField(max_length=200)
+    client_name = models.CharField(max_length=120)
+    client_phone = models.CharField(max_length=50)
+    client_email = models.CharField(max_length=120, blank=True, default='')
+    event_date = models.DateTimeField()
+    guest_count = models.IntegerField(default=50)
+    venue_name = models.CharField(max_length=200, default='Grand Ballroom B')
+    venue_type = models.CharField(max_length=50, default='ON_SITE')
+    package_name = models.CharField(max_length=120, default='Royal Executive Gala')
+    status = models.CharField(max_length=30, default='CONFIRMED')
+    total_amount = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    deposit_paid = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    balance_due = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    assigned_head_chef = models.CharField(max_length=100, blank=True, default='Chef Antoine Dubois')
+    staff_assigned_count = models.IntegerField(default=8)
+    menu_summary = models.TextField(blank=True, default='')
+    special_instructions = models.TextField(blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.event_number} - {self.title} ({self.guest_count} guests)"
+
+
+class MenuPricingRule(models.Model):
+    item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name='pricing_rules')
+    channel = models.CharField(max_length=30, default='DINE_IN')
+    base_price = models.DecimalField(max_digits=10, decimal_places=2)
+    adjusted_price = models.DecimalField(max_digits=10, decimal_places=2)
+    happy_hour_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    is_happy_hour_active = models.BooleanField(default=False)
+    margin_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=68.00)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.item.name} [{self.channel}]: ${self.adjusted_price}"
+
 
 

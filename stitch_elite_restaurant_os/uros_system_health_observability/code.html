@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-surface-variant":"#d0c5af","on-tertiary-fixed-variant":"#92002a","on-error-container":"#ffdad6","on-background":"#e5e2e1","outline-variant":"#4d4635","on-secondary":"#003824","on-primary":"#3c2f00","surface-container-low":"#1c1b1b","surface-bright":"#393939","error":"#ffb4ab","primary-fixed":"#ffe088","background":"#131313","on-primary-container":"#554300","secondary-container":"#00a572","surface":"#131313","inverse-on-surface":"#313030","on-primary-fixed":"#241a00","surface-tint":"#e9c349","tertiary-container":"#ff949c","tertiary-fixed":"#ffdadb","surface-container-high":"#2a2a2a","on-primary-fixed-variant":"#574500","tertiary-fixed-dim":"#ffb2b7","inverse-surface":"#e5e2e1","surface-container-lowest":"#0e0e0e","on-secondary-container":"#00311f","surface-dim":"#131313","primary-fixed-dim":"#e9c349","secondary-fixed-dim":"#4edea3","primary-container":"#d4af37","on-error":"#690005","secondary-fixed":"#6ffbbe","secondary":"#4edea3","outline":"#99907c","on-secondary-fixed-variant":"#005236","surface-variant":"#353535","primary":"#f2ca50","on-surface":"#e5e2e1","tertiary":"#ffbec1","on-tertiary-fixed":"#40000d","on-tertiary-container":"#8e0029","error-container":"#93000a","inverse-primary":"#735c00","surface-container-highest":"#353535","on-tertiary":"#67001b","on-secondary-fixed":"#002113","surface-container":"#20201f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"xl":"40px","margin-mobile":"16px","sm":"8px","lg":"24px","gutter":"16px","unit":"4px","xs":"4px","md":"16px","margin-desktop":"32px"},"fontFamily":{"display":["Inter"],"title-md":["Inter"],"headline-lg":["Inter"],"label-caps":["JetBrains Mono"],"headline-lg-mobile":["Inter"],"data-pos":["JetBrains Mono"],"body-sm":["Inter"],"body-lg":["Inter"]},"fontSize":{"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}],"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-lg text-on-background"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col border-r border-outline-variant"><div class="p-lg flex items-center gap-sm mb-lg border-b border-outline-variant"><div class="w-8 h-8 bg-primary rounded flex items-center justify-center"><span class="material-symbols-outlined text-on-primary">restaurant</span></div><span class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">RestaurantOS</span></div><nav class="flex-1 px-md space-y-unit" data-active-classes="bg-primary text-on-primary"><a class="flex items-center px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all gap-md" data-path="intelligence" href="#"><span class="material-symbols-outlined">insights</span><span class="font-label-caps text-label-caps">Intelligence</span></a><a class="flex items-center px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all gap-md" data-path="operations" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-caps text-label-caps">Operations</span></a><a class="flex items-center px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all gap-md" data-path="logistics" href="#"><span class="material-symbols-outlined">inventory_2</span><span class="font-label-caps text-label-caps">Logistics</span></a><a class="flex items-center px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all gap-md" data-path="growth" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-label-caps text-label-caps">Growth</span></a><div class="pt-lg pb-sm px-md font-label-caps text-label-caps text-outline">System</div><a aria-current="page" class="flex items-center px-md py-sm rounded transition-all gap-md bg-primary text-on-primary" data-path="master-settings" href="#"><span class="material-symbols-outlined">settings</span><span class="font-label-caps text-label-caps">Master Settings</span></a></nav></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-background/80 backdrop-blur-xl border-b border-outline-variant z-40 flex items-center justify-between px-margin-desktop"><div class="flex items-center gap-lg"><button class="flex items-center gap-sm px-md py-sm bg-surface-container rounded border border-outline-variant hover:border-primary transition-colors"><span class="material-symbols-outlined text-primary">store</span><span class="font-body-sm text-body-sm text-on-surface">Central Kitchen - Brooklyn</span><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></button><div class="relative flex items-center group"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span><input class="bg-surface-container-high border border-outline-variant rounded-full pl-10 pr-lg py-sm text-body-sm text-on-surface focus:outline-none focus:border-primary w-64 transition-all" placeholder="Search... (Ctrl+K)" type="text"/></div></div><div class="flex items-center gap-lg"><button class="flex items-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button><button class="flex items-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">help</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:ring-2 ring-primary ring-offset-2 ring-offset-background transition-all"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-background"><div class="flex flex-col w-full px-margin-desktop py-lg space-y-xl">
+<!-- Header -->
+<header class="flex justify-between items-end">
+<div>
+<h1 class="font-display text-display text-on-background mb-sm">System Health &amp; Observability</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+        All core services operational. Last incident: 14 days ago.
+      </p>
+</div>
+<div class="flex gap-md">
+<button class="bg-surface-container-high hover:bg-surface-variant transition-colors text-on-surface px-md py-sm rounded flex items-center gap-sm font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[18px]">download</span>
+        Export Logs
+      </button>
+<button class="bg-primary text-on-primary hover:bg-primary-fixed transition-colors px-md py-sm rounded flex items-center gap-sm font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+        Force Sync
+      </button>
+</div>
+</header>
+<!-- Monitored Services Grid -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-title-md text-title-md text-on-surface">Core Infrastructure</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-sm py-unit rounded">Auto-refresh: 5s</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-md">
+<!-- API (v1) -->
+<div class="bg-surface-container rounded p-md flex flex-col gap-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-secondary/10 rounded-bl-full blur-xl group-hover:bg-secondary/20 transition-all"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">api</span>
+<h3 class="font-label-caps text-label-caps text-on-surface">API (v1)</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span>
+</div>
+<div class="z-10">
+<div class="font-data-pos text-headline-lg text-on-surface mb-unit">99.99%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Latency</span>
+<span class="text-on-surface">42ms</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Errors/min</span>
+<span class="text-on-surface">0.01</span>
+</div>
+</div>
+</div>
+<!-- Database (Postgres) -->
+<div class="bg-surface-container rounded p-md flex flex-col gap-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-secondary/10 rounded-bl-full blur-xl group-hover:bg-secondary/20 transition-all"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">database</span>
+<h3 class="font-label-caps text-label-caps text-on-surface">PostgreSQL</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span>
+</div>
+<div class="z-10">
+<div class="font-data-pos text-headline-lg text-on-surface mb-unit">99.98%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Query Avg</span>
+<span class="text-on-surface">12ms</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Connections</span>
+<span class="text-on-surface">244/500</span>
+</div>
+</div>
+</div>
+<!-- Redis -->
+<div class="bg-surface-container rounded p-md flex flex-col gap-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-secondary/10 rounded-bl-full blur-xl group-hover:bg-secondary/20 transition-all"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">memory</span>
+<h3 class="font-label-caps text-label-caps text-on-surface">Redis Cache</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span>
+</div>
+<div class="z-10">
+<div class="font-data-pos text-headline-lg text-on-surface mb-unit">100.0%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Hit Rate</span>
+<span class="text-on-surface">94.2%</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Memory</span>
+<span class="text-on-surface">1.2GB/8GB</span>
+</div>
+</div>
+</div>
+<!-- WebSocket Server -->
+<div class="bg-surface-container rounded p-md flex flex-col gap-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-bl-full blur-xl group-hover:bg-primary/20 transition-all"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">sync_alt</span>
+<h3 class="font-label-caps text-label-caps text-on-surface">WebSocket</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(242,202,80,0.8)]"></span>
+</div>
+<div class="z-10">
+<div class="font-data-pos text-headline-lg text-on-surface mb-unit">99.95%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Active Conn</span>
+<span class="text-on-surface">1,402</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Msg/sec</span>
+<span class="text-on-surface">844</span>
+</div>
+</div>
+</div>
+<!-- Print Server -->
+<div class="bg-surface-container rounded p-md flex flex-col gap-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-error/10 rounded-bl-full blur-xl group-hover:bg-error/20 transition-all"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-error">print</span>
+<h3 class="font-label-caps text-label-caps text-on-surface">Print Server</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-error shadow-[0_0_8px_rgba(255,180,171,0.8)] animate-pulse"></span>
+</div>
+<div class="z-10">
+<div class="font-data-pos text-headline-lg text-error mb-unit">98.42%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex justify-between">
+<span>Queue Dept</span>
+<span class="text-on-surface">14</span>
+</div>
+<div class="font-body-sm text-body-sm text-error flex justify-between">
+<span>Failed Jobs</span>
+<span>3</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Split -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column (Wider) -->
+<div class="lg:col-span-2 space-y-lg">
+<!-- Active Print Queue -->
+<section class="bg-surface-container rounded p-lg">
+<div class="flex justify-between items-center mb-md border-b border-surface-variant pb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">receipt_long</span>
+<h2 class="font-title-md text-title-md text-on-surface">Global Print Queue</h2>
+</div>
+<div class="flex gap-sm">
+<span class="bg-secondary/10 text-secondary px-sm py-unit rounded font-label-caps text-label-caps">244 Processing</span>
+<span class="bg-surface-variant text-on-surface px-sm py-unit rounded font-label-caps text-label-caps">14 Queued</span>
+<span class="bg-error/10 text-error px-sm py-unit rounded font-label-caps text-label-caps">3 Failed</span>
+</div>
+</div>
+<div class="space-y-sm">
+<!-- Queue Item 1 -->
+<div class="grid grid-cols-[1fr_2fr_1fr_1fr_auto] gap-sm items-center p-sm hover:bg-surface-container-high rounded transition-colors group">
+<div class="font-data-pos text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">PRJ-8842</div>
+<div class="font-body-sm text-body-sm text-on-surface truncate">Kitchen Ticket #402 - Station A</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Central K. - Brooklyn</div>
+<div class="flex items-center gap-xs text-secondary font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px] animate-spin">sync</span> Processing
+            </div>
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<!-- Queue Item 2 -->
+<div class="grid grid-cols-[1fr_2fr_1fr_1fr_auto] gap-sm items-center p-sm hover:bg-surface-container-high rounded transition-colors group bg-error/5">
+<div class="font-data-pos text-body-sm text-error group-hover:text-error transition-colors">PRJ-8841</div>
+<div class="font-body-sm text-body-sm text-on-surface truncate">Customer Receipt #401</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">FOH - Manhattan</div>
+<div class="flex items-center gap-xs text-error font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px]">error</span> Failed
+            </div>
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined">refresh</span></button>
+</div>
+<!-- Queue Item 3 -->
+<div class="grid grid-cols-[1fr_2fr_1fr_1fr_auto] gap-sm items-center p-sm hover:bg-surface-container-high rounded transition-colors group">
+<div class="font-data-pos text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">PRJ-8843</div>
+<div class="font-body-sm text-body-sm text-on-surface truncate">Kitchen Ticket #403 - Station B</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Central K. - Brooklyn</div>
+<div class="flex items-center gap-xs text-on-surface-variant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Queued
+            </div>
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<!-- Queue Item 4 -->
+<div class="grid grid-cols-[1fr_2fr_1fr_1fr_auto] gap-sm items-center p-sm hover:bg-surface-container-high rounded transition-colors group">
+<div class="font-data-pos text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">PRJ-8844</div>
+<div class="font-body-sm text-body-sm text-on-surface truncate">End of Day Report (Summary)</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Manager Office</div>
+<div class="flex items-center gap-xs text-on-surface-variant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Queued
+            </div>
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</div>
+</section>
+<!-- Webhook Logs -->
+<section class="bg-surface-container rounded p-lg relative overflow-hidden">
+<div class="absolute right-0 top-0 w-64 h-full pointer-events-none opacity-20">
+<svg class="w-full h-full stroke-primary" fill="none" viewbox="0 0 100 100">
+<path class="animate-[dash_3s_linear_infinite]" d="M0,50 Q25,25 50,50 T100,50" stroke-dasharray="10" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex justify-between items-center mb-md border-b border-surface-variant pb-sm z-10 relative">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">webhook</span>
+<h2 class="font-title-md text-title-md text-on-surface">Event Webhooks</h2>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant hover:text-primary font-label-caps text-label-caps px-sm py-unit">Filter</button>
+<button class="bg-surface-variant text-on-surface px-sm py-unit rounded font-label-caps text-label-caps flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span> Live
+             </button>
+</div>
+</div>
+<div class="space-y-unit font-data-pos text-label-caps text-on-surface-variant z-10 relative">
+<div class="grid grid-cols-[auto_1fr_auto_auto] gap-md py-xs hover:bg-surface-container-high rounded px-sm transition-colors">
+<span class="text-secondary">← IN</span>
+<span class="text-on-surface">Order.Created (UberEats)</span>
+<span>200 OK</span>
+<span>12:44:01.002</span>
+</div>
+<div class="grid grid-cols-[auto_1fr_auto_auto] gap-md py-xs hover:bg-surface-container-high rounded px-sm transition-colors">
+<span class="text-primary">→ OUT</span>
+<span class="text-on-surface">Inventory.Low (Slack_Alert)</span>
+<span>200 OK</span>
+<span>12:43:58.841</span>
+</div>
+<div class="grid grid-cols-[auto_1fr_auto_auto] gap-md py-xs hover:bg-surface-container-high rounded px-sm transition-colors">
+<span class="text-primary">→ OUT</span>
+<span class="text-on-surface">Order.StatusChanged (WebClient)</span>
+<span>200 OK</span>
+<span>12:43:55.110</span>
+</div>
+<div class="grid grid-cols-[auto_1fr_auto_auto] gap-md py-xs hover:bg-surface-container-high rounded px-sm transition-colors bg-error/10">
+<span class="text-secondary">← IN</span>
+<span class="text-error">Menu.Update (DoorDash)</span>
+<span class="text-error">422 ERR</span>
+<span>12:43:10.055</span>
+</div>
+<div class="grid grid-cols-[auto_1fr_auto_auto] gap-md py-xs hover:bg-surface-container-high rounded px-sm transition-colors opacity-50">
+<span class="text-secondary">← IN</span>
+<span class="text-on-surface">Heartbeat.Ping (Kiosk_3)</span>
+<span>200 OK</span>
+<span>12:42:00.000</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Narrower) -->
+<div class="space-y-lg">
+<!-- Background Worker Status -->
+<section class="bg-surface-container rounded p-lg">
+<div class="flex items-center gap-sm mb-md border-b border-surface-variant pb-sm">
+<span class="material-symbols-outlined text-on-surface-variant">precision_manufacturing</span>
+<h2 class="font-title-md text-title-md text-on-surface">Background Jobs</h2>
+</div>
+<div class="space-y-md">
+<!-- Job 1 -->
+<div class="flex flex-col gap-unit">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface">Hourly Analytics Aggregation</span>
+<span class="font-label-caps text-label-caps text-secondary">Running</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded overflow-hidden">
+<div class="bg-secondary h-full w-[65%] rounded transition-all duration-1000 ease-in-out"></div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Batch 4512</span>
+<span>ETA: 2m 14s</span>
+</div>
+</div>
+<!-- Job 2 -->
+<div class="flex flex-col gap-unit">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface">Inventory Forecasting (ML)</span>
+<span class="font-label-caps text-label-caps text-primary">Scheduled</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded overflow-hidden">
+<div class="bg-primary h-full w-[0%] rounded"></div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Next Run: 02:00 AM</span>
+<span>Idling</span>
+</div>
+</div>
+<!-- Job 3 -->
+<div class="flex flex-col gap-unit">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface">Database Vacuum</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Completed</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded overflow-hidden">
+<div class="bg-outline h-full w-[100%] rounded"></div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Last Run: 10 mins ago</span>
+<span>Duration: 45s</span>
+</div>
+</div>
+</div>
+</section>
+<!-- System Resources Chart (Mock) -->
+<section class="bg-surface-container rounded p-lg relative min-h-[250px]">
+<div class="flex justify-between items-center mb-md z-10 relative">
+<h2 class="font-title-md text-title-md text-on-surface">Cluster CPU</h2>
+<span class="font-data-pos text-headline-lg-mobile text-primary">42%</span>
+</div>
+<!-- Decorative Chart Graphic -->
+<div class="absolute bottom-0 left-0 w-full h-[150px] opacity-40 pointer-events-none">
+<svg class="w-full h-full fill-primary/20 stroke-primary" preserveaspectratio="none" viewbox="0 0 400 150">
+<path d="M0,150 L0,100 Q50,80 100,110 T200,90 T300,120 T400,60 L400,150 Z" stroke-width="2"></path>
+</svg>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute bottom-lg left-lg right-lg flex justify-between font-label-caps text-label-caps text-on-surface-variant z-10">
+<span>Peak: 88%</span>
+<span>Avg: 34%</span>
+</div>
+</section>
+</div>
+</div>
+</div>
+<style>
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+</style></main></div></body></html>

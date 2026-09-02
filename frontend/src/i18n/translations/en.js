@@ -51,6 +51,12 @@ export const en = {
     manager_mobile: "Manager Mobile Hub",
     staff_rbac: "Staff & Roles (RBAC)",
     system_health: "System Health Observability",
+    multi_brand_bi: "Multi-Brand Portfolio BI",
+    tables_v2: "Floor Plan 2.0 & Coursing",
+    catering_events: "Catering & Events Hub",
+    kitchen_expo: "Assembly & Expo Station",
+    pricing_engine: "Channel Pricing Engine",
+    master_business_settings: "Master Business Architecture",
     system_settings: "System Settings",
     pin_login: "PIN Login Screen"
   },

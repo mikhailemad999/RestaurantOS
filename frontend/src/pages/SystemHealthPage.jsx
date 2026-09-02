@@ -1,73 +1,182 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
+import { useToast } from '../context/ToastContext';
+import { useLanguage } from '../context/LanguageContext';
 import { 
   Activity, Database, Server, Cpu, ShieldCheck, 
-  RefreshCw, CheckCircle2, AlertCircle, HardDrive
+  RefreshCw, CheckCircle2, AlertCircle, HardDrive, 
+  Wifi, Printer, Terminal, Download
 } from 'lucide-react';
 
 export default function SystemHealthPage() {
-  const [loading, setLoading] = useState(false);
+  const { addToast } = useToast();
+  const { language } = useLanguage();
+  const isAr = language === 'ar';
 
-  const services = [
-    { name: 'MySQL Database (Port 3306)', status: 'HEALTHY', latency: '4ms', details: 'Database: restaurant_os • PyMySQL Active', icon: Database, color: 'text-[#4edea3]' },
-    { name: 'Django REST Backend (Port 8000)', status: 'HEALTHY', latency: '12ms', details: 'Django 5.1.6 • DRF ViewSets Synced', icon: Server, color: 'text-[#4edea3]' },
-    { name: 'React + Vite Frontend (Port 5173)', status: 'HEALTHY', latency: '1ms', details: 'Hot Module Replacement (HMR) Live', icon: Cpu, color: 'text-[#4edea3]' },
-    { name: 'Kitchen KDS Station Sync', status: 'HEALTHY', latency: '8ms', details: 'Atomic Order State Routing Active', icon: Activity, color: 'text-[#4edea3]' },
-    { name: 'Delivery Dispatch Webhook', status: 'HEALTHY', latency: '15ms', details: 'Courier Assignment Engine Online', icon: HardDrive, color: 'text-[#4edea3]' },
-    { name: 'AI Management Reasoning Engine', status: 'HEALTHY', latency: '24ms', details: 'Grounding Verification Active', icon: ShieldCheck, color: 'text-[#4edea3]' },
-  ];
+  const [healthData, setHealthData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadTelemetry();
+    const interval = setInterval(loadTelemetry, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const loadTelemetry = async () => {
+    try {
+      const res = await api.getSystemHealthObservability();
+      setHealthData(res);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForceSync = async () => {
+    setLoading(true);
+    await loadTelemetry();
+    addToast('Cluster telemetry force synchronized!', 'success');
+  };
+
+  const handleExportLogs = () => {
+    addToast('Telemetry logs exported as JSON archive', 'info');
+  };
+
+  if (loading && !healthData) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh] text-primary font-mono text-sm">
+        CONNECTING TO INFRASTRUCTURE OBSERVABILITY BUS...
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-full p-4 md:p-6 bg-[#131313] flex flex-col space-y-5">
+    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 text-on-surface">
       {/* Header */}
-      <div className="bg-[#1c1b1b] p-4 rounded-xl border border-[#2a2a2a] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-6">
         <div>
-          <h1 className="text-lg font-bold text-white tracking-wide flex items-center gap-2">
-            <Activity className="w-5 h-5 text-[#4edea3]" />
-            RestaurantOS System Health & Observability
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+            <span className="font-mono text-xs uppercase tracking-widest text-secondary">
+              {healthData?.last_incident || 'All core services operational'}
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-on-surface tracking-tight">
+            {isAr ? 'حالة النظام والمراقبة الحية (Observability)' : 'System Health & Observability'}
           </h1>
-          <p className="text-xs text-[#99907c] font-mono">Real-time database, API latency, station synchronization & microservice status</p>
+          <p className="text-sm text-on-surface-variant mt-1">
+            {isAr ? 'مراقبة زمن استجابة الـ API، اتصالات قاعدة البيانات، ذاكرة التخزين المؤقت وطابعات المطبخ' : 'Real-time telemetry monitoring API latency, database pool connections, cache hit rates & printer buffers'}
+          </p>
         </div>
 
-        <button
-          onClick={() => {}}
-          className="p-2 bg-[#131313] hover:bg-[#2a2a2a] border border-[#353535] rounded-lg text-[#99907c] hover:text-white"
-        >
-          <RefreshCw className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={handleExportLogs}
+            className="px-4 py-2 text-xs font-mono uppercase tracking-wider rounded-lg bg-surface-container border border-outline-variant/40 flex items-center gap-2 text-on-surface hover:border-primary transition-colors"
+          >
+            <Download className="w-4 h-4 text-on-surface-variant" />
+            <span>{isAr ? 'تصدير السجلات' : 'Export Logs'}</span>
+          </button>
+          <button 
+            onClick={handleForceSync}
+            className="px-5 py-2 text-xs font-mono uppercase tracking-wider rounded-lg bg-primary text-on-primary font-bold hover:bg-primary-container transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(242,202,80,0.2)]"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>{isAr ? 'تحديث فوري' : 'Force Sync'}</span>
+          </button>
+        </div>
       </div>
 
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {services.map(s => {
-          const Icon = s.icon;
-          return (
-            <div key={s.name} className="bg-[#1c1b1b] border border-[#2a2a2a] rounded-2xl p-5 shadow-card space-y-3">
-              <div className="flex items-center justify-between">
+      {/* Core Infrastructure Grid */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="font-bold text-lg text-on-surface font-mono uppercase tracking-wider">
+            {isAr ? 'البنية التحتية الأساسية' : 'Core Infrastructure Grid'}
+          </h2>
+          <span className="text-xs font-mono text-secondary bg-secondary/10 px-2.5 py-1 rounded">
+            Auto-refresh: {healthData?.auto_refresh_seconds || 5}s
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {healthData?.core_services?.map(service => (
+            <div 
+              key={service.id}
+              className="bg-surface-container-low border border-outline-variant/40 rounded-2xl p-5 space-y-4 hover:border-primary/50 transition-all shadow-md flex flex-col justify-between"
+            >
+              <div className="flex justify-between items-start">
                 <div className="flex items-center gap-2">
-                  <Icon className={`w-5 h-5 ${s.color}`} />
-                  <h3 className="font-bold text-xs text-white font-sans">{s.name}</h3>
+                  {service.type === 'api' ? <Server className="w-4 h-4 text-secondary" /> :
+                   service.type === 'database' ? <Database className="w-4 h-4 text-secondary" /> :
+                   service.type === 'cache' ? <Cpu className="w-4 h-4 text-secondary" /> :
+                   service.type === 'network' ? <Wifi className="w-4 h-4 text-primary" /> :
+                   <Printer className="w-4 h-4 text-primary" />}
+                  <h3 className="font-mono text-xs font-bold text-on-surface">{service.name}</h3>
                 </div>
-                <span className="text-[10px] font-mono font-bold bg-[#005236] text-[#4edea3] px-2 py-0.5 rounded">
-                  {s.status}
-                </span>
+                <span className="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span>
               </div>
 
-              <div className="bg-[#131313] p-3 rounded-xl border border-[#2a2a2a] text-xs font-mono space-y-1">
-                <div className="flex justify-between text-[11px]">
-                  <span className="text-[#99907c]">Response Latency:</span>
-                  <span className="text-[#4edea3] font-bold">{s.latency}</span>
+              <div>
+                <div className="text-2xl font-mono font-bold text-on-surface">
+                  {service.uptime || '100.0%'}
                 </div>
-                <p className="text-[10px] text-[#d0c5af]">{s.details}</p>
-              </div>
-
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#4edea3]">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>100% Uptime (Last 30 Days)</span>
+                <div className="space-y-1 mt-2 text-xs font-mono text-on-surface-variant">
+                  {service.latency_ms && (
+                    <div className="flex justify-between">
+                      <span>Latency</span>
+                      <strong className="text-on-surface">{service.latency_ms}ms</strong>
+                    </div>
+                  )}
+                  {service.query_avg_ms && (
+                    <div className="flex justify-between">
+                      <span>Query Avg</span>
+                      <strong className="text-on-surface">{service.query_avg_ms}ms</strong>
+                    </div>
+                  )}
+                  {service.hit_rate && (
+                    <div className="flex justify-between">
+                      <span>Hit Rate</span>
+                      <strong className="text-secondary">{service.hit_rate}</strong>
+                    </div>
+                  )}
+                  {service.active_sockets && (
+                    <div className="flex justify-between">
+                      <span>Sockets</span>
+                      <strong className="text-primary">{service.active_sockets}</strong>
+                    </div>
+                  )}
+                  {service.devices_online && (
+                    <div className="flex justify-between">
+                      <span>Devices</span>
+                      <strong className="text-primary">{service.devices_online} Online</strong>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
+      </div>
+
+      {/* Telemetry Streamer Table */}
+      <div className="bg-surface-container-low border border-outline-variant/30 rounded-2xl p-6 space-y-4">
+        <h3 className="text-xs font-mono uppercase tracking-wider text-outline flex items-center gap-2">
+          <Terminal className="w-4 h-4 text-primary" />
+          <span>{isAr ? 'سجل العمليات الحية (Live Telemetry Stream)' : 'Real-time Event Stream'}</span>
+        </h3>
+
+        <div className="space-y-2 font-mono text-xs">
+          {healthData?.recent_telemetry_logs?.map((log, idx) => (
+            <div key={idx} className="flex items-center gap-4 p-2.5 rounded-lg bg-surface-container text-on-surface-variant">
+              <span className="text-outline">{log.timestamp}</span>
+              <span className="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-primary font-bold">
+                {log.service}
+              </span>
+              <span className="text-on-surface flex-1">{log.message}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

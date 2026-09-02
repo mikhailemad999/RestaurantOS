@@ -8,7 +8,8 @@ from .models import (
     QRCodeTableSession, WaitlistEntry, Reservation, StaffAttendance,
     ApprovalRequest, RiskAlert, CustomerFeedback, BusinessTarget,
     ExpenseRecord, AIRecommendation, StationProfile, PrinterDevice,
-    PrinterRoutingRule, KitchenPrintJob
+    PrinterRoutingRule, KitchenPrintJob, BusinessConfig, Brand,
+    CateringEvent, MenuPricingRule
 )
 
 class StaffMemberSerializer(serializers.ModelSerializer):
@@ -337,5 +338,35 @@ class KitchenPrintJobSerializer(serializers.ModelSerializer):
     class Meta:
         model = KitchenPrintJob
         fields = '__all__'
+
+
+class BusinessConfigSerializer(serializers.ModelSerializer):
+    business_mode_display = serializers.CharField(source='get_business_mode_display', read_only=True)
+
+    class Meta:
+        model = BusinessConfig
+        fields = '__all__'
+
+
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = '__all__'
+
+
+class CateringEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CateringEvent
+        fields = '__all__'
+
+
+class MenuPricingRuleSerializer(serializers.ModelSerializer):
+    item_name = serializers.ReadOnlyField(source='item.name')
+    item_category = serializers.ReadOnlyField(source='item.category.name')
+
+    class Meta:
+        model = MenuPricingRule
+        fields = '__all__'
+
 
 

@@ -56,6 +56,12 @@ import PrinterMonitorPage from './pages/PrinterMonitorPage';
 import PrinterRoutingPage from './pages/PrinterRoutingPage';
 import TicketTemplateEditorPage from './pages/TicketTemplateEditorPage';
 import PrinterSettingsPage from './pages/PrinterSettingsPage';
+import MasterBusinessSettingsPage from './pages/MasterBusinessSettingsPage';
+import UniversalTablesPage from './pages/UniversalTablesPage';
+import KitchenExpoPage from './pages/KitchenExpoPage';
+import CateringEventsPage from './pages/CateringEventsPage';
+import MultiBrandBIPage from './pages/MultiBrandBIPage';
+import MenuPricingEnginePage from './pages/MenuPricingEnginePage';
 import IncomingCallSimulator from './components/IncomingCallSimulator';
 
 export default function App() {
@@ -69,6 +75,8 @@ export default function App() {
               {/* Executive & Intelligence Suite */}
               <Route path="/" element={<CommandCenterPage />} />
               <Route path="/command-center" element={<CommandCenterPage />} />
+              <Route path="/multi-brand" element={<MultiBrandBIPage />} />
+              <Route path="/executive-bi" element={<MultiBrandBIPage />} />
               <Route path="/daily-brief" element={<DailyBriefPage />} />
               <Route path="/health" element={<HealthScorePage />} />
               <Route path="/ai-manager" element={<AIManagerPage />} />
@@ -77,7 +85,10 @@ export default function App() {
               {/* FOH & Guest Operations */}
               <Route path="/pos" element={<POSPage />} />
               <Route path="/delivery-order" element={<DeliveryOrderPage />} />
-              <Route path="/tables" element={<TablesPage />} />
+              <Route path="/tables" element={<UniversalTablesPage />} />
+              <Route path="/tables-v2" element={<UniversalTablesPage />} />
+              <Route path="/catering" element={<CateringEventsPage />} />
+              <Route path="/catering-events" element={<CateringEventsPage />} />
               <Route path="/waitlist" element={<WaitlistPage />} />
               <Route path="/waiter-pos" element={<WaiterPOSPage />} />
               <Route path="/kiosk" element={<KioskPage />} />
@@ -90,6 +101,8 @@ export default function App() {
               {/* Kitchen Command Center & Dedicated Stations */}
               <Route path="/kitchen" element={<KitchenCommandCenterPage />} />
               <Route path="/kitchen-command-center" element={<KitchenCommandCenterPage />} />
+              <Route path="/kitchen/expo" element={<KitchenExpoPage />} />
+              <Route path="/expo" element={<KitchenExpoPage />} />
               <Route path="/kitchen/station/:stationCode" element={<StationScreenPage />} />
               <Route path="/station-screens" element={<StationScreenPage />} />
 
@@ -104,6 +117,8 @@ export default function App() {
 
               {/* BOH, Menu & Supply Intelligence */}
               <Route path="/kds" element={<KDSPage />} />
+              <Route path="/menu/pricing-engine" element={<MenuPricingEnginePage />} />
+              <Route path="/pricing-engine" element={<MenuPricingEnginePage />} />
               <Route path="/menu-engineering" element={<MenuEngineeringPage />} />
               <Route path="/pricing" element={<SmartPricingPage />} />
               <Route path="/inventory-intelligence" element={<InventoryIntelligencePage />} />
@@ -133,6 +148,8 @@ export default function App() {
               <Route path="/manager-mobile" element={<ManagerMobilePage />} />
               <Route path="/staff" element={<StaffPage />} />
               <Route path="/system-health" element={<SystemHealthPage />} />
+              <Route path="/settings/business" element={<MasterBusinessSettingsPage />} />
+              <Route path="/master-settings" element={<MasterBusinessSettingsPage />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="/login" element={<LoginPage />} />
 

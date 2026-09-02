@@ -51,6 +51,12 @@ export const ar = {
     manager_mobile: "لوحة تحكم المدير المحمولة",
     staff_rbac: "الموظفون والصلاحيات (RBAC)",
     system_health: "مراقبة صحة النظام والخدمات",
+    multi_brand_bi: "ذكاء المحفظة والعلامات التجارية",
+    tables_v2: "مخطط الصالة 2.0 وتنسيق الكورسات",
+    catering_events: "مركز إدارة الحفلات والتموين",
+    kitchen_expo: "محطة التجميع والتسليم (إكسبو)",
+    pricing_engine: "محرك تسعير القنوات",
+    master_business_settings: "الهيكلة العامة ونماذج العمل",
     system_settings: "إعدادات النظام العامة",
     pin_login: "شاشة تسجيل الدخول برمز PIN"
   },
