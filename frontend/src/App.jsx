@@ -49,6 +49,13 @@ import AIManagerPage from './pages/AIManagerPage';
 import SystemHealthPage from './pages/SystemHealthPage';
 import DeliveryOrderPage from './pages/DeliveryOrderPage';
 import CustomerProfilePage from './pages/CustomerProfilePage';
+import OrderTrackingPage from './pages/OrderTrackingPage';
+import KitchenCommandCenterPage from './pages/KitchenCommandCenterPage';
+import StationScreenPage from './pages/StationScreenPage';
+import PrinterMonitorPage from './pages/PrinterMonitorPage';
+import PrinterRoutingPage from './pages/PrinterRoutingPage';
+import TicketTemplateEditorPage from './pages/TicketTemplateEditorPage';
+import PrinterSettingsPage from './pages/PrinterSettingsPage';
 import IncomingCallSimulator from './components/IncomingCallSimulator';
 
 export default function App() {
@@ -76,6 +83,24 @@ export default function App() {
               <Route path="/kiosk" element={<KioskPage />} />
               <Route path="/qr-ordering" element={<QROrderingPage />} />
               <Route path="/online-ordering" element={<OnlineOrderingPage />} />
+              <Route path="/order" element={<OnlineOrderingPage />} />
+              <Route path="/customer" element={<OnlineOrderingPage />} />
+              <Route path="/order-tracking/:id" element={<OrderTrackingPage />} />
+
+              {/* Kitchen Command Center & Dedicated Stations */}
+              <Route path="/kitchen" element={<KitchenCommandCenterPage />} />
+              <Route path="/kitchen-command-center" element={<KitchenCommandCenterPage />} />
+              <Route path="/kitchen/station/:stationCode" element={<StationScreenPage />} />
+              <Route path="/station-screens" element={<StationScreenPage />} />
+
+              {/* Smart Printer Fleet & Routing */}
+              <Route path="/settings/printers" element={<PrinterSettingsPage />} />
+              <Route path="/settings/printers/monitor" element={<PrinterMonitorPage />} />
+              <Route path="/printer-monitor" element={<PrinterMonitorPage />} />
+              <Route path="/settings/printers/routing" element={<PrinterRoutingPage />} />
+              <Route path="/printer-routing" element={<PrinterRoutingPage />} />
+              <Route path="/settings/printers/template" element={<TicketTemplateEditorPage />} />
+              <Route path="/ticket-template" element={<TicketTemplateEditorPage />} />
 
               {/* BOH, Menu & Supply Intelligence */}
               <Route path="/kds" element={<KDSPage />} />

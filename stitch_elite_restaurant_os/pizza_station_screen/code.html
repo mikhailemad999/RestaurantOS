@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#353535","secondary":"#4edea3","surface-tint":"#e9c349","on-error-container":"#ffdad6","on-secondary-fixed-variant":"#005236","surface-dim":"#131313","on-surface":"#e5e2e1","surface-variant":"#353535","on-primary-fixed":"#241a00","error":"#ffb4ab","surface-container-low":"#1c1b1b","on-secondary":"#003824","secondary-fixed":"#6ffbbe","on-tertiary-container":"#8e0029","tertiary-container":"#ff949c","inverse-primary":"#735c00","primary-container":"#d4af37","error-container":"#93000a","inverse-on-surface":"#313030","secondary-container":"#00a572","on-secondary-container":"#00311f","on-tertiary-fixed-variant":"#92002a","on-primary-container":"#554300","on-surface-variant":"#d0c5af","on-error":"#690005","primary":"#f2ca50","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","on-tertiary":"#67001b","tertiary-fixed-dim":"#ffb2b7","surface-container-high":"#2a2a2a","background":"#131313","outline-variant":"#4d4635","tertiary":"#ffbec1","surface":"#131313","outline":"#99907c","on-background":"#e5e2e1","secondary-fixed-dim":"#4edea3","primary-fixed-dim":"#e9c349","surface-container":"#20201f","on-primary":"#3c2f00","on-secondary-fixed":"#002113","on-tertiary-fixed":"#40000d","on-primary-fixed-variant":"#574500","tertiary-fixed":"#ffdadb","inverse-surface":"#e5e2e1","primary-fixed":"#ffe088"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","xl":"40px","margin-mobile":"16px","lg":"24px","sm":"8px","unit":"4px","md":"16px","gutter":"16px","xs":"4px"},"fontFamily":{"title-md":["Inter"],"data-pos":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"display":["Inter"]},"fontSize":{"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-lg text-on-surface dark"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col border-r border-surface-container-highest transition-all duration-300" id="sidebar"><div class="h-16 flex items-center px-6 border-b border-surface-container-highest flex-shrink-0"><span class="material-symbols-outlined text-primary mr-2">restaurant</span><span class="font-headline-lg text-title-md tracking-tight text-on-surface">RestaurantOS</span></div><nav class="flex-1 py-md px-sm overflow-y-auto space-y-xs" data-active-classes="bg-secondary-container text-on-secondary-container"><div class="px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Kitchen</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-command-center" href="#"><span class="material-symbols-outlined mr-md">grid_view</span><span class="font-body-sm">Command Center</span></a><a aria-current="page" class="flex items-center px-md py-sm rounded-DEFAULT transition-colors bg-secondary-container text-on-secondary-container" data-path="station-screens" href="#"><span class="material-symbols-outlined mr-md">kitchen</span><span class="font-body-sm">Station Screens</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-analytics" href="#"><span class="material-symbols-outlined mr-md">analytics</span><span class="font-body-sm">Reports</span></a><div class="pt-lg px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Printers</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-monitor" href="#"><span class="material-symbols-outlined mr-md">print_connect</span><span class="font-body-sm">Monitor</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-routing" href="#"><span class="material-symbols-outlined mr-md">alt_route</span><span class="font-body-sm">Routing</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-settings" href="#"><span class="material-symbols-outlined mr-md">settings</span><span class="font-body-sm">Configuration</span></a></nav><div class="p-md border-t border-surface-container-highest"><button class="flex items-center justify-center w-full py-sm bg-surface-container-high rounded-DEFAULT text-on-surface-variant hover:text-primary transition-colors" onclick="document.getElementById('sidebar').classList.toggle('w-64');document.getElementById('sidebar').classList.toggle('w-20');"><span class="material-symbols-outlined">menu_open</span></button></div></aside><div class="pl-64 transition-all duration-300"><header class="fixed top-0 left-64 right-0 h-16 bg-background/80 backdrop-blur-xl border-b border-surface-container-highest z-40 flex items-center justify-between px-lg"><div class="flex items-center gap-md"><span class="text-label-caps font-label-caps text-secondary bg-secondary-container/20 px-sm py-unit rounded-lg">LIVE OPS</span><div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div><span class="font-label-caps text-on-surface-variant text-[10px]">SYNCED</span></div></div><div class="flex items-center gap-lg"><div class="flex flex-col items-end hidden md:flex"><span class="font-title-md text-body-sm text-on-surface">Chef de Cuisine</span><span class="font-label-caps text-[10px] text-outline uppercase">Master Kitchen</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-outline-variant"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-background"><div class="flex flex-col w-full h-full bg-surface">
+<div class="flex h-full w-full gap-gutter p-margin-safe bg-surface">
+<!-- Main Content Area: Pizza Station Tickets -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- Top Bar: Station Info & Filters -->
+<div class="flex justify-between items-end mb-margin-safe">
+<div class="flex flex-col">
+<span class="font-headline-ticket text-headline-ticket text-on-surface">PIZZA STATION</span>
+<span class="font-data-mono text-data-mono text-primary mt-unit">ROUTING: PIZZA ONLY</span>
+</div>
+<div class="flex gap-gutter items-center">
+<button class="bg-surface-container-high hover:bg-surface-bright transition-colors text-on-surface rounded flex items-center px-4 py-2 gap-2 h-touch-target shadow-sm">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-label-bold-lg text-label-bold-lg">Filter</span>
+</button>
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded h-touch-target shadow-sm">
+<div class="w-3 h-3 rounded-full bg-printer-online animate-pulse"></div>
+<span class="font-data-mono text-data-mono text-on-surface">SYSTEM ONLINE</span>
+</div>
+</div>
+</div>
+<!-- Tickets Grid (KDS Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-card-gap flex-1 content-start">
+<!-- Ticket 1: PREPARING (Rush/Warning) -->
+<div class="bg-surface-container flex flex-col rounded shadow-md relative overflow-hidden ring-1 ring-kitchen-preparing/30">
+<!-- Priority/Status Bar (Top) -->
+<div class="h-1 w-full bg-kitchen-preparing"></div>
+<!-- Ticket Header -->
+<div class="p-4 bg-surface-container-low flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-ticket text-headline-ticket text-on-surface">#10520</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant mt-1">Dine-In • Table 12</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-data-mono text-kitchen-preparing" id="timer-10520">08:15</span>
+<span class="font-data-mono text-data-mono text-outline mt-1 text-[10px]">TGT: 09:00</span>
+</div>
+</div>
+<!-- Items List -->
+<div class="p-4 flex-1 flex flex-col gap-4">
+<!-- Item 1 -->
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-highest text-on-surface font-numeral-xl text-numeral-xl px-4 py-2 rounded shadow-sm flex items-center justify-center">
+                        2
+                    </div>
+<div class="flex flex-col flex-1">
+<span class="font-title-md text-title-md text-on-surface leading-tight">Chicken Ranch Pizza</span>
+<span class="font-data-mono text-data-mono text-primary mt-1">Large</span>
+<!-- Modifiers -->
+<div class="mt-2 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-kitchen-ready text-sm">add_circle</span>
+<span class="font-label-bold-lg text-label-bold-lg text-kitchen-ready uppercase">Extra Cheese</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-kitchen-rush text-sm">do_not_disturb_on</span>
+<span class="font-label-bold-lg text-label-bold-lg text-kitchen-rush uppercase line-through decoration-2">Onion</span>
+</div>
+</div>
+<!-- Special Instructions -->
+<div class="mt-3 bg-surface-bright p-2 rounded relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l"></div>
+<div class="flex items-start gap-2 pl-2">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">sticky_note_2</span>
+<span class="font-data-mono text-data-mono text-on-surface text-sm">Cut into 8 pieces</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ticket Footer / Actions -->
+<div class="p-4 bg-surface-container-low mt-auto flex gap-2">
+<button class="flex-1 bg-kitchen-ready hover:bg-kitchen-ready/80 text-on-secondary-fixed font-title-md text-title-md py-3 rounded h-touch-target transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    MARK READY
+                </button>
+</div>
+<!-- Progress Bar Bottom -->
+<div class="h-1 w-full bg-surface-container-highest relative">
+<div class="absolute left-0 top-0 bottom-0 bg-kitchen-preparing w-[90%]"></div>
+</div>
+</div>
+<!-- Ticket 2: NEW -->
+<div class="bg-surface-container flex flex-col rounded shadow-md relative overflow-hidden">
+<div class="h-1 w-full bg-kitchen-new"></div>
+<div class="p-4 bg-surface-container-low flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-ticket text-headline-ticket text-on-surface">#10521</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant mt-1">Takeout</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-data-mono text-on-surface" id="timer-10521">02:30</span>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-highest text-on-surface font-numeral-xl text-numeral-xl px-4 py-2 rounded shadow-sm flex items-center justify-center">
+                        1
+                    </div>
+<div class="flex flex-col flex-1">
+<span class="font-title-md text-title-md text-on-surface leading-tight">Margherita Pizza</span>
+<span class="font-data-mono text-data-mono text-primary mt-1">Medium</span>
+<div class="mt-2 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-kitchen-ready text-sm">add_circle</span>
+<span class="font-label-bold-lg text-label-bold-lg text-kitchen-ready uppercase">Basil</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low mt-auto flex gap-2">
+<button class="flex-1 bg-surface-bright hover:bg-surface-container-highest text-on-surface font-title-md text-title-md py-3 rounded h-touch-target transition-colors shadow-sm ring-1 ring-outline-variant flex items-center justify-center gap-2">
+                    START PREP
+                </button>
+</div>
+<div class="h-1 w-full bg-surface-container-highest relative">
+<div class="absolute left-0 top-0 bottom-0 bg-kitchen-new w-[25%]"></div>
+</div>
+</div>
+<!-- Ticket 3: RUSH -->
+<div class="bg-surface-container flex flex-col rounded shadow-xl relative overflow-hidden ring-2 ring-kitchen-rush glow-rush animate-pulse-slow">
+<style>
+                @keyframes glow {
+                    0% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+                    50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+                    100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+                }
+                .glow-rush { animation: glow 2s infinite; }
+                .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+            </style>
+<div class="h-1 w-full bg-kitchen-rush"></div>
+<div class="p-4 bg-error-container flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-ticket text-headline-ticket text-on-error-container flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+                        #10518
+                    </span>
+<span class="font-data-mono text-data-mono text-error mt-1">Delivery • VIP</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-data-mono text-error font-bold" id="timer-10518">14:22</span>
+<span class="font-data-mono text-data-mono text-error mt-1 text-[10px] uppercase">Overdue</span>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="bg-error-container text-on-error-container font-numeral-xl text-numeral-xl px-4 py-2 rounded shadow-sm flex items-center justify-center">
+                        3
+                    </div>
+<div class="flex flex-col flex-1">
+<span class="font-title-md text-title-md text-on-surface leading-tight">Pepperoni Feast</span>
+<span class="font-data-mono text-data-mono text-primary mt-1">Large</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low mt-auto flex gap-2">
+<button class="flex-1 bg-kitchen-ready hover:bg-kitchen-ready/80 text-on-secondary-fixed font-title-md text-title-md py-3 rounded h-touch-target transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    MARK READY
+                </button>
+</div>
+<div class="h-1 w-full bg-surface-container-highest relative">
+<div class="absolute left-0 top-0 bottom-0 bg-kitchen-rush w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar: Metrics & Status -->
+<div class="w-80 flex flex-col gap-4">
+<!-- SLA Widget -->
+<div class="bg-surface-container p-6 rounded shadow-md flex flex-col items-center justify-center relative overflow-hidden h-48">
+<svg class="absolute inset-0 w-full h-full text-surface-container-highest" viewbox="0 0 100 100">
+<circle class="animate-[spin_60s_linear_infinite]" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="4 8" stroke-width="4"></circle>
+</svg>
+<div class="relative z-10 flex flex-col items-center text-center">
+<span class="font-data-mono text-data-mono text-on-surface-variant uppercase tracking-widest mb-2">Station SLA</span>
+<span class="font-display-lg text-display-lg text-primary">9m</span>
+<span class="font-body-lg text-body-lg text-kitchen-preparing mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    Current avg: 8m 15s
+                </span>
+</div>
+</div>
+<!-- Queue Stats -->
+<div class="bg-surface-container rounded shadow-md flex flex-col flex-1">
+<div class="p-4 bg-surface-container-low border-b border-surface-container-highest">
+<span class="font-title-md text-title-md text-on-surface">Queue Status</span>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Active Tickets</span>
+<span class="font-numeral-md text-numeral-md text-on-surface">12</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-kitchen-new"></span> New
+                    </span>
+<span class="font-numeral-md text-numeral-md text-on-surface">4</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-kitchen-preparing"></span> Preparing
+                    </span>
+<span class="font-numeral-md text-numeral-md text-on-surface">7</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-kitchen-rush"></span> Rush
+                    </span>
+<span class="font-numeral-md text-numeral-md text-kitchen-rush">1</span>
+</div>
+</div>
+<div class="mt-auto p-4 border-t border-surface-container-highest">
+<div class="flex flex-col gap-2">
+<span class="font-data-mono text-data-mono text-on-surface-variant uppercase text-xs">Ingredient Depletion Warning</span>
+<div class="bg-surface-bright p-3 rounded flex items-center justify-between">
+<span class="font-body-lg text-body-lg text-on-surface">Ranch Sauce</span>
+<span class="font-data-mono text-data-mono text-kitchen-preparing">LOW</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Simple timer update simulation
+    function updateTimers() {
+        const timers = ['timer-10520', 'timer-10521', 'timer-10518'];
+        timers.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                let [mins, secs] = el.innerText.split(':').map(Number);
+                secs++;
+                if (secs >= 60) {
+                    mins++;
+                    secs = 0;
+                }
+                el.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        });
+    }
+    
+    // Start simulation if in browser
+    if (typeof window !== 'undefined') {
+        setInterval(updateTimers, 1000);
+    }
+</script></main></div></body></html>

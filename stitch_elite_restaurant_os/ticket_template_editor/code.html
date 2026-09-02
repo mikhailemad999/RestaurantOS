@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#353535","secondary":"#4edea3","surface-tint":"#e9c349","on-error-container":"#ffdad6","on-secondary-fixed-variant":"#005236","surface-dim":"#131313","on-surface":"#e5e2e1","surface-variant":"#353535","on-primary-fixed":"#241a00","error":"#ffb4ab","surface-container-low":"#1c1b1b","on-secondary":"#003824","secondary-fixed":"#6ffbbe","on-tertiary-container":"#8e0029","tertiary-container":"#ff949c","inverse-primary":"#735c00","primary-container":"#d4af37","error-container":"#93000a","inverse-on-surface":"#313030","secondary-container":"#00a572","on-secondary-container":"#00311f","on-tertiary-fixed-variant":"#92002a","on-primary-container":"#554300","on-surface-variant":"#d0c5af","on-error":"#690005","primary":"#f2ca50","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","on-tertiary":"#67001b","tertiary-fixed-dim":"#ffb2b7","surface-container-high":"#2a2a2a","background":"#131313","outline-variant":"#4d4635","tertiary":"#ffbec1","surface":"#131313","outline":"#99907c","on-background":"#e5e2e1","secondary-fixed-dim":"#4edea3","primary-fixed-dim":"#e9c349","surface-container":"#20201f","on-primary":"#3c2f00","on-secondary-fixed":"#002113","on-tertiary-fixed":"#40000d","on-primary-fixed-variant":"#574500","tertiary-fixed":"#ffdadb","inverse-surface":"#e5e2e1","primary-fixed":"#ffe088"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","xl":"40px","margin-mobile":"16px","lg":"24px","sm":"8px","unit":"4px","md":"16px","gutter":"16px","xs":"4px"},"fontFamily":{"title-md":["Inter"],"data-pos":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"display":["Inter"]},"fontSize":{"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-lg text-on-surface dark"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col border-r border-surface-container-highest transition-all duration-300" id="sidebar"><div class="h-16 flex items-center px-6 border-b border-surface-container-highest flex-shrink-0"><span class="material-symbols-outlined text-primary mr-2">restaurant</span><span class="font-headline-lg text-title-md tracking-tight text-on-surface">RestaurantOS</span></div><nav class="flex-1 py-md px-sm overflow-y-auto space-y-xs" data-active-classes="bg-secondary-container text-on-secondary-container"><div class="px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Kitchen</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-command-center" href="#"><span class="material-symbols-outlined mr-md">grid_view</span><span class="font-body-sm">Command Center</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="station-screens" href="#"><span class="material-symbols-outlined mr-md">kitchen</span><span class="font-body-sm">Station Screens</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-analytics" href="#"><span class="material-symbols-outlined mr-md">analytics</span><span class="font-body-sm">Reports</span></a><div class="pt-lg px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Printers</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-monitor" href="#"><span class="material-symbols-outlined mr-md">print_connect</span><span class="font-body-sm">Monitor</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-routing" href="#"><span class="material-symbols-outlined mr-md">alt_route</span><span class="font-body-sm">Routing</span></a><a aria-current="page" class="flex items-center px-md py-sm rounded-DEFAULT transition-colors bg-secondary-container text-on-secondary-container" data-path="printer-settings" href="#"><span class="material-symbols-outlined mr-md">settings</span><span class="font-body-sm">Configuration</span></a></nav><div class="p-md border-t border-surface-container-highest"><button class="flex items-center justify-center w-full py-sm bg-surface-container-high rounded-DEFAULT text-on-surface-variant hover:text-primary transition-colors" onclick="document.getElementById('sidebar').classList.toggle('w-64');document.getElementById('sidebar').classList.toggle('w-20');"><span class="material-symbols-outlined">menu_open</span></button></div></aside><div class="pl-64 transition-all duration-300"><header class="fixed top-0 left-64 right-0 h-16 bg-background/80 backdrop-blur-xl border-b border-surface-container-highest z-40 flex items-center justify-between px-lg"><div class="flex items-center gap-md"><span class="text-label-caps font-label-caps text-secondary bg-secondary-container/20 px-sm py-unit rounded-lg">LIVE OPS</span><div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div><span class="font-label-caps text-on-surface-variant text-[10px]">SYNCED</span></div></div><div class="flex items-center gap-lg"><div class="flex flex-col items-end hidden md:flex"><span class="font-title-md text-body-sm text-on-surface">Chef de Cuisine</span><span class="font-label-caps text-[10px] text-outline uppercase">Master Kitchen</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-outline-variant"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-background"><div class="flex flex-col w-full h-full relative overflow-hidden bg-background">
+<!-- Decorative background elements -->
+<div class="absolute inset-0 pointer-events-none opacity-50 z-0">
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-primary/5 via-transparent to-transparent rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-secondary/5 via-transparent to-transparent rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
+</div>
+<div class="relative z-10 flex flex-col lg:flex-row w-full h-full p-margin-safe gap-gutter">
+<!-- Sidebar Settings -->
+<div class="w-full lg:w-1/3 flex flex-col gap-card-gap">
+<div class="flex flex-col gap-unit">
+<h1 class="font-display-lg text-display-lg text-on-background">Ticket Layout</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm">Configure physical thermal print outputs for multi-lingual kitchen environments.</p>
+</div>
+<!-- Customization Panel -->
+<div class="flex flex-col gap-card-gap bg-surface-container rounded-xl p-margin-safe shadow-md mt-card-gap relative overflow-hidden">
+<!-- Vertical accent line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center justify-between pb-unit border-b border-outline-variant/30">
+<span class="font-label-bold-lg text-label-bold-lg text-on-surface">Format Settings</span>
+<span class="material-symbols-outlined text-on-surface-variant">tune</span>
+</div>
+<!-- Bilingual Toggle -->
+<div class="flex items-center justify-between py-unit group cursor-pointer" onclick="document.getElementById('bilingual-toggle').classList.toggle('bg-primary'); document.getElementById('bilingual-toggle').classList.toggle('bg-surface-container-highest'); document.getElementById('bilingual-toggle-knob').classList.toggle('translate-x-6'); document.getElementById('bilingual-toggle-knob').classList.toggle('bg-on-primary'); document.getElementById('bilingual-toggle-knob').classList.toggle('bg-on-surface-variant'); toggleBilingualMode();">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Bilingual Mode</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant text-sm">Print single ticket with EN/AR</span>
+</div>
+<div class="w-12 h-6 bg-surface-container-highest rounded-full relative transition-colors duration-300 ease-in-out" id="bilingual-toggle">
+<div class="w-4 h-4 bg-on-surface-variant rounded-full absolute top-1 left-1 transition-transform duration-300 ease-in-out" id="bilingual-toggle-knob"></div>
+</div>
+</div>
+<!-- Font Size Slider -->
+<div class="flex flex-col gap-unit pt-unit">
+<div class="flex justify-between items-center">
+<label class="font-title-md text-title-md text-on-surface text-sm">Base Font Size</label>
+<span class="font-data-mono text-data-mono text-primary">12pt</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-full appearance-none outline-none accent-primary cursor-pointer hover:accent-primary-fixed transition-all" id="font-size-slider" max="16" min="8" type="range" value="12"/>
+</div>
+<!-- Logo Uploader -->
+<div class="flex flex-col gap-unit pt-unit">
+<label class="font-title-md text-title-md text-on-surface text-sm">Header Logo</label>
+<div class="w-full h-24 border border-dashed border-outline-variant/50 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-highest/50 transition-colors group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">cloud_upload</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant text-sm mt-unit group-hover:text-on-surface transition-colors">Drop monochrome PNG</span>
+</div>
+</div>
+<!-- Footer Text -->
+<div class="flex flex-col gap-unit pt-unit">
+<label class="font-title-md text-title-md text-on-surface text-sm">Footer Message</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-unit font-data-mono text-data-mono text-on-surface focus:border-primary focus:outline-none transition-colors resize-none h-20" placeholder="Thank you for dining..."></textarea>
+</div>
+<div class="mt-card-gap">
+<button class="w-full h-touch-target bg-primary text-on-primary font-label-bold-lg text-label-bold-lg rounded-lg shadow-sm hover:bg-primary-fixed hover:shadow-md transition-all flex items-center justify-center gap-unit group relative overflow-hidden" onclick="triggerPrintAnimation()">
+<div class="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">print</span>
+                        Test Print Sequence
+                    </button>
+</div>
+</div>
+<!-- Printer Status -->
+<div class="bg-surface-container rounded-xl p-margin-safe shadow-md flex items-center justify-between">
+<div class="flex items-center gap-card-gap">
+<div class="w-10 h-10 rounded-full bg-printer-online/20 flex items-center justify-center relative">
+<div class="absolute w-full h-full rounded-full border border-printer-online animate-ping opacity-75"></div>
+<span class="material-symbols-outlined text-printer-online">print</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface text-sm">KDS-PRINTER-01</span>
+<span class="font-data-mono text-data-mono text-printer-online text-xs">ONLINE · READY</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors">settings</span>
+</div>
+</div>
+<!-- Ticket Preview Area -->
+<div class="w-full lg:w-2/3 h-[800px] bg-surface-container-low rounded-xl shadow-lg relative flex flex-col items-center justify-center overflow-hidden p-margin-safe" id="preview-container">
+<!-- Grid overlay for technical feel -->
+<div class="absolute inset-0 pointer-events-none opacity-5" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+<!-- Top bar indicator -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-surface-container-low via-outline-variant to-surface-container-low"></div>
+<div class="absolute top-margin-safe left-margin-safe flex gap-unit bg-surface-container rounded-full px-unit py-1 shadow-sm border border-outline-variant/20 z-20">
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">zoom_in</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">zoom_out</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">fit_screen</span>
+</button>
+</div>
+<!-- Physical Ticket Container -->
+<div class="relative flex gap-card-gap perspective-[1000px] transform-gpu" id="tickets-wrapper">
+<!-- English Ticket (Left) -->
+<div class="w-80 bg-[#f4f4f4] shadow-xl relative overflow-hidden transition-all duration-500 ease-in-out transform origin-top hover:scale-[1.02] hover:shadow-2xl" id="ticket-en">
+<!-- Thermal paper edge effect -->
+<div class="absolute -top-1 left-0 right-0 h-2 bg-gradient-to-b from-[#e0e0e0] to-transparent"></div>
+<div class="absolute -bottom-1 left-0 right-0 h-4 bg-[#f4f4f4] pattern-zigzag text-[#e0e0e0]"></div>
+<div class="p-6 flex flex-col gap-4 text-black font-data-mono">
+<!-- Header -->
+<div class="flex flex-col items-center justify-center border-b-2 border-black border-dashed pb-4">
+<div class="w-16 h-16 rounded bg-black flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-white text-3xl">restaurant</span>
+</div>
+<h2 class="font-headline-ticket text-headline-ticket-mobile uppercase tracking-widest text-center">Bistrot</h2>
+<p class="text-xs text-center">123 Culinary Ave</p>
+<p class="text-xs text-center">Tel: 555-0192</p>
+</div>
+<!-- Meta -->
+<div class="flex justify-between items-end border-b-2 border-black border-dashed pb-2">
+<div class="flex flex-col">
+<span class="text-xs uppercase">Order</span>
+<span class="font-numeral-md text-numeral-md font-bold">#10520</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-xs uppercase">Table</span>
+<span class="font-numeral-xl text-numeral-xl font-bold bg-black text-white px-2 py-0.5 rounded-sm">12</span>
+</div>
+</div>
+<div class="flex justify-between text-xs text-gray-600 pb-2 border-b border-gray-300">
+<span>14:32</span>
+<span>Server: Alex</span>
+</div>
+<!-- Items -->
+<div class="flex flex-col gap-3 py-2">
+<!-- Item 1 -->
+<div class="flex flex-col">
+<div class="flex justify-between items-start">
+<div class="flex gap-2 font-bold text-lg">
+<span>2x</span>
+<span>Margherita Pizza</span>
+</div>
+<span>$36.00</span>
+</div>
+<div class="pl-8 flex flex-col text-sm text-red-600 font-bold uppercase">
+<span>- NO ONIONS</span>
+<span>+ EXTRA CHEESE</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex flex-col mt-2">
+<div class="flex justify-between items-start">
+<div class="flex gap-2 font-bold text-lg">
+<span>1x</span>
+<span>Truffle Fries</span>
+</div>
+<span>$12.00</span>
+</div>
+<div class="pl-8 flex flex-col text-sm text-gray-700">
+<span>SIDE GARLIC MAYO</span>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="border-t-2 border-black border-dashed pt-4 mt-2 flex flex-col items-center gap-2">
+<div class="flex w-full justify-between font-bold text-xl">
+<span>TOTAL</span>
+<span>$48.00</span>
+</div>
+<img class="w-24 h-24 mt-2 object-contain mix-blend-multiply opacity-80" data-alt="A minimalist black and white QR code graphic designed for thermal receipt printing, crisp lines, no background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdLreE3B7Fbvmo-MFZD99UkpfMwE7g41aR0L-a0hqYp5gVMLQUj-khMrypp2uNSJwsG8ad8rlD46Cfcl8Y8NUIEHBTSuINqJ5LSjwCO8gW-8OTFxNDW7ulqRtmKbVP8FMifB1Ai0pbmpWDEM5t3bmMTV83pZncj3HqU4w7MduGQLMwlqfwgQ4Ak078Xqpxa-cQA92I7xjzJQOhDBrJsndsneBnXKB-6ORAYfmKrj81V8Wo6IvvZmojiw"/>
+<p class="text-[10px] text-center mt-2 font-body-sm text-gray-500">Thank you for dining with us.<br/>Scan to pay or leave feedback.</p>
+</div>
+</div>
+</div>
+<!-- Arabic Ticket (Right) -->
+<div class="w-80 bg-[#f4f4f4] shadow-xl relative overflow-hidden transition-all duration-500 ease-in-out transform origin-top hover:scale-[1.02] hover:shadow-2xl" dir="rtl" id="ticket-ar">
+<!-- Thermal paper edge effect -->
+<div class="absolute -top-1 left-0 right-0 h-2 bg-gradient-to-b from-[#e0e0e0] to-transparent"></div>
+<div class="absolute -bottom-1 left-0 right-0 h-4 bg-[#f4f4f4] pattern-zigzag text-[#e0e0e0]"></div>
+<div class="p-6 flex flex-col gap-4 text-black font-data-mono">
+<!-- Header -->
+<div class="flex flex-col items-center justify-center border-b-2 border-black border-dashed pb-4">
+<div class="w-16 h-16 rounded bg-black flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-white text-3xl">restaurant</span>
+</div>
+<h2 class="font-headline-ticket text-headline-ticket-mobile uppercase tracking-widest text-center">بيسترو</h2>
+<p class="text-xs text-center">١٢٣ شارع الطهي</p>
+<p class="text-xs text-center">هاتف: ٥٥٥-٠١٩٢</p>
+</div>
+<!-- Meta -->
+<div class="flex justify-between items-end border-b-2 border-black border-dashed pb-2">
+<div class="flex flex-col">
+<span class="text-xs uppercase">الطلب</span>
+<span class="font-numeral-md text-numeral-md font-bold">#10520</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="text-xs uppercase">الطاولة</span>
+<span class="font-numeral-xl text-numeral-xl font-bold bg-black text-white px-2 py-0.5 rounded-sm">12</span>
+</div>
+</div>
+<div class="flex justify-between text-xs text-gray-600 pb-2 border-b border-gray-300">
+<span>١٤:٣٢</span>
+<span>الخادم: أليكس</span>
+</div>
+<!-- Items -->
+<div class="flex flex-col gap-3 py-2">
+<!-- Item 1 -->
+<div class="flex flex-col">
+<div class="flex justify-between items-start">
+<div class="flex gap-2 font-bold text-lg">
+<span>2x</span>
+<span>بيتزا مارغريتا</span>
+</div>
+<span dir="ltr">$36.00</span>
+</div>
+<div class="pr-8 flex flex-col text-sm text-red-600 font-bold uppercase">
+<span>- بدون بصل</span>
+<span>+ جبن إضافي</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex flex-col mt-2">
+<div class="flex justify-between items-start">
+<div class="flex gap-2 font-bold text-lg">
+<span>1x</span>
+<span>بطاطس بالكمأة</span>
+</div>
+<span dir="ltr">$12.00</span>
+</div>
+<div class="pr-8 flex flex-col text-sm text-gray-700">
+<span>مايونيز بالثوم جانبي</span>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="border-t-2 border-black border-dashed pt-4 mt-2 flex flex-col items-center gap-2">
+<div class="flex w-full justify-between font-bold text-xl">
+<span>المجموع</span>
+<span dir="ltr">$48.00</span>
+</div>
+<img class="w-24 h-24 mt-2 object-contain mix-blend-multiply opacity-80" data-alt="A minimalist black and white QR code graphic designed for thermal receipt printing, crisp lines, no background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcRXQE0Q7-Zqhyzu4QK20PgvOpgr40f_4L7vcLpnthgrYc8Ysg97fUqcFfBzibzn4-4iw8gxXSmYtMBPDJ-Eg0bL44814QDeAdaNi5GFhiOQ2NkqoALQlpaZw2YlMqr57FlX25XieaAhn6KyR3M5CtxRwSdrPlCLdkp4YW3YednsuHHOZpTzTpl2yNMM3D9TjI2oRItRG9kpwnnvJav8__zpbSCWByJ_uDtoF7azqLDlNgvytbYQ0ycA"/>
+<p class="text-[10px] text-center mt-2 font-body-sm text-gray-500">شكراً لتناولكم الطعام معنا.<br/>امسح للدفع أو ترك تعليق.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Animated printing effect overlay -->
+<div class="absolute top-0 left-0 w-full h-8 bg-gradient-to-b from-primary/30 to-transparent transform -translate-y-full opacity-0 pointer-events-none z-30" id="print-overlay"></div>
+</div>
+</div>
+<style>
+        .pattern-zigzag {
+            background-image: linear-gradient(135deg, currentColor 25%, transparent 25%), linear-gradient(225deg, currentColor 25%, transparent 25%), linear-gradient(45deg, currentColor 25%, transparent 25%), linear-gradient(315deg, currentColor 25%, transparent 25%);
+            background-position: 10px 0, 10px 0, 0 0, 0 0;
+            background-size: 20px 20px;
+            background-repeat: repeat-x;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes printScan {
+            0% { transform: translateY(-100%); opacity: 1; }
+            100% { transform: translateY(800px); opacity: 0; }
+        }
+        .anim-print-scan {
+            animation: printScan 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .bilingual-mode-active #ticket-en {
+            width: 400px;
+        }
+        .bilingual-mode-active #ticket-ar {
+            display: none;
+        }
+        /* Add styles via JS for the merged ticket to avoid complex inline CSS logic here */
+    </style>
+<script>
+        let isBilingual = false;
+
+        function toggleBilingualMode() {
+            isBilingual = !isBilingual;
+            const wrapper = document.getElementById('tickets-wrapper');
+            const ticketEn = document.getElementById('ticket-en');
+            const ticketAr = document.getElementById('ticket-ar');
+
+            if (isBilingual) {
+                // Animate to combined view
+                ticketAr.style.transform = 'scale(0.8) opacity(0)';
+                setTimeout(() => {
+                    ticketAr.style.display = 'none';
+                    wrapper.classList.add('bilingual-mode-active');
+                    // In a real app, we would swap out the HTML content of ticketEn here 
+                    // to show interleaved EN/AR lines. For this demo, we just resize and hide one.
+                    ticketEn.style.transform = 'scale(1.1)';
+                    ticketEn.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.5)';
+                }, 300);
+            } else {
+                // Animate back to split view
+                ticketEn.style.transform = 'scale(1)';
+                ticketEn.style.boxShadow = '';
+                wrapper.classList.remove('bilingual-mode-active');
+                ticketAr.style.display = 'block';
+                setTimeout(() => {
+                    ticketAr.style.transform = 'scale(1) opacity(1)';
+                }, 50);
+            }
+        }
+
+        function triggerPrintAnimation() {
+            const overlay = document.getElementById('print-overlay');
+            overlay.classList.remove('anim-print-scan');
+            // Trigger reflow
+            void overlay.offsetWidth;
+            overlay.classList.add('anim-print-scan');
+            
+            // Jiggle the tickets
+            const tickets = document.querySelectorAll('#tickets-wrapper > div');
+            tickets.forEach(t => {
+                t.style.transition = 'transform 0.1s';
+                t.style.transform = 'translateY(5px)';
+                setTimeout(() => {
+                    t.style.transform = 'translateY(-2px)';
+                    setTimeout(() => {
+                        t.style.transition = 'all 0.5s ease-in-out';
+                        t.style.transform = isBilingual && t.id === 'ticket-en' ? 'scale(1.1)' : 'scale(1)';
+                    }, 100);
+                }, 100);
+            });
+        }
+    </script>
+</div></main></div></body></html>

@@ -7,7 +7,8 @@ from .models import (
     Supplier, PurchaseOrder, PurchaseOrderItem, MarketingCampaign,
     QRCodeTableSession, WaitlistEntry, Reservation, StaffAttendance,
     ApprovalRequest, RiskAlert, CustomerFeedback, BusinessTarget,
-    ExpenseRecord, AIRecommendation
+    ExpenseRecord, AIRecommendation, StationProfile, PrinterDevice,
+    PrinterRoutingRule, KitchenPrintJob
 )
 
 class StaffMemberSerializer(serializers.ModelSerializer):
@@ -297,4 +298,44 @@ class AIRecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = AIRecommendation
         fields = '__all__'
+
+
+class StationProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StationProfile
+        fields = '__all__'
+
+
+class PrinterDeviceSerializer(serializers.ModelSerializer):
+    station_name = serializers.ReadOnlyField(source='station.name_en')
+    backup_printer_name = serializers.ReadOnlyField(source='backup_printer.name')
+    pending_jobs_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PrinterDevice
+        fields = '__all__'
+
+    def get_pending_jobs_count(self, obj):
+        return obj.jobs.filter(status__in=['QUEUED', 'PRINTING', 'RETRYING']).count()
+
+
+class PrinterRoutingRuleSerializer(serializers.ModelSerializer):
+    primary_printer_name = serializers.ReadOnlyField(source='primary_printer.name')
+    backup_printer_name = serializers.ReadOnlyField(source='backup_printer.name')
+    menu_item_name = serializers.ReadOnlyField(source='menu_item.name')
+    category_name = serializers.ReadOnlyField(source='category.name')
+
+    class Meta:
+        model = PrinterRoutingRule
+        fields = '__all__'
+
+
+class KitchenPrintJobSerializer(serializers.ModelSerializer):
+    printer_name = serializers.ReadOnlyField(source='printer.name')
+    order_number = serializers.ReadOnlyField(source='order.order_number')
+
+    class Meta:
+        model = KitchenPrintJob
+        fields = '__all__'
+
 

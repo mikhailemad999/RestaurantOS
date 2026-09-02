@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Lock, Shield, User, Clock, Bell, RefreshCw, 
-  Smartphone, Database, ChefHat, Sparkles
+  Smartphone, Database, ChefHat, Sparkles, ShoppingBag
 } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 
@@ -35,7 +35,13 @@ export default function Navbar() {
       case '/reports': return 'Financial Reports & Accounting';
       case '/manager-mobile': return 'Manager Mobile Floor View';
       case '/waiter-pos': return 'Waiter Handheld POS';
-      case '/staff': return 'Staff & RBAC Permissions';
+      case '/kitchen':
+      case '/kitchen-command-center': return 'Kitchen Command Center';
+      case '/station-screens': return 'Station Line Display';
+      case '/settings/printers': return 'Printer Devices Configuration';
+      case '/settings/printers/monitor': return 'Printer Fleet Status';
+      case '/settings/printers/routing': return 'Printer Routing Rule Engine';
+      case '/settings/printers/template': return 'Thermal Ticket Template';
       case '/settings': return 'Global System Settings';
       case '/login': return 'Terminal PIN Access';
       default: return 'RestaurantOS Platform';
@@ -85,6 +91,15 @@ export default function Navbar() {
 
       {/* Right Controls / Staff Profile */}
       <div className="flex items-center gap-2.5">
+        <Link
+          to="/online-ordering"
+          title="Open Customer Online Ordering Storefront"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#1c1b1b] border border-[#353535] hover:border-[#d4af37] text-[#d4af37] text-xs font-mono rounded-lg transition-colors"
+        >
+          <ShoppingBag className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Storefront</span>
+        </Link>
+
         <LanguageSelector />
 
         {currentUser ? (

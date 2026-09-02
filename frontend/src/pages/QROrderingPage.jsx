@@ -5,6 +5,8 @@ import {
   Smartphone, Utensils, CheckCircle2, ChevronRight, Sparkles
 } from 'lucide-react';
 
+import CustomerNavbar from '../components/CustomerNavbar';
+
 export default function QROrderingPage() {
   const [tables, setTables] = useState([]);
   const [selectedTable, setSelectedTable] = useState(1);
@@ -97,7 +99,9 @@ export default function QROrderingPage() {
   const cartTotal = cart.reduce((sum, i) => sum + parseFloat(i.price) * i.quantity, 0);
 
   return (
-    <div className="min-h-full p-4 md:p-6 bg-[#0e0e0e] flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-[#0e0e0e] flex flex-col">
+      <CustomerNavbar cartCount={cart.reduce((s, i) => s + i.quantity, 0)} cartTotal={cartTotal} />
+      <div className="flex-1 p-4 md:p-6 flex flex-col items-center justify-center">
       {/* Mobile Device Viewport */}
       <div className="w-full max-w-sm bg-[#131313] border-4 border-[#2a2a2a] rounded-[38px] overflow-hidden shadow-2xl flex flex-col h-[760px]">
         {/* Notch */}
@@ -240,6 +244,7 @@ export default function QROrderingPage() {
             </button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.utils import timezone
 from django.db.models import Sum, Count, F, Q
 from decimal import Decimal
+import random
 
 from .models import (
     StaffMember, MenuCategory, MenuItem, ModifierGroup,
@@ -481,7 +482,8 @@ from .models import (
     Supplier, PurchaseOrder, PurchaseOrderItem, MarketingCampaign,
     QRCodeTableSession, WaitlistEntry, Reservation, StaffAttendance,
     ApprovalRequest, RiskAlert, CustomerFeedback, BusinessTarget,
-    ExpenseRecord, AIRecommendation, OrderStatus, OrderItemStatus,
+    ExpenseRecord, AIRecommendation, StationProfile, PrinterDevice,
+    PrinterRoutingRule, KitchenPrintJob, OrderStatus, OrderItemStatus,
     TableStatus, DeliveryStatus, MovementType
 )
 from .serializers import (
@@ -495,7 +497,8 @@ from .serializers import (
     MarketingCampaignSerializer, QRCodeTableSessionSerializer, WaitlistEntrySerializer,
     ReservationSerializer, StaffAttendanceSerializer, ApprovalRequestSerializer,
     RiskAlertSerializer, CustomerFeedbackSerializer, BusinessTargetSerializer,
-    ExpenseRecordSerializer, AIRecommendationSerializer
+    ExpenseRecordSerializer, AIRecommendationSerializer, StationProfileSerializer,
+    PrinterDeviceSerializer, PrinterRoutingRuleSerializer, KitchenPrintJobSerializer
 )
 from .analytics_service import AnalyticsService
 
@@ -759,4 +762,251 @@ class AIRecommendationViewSet(viewsets.ModelViewSet):
         rec.status = 'DISMISSED'
         rec.save()
         return Response({'success': True, 'status': 'DISMISSED'})
+
+
+# ============================================================
+# KITCHEN STATIONS & SMART PRINTER ROUTING VIEWSETS
+# ============================================================
+
+class StationProfileViewSet(viewsets.ModelViewSet):
+    queryset = StationProfile.objects.all().order_by('sort_order')
+    serializer_class = StationProfileSerializer
+
+    @action(detail=False, methods=['get'], url_path='tickets')
+    def get_station_tickets(self, request):
+        station_code = request.query_params.get('station', 'ALL')
+        active_orders = Order.objects.filter(
+            status__in=[OrderStatus.PENDING, OrderStatus.PREPARING, OrderStatus.READY]
+        ).select_related('table', 'server').prefetch_related('items__menu_item').order_by('created_at')
+
+        tickets = []
+        for ord in active_orders:
+            items = ord.items.all()
+            if station_code != 'ALL':
+                items = items.filter(station=station_code)
+            
+            if items.exists():
+                tickets.append({
+                    'order_id': ord.id,
+                    'order_number': ord.order_number,
+                    'order_type': ord.order_type,
+                    'status': ord.status,
+                    'table_number': ord.table.table_number if ord.table else 'N/A',
+                    'section': ord.table.section.name if ord.table else 'Direct',
+                    'server_name': ord.server.name if ord.server else 'Cashier',
+                    'guest_count': ord.guest_count,
+                    'special_instructions': ord.special_instructions,
+                    'created_at': ord.created_at,
+                    'elapsed_seconds': int((timezone.now() - ord.created_at).total_seconds()),
+                    'items': OrderItemSerializer(items, many=True).data
+                })
+        return Response(tickets)
+
+
+class PrinterDeviceViewSet(viewsets.ModelViewSet):
+    queryset = PrinterDevice.objects.all().order_by('name')
+    serializer_class = PrinterDeviceSerializer
+
+    @action(detail=True, methods=['post'], url_path='test-print')
+    def test_print(self, request, pk=None):
+        printer = self.get_object()
+        job_number = f"JOB-TEST-{random.randint(1000, 9999)}"
+        recent_order = Order.objects.last()
+        if not recent_order:
+            return Response({'error': 'No orders in system to generate test receipt'}, status=status.HTTP_400_BAD_REQUEST)
+
+        en_ticket = (
+            f"================================\n"
+            f"      {printer.header_text}\n"
+            f"     ** TEST PRINT SEQUENCE **\n"
+            f"================================\n"
+            f"PRINTER: {printer.name}\n"
+            f"STATION: {printer.printer_type}\n"
+            f"CONNECTION: {printer.connection_type} ({printer.ip_address}:{printer.port})\n"
+            f"PAPER: {printer.paper_width} | STATUS: {printer.status}\n"
+            f"TIMESTAMP: {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"--------------------------------\n"
+            f"[OK] ESC/POS Command Emulation\n"
+            f"[OK] High Speed Thermal Cutter\n"
+            f"[OK] CodePage 1256 Arabic Support\n"
+            f"--------------------------------\n"
+            f"      {printer.footer_text}\n"
+            f"================================"
+        )
+
+        ar_ticket = (
+            f"================================\n"
+            f"      {printer.header_text}\n"
+            f"     ** اختبار طباعة ناجح **\n"
+            f"================================\n"
+            f"الطابعة: {printer.name}\n"
+            f"القسم: {printer.printer_type}\n"
+            f"المنفذ: {printer.ip_address}:{printer.port}\n"
+            f"التاريخ: {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"--------------------------------\n"
+            f"جاهزية كاملة لنظام RestaurantOS\n"
+            f"================================"
+        )
+
+        job = KitchenPrintJob.objects.create(
+            job_number=job_number,
+            order=recent_order,
+            printer=printer,
+            station_code=printer.printer_type,
+            ticket_type='TEST_PRINT',
+            items_payload=[{'name': 'Test Diagnostic Item', 'quantity': 1, 'station': printer.printer_type}],
+            rendered_text_en=en_ticket,
+            rendered_text_ar=ar_ticket,
+            status='PRINTED',
+            completed_at=timezone.now()
+        )
+        return Response({
+            'success': True,
+            'job_id': job.id,
+            'job_number': job.job_number,
+            'rendered_text_en': en_ticket,
+            'rendered_text_ar': ar_ticket,
+            'printer': PrinterDeviceSerializer(printer).data
+        })
+
+    @action(detail=True, methods=['post'], url_path='toggle-status')
+    def toggle_status(self, request, pk=None):
+        printer = self.get_object()
+        target_status = request.data.get('status')
+        if target_status in ['ONLINE', 'OFFLINE', 'PRINTING', 'WARNING', 'ERROR', 'LOW_PAPER']:
+            printer.status = target_status
+        else:
+            printer.status = 'OFFLINE' if printer.status == 'ONLINE' else 'ONLINE'
+        printer.save()
+        return Response(PrinterDeviceSerializer(printer).data)
+
+    @action(detail=False, methods=['get'], url_path='fleet-summary')
+    def fleet_summary(self, request):
+        total = PrinterDevice.objects.count()
+        online = PrinterDevice.objects.filter(status='ONLINE').count()
+        offline = PrinterDevice.objects.filter(status='OFFLINE').count()
+        warning = PrinterDevice.objects.filter(status__in=['WARNING', 'LOW_PAPER', 'ERROR']).count()
+        active_queue = KitchenPrintJob.objects.filter(status__in=['QUEUED', 'PRINTING', 'RETRYING']).count()
+        failed_jobs = KitchenPrintJob.objects.filter(status='FAILED').count()
+        recent_jobs = KitchenPrintJob.objects.all().order_by('-created_at')[:10]
+
+        return Response({
+            'total_printers': total,
+            'online_count': online,
+            'offline_count': offline,
+            'warning_count': warning,
+            'active_queue_length': active_queue,
+            'failed_jobs_count': failed_jobs,
+            'recent_jobs': KitchenPrintJobSerializer(recent_jobs, many=True).data
+        })
+
+
+class PrinterRoutingRuleViewSet(viewsets.ModelViewSet):
+    queryset = PrinterRoutingRule.objects.all().order_by('priority')
+    serializer_class = PrinterRoutingRuleSerializer
+
+    @action(detail=False, methods=['post'], url_path='simulate')
+    def simulate_route(self, request):
+        item_id = request.data.get('item_id')
+        category_id = request.data.get('category_id')
+        station_code = request.data.get('station_code')
+        order_type = request.data.get('order_type', 'DINE_IN')
+
+        matched_rule = None
+        matched_level = None
+
+        if item_id:
+            matched_rule = PrinterRoutingRule.objects.filter(
+                rule_level='ITEM', menu_item_id=item_id, is_active=True
+            ).order_by('priority').first()
+            if matched_rule:
+                matched_level = 'Item-specific printer rule'
+
+        if not matched_rule and (category_id or item_id):
+            cat_id = category_id
+            if not cat_id and item_id:
+                item = MenuItem.objects.filter(id=item_id).first()
+                if item:
+                    cat_id = item.category_id
+            if cat_id:
+                matched_rule = PrinterRoutingRule.objects.filter(
+                    rule_level='CATEGORY', category_id=cat_id, is_active=True
+                ).order_by('priority').first()
+                if matched_rule:
+                    matched_level = 'Category printer rule'
+
+        if not matched_rule and (station_code or item_id):
+            stn = station_code
+            if not stn and item_id:
+                item = MenuItem.objects.filter(id=item_id).first()
+                if item:
+                    stn = item.station
+            if stn:
+                matched_rule = PrinterRoutingRule.objects.filter(
+                    rule_level='STATION', station_code=stn, is_active=True
+                ).order_by('priority').first()
+                if matched_rule:
+                    matched_level = 'Station printer rule'
+
+        if not matched_rule:
+            matched_rule = PrinterRoutingRule.objects.filter(
+                is_active=True
+            ).order_by('priority').first()
+            matched_level = 'Restaurant default rule' if matched_rule else 'Fallback Kitchen Printer'
+
+        primary_printer = matched_rule.primary_printer if matched_rule else PrinterDevice.objects.first()
+        backup_printer = matched_rule.backup_printer if matched_rule else (primary_printer.backup_printer if primary_printer else None)
+
+        return Response({
+            'success': True,
+            'matched_level': matched_level,
+            'rule_name': matched_rule.name if matched_rule else 'Default Fallback',
+            'routed_station': station_code or (matched_rule.station_code if matched_rule else 'GRILL'),
+            'primary_printer': PrinterDeviceSerializer(primary_printer).data if primary_printer else None,
+            'backup_printer': PrinterDeviceSerializer(backup_printer).data if backup_printer else None,
+        })
+
+
+class KitchenPrintJobViewSet(viewsets.ModelViewSet):
+    queryset = KitchenPrintJob.objects.all().order_by('-created_at')
+    serializer_class = KitchenPrintJobSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        printer_id = self.request.query_params.get('printer')
+        status_filter = self.request.query_params.get('status')
+        if printer_id:
+            qs = qs.filter(printer_id=printer_id)
+        if status_filter:
+            qs = qs.filter(status=status_filter)
+        return qs
+
+    @action(detail=True, methods=['post'], url_path='retry')
+    def retry_job(self, request, pk=None):
+        job = self.get_object()
+        job.status = 'PRINTED'
+        job.retry_count += 1
+        job.error_message = ''
+        job.completed_at = timezone.now()
+        job.save()
+        return Response(KitchenPrintJobSerializer(job).data)
+
+    @action(detail=True, methods=['post'], url_path='reroute')
+    def reroute_job(self, request, pk=None):
+        job = self.get_object()
+        target_printer_id = request.data.get('target_printer_id')
+        if target_printer_id:
+            try:
+                target_printer = PrinterDevice.objects.get(id=target_printer_id)
+                job.printer = target_printer
+            except PrinterDevice.DoesNotExist:
+                pass
+        elif job.printer.backup_printer:
+            job.printer = job.printer.backup_printer
+        job.status = 'PRINTED'
+        job.error_message = 'Re-routed to backup device'
+        job.completed_at = timezone.now()
+        job.save()
+        return Response(KitchenPrintJobSerializer(job).data)
+
 

@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { api } from '../services/api';
 import { PhoneCall, PhoneIncoming, PhoneOff, User, ArrowRight, X } from 'lucide-react';
 
 export default function IncomingCallSimulator() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [testPhone, setTestPhone] = useState('01012345678');
   const [caller, setCaller] = useState(null);
   const [searching, setSearching] = useState(false);
+
+  // Hide on customer storefront and live tracking pages
+  const isCustomerRoute = ['/online-ordering', '/order', '/order-tracking', '/qr-ordering', '/kiosk'].some(r => location.pathname.startsWith(r));
+  if (isCustomerRoute) return null;
 
   const simulateCall = async (phoneNumber) => {
     setTestPhone(phoneNumber);

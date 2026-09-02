@@ -51,6 +51,7 @@ export const api = {
 
   // Orders & POS
   getOrders: () => request('/orders/'),
+  getOrderById: (id) => request(`/orders/${id}/`),
   createPosOrder: (data) => request('/orders/create-pos-order/', { method: 'POST', body: JSON.stringify(data) }),
   updateOrderStatus: (id, status) => request(`/orders/${id}/update-status/`, { method: 'POST', body: JSON.stringify({ status }) }),
   processPayment: (id, paymentData) => request(`/orders/${id}/process-payment/`, { method: 'POST', body: JSON.stringify(paymentData) }),
@@ -177,4 +178,29 @@ export const api = {
   getRecommendations: () => request('/recommendations/'),
   acceptRecommendation: (id) => request(`/recommendations/${id}/accept/`, { method: 'POST' }),
   dismissRecommendation: (id) => request(`/recommendations/${id}/dismiss/`, { method: 'POST' }),
+
+  // Kitchen Stations & Station Screens
+  getKitchenStations: () => request('/kitchen-stations/'),
+  getStationTickets: (stationCode = 'ALL') => request(`/kitchen-stations/tickets/?station=${stationCode}`),
+
+  // Printers & Hardware Management
+  getPrinters: () => request('/printers/'),
+  createPrinter: (data) => request('/printers/', { method: 'POST', body: JSON.stringify(data) }),
+  updatePrinter: (id, data) => request(`/printers/${id}/`, { method: 'PUT', body: JSON.stringify(data) }),
+  deletePrinter: (id) => request(`/printers/${id}/`, { method: 'DELETE' }),
+  togglePrinterStatus: (id, status) => request(`/printers/${id}/toggle-status/`, { method: 'POST', body: JSON.stringify({ status }) }),
+  testPrintPrinter: (id) => request(`/printers/${id}/test-print/`, { method: 'POST' }),
+  getPrinterFleetSummary: () => request('/printers/fleet-summary/'),
+
+  // Smart Printer Routing Rules
+  getPrinterRoutingRules: () => request('/printer-routing-rules/'),
+  createPrinterRoutingRule: (data) => request('/printer-routing-rules/', { method: 'POST', body: JSON.stringify(data) }),
+  updatePrinterRoutingRule: (id, data) => request(`/printer-routing-rules/${id}/`, { method: 'PUT', body: JSON.stringify(data) }),
+  deletePrinterRoutingRule: (id) => request(`/printer-routing-rules/${id}/`, { method: 'DELETE' }),
+  simulatePrinterRoute: (data) => request('/printer-routing-rules/simulate/', { method: 'POST', body: JSON.stringify(data) }),
+
+  // Print Queue & Jobs
+  getPrintJobs: (params = '') => request(`/print-jobs/${params ? `?${params}` : ''}`),
+  retryPrintJob: (id) => request(`/print-jobs/${id}/retry/`, { method: 'POST' }),
+  reroutePrintJob: (id, targetPrinterId) => request(`/print-jobs/${id}/reroute/`, { method: 'POST', body: JSON.stringify({ target_printer_id: targetPrinterId }) }),
 };

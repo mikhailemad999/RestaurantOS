@@ -44,10 +44,13 @@ class MenuCategory(models.Model):
 
 class KitchenStation(models.TextChoices):
     ALL = 'ALL', 'All Stations'
+    PIZZA = 'PIZZA', 'Pizza'
+    SANDWICH = 'SANDWICH', 'Sandwich & Burgers'
     GRILL = 'GRILL', 'Grill & Steaks'
-    FRYER = 'FRYER', 'Fryer & Apps'
-    ASSEMBLY = 'ASSEMBLY', 'Pantry & Assembly'
+    FRYER = 'FRYER', 'Fryer & Sides'
     BAR = 'BAR', 'Beverage & Bar'
+    DESSERT = 'DESSERT', 'Dessert & Pastry'
+    ASSEMBLY = 'ASSEMBLY', 'Pantry & Assembly'
 
 
 class MenuItem(models.Model):
@@ -671,4 +674,82 @@ class AIRecommendation(models.Model):
 
     def __str__(self):
         return f"AI Recommendation [{self.category}]: {self.title}"
+
+
+# ============================================================
+# KITCHEN STATIONS & SMART PRINTER ROUTING EXTENSIONS
+# ============================================================
+
+class StationProfile(models.Model):
+    code = models.CharField(max_length=30, unique=True)
+    name_en = models.CharField(max_length=80)
+    name_ar = models.CharField(max_length=80, blank=True, default='')
+    sla_minutes = models.IntegerField(default=12)
+    display_color = models.CharField(max_length=30, default='#f2ca50')
+    priority_level = models.CharField(max_length=20, default='NORMAL')  # HIGH, NORMAL, LOW
+    is_active = models.BooleanField(default=True)
+    sort_order = models.IntegerField(default=0)
+    screen_route = models.CharField(max_length=100, blank=True, default='')
+
+    def __str__(self):
+        return f"{self.name_en} ({self.code})"
+
+
+class PrinterDevice(models.Model):
+    name = models.CharField(max_length=80)
+    display_name = models.CharField(max_length=100, blank=True, default='')
+    printer_type = models.CharField(max_length=30, default='KITCHEN')  # KITCHEN, CASHIER, PIZZA, SANDWICH, GRILL, FRYER, BAR, DESSERT, DELIVERY
+    station = models.ForeignKey(StationProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='printers')
+    connection_type = models.CharField(max_length=30, default='NETWORK')  # NETWORK, USB, WINDOWS_SHARED, BLUETOOTH
+    ip_address = models.CharField(max_length=45, default='192.168.1.100')
+    port = models.IntegerField(default=9100)
+    paper_width = models.CharField(max_length=10, default='80MM')  # 80MM, 58MM, A4
+    status = models.CharField(max_length=20, default='ONLINE')  # ONLINE, OFFLINE, PRINTING, WARNING, ERROR
+    is_active = models.BooleanField(default=True)
+    auto_print = models.BooleanField(default=True)
+    copies = models.IntegerField(default=1)
+    backup_printer = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='failover_for')
+    bilingual_mode = models.BooleanField(default=True)
+    header_text = models.CharField(max_length=200, blank=True, default='L\'ETOILE HAUTE CUISINE')
+    footer_text = models.CharField(max_length=200, blank=True, default='Master Kitchen - Culinary Precision')
+    last_ping = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.ip_address}:{self.port}) [{self.status}]"
+
+
+class PrinterRoutingRule(models.Model):
+    name = models.CharField(max_length=120)
+    rule_level = models.CharField(max_length=20, default='STATION')  # ITEM, CATEGORY, STATION, ORDER_TYPE, GLOBAL
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, null=True, blank=True, related_name='printer_rules')
+    category = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, null=True, blank=True, related_name='printer_rules')
+    station_code = models.CharField(max_length=30, blank=True, default='GRILL')
+    order_type = models.CharField(max_length=20, blank=True, default='')  # DINE_IN, TAKEOUT, DELIVERY
+    primary_printer = models.ForeignKey(PrinterDevice, on_delete=models.CASCADE, related_name='primary_rules')
+    backup_printer = models.ForeignKey(PrinterDevice, on_delete=models.SET_NULL, null=True, blank=True, related_name='backup_rules')
+    priority = models.IntegerField(default=10)  # Lower number = higher priority
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Rule: {self.name} [{self.rule_level}] -> {self.primary_printer.name}"
+
+
+class KitchenPrintJob(models.Model):
+    job_number = models.CharField(max_length=40, unique=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='print_jobs')
+    printer = models.ForeignKey(PrinterDevice, on_delete=models.CASCADE, related_name='jobs')
+    station_code = models.CharField(max_length=30, default='KITCHEN')
+    ticket_type = models.CharField(max_length=30, default='KITCHEN_TICKET')  # KITCHEN_TICKET, CASHIER_RECEIPT, DELIVERY_TICKET, BAR_TICKET
+    items_payload = models.JSONField(default=list)
+    rendered_text_en = models.TextField(blank=True, default='')
+    rendered_text_ar = models.TextField(blank=True, default='')
+    status = models.CharField(max_length=20, default='QUEUED')  # QUEUED, PRINTING, PRINTED, FAILED, RETRYING, CANCELLED
+    retry_count = models.IntegerField(default=0)
+    error_message = models.CharField(max_length=255, blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f"PrintJob {self.job_number} for Order #{self.order.order_number} [{self.status}]"
+
 

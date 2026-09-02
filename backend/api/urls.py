@@ -11,7 +11,8 @@ from .views import (
     ReservationViewSet, StaffAttendanceViewSet, ApprovalRequestViewSet,
     RiskAlertViewSet, CustomerFeedbackViewSet, BusinessTargetViewSet,
     ExpenseRecordViewSet, AIRecommendationViewSet, CustomerAddressViewSet,
-    CustomerNoteViewSet, DeliveryZoneViewSet
+    CustomerNoteViewSet, DeliveryZoneViewSet, StationProfileViewSet,
+    PrinterDeviceViewSet, PrinterRoutingRuleViewSet, KitchenPrintJobViewSet
 )
 
 router = DefaultRouter()
@@ -49,6 +50,12 @@ router.register(r'feedback', CustomerFeedbackViewSet, basename='feedback')
 router.register(r'targets', BusinessTargetViewSet, basename='targets')
 router.register(r'expenses', ExpenseRecordViewSet, basename='expenses')
 router.register(r'recommendations', AIRecommendationViewSet, basename='recommendations')
+
+# Kitchen Stations & Smart Printer Routing Routers
+router.register(r'kitchen-stations', StationProfileViewSet, basename='kitchen-stations')
+router.register(r'printers', PrinterDeviceViewSet, basename='printers')
+router.register(r'printer-routing-rules', PrinterRoutingRuleViewSet, basename='printer-routing-rules')
+router.register(r'print-jobs', KitchenPrintJobViewSet, basename='print-jobs')
 
 urlpatterns = [
     path('', include(router.urls)),

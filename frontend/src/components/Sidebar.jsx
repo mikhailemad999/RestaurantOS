@@ -8,7 +8,7 @@ import {
   Sparkles, Smartphone, Building2, Receipt, Server, 
   Settings, ShoppingCart, LayoutGrid, Tablet, Monitor, 
   TrendingUp, BarChart3, BookOpen, Navigation, KeyRound, 
-  ChevronLeft, ChevronRight, UserCheck
+  ChevronLeft, ChevronRight, UserCheck, ChefHat, Printer, Layers, Terminal
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -51,6 +51,17 @@ export default function Sidebar() {
         { path: '/kitchen-analytics', label: t('nav.kitchen_analytics'), icon: Flame },
         { path: '/menu', label: t('nav.menu_recipes'), icon: BookOpen },
         { path: '/inventory', label: t('nav.raw_inventory'), icon: Package },
+      ]
+    },
+    {
+      group: t('nav.printers_kitchen_hardware') || 'Kitchen & Printer Hardware',
+      items: [
+        { path: '/kitchen', label: t('nav.kitchen_command_center') || 'Kitchen Command Center', icon: ChefHat },
+        { path: '/station-screens', label: t('nav.station_screens') || 'Line Station Screens', icon: Flame },
+        { path: '/settings/printers/monitor', label: t('nav.printer_monitor') || 'Printer Fleet Monitor', icon: Printer },
+        { path: '/settings/printers/routing', label: t('nav.printer_routing') || 'Printer Routing Engine', icon: Layers },
+        { path: '/settings/printers/template', label: t('nav.ticket_template') || 'Thermal Ticket Layout', icon: Terminal },
+        { path: '/settings/printers', label: t('nav.printer_settings') || 'Printer Devices Config', icon: Settings },
       ]
     },
     {

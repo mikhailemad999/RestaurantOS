@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#353535","secondary":"#4edea3","surface-tint":"#e9c349","on-error-container":"#ffdad6","on-secondary-fixed-variant":"#005236","surface-dim":"#131313","on-surface":"#e5e2e1","surface-variant":"#353535","on-primary-fixed":"#241a00","error":"#ffb4ab","surface-container-low":"#1c1b1b","on-secondary":"#003824","secondary-fixed":"#6ffbbe","on-tertiary-container":"#8e0029","tertiary-container":"#ff949c","inverse-primary":"#735c00","primary-container":"#d4af37","error-container":"#93000a","inverse-on-surface":"#313030","secondary-container":"#00a572","on-secondary-container":"#00311f","on-tertiary-fixed-variant":"#92002a","on-primary-container":"#554300","on-surface-variant":"#d0c5af","on-error":"#690005","primary":"#f2ca50","surface-container-lowest":"#0e0e0e","surface-bright":"#393939","on-tertiary":"#67001b","tertiary-fixed-dim":"#ffb2b7","surface-container-high":"#2a2a2a","background":"#131313","outline-variant":"#4d4635","tertiary":"#ffbec1","surface":"#131313","outline":"#99907c","on-background":"#e5e2e1","secondary-fixed-dim":"#4edea3","primary-fixed-dim":"#e9c349","surface-container":"#20201f","on-primary":"#3c2f00","on-secondary-fixed":"#002113","on-tertiary-fixed":"#40000d","on-primary-fixed-variant":"#574500","tertiary-fixed":"#ffdadb","inverse-surface":"#e5e2e1","primary-fixed":"#ffe088"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"32px","xl":"40px","margin-mobile":"16px","lg":"24px","sm":"8px","unit":"4px","md":"16px","gutter":"16px","xs":"4px"},"fontFamily":{"title-md":["Inter"],"data-pos":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"display":["Inter"]},"fontSize":{"title-md":["20px",{"lineHeight":"1.4","fontWeight":"600"}],"data-pos":["18px",{"lineHeight":"1.0","fontWeight":"500"}],"label-caps":["12px",{"lineHeight":"1.2","letterSpacing":"0.05em","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"1.2","fontWeight":"600"}],"display":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-lg text-on-surface dark"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col border-r border-surface-container-highest transition-all duration-300" id="sidebar"><div class="h-16 flex items-center px-6 border-b border-surface-container-highest flex-shrink-0"><span class="material-symbols-outlined text-primary mr-2">restaurant</span><span class="font-headline-lg text-title-md tracking-tight text-on-surface">RestaurantOS</span></div><nav class="flex-1 py-md px-sm overflow-y-auto space-y-xs" data-active-classes="bg-secondary-container text-on-secondary-container"><div class="px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Kitchen</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-command-center" href="#"><span class="material-symbols-outlined mr-md">grid_view</span><span class="font-body-sm">Command Center</span></a><a aria-current="page" class="flex items-center px-md py-sm rounded-DEFAULT transition-colors bg-secondary-container text-on-secondary-container" data-path="station-screens" href="#"><span class="material-symbols-outlined mr-md">kitchen</span><span class="font-body-sm">Station Screens</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kitchen-analytics" href="#"><span class="material-symbols-outlined mr-md">analytics</span><span class="font-body-sm">Reports</span></a><div class="pt-lg px-md py-xs text-label-caps font-label-caps text-outline uppercase opacity-70">Printers</div><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-monitor" href="#"><span class="material-symbols-outlined mr-md">print_connect</span><span class="font-body-sm">Monitor</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-routing" href="#"><span class="material-symbols-outlined mr-md">alt_route</span><span class="font-body-sm">Routing</span></a><a class="flex items-center px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="printer-settings" href="#"><span class="material-symbols-outlined mr-md">settings</span><span class="font-body-sm">Configuration</span></a></nav><div class="p-md border-t border-surface-container-highest"><button class="flex items-center justify-center w-full py-sm bg-surface-container-high rounded-DEFAULT text-on-surface-variant hover:text-primary transition-colors" onclick="document.getElementById('sidebar').classList.toggle('w-64');document.getElementById('sidebar').classList.toggle('w-20');"><span class="material-symbols-outlined">menu_open</span></button></div></aside><div class="pl-64 transition-all duration-300"><header class="fixed top-0 left-64 right-0 h-16 bg-background/80 backdrop-blur-xl border-b border-surface-container-highest z-40 flex items-center justify-between px-lg"><div class="flex items-center gap-md"><span class="text-label-caps font-label-caps text-secondary bg-secondary-container/20 px-sm py-unit rounded-lg">LIVE OPS</span><div class="flex items-center gap-xs"><div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div><span class="font-label-caps text-on-surface-variant text-[10px]">SYNCED</span></div></div><div class="flex items-center gap-lg"><div class="flex flex-col items-end hidden md:flex"><span class="font-title-md text-body-sm text-on-surface">Chef de Cuisine</span><span class="font-label-caps text-[10px] text-outline uppercase">Master Kitchen</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-outline-variant"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen bg-background"><div class="flex flex-col w-full h-full min-h-[calc(100vh-64px)] bg-background">
+<!-- Header / Filters -->
+<div class="flex flex-col gap-md p-lg border-b border-outline-variant/30 sticky top-0 bg-background/95 backdrop-blur-md z-30">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Audit Logs</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Review sensitive operations, overrides, and access events.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container rounded-DEFAULT text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+          EXPORT CSV
+        </button>
+<button class="flex items-center gap-xs px-md py-sm bg-primary rounded-DEFAULT text-on-primary font-label-caps text-label-caps hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+          FILTERS
+        </button>
+</div>
+</div>
+<!-- Quick Filters -->
+<div class="flex gap-sm overflow-x-auto pb-xs snap-x">
+<button class="flex-shrink-0 px-md py-sm rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps flex items-center gap-xs snap-start">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+        ALL EVENTS
+      </button>
+<button class="flex-shrink-0 px-md py-sm rounded-full bg-surface-container text-on-surface font-label-caps text-label-caps flex items-center gap-xs snap-start hover:bg-surface-container-high transition-colors">
+        VOIDS &amp; COMPS
+      </button>
+<button class="flex-shrink-0 px-md py-sm rounded-full bg-error-container text-on-error-container font-label-caps text-label-caps flex items-center gap-xs snap-start hover:bg-error-container/80 transition-colors">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+        FLAGGED (12)
+      </button>
+<button class="flex-shrink-0 px-md py-sm rounded-full bg-surface-container text-on-surface font-label-caps text-label-caps flex items-center gap-xs snap-start hover:bg-surface-container-high transition-colors">
+        PRICE OVERRIDES
+      </button>
+<button class="flex-shrink-0 px-md py-sm rounded-full bg-surface-container text-on-surface font-label-caps text-label-caps flex items-center gap-xs snap-start hover:bg-surface-container-high transition-colors">
+        ACCESS LOGS
+      </button>
+</div>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md p-lg">
+<div class="bg-surface-container p-md rounded-lg flex flex-col gap-sm border border-outline-variant/50">
+<div class="flex justify-between items-center text-on-surface-variant font-label-caps text-label-caps">
+<span>TODAY'S EVENTS</span>
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</div>
+<div class="font-data-pos text-display text-on-surface">342</div>
+</div>
+<div class="bg-surface-container p-md rounded-lg flex flex-col gap-sm border border-outline-variant/50">
+<div class="flex justify-between items-center text-on-surface-variant font-label-caps text-label-caps">
+<span>TOTAL VOIDS</span>
+<span class="material-symbols-outlined text-[16px] text-error">remove_shopping_cart</span>
+</div>
+<div class="font-data-pos text-display text-on-surface">18</div>
+<div class="text-body-sm font-body-sm text-error flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +4 from yesterday
+      </div>
+</div>
+<div class="bg-surface-container p-md rounded-lg flex flex-col gap-sm border border-outline-variant/50">
+<div class="flex justify-between items-center text-on-surface-variant font-label-caps text-label-caps">
+<span>PRICE OVERRIDES</span>
+<span class="material-symbols-outlined text-[16px] text-primary">sell</span>
+</div>
+<div class="font-data-pos text-display text-on-surface">7</div>
+</div>
+<div class="bg-surface-container p-md rounded-lg flex flex-col gap-sm border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-error/5 animate-pulse"></div>
+<div class="flex justify-between items-center text-error font-label-caps text-label-caps relative z-10">
+<span>FLAGGED ACTIONS</span>
+<span class="material-symbols-outlined text-[16px]">warning</span>
+</div>
+<div class="font-data-pos text-display text-error relative z-10">12</div>
+</div>
+</div>
+<!-- Log Table -->
+<div class="flex-1 px-lg pb-lg">
+<div class="bg-surface-container rounded-lg border border-outline-variant/50 overflow-hidden">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-sm p-md border-b border-outline-variant/50 bg-surface-container-high/50 text-on-surface-variant font-label-caps text-label-caps">
+<div class="col-span-2">TIMESTAMP</div>
+<div class="col-span-3">USER / ROLE</div>
+<div class="col-span-2">ACTION TYPE</div>
+<div class="col-span-3">DETAILS</div>
+<div class="col-span-2 text-right">STATUS</div>
+</div>
+<!-- Table Body -->
+<div class="flex flex-col">
+<!-- Row 1: Flagged Void -->
+<div class="grid grid-cols-12 gap-sm p-md border-b border-outline-variant/20 hover:bg-surface-container-high/30 transition-colors group cursor-pointer">
+<div class="col-span-2 flex flex-col">
+<span class="font-data-pos text-body-lg text-on-surface">14:22:45</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OCT 24, 2023</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-data-pos text-body-sm text-on-surface">
+              JS
+            </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">James Smith</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SERVER</span>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="font-label-caps text-label-caps px-sm py-unit bg-surface-bright rounded text-on-surface border border-outline-variant/30">ITEM VOID</span>
+</div>
+<div class="col-span-3 flex flex-col justify-center">
+<span class="font-body-sm text-body-sm text-on-surface">Voided: Tomahawk Ribeye ($145.00)</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Table 42 • Ticket #8921</span>
+</div>
+<div class="col-span-2 flex justify-end items-center">
+<div class="flex items-center gap-xs px-sm py-unit bg-error-container/20 border border-error/30 rounded text-error font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+              FLAGGED
+            </div>
+</div>
+</div>
+<!-- Row 2: Authorized Override -->
+<div class="grid grid-cols-12 gap-sm p-md border-b border-outline-variant/20 hover:bg-surface-container-high/30 transition-colors group cursor-pointer">
+<div class="col-span-2 flex flex-col">
+<span class="font-data-pos text-body-lg text-on-surface">13:15:02</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OCT 24, 2023</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center font-data-pos text-body-sm text-primary">
+              MK
+            </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Maria Kline</span>
+<span class="font-label-caps text-label-caps text-primary">MANAGER</span>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="font-label-caps text-label-caps px-sm py-unit bg-surface-bright rounded text-on-surface border border-outline-variant/30">PRICE OVERRIDE</span>
+</div>
+<div class="col-span-3 flex flex-col justify-center">
+<span class="font-body-sm text-body-sm text-on-surface">House Wine: $12.00 → $0.00</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reason: VIP Comp • Ticket #8910</span>
+</div>
+<div class="col-span-2 flex justify-end items-center">
+<div class="flex items-center gap-xs px-sm py-unit bg-secondary-container/20 border border-secondary/30 rounded text-secondary font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              AUTHORIZED
+            </div>
+</div>
+</div>
+<!-- Row 3: Login Attempt -->
+<div class="grid grid-cols-12 gap-sm p-md border-b border-outline-variant/20 hover:bg-surface-container-high/30 transition-colors group cursor-pointer">
+<div class="col-span-2 flex flex-col">
+<span class="font-data-pos text-body-lg text-on-surface">12:01:55</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OCT 24, 2023</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-data-pos text-body-sm text-on-surface">
+              ?
+            </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Unknown User</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">PIN: 4***</span>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="font-label-caps text-label-caps px-sm py-unit bg-surface-bright rounded text-on-surface border border-outline-variant/30">FAILED LOGIN</span>
+</div>
+<div class="col-span-3 flex flex-col justify-center">
+<span class="font-body-sm text-body-sm text-on-surface">Invalid Manager PIN Entry</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Terminal: POS-Front-1</span>
+</div>
+<div class="col-span-2 flex justify-end items-center">
+<div class="flex items-center gap-xs px-sm py-unit bg-error-container/20 border border-error/30 rounded text-error font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+              DENIED
+            </div>
+</div>
+</div>
+<!-- Row 4: Reprint -->
+<div class="grid grid-cols-12 gap-sm p-md hover:bg-surface-container-high/30 transition-colors group cursor-pointer">
+<div class="col-span-2 flex flex-col">
+<span class="font-data-pos text-body-lg text-on-surface">11:45:10</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OCT 24, 2023</span>
+</div>
+<div class="col-span-3 flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-data-pos text-body-sm text-on-surface">
+              DT
+            </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">David Tran</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">BARTENDER</span>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="font-label-caps text-label-caps px-sm py-unit bg-surface-bright rounded text-on-surface border border-outline-variant/30">TICKET REPRINT</span>
+</div>
+<div class="col-span-3 flex flex-col justify-center">
+<span class="font-body-sm text-body-sm text-on-surface">Reprinted Final Receipt</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Bar Tab • Ticket #8890</span>
+</div>
+<div class="col-span-2 flex justify-end items-center">
+<div class="flex items-center gap-xs px-sm py-unit bg-surface-bright border border-outline-variant/30 rounded text-on-surface font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">info</span>
+              LOGGED
+            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination Placeholder -->
+<div class="flex justify-between items-center mt-md font-label-caps text-label-caps text-on-surface-variant">
+<span>SHOWING 1-4 OF 342 EVENTS</span>
+<div class="flex gap-sm">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container border border-outline-variant/50 hover:bg-surface-container-high disabled:opacity-50">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container border border-outline-variant/50 hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>
