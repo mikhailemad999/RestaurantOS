@@ -36,7 +36,7 @@ export default function PrinterRoutingPage() {
         api.getPrinterRoutingRules(),
         api.getPrinters(),
         api.getKitchenStations(),
-        api.getMenu()
+        api.getMenuItems()
       ]);
       setRules(rRes || []);
       setPrinters(pRes || []);

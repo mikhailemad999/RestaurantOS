@@ -338,24 +338,40 @@ export default function PrinterMonitorPage() {
             </div>
 
             <div className="p-6 bg-[#0e0e0e] max-h-[70vh] overflow-y-auto">
-              <div className="bg-white text-black font-mono text-xs p-6 rounded-lg shadow-inner border-y-4 border-dashed border-neutral-400 space-y-4">
-                <div className="text-center font-bold pb-2 border-b border-dashed border-neutral-300">
+              <div className="bg-white text-black font-mono text-xs p-6 rounded-lg shadow-inner border-y-4 border-dashed border-neutral-400 space-y-4 printable-receipt">
+                <pre className="whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-center font-bold pb-2 border-b border-dashed border-neutral-300">
                   {selectedJob?.rendered_text_en || testPrintModal?.rendered_text_en}
-                </div>
+                </pre>
 
-                <div className="text-right font-arabic font-semibold pt-2 border-t border-dashed border-neutral-300 text-neutral-800" dir="rtl">
-                  {selectedJob?.rendered_text_ar || testPrintModal?.rendered_text_ar}
-                </div>
+                {(selectedJob?.rendered_text_ar || testPrintModal?.rendered_text_ar) && (
+                  <pre className="whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-right font-semibold pt-2 border-t border-dashed border-neutral-300 text-neutral-800" dir="rtl">
+                    {selectedJob?.rendered_text_ar || testPrintModal?.rendered_text_ar}
+                  </pre>
+                )}
               </div>
             </div>
 
-            <div className="p-4 bg-[#20201f] border-t border-[#353535] flex justify-end">
-              <button
-                onClick={() => { setSelectedJob(null); setTestPrintModal(null); }}
-                className="bg-[#f2ca50] text-[#131313] font-bold text-xs px-5 py-2 rounded-xl hover:brightness-110 transition-all"
-              >
-                Close Receipt
-              </button>
+            <div className="p-4 bg-[#20201f] border-t border-[#353535] flex justify-between items-center gap-3">
+              <div className="text-[11px] font-mono text-[#4edea3] flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5" />
+                <span>Job Status: {selectedJob?.status || testPrintModal?.printer?.status || 'ONLINE'}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="bg-[#2a2a2a] hover:bg-[#353535] text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Printer className="w-3.5 h-3.5 text-[#f2ca50]" />
+                  <span>Print to Paper</span>
+                </button>
+                <button
+                  onClick={() => { setSelectedJob(null); setTestPrintModal(null); }}
+                  className="bg-[#f2ca50] text-[#131313] font-bold text-xs px-5 py-2 rounded-xl hover:brightness-110 transition-all cursor-pointer"
+                >
+                  Close Receipt
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Printer, Plus, Edit3, Trash2, CheckCircle, ShieldCheck, 
-  Layers, Terminal, RefreshCw, AlertCircle
+  Layers, Terminal, RefreshCw, AlertCircle, Eye
 } from 'lucide-react';
 import { api } from '../services/api';
 
@@ -12,6 +12,8 @@ export default function PrinterSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingPrinter, setEditingPrinter] = useState(null);
+  const [testPrintModal, setTestPrintModal] = useState(null);
+  const [testingPrinterId, setTestingPrinterId] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -95,6 +97,29 @@ export default function PrinterSettingsPage() {
       loadData();
     } catch (err) {
       console.error('Delete failed:', err);
+    }
+  };
+
+  const handleTestPrint = async (printerId) => {
+    setTestingPrinterId(printerId);
+    try {
+      const res = await api.testPrintPrinter(printerId);
+      setTestPrintModal(res);
+      loadData();
+    } catch (err) {
+      alert('Test print sequence failed: ' + (err.message || err));
+    } finally {
+      setTestingPrinterId(null);
+    }
+  };
+
+  const handleToggleStatus = async (printerId, currentStatus) => {
+    const nextStatus = currentStatus === 'ONLINE' ? 'OFFLINE' : 'ONLINE';
+    try {
+      await api.togglePrinterStatus(printerId, nextStatus);
+      loadData();
+    } catch (err) {
+      console.error('Failed to toggle status:', err);
     }
   };
 
@@ -210,21 +235,43 @@ export default function PrinterSettingsPage() {
               </div>
             </div>
 
-            <div className="pt-4 flex items-center justify-end gap-2">
+            <div className="pt-4 flex items-center justify-between gap-2 border-t border-[#2a2a2a]">
               <button
-                onClick={() => handleEditClick(printer)}
-                className="p-2 bg-[#20201f] hover:bg-[#2a2a2a] text-[#99907c] hover:text-white rounded-xl border border-[#353535] transition-colors"
-                title="Edit Device"
+                onClick={() => handleTestPrint(printer.id)}
+                disabled={testingPrinterId === printer.id}
+                className="bg-[#20201f] hover:bg-[#2a2a2a] text-xs font-bold text-[#f2ca50] hover:text-white px-3 py-2 rounded-xl border border-[#353535] transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer disabled:opacity-50"
               >
-                <Edit3 className="w-4 h-4" />
+                <Printer className="w-3.5 h-3.5 text-[#f2ca50]" />
+                <span>{testingPrinterId === printer.id ? 'Printing...' : 'Test Print'}</span>
               </button>
-              <button
-                onClick={() => handleDeleteClick(printer.id)}
-                className="p-2 bg-[#93000a]/20 hover:bg-[#93000a]/40 text-[#ffb4ab] rounded-xl border border-[#93000a]/30 transition-colors"
-                title="Remove Device"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => handleToggleStatus(printer.id, printer.status)}
+                  className={`px-2.5 py-1.5 rounded-xl text-[11px] font-mono font-bold transition-colors border cursor-pointer ${
+                    printer.status === 'ONLINE'
+                      ? 'bg-[#181818] border-[#353535] text-[#99907c] hover:text-[#ff949c]'
+                      : 'bg-[#00a572]/20 border-[#00a572]/40 text-[#4edea3] hover:bg-[#00a572]/30'
+                  }`}
+                  title="Toggle Online/Offline"
+                >
+                  {printer.status === 'ONLINE' ? 'Disable' : 'Enable'}
+                </button>
+                <button
+                  onClick={() => handleEditClick(printer)}
+                  className="p-2 bg-[#20201f] hover:bg-[#2a2a2a] text-[#99907c] hover:text-white rounded-xl border border-[#353535] transition-colors cursor-pointer"
+                  title="Edit Device"
+                >
+                  <Edit3 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleDeleteClick(printer.id)}
+                  className="p-2 bg-[#93000a]/20 hover:bg-[#93000a]/40 text-[#ffb4ab] rounded-xl border border-[#93000a]/30 transition-colors cursor-pointer"
+                  title="Remove Device"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         ))}
@@ -365,6 +412,66 @@ export default function PrinterSettingsPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Thermal Receipt Simulation Modal */}
+      {testPrintModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#1c1b1b] border border-[#353535] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in duration-200">
+            <div className="p-4 bg-[#20201f] border-b border-[#353535] flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <Printer className="w-4 h-4 text-[#f2ca50]" />
+                <h3 className="text-sm font-bold text-white font-mono">
+                  Thermal Test Receipt — {testPrintModal.job_number}
+                </h3>
+              </div>
+              <button
+                onClick={() => setTestPrintModal(null)}
+                className="text-[#99907c] hover:text-white text-lg font-bold cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 bg-[#0e0e0e] max-h-[70vh] overflow-y-auto">
+              <div className="bg-white text-black font-mono text-xs p-6 rounded-lg shadow-inner border-y-4 border-dashed border-neutral-400 space-y-4 printable-receipt">
+                <pre className="whitespace-pre-wrap text-center font-bold pb-2 border-b border-dashed border-neutral-300 font-mono text-[11px] leading-relaxed">
+                  {testPrintModal.rendered_text_en}
+                </pre>
+
+                {testPrintModal.rendered_text_ar && (
+                  <pre className="whitespace-pre-wrap text-right font-semibold pt-2 border-t border-dashed border-neutral-300 text-neutral-800 font-mono text-[11px] leading-relaxed" dir="rtl">
+                    {testPrintModal.rendered_text_ar}
+                  </pre>
+                )}
+              </div>
+            </div>
+
+            <div className="p-4 bg-[#20201f] border-t border-[#353535] flex justify-between items-center gap-3">
+              <div className="text-[11px] font-mono text-[#4edea3] flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5" />
+                <span>Job Created & Emulated [OK]</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="bg-[#2a2a2a] hover:bg-[#353535] text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Printer className="w-3.5 h-3.5 text-[#f2ca50]" />
+                  <span>Print to Paper</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTestPrintModal(null)}
+                  className="bg-[#f2ca50] text-[#131313] font-bold text-xs px-5 py-2 rounded-xl hover:brightness-110 transition-all cursor-pointer"
+                >
+                  Close Receipt
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

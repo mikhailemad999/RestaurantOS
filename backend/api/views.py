@@ -909,7 +909,15 @@ class PrinterDeviceViewSet(viewsets.ModelViewSet):
         job_number = f"JOB-TEST-{random.randint(1000, 9999)}"
         recent_order = Order.objects.last()
         if not recent_order:
-            return Response({'error': 'No orders in system to generate test receipt'}, status=status.HTTP_400_BAD_REQUEST)
+            recent_order = Order.objects.create(
+                order_number=f"ORD-DIAG-{random.randint(1000, 9999)}",
+                order_type='DINE_IN',
+                status=OrderStatus.COMPLETED,
+                subtotal=Decimal('0.00'),
+                tax_amount=Decimal('0.00'),
+                total_amount=Decimal('0.00'),
+                payment_status='PAID'
+            )
 
         en_ticket = (
             f"================================\n"

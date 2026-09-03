@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Printer, Sliders, Type, FileText, CheckCircle, 
@@ -14,18 +14,30 @@ export default function TicketTemplateEditorPage() {
   const [footerText, setFooterText] = useState("Thank you for dining with L'Étoile. Culinary Precision Guaranteed.");
   const [isPrinting, setIsPrinting] = useState(false);
   const [printSuccess, setPrintSuccess] = useState(false);
+  const [printers, setPrinters] = useState([]);
+  const [selectedPrinterId, setSelectedPrinterId] = useState('');
+
+  useEffect(() => {
+    api.getPrinters().then(res => {
+      if (res && res.length > 0) {
+        setPrinters(res);
+        setSelectedPrinterId(res[0].id);
+      }
+    }).catch(e => console.warn('Could not load printers', e));
+  }, []);
 
   const handleTestPrint = async () => {
     setIsPrinting(true);
     setPrintSuccess(false);
     try {
-      await api.testPrintPrinter(1);
+      const targetId = selectedPrinterId || printers[0]?.id || 1;
+      await api.testPrintPrinter(targetId);
       setTimeout(() => {
         setIsPrinting(false);
         setPrintSuccess(true);
-      }, 1000);
+      }, 800);
     } catch (err) {
-      alert('Test print sequence failed: ' + err.message);
+      alert('Test print sequence failed: ' + (err.message || err));
       setIsPrinting(false);
     }
   };
@@ -176,19 +188,48 @@ export default function TicketTemplateEditorPage() {
               />
             </div>
 
-            {/* Test Print Action Button */}
-            <button
-              onClick={handleTestPrint}
-              disabled={isPrinting}
-              className="w-full mt-4 h-12 bg-[#f2ca50] hover:bg-[#ffe088] text-[#131313] font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
-            >
-              {isPrinting ? (
-                <RotateCcw className="w-4 h-4 animate-spin" />
-              ) : (
-                <Printer className="w-4 h-4" />
-              )}
-              {isPrinting ? 'Sending ESC/POS Commands...' : 'Execute Test Print Sequence'}
-            </button>
+            {/* Printer Device Selector */}
+            <div className="pt-2">
+              <label className="text-xs font-mono uppercase text-[#99907c] block mb-2">
+                Target Thermal Printer
+              </label>
+              <select
+                value={selectedPrinterId}
+                onChange={(e) => setSelectedPrinterId(e.target.value)}
+                className="w-full bg-[#131313] border border-[#353535] rounded-xl p-2.5 text-xs text-white font-mono"
+              >
+                {printers.map(p => (
+                  <option key={p.id} value={p.id}>
+                    {p.name} ({p.printer_type} • {p.ip_address}:{p.port})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Test Print Action Buttons */}
+            <div className="space-y-2 mt-4">
+              <button
+                onClick={handleTestPrint}
+                disabled={isPrinting}
+                className="w-full h-12 bg-[#f2ca50] hover:bg-[#ffe088] text-[#131313] font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {isPrinting ? (
+                  <RotateCcw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Printer className="w-4 h-4" />
+                )}
+                {isPrinting ? 'Sending ESC/POS Commands...' : 'Execute Test Print Sequence'}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="w-full py-2.5 bg-[#20201f] hover:bg-[#2a2a2a] text-white text-xs font-bold rounded-xl border border-[#353535] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Printer className="w-3.5 h-3.5 text-[#f2ca50]" />
+                <span>Print via Browser (Physical / PDF)</span>
+              </button>
+            </div>
 
             {printSuccess && (
               <div className="mt-3 p-3 bg-[#00a572]/20 border border-[#00a572]/40 rounded-xl text-xs text-[#4edea3] font-mono flex items-center gap-2 animate-in fade-in">

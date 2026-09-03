@@ -55,3 +55,24 @@
   backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 175, 55, 0.2);
 }
+
+/* Print Styles for Real Thermal Printers & Paper */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  nav, header, aside, button, .no-print {
+    display: none !important;
+  }
+  .printable-receipt {
+    width: 100% !important;
+    max-width: 80mm !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    color: #000 !important;
+    background: #fff !important;
+  }
+}

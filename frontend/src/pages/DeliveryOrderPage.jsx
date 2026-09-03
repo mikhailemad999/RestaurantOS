@@ -82,7 +82,7 @@ export default function DeliveryOrderPage() {
     try {
       const [catsRes, itemsRes, zonesRes] = await Promise.all([
         api.getCategories(),
-        api.getMenu(),
+        api.getMenuItems(),
         api.getDeliveryZones()
       ]);
       setCategories(catsRes);
