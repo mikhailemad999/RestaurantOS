@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Save, CheckCircle2 } from 'lucide-react';
+import { Settings, Save, CheckCircle2, Database } from 'lucide-react';
 import LanguageSelector from '../components/LanguageSelector';
 import { useLanguage } from '../context/LanguageContext';
 
