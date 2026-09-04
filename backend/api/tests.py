@@ -11,6 +11,11 @@ from api.models import (
     KitchenStation, OrderStatus, TableStatus, DeliveryStatus, CustomerTier
 )
 from api.services import RestaurantService
+from .tests_delivery_customer import DeliveryCustomerSystemTests
+
+
+class DeliveryCustomerSystemTestCase(DeliveryCustomerSystemTests):
+    pass
 
 
 class RestaurantOSTestCase(TestCase):

@@ -73,11 +73,6 @@ export default function DeliveryOrderPage() {
     is_default: true
   });
 
-  // Initial Load
-  useEffect(() => {
-    loadMenuAndZones();
-  }, []);
-
   const loadMenuAndZones = async () => {
     try {
       const [catsRes, itemsRes, zonesRes] = await Promise.all([
@@ -95,6 +90,11 @@ export default function DeliveryOrderPage() {
       console.error('Failed to load menu/zones:', err);
     }
   };
+
+  // Initial Load
+  useEffect(() => {
+    loadMenuAndZones();
+  }, []);
 
   // Debounced Phone / Name Search
   useEffect(() => {
