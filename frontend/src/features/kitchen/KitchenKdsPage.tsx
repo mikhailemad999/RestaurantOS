@@ -1,7 +1,7 @@
-import React from 'react'
+﻿import React, { useState } from 'react'
 import {
   Clock, CheckCircle2, AlertTriangle, Flame,
-  RefreshCw, ChefHat, Check, ArrowRight
+  RefreshCw, ChefHat, Check, ArrowRight, Filter
 } from 'lucide-react'
 import {
   useGetKitchenKdsQuery,
@@ -9,11 +9,19 @@ import {
   useToggleOrderItemCompletedMutation,
   Order
 } from '@/api/ordersApi'
+import {
+  useGetKitchenStationsQuery,
+  useGetKitchenTicketsQuery,
+  useBumpTicketMutation
+} from '@/api/kitchenApi'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 
 export const KitchenKdsPage: React.FC = () => {
+  const [selectedStation, setSelectedStation] = useState<string>('ALL')
+
   const { data: kdsOrders = [], isLoading, refetch } = useGetKitchenKdsQuery()
+  const { data: stations = [] } = useGetKitchenStationsQuery()
   const [updateOrderStatus] = useUpdateOrderStatusMutation()
   const [toggleItemCompleted] = useToggleOrderItemCompletedMutation()
 
@@ -64,7 +72,7 @@ export const KitchenKdsPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8 animate-entrance">
+    <div className="space-y-6 animate-entrance">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg border border-slate-800">
         <div className="flex items-center gap-4">
@@ -92,6 +100,36 @@ export const KitchenKdsPage: React.FC = () => {
           </Button>
         </div>
       </div>
+
+      {/* Kitchen Station Selection Chips */}
+      {stations.length > 0 && (
+        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          <button
+            onClick={() => setSelectedStation('ALL')}
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              selectedStation === 'ALL'
+                ? 'bg-slate-900 text-white shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+            }`}
+          >
+            All Stations ({kdsOrders.length})
+          </button>
+          {stations.map((st) => (
+            <button
+              key={st.id}
+              onClick={() => setSelectedStation(st.name)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                selectedStation === st.name
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: st.display_color }} />
+              {st.name}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* KDS Bump Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
@@ -215,3 +253,5 @@ export const KitchenKdsPage: React.FC = () => {
     </div>
   )
 }
+
+export default KitchenKdsPage
