@@ -1,0 +1,35 @@
+# Django Core
+Django>=4.2,<5.0
+djangorestframework>=3.14,<4.0
+djangorestframework-simplejwt>=5.3,<6.0
+
+# Database
+mysqlclient>=2.2,<3.0
+
+# CORS
+django-cors-headers>=4.3,<5.0
+
+# Filtering
+django-filter>=23.5,<24.0
+
+# API Documentation
+drf-spectacular>=0.27,<1.0
+
+# Images
+Pillow>=10.0,<11.0
+
+# Real-time (WebSockets)
+channels>=4.0,<5.0
+channels-redis>=4.1,<5.0
+daphne>=4.0,<5.0
+
+# Background Tasks
+celery>=5.3,<6.0
+redis>=5.0,<6.0
+
+# Production Server
+gunicorn>=21.2,<22.0
+
+# Utilities
+python-decouple>=3.8,<4.0
+uuid6>=2024.1.12
